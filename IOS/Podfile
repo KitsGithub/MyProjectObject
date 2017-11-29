@@ -1,0 +1,17 @@
+
+
+target "SFLIS" do
+    pod 'Cordova', '~> 4.4.0'
+    pod 'AFNetworking', '~> 3.1.0'
+    pod 'SDWebImage'
+    # pod 'Realm'
+#    pod 'Realm+JSON'
+    pod 'FMDB'
+    pod 'SDCycleScrollView','~> 1.73'
+    pod 'MJRefresh'
+    pod 'MJExtension'
+    pod 'IQKeyboardManager', '~> 5.0.3'
+    pod 'Masonry', '~> 1.1.0'
+    pod 'SVProgressHUD'
+    
+end

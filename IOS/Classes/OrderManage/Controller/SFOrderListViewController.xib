@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SFOrderListViewController" customModule="SFLIS" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="cxn-Y4-OYw" id="kNG-XN-TWJ"/>
+                <outlet property="toBarTop" destination="jFQ-hn-tCh" id="3iG-SK-v6P"/>
+                <outlet property="topBar" destination="EeT-xx-xFZ" id="ELC-Zq-emq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="XMA-eB-UL7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EeT-xx-xFZ" customClass="SFSegmentView">
+                    <rect key="frame" x="0.0" y="64" width="375" height="42"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="fLv-Jp-kTl"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cxn-Y4-OYw">
+                    <rect key="frame" x="0.0" y="106" width="375" height="561"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="HbV-7b-tiG"/>
+                        <outlet property="delegate" destination="-1" id="PbZ-hL-8bd"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="EeT-xx-xFZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5g4-XR-7U0"/>
+                <constraint firstItem="cxn-Y4-OYw" firstAttribute="top" secondItem="EeT-xx-xFZ" secondAttribute="bottom" id="G9D-0F-zG4"/>
+                <constraint firstAttribute="trailing" secondItem="EeT-xx-xFZ" secondAttribute="trailing" id="RPC-Q3-bcC"/>
+                <constraint firstAttribute="trailing" secondItem="cxn-Y4-OYw" secondAttribute="trailing" id="Y9Y-1d-cca"/>
+                <constraint firstItem="cxn-Y4-OYw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hVR-eW-rX2"/>
+                <constraint firstItem="EeT-xx-xFZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="jFQ-hn-tCh"/>
+                <constraint firstAttribute="bottom" secondItem="cxn-Y4-OYw" secondAttribute="bottom" id="mw8-YP-rmF"/>
+            </constraints>
+            <point key="canvasLocation" x="-441" y="-52"/>
+        </view>
+    </objects>
+</document>

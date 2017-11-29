@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8" /> <title></title> 
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="cordova_plugins.js"></script>
+        <!-- // <script type="text/javascript" src="jquery.min.js"></script> -->
+        <!-- // <script type="text/javascript" src="css/ios/testFile.js"></script> -->
+
+        <script type="text/javascript" src="cordova-js-src/ios/KXLocationConstants.js"></script>
+
+        <script type="text/javascript"> 
+        // document.addEventListener("deviceready", failFunction, false);
+        
+            function cameraBTClick(){
+                Cordova.exec(nil, nil, "KXTestPlugin", "myMethod", ["调用相机"]);
+            }
+
+            function PhotoAlbumBTClick(){
+                Cordova.exec(successFunction, failFunction, "KXTestPlugin", "myMethod", ["查看相册"]);
+            }
+
+            function failFunction(error){
+                confirm("失败了");
+            }
+
+            function aaaa() {
+                document.getElementById("2").innerHTML = "<img src='data:image/png;base64,"
+            }
+
+            function successFunction(img){
+                document.getElementById("returnValue").value = img;
+                // document.getElementById("2").innerHTML = "![]("+img+")"
+            }
+            
+            
+            // 扫描二维码
+            function ScreenShotMethod () {
+                Cordova.exec(successFunction, failFunction, "KXSecondPlugin", "scan", ["扫描二维码"]);
+            }
+
+            
+
+            // 第三方分享
+            function ThirdPartShare () {
+                Cordova.exec(successFunction, failFunction, "KXSecondPlugin", "share", ["第三方分享"]);
+            }
+
+            // 支付
+            function payMethod () {
+                // Cordova.exec(successFunction, failFunction, "KXSecondPlugin", "pay", ["支付功能"]);
+                x=document.getElementById("returnValue")  //找到元素
+                x.value = "asdfasdfasdf";
+            }
+            
+            
+            function addNumber (a,b) {
+                var sum = a + b;
+                alert(sum);
+            }
+
+            // 测试方法
+            function otherMethod(){
+
+                x = document.getElementById("demoInput").value;
+                alert(x);
+            }
+
+        </script>
+    </head>
+    
+        <p>点击下面按钮调用相机拍照</p>
+        <button onclick="cameraBTClick()">调用相机</button>
+    </body>
+
+    <body>
+        <p>功能测试</p>
+        <button onclick="PhotoAlbumBTClick()">相册</button>
+        <button onclick="ScreenShotMethod()">扫一扫</button>
+        <button onclick="testMethod(1,2)">定位</button>
+        <button onclick="payMethod()">支付</button>
+        <button onclick="ThirdPartShare()">分享</button>
+        
+
+        <button onclick="otherMethod()">修改背景色</button>
+        <button onclick="otherMethod()">摇一摇</button>
+        <button onclick="successFunction("播放声音")">播放声音</button>
+        
+        
+        <h1>这是回调结果展示区</h1>
+        <textarea id ="returnValue" type="value" rows="5" cols="40"> </textarea>
+        
+    </body>
+
+
+    <body>
+        <input id='demoInput' type='text'>
+        <button onclick="start()">点我获取文本框内容</button>
+    </body>
+
+</html>

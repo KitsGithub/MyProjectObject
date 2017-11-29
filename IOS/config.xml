@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.less" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>com.less</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    
+    
+    
+<!--    自定义插件-->
+<!--    日历选择器-->
+    <feature name="SFDatePickerPlugin">
+        <param name="ios-package" value="SFDatePickerPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    地址选择器-->
+    <feature name="SFAdressPickerPlugin">
+        <param name="ios-package" value="SFAdressPickerPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    单选弹框-->
+    <feature name="SFOtherPickerViewPlugin">
+        <param name="ios-package" value="SFOtherPickerViewPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    多选弹框-->
+    <feature name="SFMoreSelectedPickerPlugin">
+        <param name="ios-package" value="SFMoreSelectedPickerPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    h5网络请求-->
+    <feature name="SFNetworkingPlugin">
+        <param name="ios-package" value="SFNetworkingPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    提示弹框-->
+    <feature name="SFMessageViewPlugin">
+        <param name="ios-package" value="SFMessageViewPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+    <platform name="ios">
+        <preference name="BackupWebStorage" value="none" />
+    </platform>
+    
+<!--    基本配置-->
+    <content src="DemoTest.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <feature name="CDVNavigationManage">
+        <param name="ios-package" value="CDVNavigationManage" />
+        <param name="onload" value="true" />
+    </feature>
+    <engine name="browser" spec="^4.1.0" />
+    <engine name="ios" spec="^4.4.0" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
+</widget>

@@ -1,0 +1,140 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+
+<title>发布车源</title>
+<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+</head>
+<body>
+<!-- <div id="appLoading" style="">
+      <img src="image/sf_loading.gif" alt="loading" />
+</div> -->
+<div class="sf_wrap sfRelease"  style="opacity:1">
+	<div class="sf_divwrap">
+		<!--发车路线开始-->
+		<div class="sf_w">
+			<h1 class="sf_h1">发车路线</h1>
+				 <div>
+                	<div>
+                		<div class="icon_frombg"></div>
+	                    <p class="sftitle">
+	                    	<input readonly class="sf_formadd sf_fromAdd" placeholder="请选择出发省、市、县" value=""  id="input_fromaddress" /><span class="sf_develop"></span>
+	                    </p>   
+	                </div>
+	                <div>
+	                	<div class="icon_contenbg"></div>
+	                	<div class="sf_Inputaddress">
+	                    	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_from_detail" value=""   placeholder="请填写出发地详细地址" />
+	                	</div>
+	                </div>
+	                <div>
+	                	<div class="icon_tobg"></div>
+	                    <p class="sftitle2" id="toAddress"><input readonly class="sf_formadd sf_toAdd" placeholder="请选择到达省、市、县"  id="input_toddress" /><span class="sf_develop"></span></p>
+	                </div>
+	                <div>
+	                	<div class="icon_tobglast"></div>
+	                	<div class="sf_Inputaddress">
+                        	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_to_detail" value="" placeholder="请填写目的地详细地址" />
+                    	</div>
+	                </div>
+                </div>
+                
+		</div>
+		<!--发车路线结束-->
+		<!--车辆类型选择-->
+		<div class="sf_w">
+			<h1 class="sf_h1">车辆类型</h1>
+			<div class="hui-accordion ss">
+				<p class="sf_title3"><input readonly class="sf_formadd sf_carType" placeholder="选择车辆类型"  /><span class="sf_develop"></span></p>
+			</div>
+			<div style="height: 34px;"></div>
+			<div class="hui-accordion">
+				<p class="sf_title3"><input readonly class="sf_formadd sf_carLength" placeholder="选择车长度"  ><span class="sf_develop"></span></p>
+			</div>
+			<div style="height: 34px;"></div>
+			<div class="hui-accordion">
+				<p class="sf_title3 "><input readonly class="sf_formadd sfcarnumber" placeholder="选择承运车辆"> <span class="sf_develop"></span></p>
+			</div>	
+		</div>
+		<!--车辆类型选择结束-->
+		<!--承运重量开始-->
+		<div class="sf_w">
+			<h1 class="sf_h1">承运重量</h1>
+			<div class="sf_Inputline">
+				<input class="sf_D sf_Dbottm" type="number" name="number"   id="input_weight" value="" placeholder="填写有效数组"/>
+				<span class="sf_text">吨</span>
+			</div>
+			<div class="sf_Inputline">
+				<input class="sf_D sf_Dbottm" type="number" name="number" id="input_volume" value="" placeholder="填写有效数组"/>
+				<span class="sf_text">方</span>
+			</div>
+		</div>
+		<!--承运重量结束-->
+		<!--联系人信息开始-->
+        <div class="sf_w">
+            <h1 class="sf_h1">联系人</h1>
+            <div class="sf_Inputline">
+                <input class="sf_D sf_Dbottm" type="text" name="number"  id="input_name" value="" placeholder="联系人姓名"/>
+            </div>
+            <div class="sf_Inputline">
+                <input class="sf_D sf_Dbottm" type="number" name="number" id="input_mobil" maxlength="11" value="" onkeyup="value = value.replace(/[^\d]/g, '')" maxlength="11" placeholder="联系人电话"/>
+            </div>
+        </div>
+        <div class="sf_w">
+            <h1 class="sf_h1">意向价格</h1>
+            <div class="sf_Inputline">
+                <input class="sf_D sf_Dbottm" type="number" name="phone"   id="input_price" value="" onkeyup="value = value.replace(/[^\d]/g, '')" placeholder="请输入预定价格"/>
+                <span class="sf_text">元/车</span>
+            </div>
+        </div>
+		<!-- 联系人信息结束 -->
+		<!-- 备注 -->
+		<div class="sf_w">
+			<div class="sf_bzleft flr">
+				<dd class="sf_timejust">
+					发车时间
+				</dd>
+				<dd class="sf_timeMx">
+					<input readonly class="sf_Day" >
+                    <input readonly class="sf_Mont" >
+                    <input readonly class="sf_year" >
+				</dd>
+			</div>
+			<div class="sf_bzright flr">
+				<textarea class="sf_Bz" name="beizhu" id="input_remark" placeholder="填写备注" ></textarea>
+			</div>
+		</div>
+		<!--备注结束-->
+		
+	</div>
+	<div class="sf_Fb">
+			立即发布
+	</div>
+	
+
+</div>
+<!-- 资源 -->
+<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+
+<!--cordove相关JS-->
+<script type="text/javascript" src="../cordova.js"></script>
+<script type="text/javascript" src="../cordova_plugins.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+
+
+<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+<script type="text/javascript" src="appjs/Release.js" charset="UTF-8"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+//
+//  PrefixHeader.pch
+//  SFLIS
+//
+//  Created by kit on 2017/9/30.
+//  Copyright © 2017年 chaocaiwei. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+
+
+//通知管理类
+#import "SFNotificationManage.h"
+
+//环境配置文件
+#import "Constant.h"
+#import "GlobalType.h"
+//数据库相关
+#import "FMDB_Manager.h"
+
+//通用头文件
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <AFNetworking.h>
+#import "BaseNavigationController.h"
+#import <MJRefresh.h>
+#import <Masonry.h>
+#import <MJExtension/MJExtension.h>
+#import "SFNetworkManage.h"
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+#import "UIColor+SF.h"
+#import "NSString+FontSize.h"
+#import "NSString+Extension.h"
+#import "SFTipsView.h"
+#import "SFDataBaseHelper.h"
+#import "UIImage+Extension.h"
+#import "UIButton+Extension.h"
+#import <SVProgressHUD.h>
+#import "BaseCordvaViewController.h"
+#import "GlobalType.h"
+//屏幕宽高
+#define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+
+//h5加载路径
+#define SFWL_H5_PATH @"www/SFH5"
+//沙盒路径
+#define DocumentPATH  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+//数据库路径
+#define DBPath [DocumentPATH stringByAppendingPathComponent:@"SFWL_DataBase.sqlite"]
+
+//用户数据
+#define USER_ID [SFAccount currentAccount].user_id
+
+//主题色
+#define THEMECOLOR     [UIColor colorWithHexString:@"#FAD64C"]    //app主色
+#define BLACKCOLOR     COLOR_TEXT_COMMON                         //app的黑色
+#define RandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
+#define COLOR_TEXT_COMMON    [UIColor colorWithHexString:@"#3d3d3d"]
+#define COLOR_TEXT_DARK      [UIColor colorWithHexString:@"#999999"]
+#define COLOR_LINE_BLACK     [UIColor colorWithHexString:@"#999999"]
+#define COLOR_LINE_DARK      [UIColor colorWithHexString:@"#eeeeee"]
+
+#define COLOR_BG              [UIColor colorWithHexString:@"#eeeeee"]
+
+#define FONT_COMMON_14         [UIFont systemFontOfSize:14]
+#define FONT_COMMON_16         [UIFont systemFontOfSize:16]
+
+#define STATUSBAR_HEIGHT [UIApplication sharedApplication].statusBarFrame.size.height
+
+//#ifndef __OPTIMIZE__
+//#define NSLog(...)  NSLog(__VA_ARGS__)
+//#else
+//#define NSLog(...) {}
+//#endif
+
+// 避免NSLog中文乱码
+#ifdef DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"\n %s:%d   %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define NSLog(...)
+#endif
+
+//#define NSLog(FORMAT, ...) fprintf(stderr,"\n %s:%d   %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+
+
+
+#endif /* PrefixHeader_pch */

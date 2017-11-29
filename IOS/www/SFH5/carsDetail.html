@@ -1,0 +1,128 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!-- <meta name="format-detection" content="telephone=yes"> -->
+
+<title>货源详情</title>
+<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+
+</head>
+<style type="text/css">
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body >
+<div class="sf_wrap" id="sfCardetail" >
+	<div class="sf_divwrap sf_GDwarp" v-bind:class="{ sf_GDwarp_normal: showType === 'A' }">
+		<!--发车路线开始-->
+		<div class="sf_w">
+			<div class="sf_goodsline">
+				<div>
+	                	<div>
+	                		<div class="icon_frombg"></div>
+		                    <p class="sftitle">
+		                    	{{datas.from_province}}-{{datas.from_city}}-{{datas.from_district}}
+		                    </p>   
+		                </div>
+		                <div>
+		                	<div>
+		                		<div class="icon_detailwarpbg"></div>
+			                    <p class="sftitle showfontcolor">
+			                    	{{datas.from_address}}
+			                    </p> 
+		                	</div>
+		                	<div>
+		                		<div class="icon_normalline"></div>
+		                	</div>	  
+		                </div>
+		                <div >
+		                	<div class="icon_tobg"></div>
+		                    <p class="sftitle2 " >{{datas.to_province}}-{{datas.to_city}}-{{datas.to_district}}</p>
+		                </div>
+		                <div >
+		                	<div class="icon_detailnormal"></div>
+		                    <p class="sftitle2 showfontcolor" >{{datas.to_address}}111111111</p>
+		                </div>
+	               </div>
+				<div class="GDmanmews sf_mtp">
+					<span class="GDheaderImg">
+						<img v-bind:src="datas.head_src" v-if="datas.head_src===''"/>
+						<img src="image/header.png" v-else/> 
+					</span>
+					<span class="GDheaderMx">
+						<p class="sf_mbt1"><span class="GDheaderName" v-cloak>{{datas.name}}</span>发货：<i class="GDheaderNum" v-cloak>{{datas.car_count}}</i>次</p>
+						<buttom class="GDheaderbut" v-cloak v-if="datas.order_status === 'D'">已认证</buttom>
+						<buttom class="GDheaderbut" v-cloak v-else>未认证</buttom>
+					</span>
+				</div>
+			</div>
+				
+		</div>
+		<!--发车路线结束-->
+		<!--车辆类型开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">车辆类型</p>
+			<p ><span class="sf_GDlist" v-cloak>{{datas.car_type}}</span><span class="sf_GDlist" v-cloak >{{datas.car_long}}</span><span class="sf_GDlist" v-cloak >{{datas.car_count}}辆</span></p>
+		</div>
+		<!--车辆类型结束-->
+		<!--联系人开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">联系人</p>
+			<p ><a class="sf_GDlist" v-cloak :href='"tel://"+datas.connect_mobile'>{{datas.connect_by}}</a></p>
+		</div>
+		<!--联系人结束-->
+		<!--联系人电话开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">联系人电话</p>
+			<p ><a class="sf_GDphone" v-cloak :href='"tel://"+datas.connect_mobile'>{{datas.connect_mobile}}</a></p>
+		</div>
+		<!--联系人电话结束-->
+		<!--装车时间开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">装车时间</p>
+			<span class="sf_GDlist" v-cloak >{{datas.depart_date}}</span>
+		</div>
+		<!--装车时间结束-->
+		<!--价格意向开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">意向价格</p>
+			<p >
+				<!-- <span class="sf_GDPrice" v-cloak v-if='datas.price === '''>面议</span> -->
+				<span class="sf_GDPrice" v-cloak >{{datas.price}}</span>
+			</p>
+		</div>
+		<!--价格意向结束-->
+		<!--备注开始-->
+		<div class="sf_w">
+			<p class="sf_GDtitle">备注</p>
+			<p ><span class="sf_GDlist" v-cloak >{{datas.car_remark}}</span></p>
+		</div>
+		<!--备注结束-->
+	</div>
+
+	<div class="sf_GDbuttom" >
+			<input class="sf_GDinput" type="text"  placeholder="我的报价" v-model='price' @keyup="priceAdd()"/>
+			<button class="sf_GDbut GoodsBut" v-on:click="add_order" >确认接单</button>
+	</div>
+</div>
+<!--cordove相关JS-->
+<script type="text/javascript" src="../cordova.js"></script>
+<script type="text/javascript" src="../cordova_plugins.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+
+<!-- 资源 -->
+<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+
+<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+<script type="text/javascript" src="appjs/carsDetail.js" charset="UTF-8"></script>
+
+
+
+</body>
+</html>
