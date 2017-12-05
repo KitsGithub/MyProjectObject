@@ -87,7 +87,7 @@
     _newCode.placeholder = @"请输入新密码";
     _newCode.secureTextEntry = YES;
     _newCode.textColor = [UIColor colorWithHexString:@"666666"];
-    _newCode.font = [UIFont systemFontOfSize:16];
+    _newCode.font = FONT_COMMON_16;
     [phoneView addSubview:_newCode];
     
     UIImageView *codeView = [[UIImageView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(phoneView.frame) + 20, SCREEN_WIDTH - 40, 48)];
@@ -99,7 +99,7 @@
     _newCode2.placeholder = @"确认新密码";
     _newCode2.secureTextEntry = YES;
     _newCode2.textColor = [UIColor colorWithHexString:@"666666"];
-    _newCode2.font = [UIFont systemFontOfSize:16];
+    _newCode2.font = FONT_COMMON_16;
     [codeView addSubview:_newCode2];
     
     UIButton *requestButton = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(codeView.frame) + 20, SCREEN_WIDTH - 40, 48)];
@@ -112,7 +112,7 @@
     [requestButton addTarget:self action:@selector(requestAction) forControlEvents:(UIControlEventTouchUpInside)];
     requestButton.layer.cornerRadius = 4;
     requestButton.clipsToBounds = YES;
-    requestButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    requestButton.titleLabel.font = FONT_COMMON_16;
     
     
 }

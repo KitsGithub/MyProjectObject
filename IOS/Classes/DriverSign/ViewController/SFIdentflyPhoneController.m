@@ -199,7 +199,7 @@
     _phone = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(phoneView.frame) - 20, CGRectGetHeight(phoneView.frame))];
     _phone.placeholder = @"请输入手机号";
     _phone.textColor = [UIColor colorWithHexString:@"666666"];
-    _phone.font = [UIFont systemFontOfSize:16];
+    _phone.font = FONT_COMMON_16;
     [phoneView addSubview:_phone];
     
     UIView *codeView = [[UIView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(phoneView.frame) + 20, SCREEN_WIDTH - 40, 48)];
@@ -209,7 +209,7 @@
     [_getCodeButton setTitle:@"获取验证码" forState:(UIControlStateNormal)];
     [_getCodeButton setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     [_getCodeButton addTarget:self action:@selector(getMobileCode) forControlEvents:(UIControlEventTouchUpInside)];
-    _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _getCodeButton.titleLabel.font = FONT_COMMON_16;
     _getCodeButton.layer.cornerRadius = 4;
     _getCodeButton.clipsToBounds = YES;
     [codeView addSubview:_getCodeButton];
@@ -222,7 +222,7 @@
     _code = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(codeContentView.frame) - 20, 48)];
     _code.placeholder = @"请输入手机验证码";
     _code.textColor = [UIColor colorWithHexString:@"666666"];
-    _code.font = [UIFont systemFontOfSize:16];
+    _code.font = FONT_COMMON_16;
     [codeContentView addSubview:_code];
     
     UIButton *requestButton = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(codeView.frame) + 20, SCREEN_WIDTH - 40, 48)];
@@ -238,7 +238,7 @@
     [requestButton addTarget:self action:@selector(requestAction) forControlEvents:(UIControlEventTouchUpInside)];
     requestButton.layer.cornerRadius = 4;
     requestButton.clipsToBounds = YES;
-    requestButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    requestButton.titleLabel.font = FONT_COMMON_16;
     
     
 }

@@ -41,7 +41,7 @@
     
     _tipsLabel = [UILabel new];
     _tipsLabel.textColor = BLACKCOLOR;
-    _tipsLabel.font = [UIFont systemFontOfSize:16];
+    _tipsLabel.font = FONT_COMMON_16;
     [self addSubview:_tipsLabel];
     
     _lineView = [UIView new];
@@ -63,7 +63,7 @@
     
     _detailLabel = [UILabel new];
     _detailLabel.textColor = [UIColor colorWithHexString:@"666666"];
-    _detailLabel.font = [UIFont systemFontOfSize:16];
+    _detailLabel.font = FONT_COMMON_16;
     _detailLabel.text = @"22113";
     [self addSubview:_detailLabel];
 }
@@ -95,7 +95,7 @@
     _lineView.frame = CGRectMake(20, CGRectGetHeight(self.frame) - 1, CGRectGetWidth(self.frame) - 40, 1);
     _arrowImage.frame = CGRectMake(CGRectGetWidth(self.frame) - 20 - 8, (CGRectGetHeight(self.frame) - 16) * 0.5, 8, 16);
     
-    CGSize detailSize = [_detailLabel.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize detailSize = [_detailLabel.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _detailLabel.frame = CGRectMake(CGRectGetMinX(_arrowImage.frame) - 10 - detailSize.width, (CGRectGetHeight(self.frame) - detailSize.height) * 0.5, detailSize.width, detailSize.height);
     
     

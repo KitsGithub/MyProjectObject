@@ -42,7 +42,7 @@
     [self addSubview:_lineView];
     
     _title = [UILabel new];
-    _title.font = [UIFont systemFontOfSize:16];
+    _title.font = FONT_COMMON_16;
     _title.textColor = COLOR_TEXT_COMMON;
     [self addSubview:_title];
     
@@ -53,7 +53,7 @@
     
     _subTitle = [UILabel new];
     _subTitle.textColor = [UIColor colorWithHexString:@"666666"];
-    _subTitle.font = [UIFont systemFontOfSize:16];
+    _subTitle.font = FONT_COMMON_16;
     [self addSubview:_subTitle];
     
     hasSubView = YES;
@@ -83,7 +83,7 @@
         
         _arrow.frame = CGRectMake(SCREEN_WIDTH - 20 - 8, (buttonH - 16) * 0.5, 8, 16);
         
-        CGSize subTitleSize = [_subTitle.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        CGSize subTitleSize = [_subTitle.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
         _subTitle.frame = CGRectMake(SCREEN_WIDTH - 20 - subTitleSize.width, (buttonH - subTitleSize.height) * 0.5, subTitleSize.width, subTitleSize.height);
         hasSubView = NO;
     }

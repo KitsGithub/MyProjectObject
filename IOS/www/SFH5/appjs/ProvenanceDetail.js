@@ -1,8 +1,8 @@
 
-//    SFAppData = {
-//    	GoodsId : 'b9fa498d-5c0e-4c42-a448-decda928c6f6',
-//    	UserId 	: '1c66694d-e2a5-41e5-abd8-409afcd92a60'
-//    };
+      SFAppData = {
+      	GoodsId : 'b9fa498d-5c0e-4c42-a448-decda928c6f6',
+      	UserId 	: '1c66694d-e2a5-41e5-abd8-409afcd92a60'
+      };
 
 function showData(){
 	var app = new Vue({
@@ -78,4 +78,4 @@ function orderDetail_error(errorData){
 	showErrorMessage([errorData.message])
 };
 
-//    showData();
+      showData();

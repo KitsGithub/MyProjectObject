@@ -56,7 +56,7 @@
     _button.clipsToBounds = YES;
     _button.hidden = YES;
     [_button setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
-    _button.titleLabel.font = [UIFont systemFontOfSize:16];
+    _button.titleLabel.font = FONT_COMMON_16;
 }
 
 - (void)setPlaceHolder:(NSString *)placeHolder {

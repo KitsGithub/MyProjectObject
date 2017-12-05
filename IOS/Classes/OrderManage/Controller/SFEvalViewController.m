@@ -38,7 +38,7 @@
     UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
     btn.frame     = CGRectMake(0, 0, 44, 44);
     [btn setTitle:@"发布" forState:(UIControlStateNormal)];
-    btn.titleLabel.font  = [UIFont systemFontOfSize:16];
+    btn.titleLabel.font  = FONT_COMMON_16;
     [btn setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     [btn addTarget:self action:@selector(publishAction:) forControlEvents:(UIControlEventTouchUpInside)];
     self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithCustomView:btn];

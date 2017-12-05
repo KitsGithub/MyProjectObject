@@ -46,7 +46,7 @@
     
     _driverName = [UILabel new];
     _driverName.textColor = COLOR_TEXT_COMMON;
-    _driverName.font = [UIFont systemFontOfSize:16];
+    _driverName.font = FONT_COMMON_16;
     [self addSubview:_driverName];
     
     _lineView = [UIView new];
@@ -67,7 +67,7 @@
 - (void)layoutSubviews {
     _chooseButton.frame = CGRectMake(20, 18, 20, 20);
     
-    CGSize nameSize = [_driverName.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize nameSize = [_driverName.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _driverName.frame = CGRectMake(CGRectGetMaxX(_chooseButton.frame) + 10, (CGRectGetHeight(self.frame) - nameSize.height) * 0.5, nameSize.width, nameSize.height);
     
     _lineView.frame = CGRectMake(20, CGRectGetHeight(self.frame) - 1, SCREEN_WIDTH - 40, 1);

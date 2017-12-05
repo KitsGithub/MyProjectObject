@@ -128,14 +128,10 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
  */
 - (void)chooseCarNum {
     SFChooseCarrierCarController *car = [[SFChooseCarrierCarController alloc] init];
-    car.selectedNum = self.model.carNum;
-    [car setResultReturnBlock:^(NSString *carId, NSString *carNum) {
-        if (!self.model) {
-            self.model = [SFCarrierModel new];
-            self.model.car_no = carNum;
-        } else {
-            self.model.car_no = carNum;
-        }
+    car.selectedCarArray = @[self.model.carNum];
+    [car setResultReturnBlock:^(NSArray<SFCarListModel *> *modelArray) {
+        SFCarListModel *model = modelArray.firstObject;
+        self.model = model;
         _isChange = YES;
         [_tableView reloadData];
     }];

@@ -31,25 +31,21 @@ var SFAppData;
  * 打开地址 选择器
 
  @params
- successFunction 	  	: 成功回调
- failFunction    	  	: 失败回调
- SFAdressPickerPlugin 	: 插件名
- adressPicker		  	: 插件方法
- datas 					: 参数数组 <str>
+ datas 	: 参数数组 [<str>]
 */
-function openAdressPickerMethod(datas) {
-   Cordova.exec(successFunction, failFunction, "SFAdressPickerPlugin", "adressPicker", datas);
+function openAdressPickerMethod(datas,successFn,failFn) {
+   Cordova.exec(successFn, failFn, "SFAdressPickerPlugin", "adressPicker", datas);
 }
 
 /*
  * 打开单选 选择器
 */
-function openOtherPickerMethod(datas) {
-	Cordova.exec(successFunction, failFunction, "SFOtherPickerViewPlugin", "otherSelectePicker", datas);
+function openOtherPickerMethod(datas,successFn,failFn) {
+	Cordova.exec(successFn, failFn, "SFOtherPickerViewPlugin", "otherSelectePicker", datas);
 }
 
 
-function  openLeftAlignPicker(datas) {
+function openLeftAlignPicker(datas) {
     Cordova.exec(successFunction, failFunction, "SFOtherPickerViewPlugin", "singleTablePicker", datas);
 }
 
@@ -79,6 +75,31 @@ function openDatePickerMethod(datas,successDayFunction,failFunction) {
 	Cordova.exec(successDayFunction, failFunction, "SFDatePickerPlugin", "datePicker", datas);
 }
 
+/* 
+ * 打开车辆选择器 
+ * datas : ['carNum1','carNum2']
+ *
+ * 回调参数 : {"message" : jsonObject
+              "fromId"  : <str>
+              "price"   : "请输入价格"" (固定值)
+            }
+*/
+function openSelectedCarMethod(datas,successDayFunction,failFunction) {
+    Cordova.exec(successDayFunction, failFunction, "SFChooseCarPlguin", "chooseCar", datas);
+}
+
+/*
+ * 选择发布周期
+ * datas : [{"fromId" : <str>}]
+ * 
+ * 回调参数 : {
+    "message" : <str>, (eg.只发布一次)
+    "fromId"  : <str> 
+ }
+ */
+function openSelectedReleaseTimeMehtod(datas,successFn,failFn) {
+    Cordova.exec(successFn, failFn, "SFChooseReleaerTimePlugin", "chooseReleaseTime", datas);
+}
 
 /** 导航控制器  **/
 var navigation = {};
@@ -200,6 +221,19 @@ SF_ReqestManage.getCurrentUser = function (success,error) {
         success(result);
     }, error, "SFNetworkingPlugin","getCurrentUser",[]);
 }
+
+//只允许输入数字和小数
+function onlyNumber(obj) {
+    var t = obj.value.charAt(0);
+    obj.value = obj.value.replace(/[^\d\.]/g, '');
+    obj.value = obj.value.replace(/^\./g, '');
+    obj.value = obj.value.replace(/\.{2,}/g, '.');
+    obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
+    if (t == '-') {
+        t ='0';
+    };
+};
+
 
 
 window.confirm = function (message) {

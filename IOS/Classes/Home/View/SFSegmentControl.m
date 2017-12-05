@@ -21,7 +21,7 @@
         _itemWidth   = 70;
         _titleColor  = [UIColor whiteColor];
         _selectedTitleColor = [UIColor colorWithHexString:@"#42432A"];
-        _font  = [UIFont systemFontOfSize:16];
+        _font  = FONT_COMMON_16;
         [self setup];
     }
     return self;

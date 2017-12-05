@@ -36,7 +36,7 @@
     
     _titleLabel = [UILabel new];
     _titleLabel.text = @"个人中心";
-    _titleLabel.font = [UIFont systemFontOfSize:16];
+    _titleLabel.font = FONT_COMMON_16;
     
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_titleLabel];

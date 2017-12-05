@@ -70,7 +70,7 @@
     _locationLabel = [UILabel new];
     _locationLabel.numberOfLines = 2;
     _locationLabel.textAlignment = NSTextAlignmentCenter;
-    _locationLabel.font = [UIFont systemFontOfSize:16];
+    _locationLabel.font = FONT_COMMON_16;
     _locationLabel.textColor = COLOR_TEXT_COMMON;
     _locationLabel.text = @"完成此次签到，您已到达 保定市";
     [_contentView addSubview:_locationLabel];
@@ -82,7 +82,7 @@
     [_comfirmButton setBackgroundColor:THEMECOLOR];
     [_comfirmButton setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     [_comfirmButton setTitle:@"完成" forState:(UIControlStateNormal)];
-    _comfirmButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _comfirmButton.titleLabel.font = FONT_COMMON_16;
     
     
 }
@@ -161,7 +161,7 @@
     
     CGFloat loactionX = contentW * (30 / 300.0f);
     CGFloat loactionY = CGRectGetMaxY(_tipsLabe.frame) + (contentH * (30 / 450.0f));
-    CGSize locationSize = [_locationLabel.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(contentW - loactionX * 2, MAXFLOAT)];
+    CGSize locationSize = [_locationLabel.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(contentW - loactionX * 2, MAXFLOAT)];
     _locationLabel.frame = CGRectMake(loactionX, loactionY, locationSize.width, locationSize.height);
     
     CGFloat comfirmX = contentW * (20 / 300.0f);

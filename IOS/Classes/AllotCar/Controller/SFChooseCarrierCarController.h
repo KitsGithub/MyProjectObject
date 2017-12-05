@@ -7,14 +7,26 @@
 //
 
 #import "BaseViewController.h"
+@class SFCarListModel;
 
-typedef void(^ResultReturnBlock)(NSString *carId,NSString *carNum);
+typedef enum : NSUInteger {
+    TypeMode_SingleChooser = 0,
+    TypeMode_MoreChooser,
+    TypeMode_H5MoreChooser
+} TypeMode;
+
+typedef void(^ResultReturnBlock)(NSArray <SFCarListModel *> *modelArray);
 
 @interface SFChooseCarrierCarController : BaseViewController
 
-@property (nonatomic, copy) NSString *selectedNum;
+
+/**
+ 多个车牌
+ */
+@property (nonatomic, strong) NSMutableArray *selectedCarArray;
 
 @property (nonatomic, copy) ResultReturnBlock resultReturnBlock;
 
+@property (nonatomic, assign) TypeMode typeMode;
 
 @end

@@ -10,7 +10,6 @@
 #import "SFUserView.h"
 #import "SFDetailView.h"
 
-#define textFont [UIFont systemFontOfSize:16]
 
 @implementation HomeViewCell {
     UILabel *_from;
@@ -48,13 +47,13 @@
     
     _from = [UILabel new];
     _from.numberOfLines = 2;
-    _from.font = textFont;
+    _from.font = FONT_COMMON_16;
     [self addSubview:_from];
     
     
     _to = [UILabel new];
     _to.numberOfLines = 2;
-    _to.font = textFont;
+    _to.font = FONT_COMMON_16;
     [self addSubview:_to];
     
     
@@ -136,10 +135,10 @@
 
 - (void)layoutSubviews {
     
-    CGSize fromSize = [_from.text sizeWithFont:textFont maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
+    CGSize fromSize = [_from.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
     _from.frame = CGRectMake(27, 20, fromSize.width, fromSize.height);
     
-    CGSize toSize = [_to.text sizeWithFont:textFont maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
+    CGSize toSize = [_to.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
     _to.frame = CGRectMake(CGRectGetMinX(_from.frame), CGRectGetMaxY(_from.frame) + 8, toSize.width, toSize.height);
     
     

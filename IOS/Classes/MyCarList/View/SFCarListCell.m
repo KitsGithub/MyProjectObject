@@ -8,8 +8,6 @@
 
 #import "SFCarListCell.h"
 
-#define NormalFont [UIFont systemFontOfSize:16]
-
 @implementation SFCarListCell {
     UIImageView *_carTips;
     UIView *_lineView;
@@ -47,17 +45,17 @@
     
     _carNum = [UILabel new];
     _carNum.textColor = BLACKCOLOR;
-    _carNum.font = NormalFont;
+    _carNum.font = FONT_COMMON_16;
     [self addSubview:_carNum];
     
     _carType = [UILabel new];
     _carType.textColor = BLACKCOLOR;
-    _carType.font = NormalFont;
+    _carType.font = FONT_COMMON_16;
     [self addSubview:_carType];
     
     _carLong = [UILabel new];
     _carLong.textColor = BLACKCOLOR;
-    _carLong.font = NormalFont;
+    _carLong.font = FONT_COMMON_16;
     [self addSubview:_carLong];
     
     
@@ -133,13 +131,13 @@
 - (void)layoutSubviews {
     _carTips.frame = CGRectMake(20, 20, 20, 16);
     
-    CGSize numSize = [_carNum.text sizeWithFont:NormalFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize numSize = [_carNum.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carNum.frame = CGRectMake(CGRectGetMaxX(_carTips.frame) + 10, _carTips.center.y - numSize.height * 0.5, numSize.width, numSize.height);
     
-    CGSize typeSize = [_carType.text sizeWithFont:NormalFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize typeSize = [_carType.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carType.frame = CGRectMake(CGRectGetMinX(_carTips.frame), CGRectGetMaxY(_carTips.frame) + 18, typeSize.width, typeSize.height);
     
-    CGSize carLongSize = [_carLong.text sizeWithFont:NormalFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize carLongSize = [_carLong.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carLong.frame = CGRectMake(CGRectGetMaxX(_carType.frame) + 10, CGRectGetMinY(_carType.frame), carLongSize.width, carLongSize.height);
     
     

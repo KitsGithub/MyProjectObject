@@ -75,7 +75,7 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
     
     __weak typeof(self) wself = self;
     __weak typeof(_tableView) wTableView = _tableView;
-    _segment   = [[SFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 30 + 64 + 64 + 15*2, 44) items:@[@"待运输",@"已到货"] font:[UIFont systemFontOfSize:16]];
+    _segment   = [[SFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 30 + 64 + 64 + 15*2, 44) items:@[@"待运输",@"已到货"] font:FONT_COMMON_16];
     _segment.lineWidth  = 80;
     _segment.selectedBlock = ^(NSInteger index) {
         wself.dataType = index;

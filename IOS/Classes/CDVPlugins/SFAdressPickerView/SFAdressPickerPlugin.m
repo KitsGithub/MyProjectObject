@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) CDVInvokedUrlCommand *command;
 
-@property (nonatomic, copy) NSString *_h5Class;
+@property (nonatomic, assign) NSNumber *_h5Class;
 
 @end
 
@@ -23,7 +23,7 @@
 - (void)adressPicker:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         NSMutableDictionary *params = command.arguments[0];
-        __h5Class = params[@"class"];
+        __h5Class = params[@"fromId"];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.command = command;
             [self setupPicker];
@@ -44,10 +44,9 @@
     
     //包装h5的json对象
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"class"] = __h5Class;
+    params[@"fromId"] = __h5Class;
     params[@"message"] = adress;
-    
-    
+    params[@"isCheck"] = @(1);
     //回调给H5
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:params];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.command.callbackId];
@@ -57,8 +56,7 @@
 - (void)SFAdressPickerViewDidSelectedCancel:(SFAdressPickerView *)picker {
     //包装h5的json对象
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"class"] = __h5Class;
-    
+    params[@"fromId"] = __h5Class;
     
     
     //回调给H5

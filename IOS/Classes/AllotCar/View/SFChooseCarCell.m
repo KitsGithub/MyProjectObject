@@ -13,7 +13,7 @@
     UILabel *_carNum;
     UILabel *_detail;
     
-    UIImageView *_tickImage;
+    UIButton *_tickImage;
     UIView *_lineView;
 }
 
@@ -30,8 +30,8 @@
     
 }
 
-- (void)showTickImage:(BOOL)hidden {
-    _tickImage.hidden = hidden;
+- (void)showTickImage:(BOOL)show {
+    _tickImage.hidden = !show;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -42,23 +42,26 @@
 }
 
 - (void)setupView {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     _tipsView = [UIImageView new];
     _tipsView.image = [UIImage imageNamed:@"SFCarList_CarTips"];
     [self addSubview:_tipsView];
     
     _carNum = [UILabel new];
     _carNum.textColor = COLOR_TEXT_COMMON;
-    _carNum.font = [UIFont systemFontOfSize:16];
+    _carNum.font = FONT_COMMON_16;
     [self addSubview:_carNum];
     
     _detail = [UILabel new];
     _detail.textColor = COLOR_TEXT_COMMON;
-    _detail.font = [UIFont systemFontOfSize:16];
+    _detail.font = FONT_COMMON_16;
     [self addSubview:_detail];
     
     
-    _tickImage = [UIImageView new];
-    _tickImage.image = [UIImage imageNamed:@"Tick_Image"];
+    _tickImage = [UIButton new];
+    _tickImage.userInteractionEnabled = NO;
+    [_tickImage setImage:[UIImage imageNamed:@"Confirm_Normal"] forState:(UIControlStateNormal)];
+    [_tickImage setImage:[UIImage imageNamed:@"Confirm_Selected"] forState:(UIControlStateSelected)];
     _tickImage.hidden = YES;
     [self addSubview:_tickImage];
     
@@ -80,16 +83,30 @@
     
 }
 
+- (void)setType:(NSInteger)type {
+    _type = type;
+    if (type) {
+        _tickImage.hidden = NO;
+    } else {
+        _tickImage.hidden = YES;
+    }
+}
+
+- (void)setTickChoose {
+    _tickImage.selected = !_tickImage.selected;
+    _SFSelected = _tickImage.selected;
+}
+
 - (void)layoutSubviews {
     _tipsView.frame = CGRectMake(20, 20, 20, 16);
     
-    CGSize carNumSize = [_carNum.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize carNumSize = [_carNum.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carNum.frame = CGRectMake(CGRectGetMaxX(_tipsView.frame) + 10, 20, carNumSize.width, carNumSize.height);
     
-    CGSize detailSize = [_detail.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize detailSize = [_detail.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _detail.frame = CGRectMake(20, CGRectGetMaxY(_tipsView.frame) + 18, detailSize.width, detailSize.height);
     
-    _tickImage.frame = CGRectMake(SCREEN_WIDTH - 20 - 16, (CGRectGetHeight(self.frame) - 12) * 0.5, 16, 12);
+    _tickImage.frame = CGRectMake(SCREEN_WIDTH - 20 - 20, (CGRectGetHeight(self.frame) - 20) * 0.5, 20, 20);
     
     _lineView.frame = CGRectMake(20, CGRectGetHeight(self.frame) - 1, SCREEN_WIDTH - 40, 1);
     

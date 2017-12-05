@@ -44,19 +44,24 @@
  暂存方法
  */
 - (void)saveOrder {
-    NSString *htmlMethod3 = [NSString stringWithFormat:@"saveOrder()"];
+    NSString *htmlMethod3 = [NSString stringWithFormat:@"rendCardetail(123)"];
     [self.commandDelegate evalJs:htmlMethod3];
 }
 
 - (void)sendMessageToH5 {
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"UserId"] = USER_ID;
+    if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+        dic[@"CarId"] = self.orderId;
+    } else {
+        dic[@"goods_id"] = self.orderId;
+    }
+    NSString *htmlMethod = [NSString stringWithFormat:@"SFAppData = %@",[dic mj_JSONString]];
+    [self.commandDelegate evalJs:htmlMethod];
+    
     if (self.orderId.length) {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        dic[@"Guid"] = self.orderId;
-        dic[@"UserId"] = USER_ID;
-        NSString *htmlMethod = [NSString stringWithFormat:@"SFAppData = %@",[dic mj_JSONString]];
-        [self.commandDelegate evalJs:htmlMethod];
-        
-        NSString *method = [NSString stringWithFormat:@"requestOrderDetail()"];
+        NSString *method = [NSString stringWithFormat:@"requestCardetail()"];
         [self.commandDelegate evalJs:method];
     }
 }

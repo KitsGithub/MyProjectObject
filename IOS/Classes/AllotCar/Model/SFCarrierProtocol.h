@@ -9,16 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @protocol SFCarrierProtocol <NSObject>
-@required
-
+@optional
 /**
  车牌号码
  */
 - (NSString *)carNum;
 
 - (NSString *)car_id;
-
-- (void)setCarNum:(NSString *)carNum;
 
 - (NSArray <NSString *>*)driverNameArray;
 

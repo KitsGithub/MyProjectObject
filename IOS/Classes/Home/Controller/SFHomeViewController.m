@@ -260,13 +260,13 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
         [self presentViewController:nav animated:YES completion:^{}];
         return;
     }
-    if (self.resourceType == Resource_Order && account.role == SFUserRoleGoodsownner) {
-        [[[SFTipsView alloc] init] showFailureWithTitle:@"货主不能预订货物"];
-        return;
-    } else if (self.resourceType == Resource_Car && account.role == SFUserRoleCarownner) {
-        [[[SFTipsView alloc] init] showFailureWithTitle:@"车主不能预订车辆"];
-        return;
-    }
+//    if (self.resourceType == Resource_Order && account.role == SFUserRoleGoodsownner) {
+//        [[[SFTipsView alloc] init] showFailureWithTitle:@"货主不能预订货物"];
+//        return;
+//    } else if (self.resourceType == Resource_Car && account.role == SFUserRoleCarownner) {
+//        [[[SFTipsView alloc] init] showFailureWithTitle:@"车主不能预订车辆"];
+//        return;
+//    }
     
     BaseViewController *ToVc;
     if (self.resourceType == Resource_Order) {

@@ -24,12 +24,17 @@
 		472B9B5D1FBC140600B88ABC /* SFAllotCarrierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B5C1FBC140600B88ABC /* SFAllotCarrierCell.m */; };
 		472B9B611FBC3E8400B88ABC /* SFCarrierModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B601FBC3E8400B88ABC /* SFCarrierModel.m */; };
 		472B9B641FBC468900B88ABC /* SFDriversView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B631FBC468900B88ABC /* SFDriversView.m */; };
+		472E84471FD64DB000CA3F6C /* SFBookingCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */; };
+		472E844C1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */; };
+		472E844F1FD67AAE00CA3F6C /* SFMoreDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */; };
+		4732F10A1FCFA21300530A45 /* SFChooseReleaerTimePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */; };
+		4732F10E1FCFA29100530A45 /* SFChooseReleaseTimeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */; };
+		4732F1111FCFDCBB00530A45 /* SFReleaseGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F1101FCFDCBB00530A45 /* SFReleaseGoodsViewController.m */; };
 		473E93291FC287A0002648AC /* SFAuthStatuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E93281FC287A0002648AC /* SFAuthStatuViewController.m */; };
 		473E932E1FC28860002648AC /* SFAuthStausTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E932D1FC28860002648AC /* SFAuthStausTipsView.m */; };
 		473E93311FC2AD74002648AC /* SFAuthStatusMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E93301FC2AD74002648AC /* SFAuthStatusMessageView.m */; };
 		473E93341FC2C332002648AC /* SFAuthStatusShowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E93331FC2C32A002648AC /* SFAuthStatusShowImageView.m */; };
 		47404ABB1FAAB19D0030D93C /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47404ABA1FAAB19D0030D93C /* PersonalSettingCell.m */; };
-		47404ABE1FAACA050030D93C /* SFCarDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47404ABD1FAACA050030D93C /* SFCarDetailController.m */; };
 		47432A8F1F905C7500653191 /* SFAdressPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47432A8E1F905C7500653191 /* SFAdressPickerCell.m */; };
 		47432A931F9063EC00653191 /* SFButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47432A921F9063EC00653191 /* SFButtonView.m */; };
 		47432A981F90A27200653191 /* SFOtherPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47432A971F90A27200653191 /* SFOtherPickerView.m */; };
@@ -65,13 +70,16 @@
 		47533EBD1FA6BD4400668E12 /* CarownerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47533EBC1FA6BD4400668E12 /* CarownerList.plist */; };
 		47533EBF1FA6BD5A00668E12 /* GoodsownerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47533EBE1FA6BD5A00668E12 /* GoodsownerList.plist */; };
 		47533EC91FA6CCD100668E12 /* SFCarListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47533EC81FA6CCD100668E12 /* SFCarListViewController.m */; };
-		47533ECC1FA6CCF000668E12 /* SFCarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47533ECB1FA6CCF000668E12 /* SFCarListModel.m */; };
 		47533ECF1FA6D0DF00668E12 /* SFCarListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47533ECE1FA6D0DF00668E12 /* SFCarListCell.m */; };
 		47533ED81FA71A1D00668E12 /* SFAddCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47533ED71FA71A1D00668E12 /* SFAddCarView.m */; };
 		475649E91F8EF82B002E3AFE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 475649E81F8EF82B002E3AFE /* AppDelegate.mm */; };
 		475649F01F8F52DB002E3AFE /* SFAdressPickerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 475649EF1F8F52DB002E3AFE /* SFAdressPickerPlugin.m */; };
 		475649FB1F8F55FA002E3AFE /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 475649F81F8F55FA002E3AFE /* city.json */; };
 		475649FC1F8F55FA002E3AFE /* SFAdressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475649FA1F8F55FA002E3AFE /* SFAdressPickerView.m */; };
+		475705661FD4E38E00EF5730 /* SFOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475705651FD4E38E00EF5730 /* SFOrderDetailCell.m */; };
+		4757056B1FD4F18F00EF5730 /* SFBookingGoodOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757056A1FD4F18F00EF5730 /* SFBookingGoodOrderController.m */; };
+		4757056E1FD4F6A400EF5730 /* SFBookingGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4757056D1FD4F6A400EF5730 /* SFBookingGoodsCell.m */; };
+		475705711FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475705701FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m */; };
 		475FF8BA1F9D7F040078858C /* SFPersonCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475FF8B91F9D7F040078858C /* SFPersonCenterCell.m */; };
 		475FF8BD1F9DF1770078858C /* UIButton+SFBudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 475FF8BC1F9DF1770078858C /* UIButton+SFBudge.m */; };
 		4765A13C1F948BFF001C1325 /* SFOtherPickerViewPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4765A13B1F948BFF001C1325 /* SFOtherPickerViewPlugin.m */; };
@@ -83,6 +91,7 @@
 		4775B1191F7F837400894967 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4775B1181F7F837400894967 /* BaseNavigationController.m */; };
 		477BD96F1FCBAF3F0085196F /* SFChooseCarrierCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477BD96E1FCBAF3F0085196F /* SFChooseCarrierCarController.m */; };
 		477BD9721FCBB1D00085196F /* SFChooseCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 477BD9711FCBB1D00085196F /* SFChooseCarCell.m */; };
+		479FAFFE1FD14BC900F9BDA7 /* SFMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479FAFFD1FD14BC900F9BDA7 /* SFMessageInputView.m */; };
 		47A18E461FC54A8D00F5AA5B /* SFDriverTransportDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A18E451FC54A8D00F5AA5B /* SFDriverTransportDetailController.m */; };
 		47A18E491FC55BB700F5AA5B /* SFAddressMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A18E481FC55BB700F5AA5B /* SFAddressMessageView.m */; };
 		47A18E4C1FC55C5600F5AA5B /* SFTransportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A18E4B1FC55C5600F5AA5B /* SFTransportCell.m */; };
@@ -101,14 +110,26 @@
 		47D1632A1FB9740F008525CD /* SFInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D163291FB9740F008525CD /* SFInputViewCell.m */; };
 		47D1632D1FB97F95008525CD /* SFChangePswFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1632C1FB97F95008525CD /* SFChangePswFooterView.m */; };
 		47D193851FAC78AF0072BEFC /* SFMessageViewPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D193841FAC78AF0072BEFC /* SFMessageViewPlugin.m */; };
+		47D3A5ED1FD103AC00E913F7 /* SFBookingCarFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D3A5EC1FD103AC00E913F7 /* SFBookingCarFooter.m */; };
+		47D3A5F01FD12B2C00E913F7 /* SFBookingCarCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D3A5EF1FD12B2C00E913F7 /* SFBookingCarCalendarCell.m */; };
 		47E232071FBAC1E0001D1063 /* SFAllotCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E232061FBAC1E0001D1063 /* SFAllotCarController.m */; };
 		47E2320A1FBAE650001D1063 /* SFCarrierMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E232091FBAE650001D1063 /* SFCarrierMessageController.m */; };
+		47E309B01FD137B7004FD59B /* SFCarDemandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E309AF1FD137B7004FD59B /* SFCarDemandViewController.m */; };
 		47E980871F8CA9DC00BE1660 /* SFHomeNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E980861F8CA9DC00BE1660 /* SFHomeNavBar.m */; };
 		47EB13931FA9C8C100E92978 /* SFPersonSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB13921FA9C8C100E92978 /* SFPersonSettingController.m */; };
 		47EB139A1FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB13991FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m */; };
 		47EB4B001FC66DB600A8F9F1 /* SFTransportDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB4AFF1FC66DB600A8F9F1 /* SFTransportDetailCell.m */; };
 		47F269F81FA07A5C003A3CB7 /* FMDB_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F269F41FA07A5C003A3CB7 /* FMDB_Manager.m */; };
 		47F269F91FA07A5C003A3CB7 /* ManagerConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F269F71FA07A5C003A3CB7 /* ManagerConst.m */; };
+		47FA3CA51FD0EEC800D2188E /* SFCarOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3C9B1FD0EEC700D2188E /* SFCarOrderDetailModel.m */; };
+		47FA3CA61FD0EEC800D2188E /* SFCarDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3C9D1FD0EEC700D2188E /* SFCarDetailController.m */; };
+		47FA3CA71FD0EEC800D2188E /* SFCarDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CA01FD0EEC700D2188E /* SFCarDetailCell.m */; };
+		47FA3CA81FD0EEC800D2188E /* SFCarDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CA21FD0EEC700D2188E /* SFCarDetailFooterView.m */; };
+		47FA3CA91FD0EEC800D2188E /* SFCarDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CA41FD0EEC700D2188E /* SFCarDetailHeaderView.m */; };
+		47FA3CAF1FD0F07D00D2188E /* SFBookingCarOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CAE1FD0F07D00D2188E /* SFBookingCarOrderViewController.m */; };
+		47FA3CB21FD0F5E900D2188E /* SFBookingCarOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CB11FD0F5E900D2188E /* SFBookingCarOrderCell.m */; };
+		47FD06691FD538C300B17A80 /* SFChooseCarPlguin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */; };
+		47FD06701FD54F6E00B17A80 /* SFCarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FD066E1FD54F6E00B17A80 /* SFCarListModel.m */; };
 		720806091F8F45160041BDBC /* SFDataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 720806081F8F45160041BDBC /* SFDataBaseHelper.m */; };
 		7208060C1F8F45990041BDBC /* SFUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7208060B1F8F45990041BDBC /* SFUserInfo.m */; };
 		720CC14E1FA2C6360064BC2A /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 720CC14D1FA2C6360064BC2A /* UIViewController+Extension.m */; };
@@ -217,11 +238,22 @@
 		472B9B591FBBEC2B00B88ABC /* SFAddCarrierCarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAddCarrierCarController.m; sourceTree = "<group>"; };
 		472B9B5B1FBC140600B88ABC /* SFAllotCarrierCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAllotCarrierCell.h; sourceTree = "<group>"; };
 		472B9B5C1FBC140600B88ABC /* SFAllotCarrierCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAllotCarrierCell.m; sourceTree = "<group>"; };
-		472B9B5E1FBC3E7500B88ABC /* SFCarrierProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarrierProtocol.h; sourceTree = "<group>"; };
 		472B9B5F1FBC3E8400B88ABC /* SFCarrierModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarrierModel.h; sourceTree = "<group>"; };
 		472B9B601FBC3E8400B88ABC /* SFCarrierModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarrierModel.m; sourceTree = "<group>"; };
 		472B9B621FBC468900B88ABC /* SFDriversView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDriversView.h; sourceTree = "<group>"; };
 		472B9B631FBC468900B88ABC /* SFDriversView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDriversView.m; sourceTree = "<group>"; };
+		472E84451FD64DB000CA3F6C /* SFBookingCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarModel.h; sourceTree = "<group>"; };
+		472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarModel.m; sourceTree = "<group>"; };
+		472E844A1FD67A9300CA3F6C /* SFDateMorePickerPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDateMorePickerPlugin.h; sourceTree = "<group>"; };
+		472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDateMorePickerPlugin.m; sourceTree = "<group>"; };
+		472E844D1FD67AAE00CA3F6C /* SFMoreDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMoreDatePickerView.h; sourceTree = "<group>"; };
+		472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMoreDatePickerView.m; sourceTree = "<group>"; };
+		4732F1081FCFA21300530A45 /* SFChooseReleaerTimePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseReleaerTimePlugin.h; sourceTree = "<group>"; };
+		4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseReleaerTimePlugin.m; sourceTree = "<group>"; };
+		4732F10C1FCFA29100530A45 /* SFChooseReleaseTimeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseReleaseTimeController.h; sourceTree = "<group>"; };
+		4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseReleaseTimeController.m; sourceTree = "<group>"; };
+		4732F10F1FCFDCBB00530A45 /* SFReleaseGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFReleaseGoodsViewController.h; sourceTree = "<group>"; };
+		4732F1101FCFDCBB00530A45 /* SFReleaseGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFReleaseGoodsViewController.m; sourceTree = "<group>"; };
 		473E93271FC287A0002648AC /* SFAuthStatuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthStatuViewController.h; sourceTree = "<group>"; };
 		473E93281FC287A0002648AC /* SFAuthStatuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAuthStatuViewController.m; sourceTree = "<group>"; };
 		473E932C1FC28860002648AC /* SFAuthStausTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthStausTipsView.h; sourceTree = "<group>"; };
@@ -232,8 +264,6 @@
 		473E93331FC2C32A002648AC /* SFAuthStatusShowImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAuthStatusShowImageView.m; sourceTree = "<group>"; };
 		47404AB91FAAB19D0030D93C /* PersonalSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalSettingCell.h; sourceTree = "<group>"; };
 		47404ABA1FAAB19D0030D93C /* PersonalSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingCell.m; sourceTree = "<group>"; };
-		47404ABC1FAACA050030D93C /* SFCarDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarDetailController.h; sourceTree = "<group>"; };
-		47404ABD1FAACA050030D93C /* SFCarDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarDetailController.m; sourceTree = "<group>"; };
 		47432A8D1F905C7500653191 /* SFAdressPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAdressPickerCell.h; sourceTree = "<group>"; };
 		47432A8E1F905C7500653191 /* SFAdressPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAdressPickerCell.m; sourceTree = "<group>"; };
 		47432A911F9063EC00653191 /* SFButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFButtonView.h; sourceTree = "<group>"; };
@@ -289,8 +319,6 @@
 		47533EBE1FA6BD5A00668E12 /* GoodsownerList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GoodsownerList.plist; sourceTree = "<group>"; };
 		47533EC71FA6CCD100668E12 /* SFCarListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarListViewController.h; sourceTree = "<group>"; };
 		47533EC81FA6CCD100668E12 /* SFCarListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarListViewController.m; sourceTree = "<group>"; };
-		47533ECA1FA6CCF000668E12 /* SFCarListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarListModel.h; sourceTree = "<group>"; };
-		47533ECB1FA6CCF000668E12 /* SFCarListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarListModel.m; sourceTree = "<group>"; };
 		47533ECD1FA6D0DF00668E12 /* SFCarListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarListCell.h; sourceTree = "<group>"; };
 		47533ECE1FA6D0DF00668E12 /* SFCarListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarListCell.m; sourceTree = "<group>"; };
 		47533ED61FA71A1D00668E12 /* SFAddCarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAddCarView.h; sourceTree = "<group>"; };
@@ -301,6 +329,14 @@
 		475649F81F8F55FA002E3AFE /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		475649F91F8F55FA002E3AFE /* SFAdressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAdressPickerView.h; sourceTree = "<group>"; };
 		475649FA1F8F55FA002E3AFE /* SFAdressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAdressPickerView.m; sourceTree = "<group>"; };
+		475705641FD4E38E00EF5730 /* SFOrderDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFOrderDetailCell.h; sourceTree = "<group>"; };
+		475705651FD4E38E00EF5730 /* SFOrderDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFOrderDetailCell.m; sourceTree = "<group>"; };
+		475705691FD4F18F00EF5730 /* SFBookingGoodOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingGoodOrderController.h; sourceTree = "<group>"; };
+		4757056A1FD4F18F00EF5730 /* SFBookingGoodOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingGoodOrderController.m; sourceTree = "<group>"; };
+		4757056C1FD4F6A400EF5730 /* SFBookingGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingGoodsCell.h; sourceTree = "<group>"; };
+		4757056D1FD4F6A400EF5730 /* SFBookingGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingGoodsCell.m; sourceTree = "<group>"; };
+		4757056F1FD4F6E800EF5730 /* SFBookingGoodsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingGoodsHeaderView.h; sourceTree = "<group>"; };
+		475705701FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingGoodsHeaderView.m; sourceTree = "<group>"; };
 		475FF8B81F9D7F040078858C /* SFPersonCenterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPersonCenterCell.h; sourceTree = "<group>"; };
 		475FF8B91F9D7F040078858C /* SFPersonCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPersonCenterCell.m; sourceTree = "<group>"; };
 		475FF8BB1F9DF1770078858C /* UIButton+SFBudge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+SFBudge.h"; sourceTree = "<group>"; };
@@ -327,6 +363,8 @@
 		477BD96E1FCBAF3F0085196F /* SFChooseCarrierCarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseCarrierCarController.m; sourceTree = "<group>"; };
 		477BD9701FCBB1D00085196F /* SFChooseCarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseCarCell.h; sourceTree = "<group>"; };
 		477BD9711FCBB1D00085196F /* SFChooseCarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseCarCell.m; sourceTree = "<group>"; };
+		479FAFFC1FD14BC900F9BDA7 /* SFMessageInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMessageInputView.h; sourceTree = "<group>"; };
+		479FAFFD1FD14BC900F9BDA7 /* SFMessageInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMessageInputView.m; sourceTree = "<group>"; };
 		47A18E441FC54A8D00F5AA5B /* SFDriverTransportDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDriverTransportDetailController.h; sourceTree = "<group>"; };
 		47A18E451FC54A8D00F5AA5B /* SFDriverTransportDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDriverTransportDetailController.m; sourceTree = "<group>"; };
 		47A18E471FC55BB700F5AA5B /* SFAddressMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAddressMessageView.h; sourceTree = "<group>"; };
@@ -362,10 +400,16 @@
 		47D1632C1FB97F95008525CD /* SFChangePswFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChangePswFooterView.m; sourceTree = "<group>"; };
 		47D193831FAC78AF0072BEFC /* SFMessageViewPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMessageViewPlugin.h; sourceTree = "<group>"; };
 		47D193841FAC78AF0072BEFC /* SFMessageViewPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMessageViewPlugin.m; sourceTree = "<group>"; };
+		47D3A5EB1FD103AC00E913F7 /* SFBookingCarFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarFooter.h; sourceTree = "<group>"; };
+		47D3A5EC1FD103AC00E913F7 /* SFBookingCarFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarFooter.m; sourceTree = "<group>"; };
+		47D3A5EE1FD12B2C00E913F7 /* SFBookingCarCalendarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarCalendarCell.h; sourceTree = "<group>"; };
+		47D3A5EF1FD12B2C00E913F7 /* SFBookingCarCalendarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarCalendarCell.m; sourceTree = "<group>"; };
 		47E232051FBAC1E0001D1063 /* SFAllotCarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAllotCarController.h; sourceTree = "<group>"; };
 		47E232061FBAC1E0001D1063 /* SFAllotCarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAllotCarController.m; sourceTree = "<group>"; };
 		47E232081FBAE650001D1063 /* SFCarrierMessageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarrierMessageController.h; sourceTree = "<group>"; };
 		47E232091FBAE650001D1063 /* SFCarrierMessageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarrierMessageController.m; sourceTree = "<group>"; };
+		47E309AE1FD137B7004FD59B /* SFCarDemandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarDemandViewController.h; sourceTree = "<group>"; };
+		47E309AF1FD137B7004FD59B /* SFCarDemandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCarDemandViewController.m; sourceTree = "<group>"; };
 		47E980851F8CA9DC00BE1660 /* SFHomeNavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHomeNavBar.h; sourceTree = "<group>"; };
 		47E980861F8CA9DC00BE1660 /* SFHomeNavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHomeNavBar.m; sourceTree = "<group>"; };
 		47EB13911FA9C8C100E92978 /* SFPersonSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPersonSettingController.h; sourceTree = "<group>"; };
@@ -378,6 +422,25 @@
 		47F269F41FA07A5C003A3CB7 /* FMDB_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDB_Manager.m; sourceTree = "<group>"; };
 		47F269F61FA07A5C003A3CB7 /* ManagerConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerConst.h; sourceTree = "<group>"; };
 		47F269F71FA07A5C003A3CB7 /* ManagerConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerConst.m; sourceTree = "<group>"; };
+		47FA3C9A1FD0EEC700D2188E /* SFCarOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarOrderDetailModel.h; sourceTree = "<group>"; };
+		47FA3C9B1FD0EEC700D2188E /* SFCarOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarOrderDetailModel.m; sourceTree = "<group>"; };
+		47FA3C9C1FD0EEC700D2188E /* SFCarDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarDetailController.h; sourceTree = "<group>"; };
+		47FA3C9D1FD0EEC700D2188E /* SFCarDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarDetailController.m; sourceTree = "<group>"; };
+		47FA3C9F1FD0EEC700D2188E /* SFCarDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarDetailCell.h; sourceTree = "<group>"; };
+		47FA3CA01FD0EEC700D2188E /* SFCarDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarDetailCell.m; sourceTree = "<group>"; };
+		47FA3CA11FD0EEC700D2188E /* SFCarDetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarDetailFooterView.h; sourceTree = "<group>"; };
+		47FA3CA21FD0EEC700D2188E /* SFCarDetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarDetailFooterView.m; sourceTree = "<group>"; };
+		47FA3CA31FD0EEC700D2188E /* SFCarDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarDetailHeaderView.h; sourceTree = "<group>"; };
+		47FA3CA41FD0EEC700D2188E /* SFCarDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarDetailHeaderView.m; sourceTree = "<group>"; };
+		47FA3CAD1FD0F07D00D2188E /* SFBookingCarOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarOrderViewController.h; sourceTree = "<group>"; };
+		47FA3CAE1FD0F07D00D2188E /* SFBookingCarOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarOrderViewController.m; sourceTree = "<group>"; };
+		47FA3CB01FD0F5E900D2188E /* SFBookingCarOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarOrderCell.h; sourceTree = "<group>"; };
+		47FA3CB11FD0F5E900D2188E /* SFBookingCarOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarOrderCell.m; sourceTree = "<group>"; };
+		47FD06671FD538C300B17A80 /* SFChooseCarPlguin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseCarPlguin.h; sourceTree = "<group>"; };
+		47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseCarPlguin.m; sourceTree = "<group>"; };
+		47FD066A1FD54E7D00B17A80 /* SFCarrierProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarrierProtocol.h; sourceTree = "<group>"; };
+		47FD066E1FD54F6E00B17A80 /* SFCarListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarListModel.m; sourceTree = "<group>"; };
+		47FD066F1FD54F6E00B17A80 /* SFCarListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarListModel.h; sourceTree = "<group>"; };
 		5657EA3B6B305EA752832181 /* Pods-TestHybird.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestHybird.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestHybird/Pods-TestHybird.debug.xcconfig"; sourceTree = "<group>"; };
 		5C025349F5A5E8E9C1CF446F /* libPods-TestHybird.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestHybird.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		720806071F8F45160041BDBC /* SFDataBaseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDataBaseHelper.h; sourceTree = "<group>"; };
@@ -685,6 +748,44 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		472E84481FD67A7100CA3F6C /* DateMorePickerPlguin */ = {
+			isa = PBXGroup;
+			children = (
+				472E84491FD67A7100CA3F6C /* View */,
+				472E844A1FD67A9300CA3F6C /* SFDateMorePickerPlugin.h */,
+				472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */,
+			);
+			path = DateMorePickerPlguin;
+			sourceTree = "<group>";
+		};
+		472E84491FD67A7100CA3F6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				472E844D1FD67AAE00CA3F6C /* SFMoreDatePickerView.h */,
+				472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */ = {
+			isa = PBXGroup;
+			children = (
+				4732F1081FCFA21300530A45 /* SFChooseReleaerTimePlugin.h */,
+				4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */,
+				4732F10B1FCFA26900530A45 /* ReaseTimeVC */,
+			);
+			path = SFChoostReleaseTime;
+			sourceTree = "<group>";
+		};
+		4732F10B1FCFA26900530A45 /* ReaseTimeVC */ = {
+			isa = PBXGroup;
+			children = (
+				4732F10C1FCFA29100530A45 /* SFChooseReleaseTimeController.h */,
+				4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */,
+			);
+			path = ReaseTimeVC;
+			sourceTree = "<group>";
+		};
 		473E932A1FC28819002648AC /* AuthStatus */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,10 +847,10 @@
 		474747791F8DC02E004EBAC8 /* OrderDetail(详情) */ = {
 			isa = PBXGroup;
 			children = (
-				4747477F1F8DC131004EBAC8 /* SFOrderDetailController.h */,
-				474747801F8DC131004EBAC8 /* SFOrderDetailController.m */,
-				47404ABC1FAACA050030D93C /* SFCarDetailController.h */,
-				47404ABD1FAACA050030D93C /* SFCarDetailController.m */,
+				475705671FD4F11600EF5730 /* BookingGoodOrder */,
+				47FA3CAA1FD0F06A00D2188E /* BookingCarOrder */,
+				47FA3C981FD0EEC700D2188E /* CarOrderDetail */,
+				475705621FD4E33900EF5730 /* GoodsOrderDetail */,
 				474B21E51FB191D70025A426 /* SFDetailViewController.h */,
 				474B21E61FB191D70025A426 /* SFDetailViewController.m */,
 			);
@@ -762,6 +863,8 @@
 			children = (
 				474747841F8DCB19004EBAC8 /* SFReleaseViewController.h */,
 				474747851F8DCB19004EBAC8 /* SFReleaseViewController.m */,
+				4732F10F1FCFDCBB00530A45 /* SFReleaseGoodsViewController.h */,
+				4732F1101FCFDCBB00530A45 /* SFReleaseGoodsViewController.m */,
 			);
 			name = "ReleaseRescource(发布)";
 			path = ReleaseRescource;
@@ -896,8 +999,8 @@
 		47533EC21FA6CC6000668E12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				47533ECA1FA6CCF000668E12 /* SFCarListModel.h */,
-				47533ECB1FA6CCF000668E12 /* SFCarListModel.m */,
+				47FD066F1FD54F6E00B17A80 /* SFCarListModel.h */,
+				47FD066E1FD54F6E00B17A80 /* SFCarListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -922,6 +1025,46 @@
 			);
 			name = "SFAdressPickerView(地址选择器)";
 			path = SFAdressPickerView;
+			sourceTree = "<group>";
+		};
+		475705621FD4E33900EF5730 /* GoodsOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				475705631FD4E37400EF5730 /* View */,
+				4747477F1F8DC131004EBAC8 /* SFOrderDetailController.h */,
+				474747801F8DC131004EBAC8 /* SFOrderDetailController.m */,
+			);
+			path = GoodsOrderDetail;
+			sourceTree = "<group>";
+		};
+		475705631FD4E37400EF5730 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				475705641FD4E38E00EF5730 /* SFOrderDetailCell.h */,
+				475705651FD4E38E00EF5730 /* SFOrderDetailCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		475705671FD4F11600EF5730 /* BookingGoodOrder */ = {
+			isa = PBXGroup;
+			children = (
+				475705681FD4F11600EF5730 /* View */,
+				475705691FD4F18F00EF5730 /* SFBookingGoodOrderController.h */,
+				4757056A1FD4F18F00EF5730 /* SFBookingGoodOrderController.m */,
+			);
+			path = BookingGoodOrder;
+			sourceTree = "<group>";
+		};
+		475705681FD4F11600EF5730 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4757056C1FD4F6A400EF5730 /* SFBookingGoodsCell.h */,
+				4757056D1FD4F6A400EF5730 /* SFBookingGoodsCell.m */,
+				4757056F1FD4F6E800EF5730 /* SFBookingGoodsHeaderView.h */,
+				475705701FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4775B1011F7F73F400894967 /* Public(公共基类) */ = {
@@ -1027,15 +1170,18 @@
 		47D152AE1F98582C0093CB16 /* CDVPlugins */ = {
 			isa = PBXGroup;
 			children = (
+				47FD06661FD538A900B17A80 /* SFChooseCarPlugin */,
+				4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */,
 				47D193821FAC78AF0072BEFC /* SFMessageViewPlugin */,
 				47138AC01FA1DBD800801E99 /* SFAlertViewPlugin */,
 				47138AAC1FA1885A00801E99 /* SFPhotoPicker(拍摄插件) */,
 				47D152AF1F987BE50093CB16 /* SFNetworkingPlugin(网络请求) */,
 				47D1529F1F9838000093CB16 /* MoreSelectedPicker(多选选择器) */,
+				472E84481FD67A7100CA3F6C /* DateMorePickerPlguin */,
 				4752891D1F974B2D003A0ABD /* DatePickerPlugin(日历选择器) */,
+				475649F71F8F55FA002E3AFE /* SFAdressPickerView(地址选择器) */,
 				47432A951F90A25400653191 /* SFOtherPickerView(其他规格选择) */,
 				47432A901F9063DF00653191 /* View */,
-				475649F71F8F55FA002E3AFE /* SFAdressPickerView(地址选择器) */,
 			);
 			path = CDVPlugins;
 			sourceTree = "<group>";
@@ -1090,7 +1236,7 @@
 		47E232031FBAC1BB001D1063 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				472B9B5E1FBC3E7500B88ABC /* SFCarrierProtocol.h */,
+				47FD066A1FD54E7D00B17A80 /* SFCarrierProtocol.h */,
 				472B9B5F1FBC3E8400B88ABC /* SFCarrierModel.h */,
 				472B9B601FBC3E8400B88ABC /* SFCarrierModel.m */,
 			);
@@ -1174,6 +1320,85 @@
 				47F269F71FA07A5C003A3CB7 /* ManagerConst.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		47FA3C981FD0EEC700D2188E /* CarOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				47FA3C991FD0EEC700D2188E /* Model */,
+				47FA3C9E1FD0EEC700D2188E /* View */,
+				47FA3C9C1FD0EEC700D2188E /* SFCarDetailController.h */,
+				47FA3C9D1FD0EEC700D2188E /* SFCarDetailController.m */,
+			);
+			path = CarOrderDetail;
+			sourceTree = "<group>";
+		};
+		47FA3C991FD0EEC700D2188E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47FA3C9A1FD0EEC700D2188E /* SFCarOrderDetailModel.h */,
+				47FA3C9B1FD0EEC700D2188E /* SFCarOrderDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47FA3C9E1FD0EEC700D2188E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47FA3C9F1FD0EEC700D2188E /* SFCarDetailCell.h */,
+				47FA3CA01FD0EEC700D2188E /* SFCarDetailCell.m */,
+				47FA3CA11FD0EEC700D2188E /* SFCarDetailFooterView.h */,
+				47FA3CA21FD0EEC700D2188E /* SFCarDetailFooterView.m */,
+				47FA3CA31FD0EEC700D2188E /* SFCarDetailHeaderView.h */,
+				47FA3CA41FD0EEC700D2188E /* SFCarDetailHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		47FA3CAA1FD0F06A00D2188E /* BookingCarOrder */ = {
+			isa = PBXGroup;
+			children = (
+				47FA3CAB1FD0F06A00D2188E /* Model */,
+				47FA3CAC1FD0F06A00D2188E /* View */,
+				47FA3CAD1FD0F07D00D2188E /* SFBookingCarOrderViewController.h */,
+				47FA3CAE1FD0F07D00D2188E /* SFBookingCarOrderViewController.m */,
+				47E309AE1FD137B7004FD59B /* SFCarDemandViewController.h */,
+				47E309AF1FD137B7004FD59B /* SFCarDemandViewController.m */,
+			);
+			path = BookingCarOrder;
+			sourceTree = "<group>";
+		};
+		47FA3CAB1FD0F06A00D2188E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				472E84451FD64DB000CA3F6C /* SFBookingCarModel.h */,
+				472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47FA3CAC1FD0F06A00D2188E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47FA3CB01FD0F5E900D2188E /* SFBookingCarOrderCell.h */,
+				47FA3CB11FD0F5E900D2188E /* SFBookingCarOrderCell.m */,
+				47D3A5EB1FD103AC00E913F7 /* SFBookingCarFooter.h */,
+				47D3A5EC1FD103AC00E913F7 /* SFBookingCarFooter.m */,
+				47D3A5EE1FD12B2C00E913F7 /* SFBookingCarCalendarCell.h */,
+				47D3A5EF1FD12B2C00E913F7 /* SFBookingCarCalendarCell.m */,
+				479FAFFC1FD14BC900F9BDA7 /* SFMessageInputView.h */,
+				479FAFFD1FD14BC900F9BDA7 /* SFMessageInputView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		47FD06661FD538A900B17A80 /* SFChooseCarPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				47FD06671FD538C300B17A80 /* SFChooseCarPlguin.h */,
+				47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */,
+			);
+			path = SFChooseCarPlugin;
 			sourceTree = "<group>";
 		};
 		722CD46F1F8CA34E00684DA2 /* Login */ = {
@@ -1632,6 +1857,7 @@
 			files = (
 				7263C4641F94600B00923426 /* SFSearchViewController.m in Sources */,
 				470D753B1FC42F9500C1DF2C /* SFIdentflyPhoneController.m in Sources */,
+				475705711FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m in Sources */,
 				475289591F974B2D003A0ABD /* RMCollectionCell.m in Sources */,
 				72CFF1591F8E1CE300386DF6 /* SFDesignableView.m in Sources */,
 				725A86821F7F6F3C006EF808 /* CDVNavigationManage.m in Sources */,
@@ -1641,6 +1867,7 @@
 				722CD4811F8CAB6900684DA2 /* SFPersonalCenterController.m in Sources */,
 				72AD7B7A1F9856630041339B /* SFOrderListViewController.m in Sources */,
 				47EB13931FA9C8C100E92978 /* SFPersonSettingController.m in Sources */,
+				47D3A5F01FD12B2C00E913F7 /* SFBookingCarCalendarCell.m in Sources */,
 				722CD4751F8CA36800684DA2 /* LoginViewController.m in Sources */,
 				47A18E551FC57B7B00F5AA5B /* SFTransportLineView.m in Sources */,
 				726A00421F8B379900AE17FC /* GoodsSupply.m in Sources */,
@@ -1648,14 +1875,16 @@
 				726A00301F8B371B00AE17FC /* SFNetworkError.m in Sources */,
 				72491D001FA9600A00AD63A1 /* SFCommond.m in Sources */,
 				4752894A1F974B2D003A0ABD /* TicketModel.m in Sources */,
+				4757056B1FD4F18F00EF5730 /* SFBookingGoodOrderController.m in Sources */,
 				472B9B611FBC3E8400B88ABC /* SFCarrierModel.m in Sources */,
 				726606351F9060FA00A70C8B /* LimitInput.m in Sources */,
 				47533EC91FA6CCD100668E12 /* SFCarListViewController.m in Sources */,
+				47FA3CAF1FD0F07D00D2188E /* SFBookingCarOrderViewController.m in Sources */,
 				47A4322F1FC6A36800E24989 /* SFForgetPswViewController.m in Sources */,
 				72978ED21F8F5ADE00DAD6E8 /* SFTipableTextfiled.m in Sources */,
 				72B433AC1FA036FE007AAA07 /* NSDictionary+jlExtension.m in Sources */,
+				47FA3CA61FD0EEC800D2188E /* SFCarDetailController.m in Sources */,
 				477BD9721FCBB1D00085196F /* SFChooseCarCell.m in Sources */,
-				47404ABE1FAACA050030D93C /* SFCarDetailController.m in Sources */,
 				47533ED81FA71A1D00668E12 /* SFAddCarView.m in Sources */,
 				474B83CD1FB94BB100CAA8FF /* SFChangePasswordController.m in Sources */,
 				726A00551F8B676B00AE17FC /* SFDetailView.m in Sources */,
@@ -1664,12 +1893,15 @@
 				471877131F99CF7900A36D3A /* SFPersonalNavBar.m in Sources */,
 				47138AB21FA18A2200801E99 /* SFSinglePickerView.m in Sources */,
 				47138ABE1FA1DB4600801E99 /* SFAlertViewPlugin.m in Sources */,
+				47FA3CB21FD0F5E900D2188E /* SFBookingCarOrderCell.m in Sources */,
 				726A00501F8B674A00AE17FC /* HomeViewCell.m in Sources */,
 				4775B1071F7F79DA00894967 /* BaseViewController.m in Sources */,
+				47FD06691FD538C300B17A80 /* SFChooseCarPlguin.m in Sources */,
 				726A00591F8B6A8400AE17FC /* NSString+FontSize.m in Sources */,
 				47A18E491FC55BB700F5AA5B /* SFAddressMessageView.m in Sources */,
 				477BD96F1FCBAF3F0085196F /* SFChooseCarrierCarController.m in Sources */,
 				470D75341FC3C83B00C1DF2C /* SFAuthImageView.m in Sources */,
+				472E844F1FD67AAE00CA3F6C /* SFMoreDatePickerView.m in Sources */,
 				72F828561FB1A04C0083A119 /* SFMultiOprationImageView.m in Sources */,
 				4715CC4F1FCC053D00E72466 /* SFAddCarrierDriverCell.m in Sources */,
 				72935A021F988E6C003C0630 /* SFOrderManage.m in Sources */,
@@ -1680,6 +1912,7 @@
 				72F8284C1FB148530083A119 /* SFReceiveGoods.m in Sources */,
 				7263C4611F945B7400923426 /* UIImage+Extension.m in Sources */,
 				475289461F974B2D003A0ABD /* UIView+CustomFrame.m in Sources */,
+				47E309B01FD137B7004FD59B /* SFCarDemandViewController.m in Sources */,
 				72BDBB3B1F8F1A6500992321 /* LoginRequest.m in Sources */,
 				7290902D1FAC40D1002DE082 /* SFGoodsProvenance.m in Sources */,
 				47D152A61F983A230093CB16 /* SFMoreSelectedButtonView.m in Sources */,
@@ -1687,12 +1920,14 @@
 				72F828491FB1483E0083A119 /* SFBookingCar.m in Sources */,
 				47D152AD1F9844950093CB16 /* SFMoreSelectedPickerPlugin.m in Sources */,
 				4765A13C1F948BFF001C1325 /* SFOtherPickerViewPlugin.m in Sources */,
+				4732F10A1FCFA21300530A45 /* SFChooseReleaerTimePlugin.m in Sources */,
 				47A18E4C1FC55C5600F5AA5B /* SFTransportCell.m in Sources */,
 				47B5CA641F8B05B3007D5D05 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				4771BA051FBD6BEC00FFE73E /* AddCarrierDriverController.m in Sources */,
 				475289471F974B2D003A0ABD /* RMCalendarController.m in Sources */,
 				47D1632D1FB97F95008525CD /* SFChangePswFooterView.m in Sources */,
 				7250C52C1F9DCB3B00DF5804 /* SFCustomTextView.m in Sources */,
+				475705661FD4E38E00EF5730 /* SFOrderDetailCell.m in Sources */,
 				47F269F81FA07A5C003A3CB7 /* FMDB_Manager.m in Sources */,
 				7263C45C1F94534200923426 /* SFSearchBarView.m in Sources */,
 				472B9B5A1FBBEC2B00B88ABC /* SFAddCarrierCarController.m in Sources */,
@@ -1705,6 +1940,7 @@
 				47F269F91FA07A5C003A3CB7 /* ManagerConst.m in Sources */,
 				7250C52F1F9DCBE700DF5804 /* SFEvalViewController.m in Sources */,
 				7281EE161F95E11F00DBE9AB /* SFMenuView.m in Sources */,
+				479FAFFE1FD14BC900F9BDA7 /* SFMessageInputView.m in Sources */,
 				473E93341FC2C332002648AC /* SFAuthStatusShowImageView.m in Sources */,
 				474747811F8DC131004EBAC8 /* SFOrderDetailController.m in Sources */,
 				47138AC31FA1DC7600801E99 /* SFAuthenticationView.m in Sources */,
@@ -1717,13 +1953,16 @@
 				728BE68F1FA6BD4D0004A0F5 /* SFSegmentView.m in Sources */,
 				4752895A1F974B2D003A0ABD /* SFDatePickerPlugin.m in Sources */,
 				726A00311F8B371B00AE17FC /* SFNetworkManage.m in Sources */,
+				47FA3CA81FD0EEC800D2188E /* SFCarDetailFooterView.m in Sources */,
 				473E932E1FC28860002648AC /* SFAuthStausTipsView.m in Sources */,
 				47EB139A1FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m in Sources */,
+				47FA3CA71FD0EEC800D2188E /* SFCarDetailCell.m in Sources */,
 				72BDBB3E1F8F1F9900992321 /* NSString+Extension.m in Sources */,
-				47533ECC1FA6CCF000668E12 /* SFCarListModel.m in Sources */,
 				4771B9FF1FBD433C00FFE73E /* AddCarryController.m in Sources */,
 				7290902C1FAC40D1002DE082 /* SFOrder.m in Sources */,
+				4732F1111FCFDCBB00530A45 /* SFReleaseGoodsViewController.m in Sources */,
 				475289491F974B2D003A0ABD /* RMCalendarModel.m in Sources */,
+				472E844C1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m in Sources */,
 				47D193851FAC78AF0072BEFC /* SFMessageViewPlugin.m in Sources */,
 				475649E91F8EF82B002E3AFE /* AppDelegate.mm in Sources */,
 				722CD47B1F8CAB4600684DA2 /* SFOrderManageController.m in Sources */,
@@ -1733,6 +1972,7 @@
 				7208060C1F8F45990041BDBC /* SFUserInfo.m in Sources */,
 				474B83C21FB93DE100CAA8FF /* SFChangeNickNameController.m in Sources */,
 				720806091F8F45160041BDBC /* SFDataBaseHelper.m in Sources */,
+				47FA3CA91FD0EEC800D2188E /* SFCarDetailHeaderView.m in Sources */,
 				726A004B1F8B390F00AE17FC /* SFHomeViewController.m in Sources */,
 				726A00431F8B379900AE17FC /* HomeRequestHelper.m in Sources */,
 				471088E41FA3048E00013203 /* SFMyDriverListController.m in Sources */,
@@ -1743,11 +1983,13 @@
 				47D152A21F9838540093CB16 /* SFMoreSelectedPickerView.m in Sources */,
 				726A00561F8B676B00AE17FC /* SFUserView.m in Sources */,
 				72DB634C1FA1C90900647672 /* CarsSupply.m in Sources */,
+				47D3A5ED1FD103AC00E913F7 /* SFBookingCarFooter.m in Sources */,
 				72B433AD1FA036FE007AAA07 /* NSArray+jlExtension.m in Sources */,
 				728BE6921FA6C5F40004A0F5 /* SFProvenanceViewController.m in Sources */,
 				72E220391FAC4BE600B4261B /* GlobalType.m in Sources */,
 				47D1632A1FB9740F008525CD /* SFInputViewCell.m in Sources */,
 				47A18E4F1FC5685F00F5AA5B /* SFDriverSignAlerView.m in Sources */,
+				47FA3CA51FD0EEC800D2188E /* SFCarOrderDetailModel.m in Sources */,
 				472B9B5D1FBC140600B88ABC /* SFAllotCarrierCell.m in Sources */,
 				474747891F8E064A004EBAC8 /* SFTipsView.m in Sources */,
 				726A00341F8B377800AE17FC /* UIColor+SF.m in Sources */,
@@ -1757,18 +1999,22 @@
 				47E980871F8CA9DC00BE1660 /* SFHomeNavBar.m in Sources */,
 				47EB4B001FC66DB600A8F9F1 /* SFTransportDetailCell.m in Sources */,
 				47E2320A1FBAE650001D1063 /* SFCarrierMessageController.m in Sources */,
+				4757056E1FD4F6A400EF5730 /* SFBookingGoodsCell.m in Sources */,
 				723405F71F9D757E001C686A /* SFOrderListTableViewDelegate.m in Sources */,
 				729090301FAC40DC002DE082 /* SFCarProvenance.m in Sources */,
 				471088E71FA30D6800013203 /* SFDriverListCell.m in Sources */,
 				473E93291FC287A0002648AC /* SFAuthStatuViewController.m in Sources */,
+				47FD06701FD54F6E00B17A80 /* SFCarListModel.m in Sources */,
 				4775B1191F7F837400894967 /* BaseNavigationController.m in Sources */,
 				475289451F974B2D003A0ABD /* NSDate+RMCalendarLogic.m in Sources */,
 				47A18E521FC5769F00F5AA5B /* SFTransportDetailController.m in Sources */,
 				725A867C1F7F6F33006EF808 /* main.m in Sources */,
+				4732F10E1FCFA29100530A45 /* SFChooseReleaseTimeController.m in Sources */,
 				725D168A1F999A4C006118D7 /* SFOpration.m in Sources */,
 				47432A931F9063EC00653191 /* SFButtonView.m in Sources */,
 				471088F11FA31ECB00013203 /* SFDriverModel.m in Sources */,
 				72491D061FA99A8A00AD63A1 /* SFImagePicker.m in Sources */,
+				472E84471FD64DB000CA3F6C /* SFBookingCarModel.m in Sources */,
 				4747477E1F8DC0D8004EBAC8 /* BaseCordvaViewController.m in Sources */,
 				470D75311FC3BF3B00C1DF2C /* SFAuthIdentflyTipsView.m in Sources */,
 				720CC14E1FA2C6360064BC2A /* UIViewController+Extension.m in Sources */,

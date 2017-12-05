@@ -53,7 +53,7 @@
     // 设置标题文字颜色
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
     attrs[NSForegroundColorAttributeName] = [UIColor blackColor];
-    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:16];
+    attrs[NSFontAttributeName] = FONT_COMMON_16;
     [navBar setTitleTextAttributes:attrs];
     
     //设置BarButtonItem的主题

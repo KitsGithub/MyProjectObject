@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SFAuthStatusModle.h"
+@class SFAuthStatusModle;
 @interface SFCarListModel : NSObject
 
 @property (nonatomic, copy) NSString *car_id;
@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString *issue_status;     //车辆状态
 @property (nonatomic, copy) NSString *issue_date;       //日期
 
+@property (nonatomic, copy) NSString *price;
 
 /** 认证状态 */
 @property (nonatomic, copy) NSString *verify_status;    //认证状态

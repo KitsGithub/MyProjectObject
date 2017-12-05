@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>接单人详情</title>
+		<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+	
+	</head>
+	<style type="text/css">
+	    [v-cloak]{
+	        display: none;
+	    }
+      
+	</style>
+	<body>
+		<div id="appLoading">
+	      <img src="image/sf_loading.gif" alt="loading" />
+	    </div>
+		<div id="orderDetail" >	
+			<div class="sf_wrap" id="sfCardetail">
+				
+				<div class="sf_divwrap hmyHiscontent"  >
+					<!--人物信息开始-->
+						<div>
+							<div class="sf_w">
+								<div>
+									<div class="GDmanmews">
+										<span class="sf_imgheaderbig">
+											<img :src="header_src" v-if="header_src!==''" />
+											<img src="image/header.png"  v-else />
+										</span>
+										<span class="sf_imgheaderbignews">
+											<p class="sf_Fhtitle">发货人：<i class="">{{datas.delivery_by}}</i></p>
+											<span class="sf_Fhtitlephone"><i class="sf_iconphone" ></i>{{datas.delivery_mobile}}</span> 
+										</span>
+									</div>
+								</div>		
+							</div>	
+						</div>
+					<!--人物信息结束-->
+				</div>
+				<div class="sf_divwrap hMYsection"  >
+					<!--车辆信息开始-->
+					<div class="allcarlist">
+						<ul id="carWraps">
+							<li v-for="(item,index) in arrs">
+								<div class="carWrapsleft">
+									<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1">粤B 12345</span><span class="gray_color">保温车 4.2米 1吨 1方<span></span></div>
+									<div class="bottomnews"><i class="iconcar preciicon"></i><span class="red_color">1方</span></div>
+								</div>
+								<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show = "!item.islook">	
+								</div>		
+							</li>
+						</ul>
+					</div>
+					<!--车辆信息结束-->
+				</div>
+				<!--已拒绝或者已接收开始-->
+				<div class="wy_choose_footer">
+					<div class="totalprice flr">
+						{{totalPrice |  moneyFormat(totalPrice)}}
+					</div>
+					<div class="refuse flr" @click="refuseSeclect">回绝</div>
+					<div class="Receive flr" @click="ReceiveSeclect">接受</div>
+				</div>
+				<!--已拒绝或者已接收结束-->
+			</div>
+		</div>
+		
+	</body>
+	<!--cordove相关JS-->
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../cordova_plugins.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+	<!-- 资源 -->
+	<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/wy_Single.js" charset="UTF-8"></script>
+</html>

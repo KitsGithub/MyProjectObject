@@ -81,7 +81,7 @@
     _message.numberOfLines = 0;
     _message.textColor = BLACKCOLOR;
     _message.textAlignment = NSTextAlignmentLeft;
-    _message.font = [UIFont systemFontOfSize:16];
+    _message.font = FONT_COMMON_16;
     _message.text = self.messageStr;
     _message.lineBreakMode = NSLineBreakByCharWrapping;
     [_contentView addSubview:_message];
@@ -90,7 +90,7 @@
     [_comfirmButton setBackgroundColor:THEMECOLOR];
     [_comfirmButton setTitle:@"去认证" forState:(UIControlStateNormal)];
     [_comfirmButton setTitleColor:BLACKCOLOR forState:(UIControlStateNormal)];
-    _comfirmButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _comfirmButton.titleLabel.font = FONT_COMMON_16;
     _comfirmButton.layer.cornerRadius = 2;
     [_contentView addSubview:_comfirmButton];
     
@@ -99,7 +99,7 @@
     [_cancelButton setBackgroundColor:[UIColor colorWithHexString:@"f0f0f0"]];
     [_cancelButton setTitle:@"下次再认证" forState:(UIControlStateNormal)];
     [_cancelButton setTitleColor:BLACKCOLOR forState:(UIControlStateNormal)];
-    _cancelButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _cancelButton.titleLabel.font = FONT_COMMON_16;
     _cancelButton.layer.cornerRadius = 2;
     [_contentView addSubview:_cancelButton];
     
@@ -170,7 +170,7 @@
         
         
         CGFloat messageX = 46 * totalScale;
-        CGSize messageSize = [_message.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(messageX * 2, 40)];
+        CGSize messageSize = [_message.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(messageX * 2, 40)];
         _message.frame = CGRectMake(messageX, CGRectGetMaxY(_title.frame) + 20 * totalScale, contentWidth - messageX * 2, messageSize.height);
         
         

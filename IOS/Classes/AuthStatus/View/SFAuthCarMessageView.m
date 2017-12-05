@@ -12,9 +12,6 @@
 
 #import "SFAddCarView.h"
 
-#define NormalFont [UIFont systemFontOfSize:16]
-
-
 @interface SFAuthCarMessageView () <SFSinglePickerProtocol>
 
 @property (nonatomic, strong) NSMutableArray <NSString *>*AscriptionArray;

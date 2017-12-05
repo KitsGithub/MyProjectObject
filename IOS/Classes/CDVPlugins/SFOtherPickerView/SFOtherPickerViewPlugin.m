@@ -32,7 +32,7 @@
         
         NSMutableDictionary *params = command.arguments[0];
         __title = params[@"title"];
-        __h5Class = params[@"class"];
+        __h5Class = params[@"fromId"];
         self.resourceArray = params[@"data"];
         
         
@@ -56,7 +56,7 @@
     [self.commandDelegate runInBackground:^{
         NSMutableDictionary *params = command.arguments[0];
         __title = params[@"title"];
-        __h5Class = params[@"class"];
+        __h5Class = params[@"fromId"];
         self.resourceArray = params[@"data"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -78,17 +78,19 @@
 - (void)pickerView:(SFOtherPickerView *)pickerView commitDidSelected:(NSInteger)index resourceArray:(NSArray *)resouceArray{
     NSLog(@"%@",self.resourceArray[index]);
     
-    [self callBackHtmlWithStatus:(CDVCommandStatus_OK) andParams:@{
-                                                                   @"class" :__h5Class,
-                                                                   @"message":self.resourceArray[index]
-                                                                   }];
+    [self callBackHtmlWithStatus:(CDVCommandStatus_OK)
+                       andParams:@{
+                                   @"fromId" :__h5Class,
+                                   @"message":self.resourceArray[index]
+                                   }];
 }
 
 - (void)pickerViewDidSelectedCancel:(SFOtherPickerView *)pickerView {
     //包装h5的json对象
-    [self callBackHtmlWithStatus:(CDVCommandStatus_ERROR) andParams:@{
-                                                                      @"class" : __h5Class
-                                                                      }];
+    [self callBackHtmlWithStatus:(CDVCommandStatus_ERROR)
+                       andParams:@{
+                                   @"fromId" : __h5Class
+                                   }];
 }
 
 

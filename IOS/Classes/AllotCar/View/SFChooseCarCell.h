@@ -13,6 +13,12 @@
 
 @property (nonatomic, weak) SFCarListModel *model;
 
+/**
+ 0->单选  1->多选
+ */
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign, readonly) BOOL SFSelected;
 - (void)showTickImage:(BOOL)hidden;
+- (void)setTickChoose;
 
 @end

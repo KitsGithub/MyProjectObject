@@ -133,7 +133,7 @@
     [self addSubview:_nameView];
     
     _name = [UITextField new];
-    _name.font = [UIFont systemFontOfSize:16];
+    _name.font = FONT_COMMON_16;
     _name.placeholder = @"姓名与身份证保持一致";
     _name.textColor = COLOR_TEXT_COMMON;
     _name.tag = 1;
@@ -143,7 +143,7 @@
     _phoneView = [UIView new];
     [self addSubview:_phoneView];
     _phone = [UITextField new];
-    _phone.font = [UIFont systemFontOfSize:16];
+    _phone.font = FONT_COMMON_16;
     _phone.textColor = COLOR_TEXT_COMMON;
     _phone.tag = 2;
     _phone.delegate = self;
@@ -153,7 +153,7 @@
     _idNumView = [UIView new];
     [self addSubview:_idNumView];
     _idNum = [UITextField new];
-    _idNum.font = [UIFont systemFontOfSize:16];
+    _idNum.font = FONT_COMMON_16;
     _idNum.textColor = COLOR_TEXT_COMMON;
     _idNum.tag = 3;
     _idNum.delegate = self;
@@ -163,7 +163,7 @@
     _carIdView = [UIView new];
     [self addSubview:_carIdView];
     _carId = [UITextField new];
-    _carId.font = [UIFont systemFontOfSize:16];
+    _carId.font = FONT_COMMON_16;
     _carId.textColor = COLOR_TEXT_COMMON;
     _carId.tag = 4;
     _carId.delegate = self;

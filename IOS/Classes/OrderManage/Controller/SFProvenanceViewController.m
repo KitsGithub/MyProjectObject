@@ -84,7 +84,7 @@
     self.navigationController.navigationItem.backBarButtonItem.action = @selector(backAction);
     
     __weak typeof(self) wself = self;
-    _segment   = [[SFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 30 + 64 + 64 + 15*2, 44) items:[self titleItems] font:[UIFont systemFontOfSize:16]];
+    _segment   = [[SFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 30 + 64 + 64 + 15*2, 44) items:[self titleItems] font:FONT_COMMON_16];
     _segment.lineWidth  = 80;
     _segment.selectedBlock = ^(NSInteger index) {
         wself.currentDirection  = index;
@@ -131,11 +131,11 @@
             [wself.navigationController pushViewController:detail animated:YES];
         } else if (([SFAccount currentAccount].role == SFUserRoleGoodsownner && wself.currentDirection == 1) || ([SFAccount currentAccount].role == SFUserRoleCarownner && wself.currentDirection == 0)) {
             SFCarDetailController *carDetail = [[SFCarDetailController alloc] init];
-            carDetail.wwwFolderName = SFWL_H5_PATH;
-            carDetail.startPage = @"carsDetail.html";
-            carDetail.orderID = model.guid;
-            carDetail.showType = NO;
-            carDetail.title = @"车辆详情";
+//            carDetail.wwwFolderName = SFWL_H5_PATH;
+//            carDetail.startPage = @"carsDetail.html";
+//            carDetail.orderID = model.guid;
+//            carDetail.showType = NO;
+//            carDetail.title = @"车辆详情";
             [wself.navigationController pushViewController:carDetail animated:YES];
         }
         

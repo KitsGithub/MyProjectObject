@@ -59,7 +59,7 @@
     
     _location = [UILabel new];
     _location.textColor = COLOR_TEXT_COMMON;
-    _location.font = [UIFont systemFontOfSize:16];
+    _location.font = FONT_COMMON_16;
     _location.numberOfLines = 0;
     _location.text = @"河北省保定南出口(G4京港澳高速出口西南向)附近";
     [self addSubview:_location];
@@ -88,7 +88,7 @@
     _time.frame = CGRectMake(timeX , 0, timeSize.width, timeSize.height);
     
     
-    CGSize loactionSize = [_location.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(SCREEN_WIDTH - timeX - 24, MAXFLOAT)];
+    CGSize loactionSize = [_location.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(SCREEN_WIDTH - timeX - 24, MAXFLOAT)];
     _location.frame = CGRectMake(timeX, CGRectGetMaxY(_time.frame) + 4, loactionSize.width, loactionSize.height);
     
     _lineView.frame = CGRectMake(_tipsView.center.x, CGRectGetMaxY(_tipsView.frame), 1, CGRectGetHeight(self.frame) - CGRectGetHeight(_tipsView.frame));

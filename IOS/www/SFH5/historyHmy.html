@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>历史接单人</title>
+		<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+	
+	</head>
+	<style type="text/css">
+	    [v-cloak]{
+	        display: none;
+	    }
+      
+	</style>
+	<body>
+		<div id="appLoading">
+	      <img src="image/sf_loading.gif" alt="loading" />
+	    </div>
+		<div id="orderDetail" >	
+			<div class="sf_wrap" id="sfCardetail">
+				<!--历史接单人开始-->
+				<div class="sf_divwrap hmyHiscontent"  >
+					<div class="searchDaytime">
+						<span></span>
+						<input type="text" placeholder="接单时间" readonly/>						
+					</div>
+					<div class="hisCenter his_pt" >
+						<dl>
+							<dd class="hisCenterlist" v-for="(item,index) in arrs">
+								<div v-on:click="isShow(item,index)">{{item.time}}<span  :class="{active:item.isCheck}"></span></div>
+								<ul class="hisCenterlist_ul" v-show="item.isCheck">
+									<li v-for="its in arrs[index].news">
+										<div class="hisCenterlist_header" >
+											<img src="image/header.png" alt="" />
+											<span>罗鸠源</span>
+										</div>
+										<div class="cartotal">
+											<span>3辆车</span>
+											<span>报价共</span>
+											<span>¥3000.00</span>
+										</div>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!--历史接单人结束-->
+			</div>
+		</div>
+		
+	</body>
+	<!--cordove相关JS-->
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../cordova_plugins.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+	<!-- 资源 -->
+	<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/historyHmy.js" charset="UTF-8"></script>
+</html>

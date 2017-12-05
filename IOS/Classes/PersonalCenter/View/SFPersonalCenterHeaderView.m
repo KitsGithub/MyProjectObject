@@ -60,7 +60,7 @@ static CGFloat IdentflyTopPadding;
         IdentflyTopPadding = 23;
     } else {
         BodyFont = [UIFont boldSystemFontOfSize:16];
-        NormalFont = [UIFont systemFontOfSize:16];
+        NormalFont = FONT_COMMON_16;
         
         UserIconWH  = 74;
         IconTopPadding = 33;

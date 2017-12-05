@@ -25,7 +25,6 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setTitle:@"选择车辆"];
     [self setupView];
     [self getIdentflyCarList];
 }
@@ -42,8 +41,10 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
                                              }
                                    success:^(id result)
     {
+        NSMutableArray *dataArray = [SFCarListModel mj_objectArrayWithKeyValuesArray:result];
         
-        self.dataArray = [SFCarListModel mj_objectArrayWithKeyValuesArray:result];
+        self.dataArray = [self screenDataFromArray:dataArray];
+        
         [_tableView reloadData];
         
         
@@ -53,23 +54,76 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
 }
 
 
+/**
+ 筛选数据
+ */
+- (NSMutableArray *)screenDataFromArray:(NSArray *)dataArray {
+    NSMutableArray *targetArray = [NSMutableArray array];
+    for (SFCarListModel *model in dataArray) {
+        BOOL isEqure = NO;
+        if (!self.selectedCarArray.count) {
+            [targetArray addObjectsFromArray:dataArray];
+            break;
+        }
+        for (NSString *carNum in self.selectedCarArray) {
+            if ([model.car_no isEqualToString:carNum]) {
+                isEqure = YES;
+                break;
+            }
+        }
+        if (!isEqure) {
+            [targetArray addObject:model];
+        }
+    }
+    return targetArray;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSArray *cellArray = tableView.visibleCells;
-    for (SFChooseCarCell *cell in cellArray) {
+    if (self.typeMode == TypeMode_SingleChooser) {
+        NSArray *cellArray = tableView.visibleCells;
+        for (SFChooseCarCell *cell in cellArray) {
+            [cell showTickImage:NO];
+        }
+        
+        SFChooseCarCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [cell showTickImage:YES];
+        [cell setTickChoose];
+        if (self.resultReturnBlock) {
+            self.resultReturnBlock(@[cell.model]);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        
+        SFChooseCarCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setTickChoose];
+        
     }
     
-    SFChooseCarCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell showTickImage:NO];
-    
+}
+
+- (void)comfirmButtonClick {
     if (self.resultReturnBlock) {
-        self.resultReturnBlock(cell.model.car_id,cell.model.car_no);
+        NSArray *cellArray = _tableView.visibleCells;
+        NSMutableArray *selectedArray = [NSMutableArray array];
+        for (SFChooseCarCell *cell in cellArray) {
+            if (cell.SFSelected) {
+                [selectedArray addObject:cell.model];
+            }
+        }
+        self.resultReturnBlock([self screenDataFromArray:selectedArray]);
+        
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupView {
+    
+    self.title = @"选择车辆";
+    if (self.typeMode != TypeMode_SingleChooser) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:(UIBarButtonItemStylePlain) target:self action:@selector(comfirmButtonClick)];
+        
+    }
+    
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -89,10 +143,16 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SFChooseCarCell *cell = [tableView dequeueReusableCellWithIdentifier:ChooseCarCellReusedID forIndexPath:indexPath];
+    cell.type = self.typeMode;
     SFCarListModel *model = self.dataArray[indexPath.row];
-    if ([self.selectedNum isEqualToString:model.car_no]) {
-        [cell showTickImage:NO];
+    for (NSString *targetStr in self.selectedCarArray) {
+        if ([targetStr isEqualToString:model.car_no]) {
+            [cell showTickImage:YES];
+            [cell setTickChoose];
+        }
     }
+    
+    
     cell.model = model;
     return cell;
 }
@@ -102,12 +162,19 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
 }
 
 
-
+#pragma mark - lazyLoad
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+
+- (NSMutableArray *)selectedCarArray {
+    if (!_selectedCarArray) {
+        _selectedCarArray = [NSMutableArray array];
+    }
+    return _selectedCarArray;
 }
 
 @end

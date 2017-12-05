@@ -131,7 +131,7 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AddCarrierDriverCellReusedID forIndexPath:indexPath];
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.textLabel.font = FONT_COMMON_16;
     cell.textLabel.text = self.driverArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = COLOR_TEXT_COMMON;

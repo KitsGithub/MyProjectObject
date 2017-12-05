@@ -20,6 +20,7 @@ typedef void(^ViewAction)(SFAddCarView *view);
 @property (nonatomic, assign) AddCarViewStyle viewStyle;
 @property (nonatomic, copy) NSString *placeHolder;
 @property (nonatomic, copy) NSString *inputViewStr;
+@property (nonatomic, assign) BOOL showLineView;
 @property (nonatomic, copy) ViewAction action;
 
 @property (nonatomic, copy, readonly) NSString *inputStr;

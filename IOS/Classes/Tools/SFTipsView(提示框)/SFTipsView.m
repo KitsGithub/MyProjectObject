@@ -43,7 +43,7 @@ static SFTipsView *tipsView;
 
 - (void)setupView {
     _tipsLabel = [UILabel new];
-    _tipsLabel.font = [UIFont systemFontOfSize:16];
+    _tipsLabel.font = FONT_COMMON_16;
     _tipsLabel.textAlignment = NSTextAlignmentCenter;
     _tipsLabel.textColor = [UIColor whiteColor];
     [self addSubview:_tipsLabel];

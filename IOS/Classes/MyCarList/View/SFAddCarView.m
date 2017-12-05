@@ -8,8 +8,6 @@
 
 #import "SFAddCarView.h"
 
-#define NormalFont [UIFont systemFontOfSize:16]
-
 @interface SFAddCarView () <UITextFieldDelegate>
 
 @end
@@ -91,7 +89,7 @@
     
     _titleLabel = [UILabel new];
     _titleLabel.textColor = [UIColor colorWithHexString:@"666666"];
-    _titleLabel.font = NormalFont;
+    _titleLabel.font = FONT_COMMON_16;
     [self addSubview:_titleLabel];
     
     _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Arrow_Down"]];
@@ -99,7 +97,7 @@
     
     _textField = [UITextField new];
     _textField.textColor = COLOR_TEXT_DARK;
-    _textField.font = NormalFont;
+    _textField.font = FONT_COMMON_16;
     _textField.delegate = self;
     [self addSubview:_textField];
     
@@ -133,6 +131,11 @@
     _placeHolder = placeHolder;
     _titleLabel.text = placeHolder;
     _textField.placeholder = placeHolder;
+}
+
+- (void)setShowLineView:(BOOL)showLineView {
+    _showLineView = showLineView;
+    _lineView.hidden = !showLineView;
 }
 
 - (void)setInputViewStr:(NSString *)inputViewStr {

@@ -112,7 +112,7 @@
                 release.startPage = @"release_car.html";
                 release.title = @"发布车源";
             } else {
-                release.startPage = @"release_good.html";
+                release.startPage = @"release_Goods.html";
                 release.title = @"发布货源";
             }
             
@@ -123,7 +123,7 @@
             [self presentViewController:navVc animated:YES completion:nil];
             
         } else {
-            
+
             UIAlertController *alertVc;
             UIAlertAction *action1;
             UIAlertAction *action2;
@@ -139,15 +139,15 @@
                     [self.selectedViewController pushViewController:auth animated:YES];
                 }];
             }
-            
+
             [alertVc addAction:action1];
             if (action2) {
                 [alertVc addAction:action2];
             }
-            
-            
+
+
             [self presentViewController:alertVc animated:YES completion:nil];
-            
+
         }
     }
 }

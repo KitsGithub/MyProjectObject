@@ -41,6 +41,18 @@
         <param name="onload" value="true" />
     </feature>
     
+<!--   车辆选择器-->
+    <feature name="SFChooseCarPlguin">
+        <param name="ios-package" value="SFChooseCarPlguin" />
+        <param name="onload" value="true" />
+    </feature>
+    
+<!--    选择发布周期-->
+    <feature name="SFChooseReleaerTimePlugin">
+        <param name="ios-package" value="SFChooseReleaerTimePlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    
 <!--    提示弹框-->
     <feature name="SFMessageViewPlugin">
         <param name="ios-package" value="SFMessageViewPlugin" />

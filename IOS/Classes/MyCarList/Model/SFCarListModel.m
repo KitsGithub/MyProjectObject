@@ -35,4 +35,31 @@
     return @" 0方";
 }
 
+- (NSString *)price {
+    if (_price.length) {
+        return _price;
+    }
+    return @"";
+}
+
+/**
+ 车牌号码
+ */
+- (NSString *)carNum {
+    return _car_no;
+}
+
+- (NSString *)car_id {
+    return _car_id;
+}
+
+- (void)setCarNum:(NSString *)carNum {
+    _car_no = carNum;
+}
+
+- (NSArray <NSString *>*)driverNameArray {
+    return @[];
+}
+
+
 @end

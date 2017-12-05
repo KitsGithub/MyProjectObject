@@ -222,7 +222,7 @@ function successFunction(data){
 				break;
 		}
     }
-	$(clas).next("span").removeClass("active")
+	//	$(clas).next("span").removeClass("active")
 	// confirm(data.address);
 }
 
@@ -527,12 +527,12 @@ function requestOrderDetail (){
 
 	//请求我发的车详情
 	var requestURL = appURL + "/CarsBooking/GetCarsOrderDetails";
-	// var CarId = "a30e7b8c-b9fd-4766-a214-55688afca4b9";
-	// var UserId ="88383c70-f27b-43cc-98a5-d073a67de55" ;
-	// var SFAppData={
-	// 	CarId:CarId,
-	// 	UserId:UserId
-	// }
+	 var CarId = "a30e7b8c-b9fd-4766-a214-55688afca4b9";
+	 var UserId ="88383c70-f27b-43cc-98a5-d073a67de55" ;
+	 var SFAppData={
+	 	CarId:CarId,
+	 	UserId:UserId
+	 }
 			// $(".sfRelease").css("opacity",'0');
 	  //   	$("#appLoading").css("opacity",'1');
 	    	//$("#appLoading").remove();
@@ -540,7 +540,7 @@ function requestOrderDetail (){
 	    url: requestURL,
 	    type: "POST",
 	    dataType: "json",
-	    data :SFAppData,
+	    data :SFAppData,	
 	    success: function (data) {
 	    	var data = data.Data.cars_details;
 	    	console.log(data);
@@ -577,9 +577,7 @@ function requestOrderDetail (){
 			 //意向价格
 			 $("#input_price").val(price);
 			 //发车时间
-			 $(".sf_Day").val()
-
-	    	 lodingFn();
+			 $(".sf_Day").val();
 	    },
 	    error: function (error) {
 	    	confirm("请检查网络")
@@ -587,9 +585,4 @@ function requestOrderDetail (){
 	});
 }
 
-function lodingFn(){
-			$(".sfRelease").css("opacity",'1');
-	    	$("#appLoading").css("opacity",'0');
-	    	$("#appLoading").remove();
-};
 

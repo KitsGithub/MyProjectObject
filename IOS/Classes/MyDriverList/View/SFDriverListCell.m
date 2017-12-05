@@ -8,8 +8,6 @@
 
 #import "SFDriverListCell.h"
 
-#define NormalFont [UIFont systemFontOfSize:16]
-
 @implementation SFDriverListCell {
     UILabel *_name;
     UIImageView *_phoneTips;
@@ -43,12 +41,12 @@
     
     _name = [UILabel new];
     _name.textColor = BLACKCOLOR;
-    _name.font = NormalFont;
+    _name.font = FONT_COMMON_16;
     [self addSubview:_name];
     
     _phone = [UILabel new];
     _phone.textColor = BLACKCOLOR;
-    _phone.font = NormalFont;
+    _phone.font = FONT_COMMON_16;
     [self addSubview:_phone];
     
     _phoneTips = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Dirvier_Phone"]];
@@ -127,12 +125,12 @@
 
 
 - (void)layoutSubviews {
-    CGSize nameSize = [_name.text sizeWithFont:NormalFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize nameSize = [_name.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _name.frame = CGRectMake(20, 20, nameSize.width, nameSize.height);
     
     _phoneTips.frame = CGRectMake(CGRectGetMaxX(_name.frame) + 20, _name.center.y - 9, 14, 18);
     
-    CGSize phoneSize = [_phone.text sizeWithFont:NormalFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize phoneSize = [_phone.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _phone.frame = CGRectMake(CGRectGetMaxX(_phoneTips.frame) + 5, CGRectGetMinY(_name.frame), phoneSize.width, phoneSize.height);
     
     CGSize optionSize = [_option2.titleLabel.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];

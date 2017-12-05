@@ -35,6 +35,9 @@ body{
 .flr{
 	float: left;
 }
+.flr_r{
+	float:right;
+}
 i{
 	font-style: normal;
 }
@@ -53,6 +56,12 @@ b{
 .sf_mtp{
 	margin-top: 2rem;
 }
+.sf_mtp1{
+	margin-top: 1rem;
+}
+.sf_mtp3{
+	margin-top: 3rem;
+}
 .sf_btp{
 	padding-top:2rem
 }
@@ -61,6 +70,12 @@ b{
 }
 .sf_mbt1{
 	margin-bottom: 1rem;
+}
+.sf_mbt3{
+	margin-bottom: 3rem;
+}
+.sf_mrt1{
+	margin-right: 1rem;
 }
 .icon_frombg,.icon_tobg,.icon_detailwarpbg,.icon_detailnormal{
 	width:1.7rem;
@@ -201,7 +216,7 @@ b{
 	margin-top: 15px;
 }
 .sf_bzright{
-	width:62.5%;
+	width:84%;
 	height: 11rem;
   	border-radius: 10px;
   	background-color: #f1f1f3;
@@ -212,7 +227,7 @@ b{
 	width: 100%;
 	height: 100%;
 	font-size: 18px;
-	line-height: 2.8rem;
+	line-height: 3.8rem;
 	text-align: left;
 	color: #999999;
 	text-indent: 0.4rem;
@@ -266,7 +281,7 @@ b{
   	border: none;
 }
 .sf_Fb{
-	width: 40%;
+	width: 100%;
   	height: 5rem;
   	font-family: PingFangSC;
   	font-size: 18px;
@@ -276,8 +291,8 @@ b{
   	border-radius: 2px;
   	background-color: #ffd74c;
 	margin-top: 30px;
-	float: left;
-	margin: 0 5%;
+	position: fixed;
+	bottom: 0;
 }
 .sf_develop{
 	float:right;
@@ -750,11 +765,300 @@ b{
       	transition:opacity 3s;
       }
 
-
-
-
-
-
+/*********************************发布车源*********************************************/
+	/*.caiList{
+		
+	}*/
+	.caiList>ul>li{
+		display: block;
+		border-right: solid 1px #eeeeee;
+		border-top: solid 1px #eeeeee;
+		border-bottom: solid 1px #eeeeee;
+		border-left: solid 0.2rem #ffd74c;
+		padding: 5% 4.5%;
+		width:89%;
+		margin-bottom: 1rem;
+		overflow: hidden;
+	}
+	.caiList>ul>li>div{
+		width:100%;
+		font-size: 16px;
+		  line-height: 1.6rem;
+		  text-align: left;
+		  color: #3d3d3d;
+	}
+	.caiList>ul>li>div>i{
+		display: inline-block;
+	}
+	.caiList>ul>li>div:nth-child(1),.caiList>ul>li>div:nth-child(2){
+		margin-bottom: 1.8rem;	
+	}
+	.caiList>ul>li>div:nth-child(3){
+		width:100%;
+		height: 5rem;
+		border-radius: 10px;
+  		background-color: #f1f1f3;
+	}
+	.caiList>ul>li>div:nth-child(3)>input{
+  		border: none;
+  		text-indent: 1rem;
+  		background-color: #f1f1f3;
+  		height: 5rem;
+  		line-height: 5rem;
+  		width:90%;
+	}
+	.iconcar{
+		display: inline-block;
+		width:2rem;
+		height: 1.6rem;
+		background:url(../image/iconss.png) no-repeat left center;
+		background-size:cover;
+		margin-right: 1rem;
+		vertical-align: middle;
+	}
+	.iconcloose{
+		width:1.2rem;height: 1.2rem;
+		background: url(../image/closeicon.png) no-repeat left center;
+		background-size: cover;
+		
+		float: right;
+	}
+	.iconprice{
+		width:1.1rem;
+		height: 1.3rem;
+		background: url(../image/priceicon.png) no-repeat left center;
+		background-size: cover;
+		margin-right: 1rem;
+		vertical-align: middle;
+	}
+/************************************我的物源的货源详情*************************************************/
+.histroyWrap{
+    	margin:3rem 0;
+    	overflow: hidden;
+    }
+    .hmyHiscontent{
+    	margin-bottom:1rem;
+    	background:#ffffff;
+    }
+    .histroyWrap>span{
+    	display: block;
+    }
+    .histroyWrap>span:nth-child(1){
+    	font-size: 21px;
+    	font-weight: bold;
+    	float: left;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 16px;
+    	line-height: 1.6rem;
+    	float: right;
+    }
+    .histroyWrap>span>i{
+    	display: inline-block;
+    	width:0.8rem;
+    	height:1.6rem ;
+    	background: url(../image/back-icon.png) no-repeat left top;
+    	background-size: cover;
+    	vertical-align:middle;
+    	margin-left:1rem;
+    }
+    .hisCenter{
+    	margin-bottom: 1rem;
+    }
+    .hisCenterlist{
+    	margin-bottom:1rem;
+    }
+    .hisCenterlist>div{
+		  height: 2.4rem; 
+		  overflow: hidden;  		  	
+    }
+    .hisCenterlist>div>p{
+		 font-size: 14px;
+		  line-height:1.4rem;
+		  text-align: left;
+		  color: #999999; 
+		  height: 1.4rem;  
+		  border-left:0.4rem solid #ff5043;
+		  text-indent: 0.5rem;
+		  display: inline-block;
+		  width:50%;
+		  	
+    }
+    .hisCenterlist>div>span{
+    	display: inline-block;
+    	float: right;
+	   	width:2.4rem;
+	   	height: 2.4rem;
+	   	background: url(../image/openicon2.png) no-repeat left center;
+	   	background-size: cover;
+    }
+    .hisCenterlist>div>span.active{
+	   	background: url(../image/openicon1.png) no-repeat left center;
+	   	background-size: cover;
+    }
+    .hisCenterlist_ul{
+		  border-bottom: solid 1px #eeeeee;
+		  padding-bottom:2rem;
+		  margin-bottom:2rem;
+    }
+    .hisCenterlist_ul>li{
+    	 	width: 31.5rem;
+		  height: 5.6rem;
+		  border-radius: 2px;
+		  background-color: #f6f6f6;
+		  border: solid 1px #eeeeee;
+		  padding: 1rem 1rem 2rem;
+		  margin-bottom: 1rem;
+		  
+    }
+    .hisCenterlist_header{
+    	height: 3rem;
+    }
+    .hisCenterlist_header>img{
+    	width: 3rem;
+    	height: 3rem;
+    	border-radius: 100%;
+    	line-height: 3rem;
+    	vertical-align: middle;
+    }
+    .hisCenterlist_header>span{
+    	height: 3rem;
+    	margin-left: 0.8rem;
+    	 font-size: 16px;
+		  text-align: left;
+		  color: #3d3d3d;
+		  vertical-align: middle;
+    }
+    .hisCenterlist_wrap{
+    	margin-top:1rem;
+    	margin-left:3.8rem;
+    }
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	height: 3rem;
+    	margin-left: 0.8rem;
+    	 font-size: 16px;
+		  text-align: left;
+		  color: #3d3d3d;
+    }
+    .hisCenterlist_wrap>span>i{
+		color: #e65c5c;
+    }
+    .his_pt{
+    	padding-top:2rem
+    }
+    .cartotal{
+      	margin-top:1rem;
+      	margin-left:3.8rem
+	  }
+	  .cartotal>span{
+	  	font-size: 16px;
+		  line-height: 1.6rem;
+		  text-align: left;
+		  color: #3d3d3d;
+		  margin-right:1rem;
+	  }
+	  .cartotal>span:nth-child(3){
+		  color: #e65c5c;
+	  }
+/******************历史接单人********************************/
+#sfCardetail{
+      	background:none;
+      }
+      .searchDaytime{
+      	margin-top:1rem;
+      	width:100%;
+		  height: 3.6rem;
+		  border-radius: 10px;
+		  background-color: #ebebed;
+      }
+      .searchDaytime>input{
+      	margin-left:1rem;
+      	margin-top:0.5rem;
+      	height: 2.6rem;
+      	border: none;
+      	background: none;
+      	line-height: 2.6rem;
+      	width:80%;
+      }
+      .searchDaytime>span{
+		width:1.8rem;
+		height: 1.8rem;
+		margin:0.9rem 1rem;
+		background:url(../image/search.png) no-repeat left center;
+		background-size:cover;
+		display: inline-block;
+		float: left;
+      }
+/****************************接单人详情**********************************/
+.red_color{
+		  color: #e65c5c;
+      }
+      .gray_color{
+      	color:#999999;
+      }
+      .carWrapsleft,.iconcarright{
+      	float: left;
+      }
+      .topnews{
+      	margin-bottom: 1.8rem;
+      }
+      .allcarlist>ul>li{
+      	overflow: hidden;
+      	border-bottom: 1px solid #eeeeee;
+      	padding: 3rem 0;
+      	font-size:16px;
+      }
+      .carWrapsleft{
+      	width:87%;
+      }
+      .iconcarright{
+      	width:2rem;
+      	height: 2rem;
+      	background: url(../image/checknormal.png) no-repeat left center;
+      	background-size: cover;
+      	margin: 1.5rem 0; 
+      }
+      .iconcarright[checked]{
+      	background: url(../image/ischeck.png) no-repeat left center;
+      	background-size: cover;
+      }
+      .wy_choose_footer{
+      	background: #3d3d3d;
+      	height:5rem ;
+      	overflow: hidden;
+      	position: fixed;
+      	bottom: 0;
+      }
+      .totalprice{
+      	line-height: 5rem;
+      	color: #ffffff;
+      	font-size: 18px;
+      	text-indent: 2rem;
+      	width:17.5rem;
+      }
+      .refuse,.Receive{
+      	width:10rem;
+      	height: 5rem;
+      	font-size: 18px;
+		  line-height: 5rem;
+		  text-align: center;
+		  color: #3d3d3d;
+      }
+      .refuse{
+      	background: #f0f0f0;
+      }
+      .Receive{
+      	background: #ffd74c;
+      }
+      .hMYsection{
+      	background: #ffffff;
+      	min-height: 50rem;
+      	height: auto;
+      }
+	.preciicon{
+		background: url(../image/icons.png) no-repeat left center;
+		background-size: cover;
+	}
 
 
 
@@ -897,7 +1201,62 @@ b{
 		.sf_daytime{
 			font-size: 14px;
 		}
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 16px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 10px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 21px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 16px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 14px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 16px;
+    }
 
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 16px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 16px;
+	  }
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 14px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 8px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 18px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 14px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 12px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 14px;
+    }
+
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 14px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 14px;
+	  }
 
 
 
@@ -1022,7 +1381,34 @@ b{
 	.sf_daytime{
 		font-size: 15px;
 	}
-	
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 15px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 9px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 9px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 15px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 12px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 15px;
+    }
+
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 15px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 15px;
+	  }
 	
 	
 	
@@ -1148,6 +1534,34 @@ b{
 		.sf_daytime{
 			font-size: 16px;
 		}
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 16px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 10px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 21px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 16px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 14px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 16px;
+    }
+
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 16px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 16px;
+	  }
 		
 		
 }
@@ -1268,7 +1682,34 @@ b{
 		.sf_daytime{
 			font-size: 24px;
 		}
-		
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 24px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 15px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 31px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 24px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 21px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 24px;
+    }
+
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 24px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 24px;
+	  }		
 		
 }
 
@@ -1389,7 +1830,34 @@ b{
 		.sf_daytime{
 			font-size: 32px;
 		}
-		
+/*********************************发布车源*********************************************/
+	.caiList>ul>li>div{
+		font-size: 32px;
+	}
+	.caiList>ul>li>div:nth-child(3){
+		border-radius: 20px;
+	}
+/************************************我的物源的货源详情*************************************************/
+    .histroyWrap>span:nth-child(1){
+    	font-size: 42px;
+    }
+    .histroyWrap>span:nth-child(2){
+    	font-size: 32px;
+    }
+    .hisCenterlist>div>p{
+		 font-size: 28px;	
+    }
+    .hisCenterlist_header>span{
+    	 font-size: 32px;
+    }
+
+    .hisCenterlist_wrap>span,.hisCenterlist_wrap>span>i{
+    	 font-size: 32px;
+    }
+
+	  .cartotal>span{
+	  	font-size: 32px;
+	  }		
 		
 }
 

@@ -42,7 +42,7 @@
         [button setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
         button.layer.cornerRadius = 15;
         button.clipsToBounds = YES;
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.titleLabel.font = FONT_COMMON_16;
         [self addSubview:button];
         
     }
@@ -55,7 +55,7 @@
     for (NSInteger index = 0; index < _buttonArray.count; index++) {
         UIButton *button = _buttonArray[index];
         
-        CGSize titleSize = [button.titleLabel.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        CGSize titleSize = [button.titleLabel.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
         
         if (index == 0) {
             button.frame = CGRectMake(0, 0, titleSize.width + 30, 30);

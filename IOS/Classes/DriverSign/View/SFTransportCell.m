@@ -51,7 +51,7 @@
     _carNum = [UILabel new];
     _carNum.text = @"粤B 123123";
     _carNum.textColor = COLOR_TEXT_COMMON;
-    _carNum.font = [UIFont systemFontOfSize:16];
+    _carNum.font = FONT_COMMON_16;
     [self addSubview:_carNum];
     
     
@@ -60,7 +60,7 @@
     [self addSubview:_driverTips];
     
     _drivers = [UILabel new];
-    _drivers.font = [UIFont systemFontOfSize:16];
+    _drivers.font = FONT_COMMON_16;
     _drivers.textColor = COLOR_TEXT_COMMON;
     _drivers.text = @"陈小鸣／李天强／李强／余威";
     [self addSubview:_drivers];
@@ -76,7 +76,7 @@
         button.layer.cornerRadius = 4;
         button.clipsToBounds = YES;
         button.tag = index;
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.titleLabel.font = FONT_COMMON_16;
         switch (index) {
             case 0:
                 [button setTitle:@"详情" forState:(UIControlStateNormal)];
@@ -123,11 +123,11 @@
     _address.frame = CGRectMake(0, 30, SCREEN_WIDTH, 102);
     
     _carNumTips.frame = CGRectMake(20, CGRectGetMaxY(_address.frame) + 20, 20, 16);
-    CGSize carNumSize = [_carNum.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize carNumSize = [_carNum.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carNum.frame = CGRectMake(CGRectGetMaxX(_carNumTips.frame) + 10, _carNumTips.center.y - carNumSize.height * 0.5, carNumSize.width, carNumSize.height);
     
     _driverTips.frame = CGRectMake(CGRectGetMinX(_carNumTips.frame), CGRectGetMaxY(_carNumTips.frame) + 20, 20, 16);
-    CGSize driverSize = [_drivers.text sizeWithFont:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize driverSize = [_drivers.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _drivers.frame = CGRectMake(CGRectGetMaxX(_driverTips.frame) + 10, _driverTips.center.y - driverSize.height * 0.5, driverSize.width, driverSize.height);
     
     _buttonView.frame = CGRectMake(20, CGRectGetMaxY(_driverTips.frame) + 30, SCREEN_WIDTH - 40, 44);

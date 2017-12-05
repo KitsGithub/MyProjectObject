@@ -9,8 +9,6 @@
 #import "SFAllotCarrierCell.h"
 #import "SFDriversView.h"
 
-#define Font [UIFont systemFontOfSize:16]
-
 @implementation SFAllotCarrierCell {
     UIButton *_firstButton;
     UIButton *_secondButton;
@@ -59,7 +57,7 @@
     [self addSubview:_firstButton];
     
     _carNum = [UILabel new];
-    _carNum.font = Font;
+    _carNum.font = FONT_COMMON_16;
     _carNum.textColor = COLOR_TEXT_COMMON;
     _carNum.text = @"请选择车牌";
     [_firstButton addSubview:_carNum];
@@ -70,7 +68,7 @@
     [self addSubview:_secondButton];
     
     _driverTips = [UILabel new];
-    _driverTips.font = Font;
+    _driverTips.font = FONT_COMMON_16;
     _driverTips.text = @"添加司机";
     _driverTips.textColor = COLOR_TEXT_COMMON;
     [self addSubview:_driverTips];
@@ -100,7 +98,7 @@
     [_firstCar setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     [_firstCar addTarget:self action:@selector(setFirstCar:) forControlEvents:(UIControlEventTouchUpInside)];
     _firstCar.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    _firstCar.titleLabel.font = [UIFont systemFontOfSize:16];
+    _firstCar.titleLabel.font = FONT_COMMON_16;
     
     [_eddittingView addSubview:_firstCar];
     
@@ -111,7 +109,7 @@
     [_delButton setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     _delButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     _delButton.tag = 1;
-    _delButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    _delButton.titleLabel.font = FONT_COMMON_16;
     [_delButton addTarget:self action:@selector(optionsClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [_eddittingView addSubview:_delButton];
     
@@ -161,7 +159,7 @@
     
     _firstButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, 76);
     
-    CGSize numSize = [_carNum.text sizeWithFont:Font maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize numSize = [_carNum.text sizeWithFont:FONT_COMMON_16 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _carNum.frame = CGRectMake(20, (CGRectGetHeight(_firstButton.frame) - numSize.height) * 0.5, numSize.width, numSize.height);
     
     _lineView1.frame = CGRectMake(20, CGRectGetMaxY(_carNum.frame) + 30, SCREEN_WIDTH - 40, 1);

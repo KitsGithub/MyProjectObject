@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SFCarrierProtocol.h"
 
-@interface SFCarrierModel : NSObject <SFCarrierProtocol>
+@interface SFCarrierModel : NSObject
 
 @property (nonatomic, strong) NSString *carNum;
 
@@ -30,5 +29,7 @@
  逗号隔开的多个车牌号码
  */
 @property (nonatomic, copy) NSString *car_no;
+
+@property (nonatomic, strong) NSArray *driverNameArray;
 
 @end
