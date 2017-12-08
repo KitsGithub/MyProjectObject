@@ -31,8 +31,7 @@ static CGFloat maxDistance = 200;
 @property (nonatomic, weak)SFPersonalNavBar *navBar;
 
 @property (nonatomic, strong) NSMutableArray *titleArray;
-@property (nonatomic, weak) SFAccount *acount;
-@property (nonatomic,strong)SFAuthStatusModle *authStatus;
+@property (nonatomic,strong) SFAuthStatusModle *authStatus;
 @end
 
 @implementation SFPersonalCenterController {
@@ -69,9 +68,9 @@ static CGFloat maxDistance = 200;
 
 - (void)identiflyStatusChange:(NSNotification *)notification {
     _verify_remark = @"审核中";
-    if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+    if (SF_USER.role == SFUserRoleCarownner) {
         [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
-    } else if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+    } else if (SF_USER.role == SFUserRoleGoodsownner) {
         [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
     }
 }
@@ -82,7 +81,7 @@ static CGFloat maxDistance = 200;
  */
 
 - (void)logout {
-    [[SFDataBaseHelper shared] clearAccount];
+    [SF_USER clearUserInfo];
     [[[SFTipsView alloc] init] showSuccessWithTitle:@"退出成功"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -91,9 +90,9 @@ static CGFloat maxDistance = 200;
 // 获取当前用户的信誉认证状态
 - (void)getCertificationInfo {
     
-    _verify_remark = [SFAccount currentAccount].authStatus.verify_remark;
+    _verify_remark = SF_USER.authStatus.verify_remark;
     
-    SFAccount *account = [SFAccount currentAccount];
+    SFUserInfo *account = SF_USER;
     [[SFNetworkManage shared] postWithPath:@"Certificate/GetCertificateInfo"
                                     params:@{
                                              @"UserId" : account.user_id
@@ -101,14 +100,14 @@ static CGFloat maxDistance = 200;
                                    success:^(id result)
     {
         SFAuthStatusModle *auth = [SFAuthStatusModle mj_objectWithKeyValues:result];
-        [SFAccount currentAccount].authStatus = auth;
+        SF_USER.authStatus = auth;
         
         
         _verify_remark = auth.statusDesc;
         self.authStatus  = auth;
-        if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+        if (SF_USER.role == SFUserRoleCarownner) {
             [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
-        } else if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+        } else if (SF_USER.role == SFUserRoleGoodsownner) {
             [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
         }
 
@@ -185,7 +184,7 @@ static CGFloat maxDistance = 200;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BaseViewController *vc;
     
-    if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+    if (SF_USER.role == SFUserRoleCarownner) {
         switch (indexPath.row) {
             case 0 :{
                 NSLog(@"我的物源");
@@ -205,11 +204,11 @@ static CGFloat maxDistance = 200;
                 [self toAuthVc];
                 return;
                 break;
-            case 5:
+            case 4:
                 NSLog(@"个人资料");
                 vc = [[SFPersonSettingController alloc] init];
                 break;
-            case 7:
+            case 5:
                 NSLog(@"退出");
                 [self logout];
                 return;
@@ -228,11 +227,11 @@ static CGFloat maxDistance = 200;
                 [self toAuthVc];
                 return;
                 break;
-            case 3:
+            case 2:
                 NSLog(@"个人资料");
                 vc = [[SFPersonSettingController alloc] init];
                 break;
-            case 5:
+            case 3:
                 NSLog(@"退出");
                 [self logout];
                 return;
@@ -270,10 +269,10 @@ static CGFloat maxDistance = 200;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SFPersonCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:PersonalCenterCellReusedID];
-    if (indexPath.row == 3 && [SFAccount currentAccount].role == SFUserRoleCarownner) {
+    if (indexPath.row == 3 && SF_USER.role == SFUserRoleCarownner) {
         [cell setTitleStr:self.titleArray[indexPath.row] andSubTitleStr:_verify_remark];
 
-    } else if (indexPath.row == 1 && [SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+    } else if (indexPath.row == 1 && SF_USER.role == SFUserRoleGoodsownner) {
         [cell setTitleStr:self.titleArray[indexPath.row] andSubTitleStr:_verify_remark];
 
     } else {
@@ -311,7 +310,7 @@ static CGFloat maxDistance = 200;
 
 - (NSMutableArray *)titleArray {
     if (!_titleArray) {
-        if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+        if (SF_USER.role == SFUserRoleCarownner) {
             _titleArray = [NSMutableArray mj_objectArrayWithFile:[[NSBundle mainBundle] pathForResource:@"CarownerList" ofType:@"plist"]];
         } else {
             _titleArray = [NSMutableArray mj_objectArrayWithFile:[[NSBundle mainBundle] pathForResource:@"GoodsownerList" ofType:@"plist"]];

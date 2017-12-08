@@ -56,7 +56,7 @@
     _headerView.backgroundColor = RandomColor;
     [self addSubview:_headerView];
     
-    [_headerView sd_setImageWithURL:[NSURL URLWithString:[SFAccount currentAccount].head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    [_headerView sd_setImageWithURL:[NSURL URLWithString:SF_USER.small_head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
     
     _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PersonalCenter_arrow"]];
     [self addSubview:_arrowImage];

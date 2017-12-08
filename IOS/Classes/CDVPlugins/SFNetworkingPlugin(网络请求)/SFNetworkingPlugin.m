@@ -8,7 +8,6 @@
 
 #import "SFNetworkingPlugin.h"
 #import "BaseCordvaViewController.h"
-#import "SFAccount.h"
 #import "UIViewController+Extension.h"
 
 static NSMutableDictionary *s_functionDic;
@@ -140,7 +139,7 @@ static NSMutableDictionary *s_functionDic;
 
 - (void)getCurrentUser:(CDVInvokedUrlCommand *_Nonnull)command
 {
-    SFAccount *user = [SFAccount currentAccount];
+    SFUserInfo *user = SF_USER;
     NSDictionary *userDic = [user mj_keyValues];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:(CDVCommandStatus_OK) messageAsDictionary:userDic] callbackId:command.callbackId];
 }

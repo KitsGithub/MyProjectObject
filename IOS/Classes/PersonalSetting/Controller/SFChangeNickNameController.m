@@ -74,9 +74,9 @@
             [[SFTipsView shareView] showSuccessWithTitle:@"修改昵称成功"];
             
             //保存新的用户信息
-            SFAccount *account = [SFAccount currentAccount];
+            SFUserInfo *account = SF_USER;
             account.name = result;
-            [[SFDataBaseHelper shared] saveAccount:account];
+            [account saveUserInfo];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:SF_USER_MESSAGECHANGE_N object:nil];
             

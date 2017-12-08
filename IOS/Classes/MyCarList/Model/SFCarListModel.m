@@ -35,11 +35,11 @@
     return @" 0方";
 }
 
-- (NSString *)price {
-    if (_price.length) {
-        return _price;
+- (NSString *)order_fee {
+    if (_order_fee.length) {
+        return _order_fee;
     }
-    return @"";
+    return @"面议";
 }
 
 /**

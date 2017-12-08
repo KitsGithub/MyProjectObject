@@ -42,9 +42,56 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)bookingCarRequest {
+    [SVProgressHUD show];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    SFBookingCarCalendarCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    NSString *time;
+    if ([cell isKindOfClass:[SFBookingCarCalendarCell class]]) {
+        time = cell.calendarTime;
+    }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+    NSDate *selectedDate = [formatter dateFromString:time];
+    [formatter setDateFormat:@"YYY-MM-dd HH:mm"];
+    NSString *sendTime = [formatter stringFromDate:selectedDate];
+    
+    params[@"time"] = sendTime;
+    
+    [[SFNetworkManage shared] postWithPath:@"CarsBooking/BookingCarOrder"
+                                    params:params
+                                   success:^(id result)
+    {
+        [SVProgressHUD dismiss];
+        if (result) {
+            [[SFTipsView shareView] showSuccessWithTitle:@"预定成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"预定失败"];
+        }
+        
+    } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+    }];
+    
+}
+
 #pragma mark - UIAction
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0) {
+        SFBookingCarOrderCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        __weak typeof(indexPath) weakIndexPath = indexPath;
+        __weak typeof(self) weakSelf = self;
+        SFCarDemandViewController *carDemand = [[SFCarDemandViewController alloc] init];
+        carDemand.bookingModel = cell.model ;
+        [carDemand setReturnBlock:^(SFBookingCarModel *model) {
+            [weakSelf.dataArray replaceObjectAtIndex:weakIndexPath.row withObject:model];
+            [_tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }];
+        [self.navigationController pushViewController:carDemand animated:YES];
+    }
 }
 
 - (void)SFBookingCarOrderCellDidClickDelButton:(SFBookingCarOrderCell *)cell {
@@ -71,8 +118,27 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
  立即预定
  */
 - (void)bookingCarNow {
-    [[SFTipsView shareView] showSuccessWithTitle:@"预定成功"];
+    
+    if (!self.dataArray.count) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请添加车辆需求"];
+        return;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否确认要预订？" message:@"注意：未填写的车辆需求，司机将可任意分配车辆" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf bookingCarRequest];
+    }];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
+    
+    [alert addAction:action2];
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
+
 
 
 #pragma mark - 布局

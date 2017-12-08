@@ -69,6 +69,13 @@
     _textField.secureTextEntry = secureTextEntry;
 }
 
+- (void)setValeWithStr:(NSString *)value edittingEnable:(BOOL)enable {
+    _value = value;
+    _textField.text = value;
+    _textField.userInteractionEnabled = enable;
+    
+}
+
 - (void)setButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action; {
     _button.hidden = NO;
     

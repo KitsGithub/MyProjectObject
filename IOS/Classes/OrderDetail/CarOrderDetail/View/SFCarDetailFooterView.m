@@ -33,12 +33,18 @@
     _message.font = FONT_COMMON_16;
     _message.textColor = [UIColor colorWithHexString:@"#666666"];
     _message.numberOfLines = 0;
-    _message.text = @"西瓜贼甜，请你吃一个，一个不够再给你切一个大的。这里是备注内容";
+    _message.text = @"未填写备注";
     [self addSubview:_message];
     
     _lineView = [UIView new];
     _lineView.backgroundColor = COLOR_LINE_DARK;
     [self addSubview:_lineView];
+}
+
+- (void)setRemark:(NSString *)remark {
+    if (remark.length) {
+        _message.text = remark;
+    }
 }
 
 - (void)layoutSubviews {

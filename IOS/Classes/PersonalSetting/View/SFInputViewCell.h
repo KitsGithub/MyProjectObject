@@ -19,6 +19,7 @@ typedef void(^EndEdittingBlock)();
 
 @property (nonatomic, copy) EndEdittingBlock endEdittingBlock;
 
+- (void)setValeWithStr:(NSString *)value edittingEnable:(BOOL)enable;
 - (void)setButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
 
 @end

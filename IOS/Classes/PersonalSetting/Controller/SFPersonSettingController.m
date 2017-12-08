@@ -103,7 +103,7 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
                 return;
             case 1: {
                 NSLog(@"修改昵称");
-                SFAccount *account = [SFAccount currentAccount];
+                SFUserInfo *account = SF_USER;
                 vc = [[SFChangeNickNameController alloc] initWithNickName:[NSString stringWithFormat:@"%@",account.name]];
                 break;
             }
@@ -197,8 +197,8 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
 
 - (NSMutableArray<NSArray *> *)detailArray {
     if (!_detailArray) {
-        SFAccount *account = [SFAccount currentAccount];
-        NSArray *arr1 = @[account.head_src,account.name,account.sex];
+        SFUserInfo *account = SF_USER;
+        NSArray *arr1 = @[account.small_head_src,account.name,account.sex];
         NSArray *arr2 = @[account.name,account.mobile,@""];
         _detailArray = [NSMutableArray arrayWithObjects:arr1,arr2, nil];
     }

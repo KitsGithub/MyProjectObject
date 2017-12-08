@@ -1,7 +1,7 @@
 
       SFAppData = {
-      	UserId : '07922f33-49b7-4958-b7e1-20162303ddfd',
-      	CarId : '3559637c-2733-4f29-b8ea-ea87658e4c88'
+      	UserId : '4e728b00-ab4b-4e79-af23-3fb05d21f07f',
+      	CarId : 'ee6b2a6b-3ac6-436a-853e-267388f5f369'
       };
 
 function showData(){
@@ -10,7 +10,7 @@ function showData(){
 	    data:function(){
 	    	return{
 	    		datas:{},		//订单数据	json
-	    		carrierList:[],	//承运人列表 	array
+	    		booked_by:[],	//承运人列表 	array
 					isNumber:null,
 					appUrl:"http://172.16.100.147/devlis",
 	    	}
@@ -21,16 +21,16 @@ function showData(){
 	    methods: {
         ajaxgoods: function (event) {
 	        	var that = this;
-	        	var requestURL = appURL + "/CarsBooking/GetCarsOrderDetails";
+	        	var requestURL ="http://192.168.112.44/lisapi/api/CarsBooking/GetCarsOrderDetails";
 	          $.ajax({
-			        url: "http://192.168.112.44/lisapi/api/CarsBooking/GetCarsOrderDetails",
+			        url: requestURL,
 			        type: "POST",
 			        dataType: "json",
 			        data :SFAppData,
 			        success: function (data) {
 			        	console.log(data)
 			        	that.datas 			= data.Data.cars_details;
-			        	that.carrierList 	= data.Data.booked_by;
+			        	that.booked_by 	= data.Data.booked_by;
 			        	console.log(that.carrierList);
 			        	
 			        	$("#orderDetail").css("opacity",'1');

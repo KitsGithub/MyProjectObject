@@ -70,7 +70,7 @@
 - (void)setModel:(SFBookingCarModel *)model {
     _model = model;
     
-    _message1.text = [NSString stringWithFormat:@"%@ %@ %@",model.car_Type,model.car_Long,model.car_Count];
+    _message1.text = [NSString stringWithFormat:@"%@ %@ %@辆",model.car_Type,model.car_Long,model.car_Count];
     _message2.text = [NSString stringWithFormat:@"%@吨 %@方  %@元/车",model.good_weight,model.good_size,model.price];
     
 }

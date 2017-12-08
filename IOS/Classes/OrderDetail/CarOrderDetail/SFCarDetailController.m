@@ -20,10 +20,16 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
 
 @interface SFCarDetailController () <UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic, strong) SFCarOrderDetailModel *carDetailModel;
+
+@property (nonatomic, strong) NSMutableArray <SFCarListModel *>*dataArray;
+
 @end
 
 @implementation SFCarDetailController {
     UITableView *_tableView;
+    SFCarDetailHeaderView *_headerView;
+    SFCarDetailFooterView *_footerView;
 }
 
 - (instancetype)initWithOrderID:(NSString *)orderID {
@@ -49,15 +55,26 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
 
 - (void)requestCarOrderDetail {
     if (self.orderID.length) {
+        [SVProgressHUD show];
         [[SFNetworkManage shared] postWithPath:@"Cars/GetCarDetails"
                                         params:@{
                                                  @"Guid" : self.orderID
                                                  }
                                        success:^(id result)
          {
+             [SVProgressHUD dismiss];
+             SFCarOrderDetailModel *model = [SFCarOrderDetailModel mj_objectWithKeyValues:result];
+             self.carDetailModel = model;
              
+             self.dataArray = model.car_info;
+             
+             _headerView.model = model;
+             _footerView.remark = model.attention_remark;
+             
+             [_tableView reloadData];
          } fault:^(SFNetworkError *err) {
-             
+             [SVProgressHUD dismiss];
+             [[SFTipsView shareView] showFailureWithTitle:@"请检查网络"];
          }];
     }
 }
@@ -73,26 +90,34 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
     self.title = @"车源详情";
 }
 - (void)setupView {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - STATUSBAR_HEIGHT - 44 - 50) style:(UITableViewStylePlain)];
+    CGFloat buttonHeight = 0;
+    if (!self.showType) {
+        buttonHeight = 50;
+    }
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - STATUSBAR_HEIGHT - 44 - buttonHeight) style:(UITableViewStylePlain)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerClass:[SFCarDetailCell class] forCellReuseIdentifier:CARDETAILCELL_ID];
     [self.view addSubview:_tableView];
     
-    SFCarDetailHeaderView *headerView = [[SFCarDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
-    _tableView.tableHeaderView = headerView;
+    _headerView = [[SFCarDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
+    _tableView.tableHeaderView = _headerView;
     
     
-    SFCarDetailFooterView *footerView = [[SFCarDetailFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 115)];
-    _tableView.tableFooterView = footerView;
+    _footerView = [[SFCarDetailFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 115)];
+    _tableView.tableFooterView = _footerView;
     
-    UIButton *footer = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
-    [footer setTitle:@"预定" forState:(UIControlStateNormal)];
-    [footer setBackgroundColor:THEMECOLOR];
-    [footer setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
-    [footer addTarget:self action:@selector(BookingCarOrder) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:footer];
+    if (buttonHeight) {
+        UIButton *footer = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
+        [footer setTitle:@"预定" forState:(UIControlStateNormal)];
+        [footer setBackgroundColor:THEMECOLOR];
+        [footer setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+        [footer addTarget:self action:@selector(BookingCarOrder) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.view addSubview:footer];
+    }
+    
     
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
@@ -109,7 +134,7 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,11 +142,18 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SFCarListModel *model = self.dataArray[indexPath.row];
     SFCarDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CARDETAILCELL_ID forIndexPath:indexPath];
+    cell.model = model;
     return cell;
 }
 
 
-
+- (NSMutableArray<SFCarListModel *> *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 
 @end

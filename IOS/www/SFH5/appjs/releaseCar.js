@@ -1,21 +1,22 @@
 
-// SFAppData={Guid:"0d5c0302-582a-48b7-be16-af7f1241be77"};
+// SFAppData={
+// 	UserId :"88383c70-f27b-43cc-98a5-d073a67de55",
+//	CarId:"a30e7b8c-b9fd-4766-a214-55688afca4b9"
+//};
    var orderId;
    
    //原生调用暂存的方法
-function rendCardetail(orderId){
-	if(orderId){
+function rendCardetail(){
 		justCar();	    
-	}
 }
 
 
 //请求原生地址插件
 function saveaddress(cls,ids){
 	var fromID=[{fromId:ids}];
-	cls.click(function(){
-		$(this).next(".sf_develop").addClass("active");
-		openAdressPickerMethod(fromID,successFn,null)
+	cls.parent("p").click(function(){
+		$(this).children(".sf_develop").addClass("active");
+		openAdressPickerMethod(fromID,successFn,failFn)
 	});
 }
 saveaddress($("#sf_fromAdd"),"sf_fromAdd")
@@ -26,14 +27,14 @@ saveaddress($("#toAddress"),"toAddress")
 //请求原生选中车辆成功
 function appendCarNumber(datas){
 	var html="";
-	if(datas.price!=undefined){
+	if(jQuery.isArray(datas)){
+		for(var i=0; i<datas.length;i++){
+			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+datas[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+datas[i].car_type+'</span><span>'+datas[i].car_long+'米  </span><span>'+datas[i].dead_weight+'吨  </span><span>'+datas[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas[i].order_fee+'"  value= "'+datas[i].order_fee+'"  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
+		}
+	}else{
 		var data =datas.message;
 		for(var i=0; i<data.length;i++){
 			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+data[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+data[i].car_type+'</span><span>'+data[i].car_long+'米  </span><span>'+data[i].dead_weight+'吨  </span><span>'+data[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas.price+'"  value= ""  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
-		}
-	}else{
-		for(var i=0; i<datas.length;i++){
-			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+datas[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+datas[i].car_type+'</span><span>'+datas[i].car_long+'米  </span><span>'+datas[i].dead_weight+'吨  </span><span>'+datas[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas[i].order_fee+'"  value= "'+datas[i].order_fee+'"  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
 		}
 	}
 	$("#carWraps").append(html);
@@ -42,7 +43,7 @@ function appendCarNumber(datas){
 
 //点击选择车辆选车
 $("#choseCarnumber").click(function(){
-	$(this).children(".sf_develop").addClass("active");
+//	$(this).children(".sf_develop").addClass("active");
 	var arrs = $("#carWraps").find("li");
 	var cars = [];
 	if(arrs.length==0){
@@ -79,24 +80,24 @@ function justCar(){
 	
 	
 	if(sf_fromAdd.val()==""){
-		showErrorMessage(["请选择出发地省市县"]);
+		showErrorMessage("请选择出发地省市县");
 		return false;	
 	};
 	if(input_from_detail.val()==""){
-		showErrorMessage(["请填写出发地详细地址"]);
+		showErrorMessage("请填写出发地详细地址");
 		return false;
 	};
 	if(toAddress.val()==""){
-		showErrorMessage(["请选择到达地省市县"])
+		showErrorMessage("请选择到达地省市县")
 		return false;
 	};
 	if(input_to_detail.val()==""){
-		showErrorMessage(["请填写到达地详细地址"])
+		showErrorMessage("请填写到达地详细地址")
 		return false;
 	};
 	
 	if(releaseCarprice.val()==undefined){
-		showErrorMessage(["请选择车辆"])
+		showErrorMessage("请选择车辆")
 		return false;
 	}else{
 		if(releaseCarprice.val()==""){
@@ -119,21 +120,28 @@ function releaseCarnews(datas){
 	        dataType:"json",
 	        data: datas,
 	        success: function (data) {
-//	        	var head_src = 'http://172.16.100.147/devlis' + data.Data.head_src
-//	        	data.Data.head_src = head_src
-//	        	that.datas=data.Data
 	            console.log(data);
-	            showSuccessMessage(["发布成功"]);
-	            navigation.dismiss(null,null);
+	            if(data.Code!=1){
+		            showSuccessMessage("发布成功");
+		            if (!orderId.length) {
+		            	navigation.dismiss(null,null);
+		            } else {
+		            	navigation.pop(null,null);
+		            };
+	            }else{
+	            	showErrorMessage("发布失败");
+	            };
 	            
 	        },
 	        error: function (error) {
-	            showErrorMessage(["发布失败"])
+	            showErrorMessage("发布失败")
 	        }
 		});
 }
+
+//调试用的接口
 //http://192.168.112.44/lisapi/api
-//暂存订单请求
+//暂存订单请求渲染数据
 function requestCardetail(){
 	$.ajax({
 	        url:appURL+"/CarsBooking/GetCarsOrderDetails",
@@ -147,7 +155,7 @@ function requestCardetail(){
 	            temporaryDetail(cars_details,cars_info);
 	        },
 	        error: function (error) {
-	            showErrorMessage(["发布失败"])
+	            showErrorMessage("发布失败")
 	        }
 		});
 }
@@ -161,7 +169,15 @@ function temporaryDetail(data,cars_info){
 		var input_to_detail = $("#input_to_detail").val(data.to_address);
 		var input_remark = $("#input_remark").val(data.car_remark);
 		
+		//去掉默认值
+		var sf_fromAddPlac=$("#sf_fromAdd").attr("placeholder","");
+		var input_from_detailPlac =  $("#input_from_detail").attr("placeholder","");;
+		
+		var toAddressPlac=$("#toAddress").attr("placeholder","");;
+		var input_to_detailPlac = $("#input_to_detail").attr("placeholder","");;
+		var input_remarkPlac = $("#input_remark").attr("placeholder","");;
+		
 		appendCarNumber(cars_info);	
 }
 
-// requestCardetail()
+ //requestCardetail()

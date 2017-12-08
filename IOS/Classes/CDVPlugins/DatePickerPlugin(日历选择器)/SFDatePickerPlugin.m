@@ -8,8 +8,8 @@
 
 #import "SFDatePickerPlugin.h"
 #import "RMCalendarController.h"
-
-@interface SFDatePickerPlugin ()
+#import "SFMoreDatePickerView.h"
+@interface SFDatePickerPlugin () <SFMoreDatePickerDelegate>
 
 @property (nonatomic, strong) CDVInvokedUrlCommand *command;
 
@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *day;
 
 @property (nonatomic, copy) NSString *selectedDayStr;
+@property (nonatomic, copy) NSString *cycle;
 
 @end
 
@@ -27,19 +28,27 @@
 
 - (void)datePicker:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
-        
-        
         NSMutableDictionary *params = command.arguments[0];
         if ([params isKindOfClass:[NSMutableDictionary class]] || [params isKindOfClass:[NSDictionary class]]) {
             __h5Class = params[@"class"];
             self.selectedDayStr = params[@"data"];
         }
-        
-        
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             self.command = command;
             [self setupPicker];
+        });
+    }];
+}
+
+- (void)sheetTypePicker:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        
+        NSMutableDictionary *params = command.arguments[0];
+        __h5Class = params[@"fromId"];
+        self.cycle = params[@"cycle"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.command = command;
+            [self setupSheetTypePicker:params[@"time"]];
         });
     }];
 }
@@ -70,6 +79,44 @@
     [self.viewController.navigationController pushViewController:c animated:YES];
 }
 
+
+- (void)setupSheetTypePicker:(NSString *)timeStr {
+    NSDate *selectedDate = [NSDate date];
+    if (timeStr.length) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+        selectedDate = [formatter dateFromString:timeStr];
+    }
+    
+    DateType dateType = DateType_SingleTime;
+    if (![self.cycle isEqualToString:@"只发布一次"]) {
+        dateType = DateType_MoreTime;
+    }
+    
+    SFMoreDatePickerView *pick = [[SFMoreDatePickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) dateType:dateType];
+    pick.delegate = self;
+    pick.startDate = selectedDate;
+    [pick show];
+}
+
+
+- (void)SFMoreDatePickerView:(SFMoreDatePickerView *)picker didSelectedDateStr:(NSString *)dateStr date:(NSDate *)date {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"fromId"] = __h5Class;
+    params[@"message"] = dateStr;
+    
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:(CDVCommandStatus_OK) messageAsDictionary:params];
+    [self.commandDelegate sendPluginResult:result callbackId:self.command.callbackId];
+}
+
+- (void)SFMoreDatePickerViewDidSelectedCancel {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"fromId"] = __h5Class;
+    
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:(CDVCommandStatus_ERROR) messageAsDictionary:params];
+    [self.commandDelegate sendPluginResult:result callbackId:self.command.callbackId];
+}
 
 /**
  把用户选择的年月日返回给h5渲染

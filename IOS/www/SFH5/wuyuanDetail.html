@@ -33,10 +33,10 @@
 					</div>
 					<div class="hisCenter his_pt" >
 						<dl>
-							<dd class="hisCenterlist" v-for="(item,index) in carrierList">
+							<dd class="hisCenterlist" v-for="(item,index) in booked_by">
 								<div v-on:click="isShow(item,index)"><p>{{item.order_date}}</p><span  :class="{active:isNumber===index}"></span></div>
 								<ul class="hisCenterlist_ul" v-show="isNumber===index">
-									<li v-for="(items,index) in carrierList[index].demand_info">
+									<li v-for="(items,index) in booked_by[index].demand_info">
 										<a :href="'wy_Choice.html?GoodsId='+items.goods_id+',orderId='+items.order_id">
 											<div class="hisCenterlist_header" >
 												<img :src="appUrl+items.head_src" alt="货满运头像" v-if="item.head_src!==''"/>

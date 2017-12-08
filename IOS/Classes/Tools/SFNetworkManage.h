@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking.h>
 #import "SFNetworkError.h"
-
 
 typedef NS_ENUM(NSUInteger, SFNetworkStatus) {
     SFNetworkStatusUnknown,
@@ -43,12 +43,10 @@ typedef void(^SFSuccessResultBlock)(id);
  @param fault 失败回调
  */
 - (void)postWithPath:(NSString *)path params:(NSDictionary *)params success:(SFSuccessResultBlock)success fault:(SFErrorResultBlock)fault;
-- (void)postWithPath:(NSString *)URLString
-                        params:(NSDictionary *)params
-     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-                      progress:(nullable void (^)(double))uploadProgress
-             success:(SFSuccessResultBlock _Nullable )success 
-                      fault:(SFErrorResultBlock)fault;
+
+- (void)postWithPath:(NSString *)URLString params:(NSDictionary *)params constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block progress:(nullable void (^)(double))uploadProgress success:(SFSuccessResultBlock _Nullable )success fault:(SFErrorResultBlock)fault;
+
+
 - (void)getWithPath:(NSString *)path params:(NSDictionary *)params success:(SFSuccessResultBlock _Nonnull)success fault:(SFErrorResultBlock)fault;
 
 /**

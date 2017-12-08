@@ -33,17 +33,18 @@ static NSString *CHOOSERELEASEID = @"CHOOSERELEASEID";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)saveAction {
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.block) {
-        self.block(self.titleArray[0]);
+        self.block(self.titleArray[indexPath.row]);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupNav {
     self.title = @"发布周期";
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:(UIBarButtonItemStylePlain) target:self action:@selector(saveAction)];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
+//    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:(UIBarButtonItemStylePlain) target:self action:@selector(saveAction)];
+//    self.navigationItem.rightBarButtonItem = rightBarItem;
 }
 
 - (void)setupView {
@@ -81,6 +82,8 @@ static NSString *CHOOSERELEASEID = @"CHOOSERELEASEID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CHOOSERELEASEID forIndexPath:indexPath];
     cell.textLabel.text = self.titleArray[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:18];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"666666"];
     return cell;
 }
 

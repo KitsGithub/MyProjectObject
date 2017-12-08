@@ -160,10 +160,10 @@ NSString *orderType_CodeStr(SFOrderType status)
 
 SFProvenanceType SFProvenanceTypeCreate(SFUserRole role,SFProvenanceDirection direction)
 {
-    BOOL isPublishCar = direction  == SFProvenanceDirectionPublish && [SFAccount currentAccount].role == SFUserRoleCarownner;
-    BOOL isPublishGoods = direction  == SFProvenanceDirectionPublish && [SFAccount currentAccount].role == SFUserRoleGoodsownner;
-    BOOL isOrderedCar = direction  == SFProvenanceDirectionReceive && [SFAccount currentAccount].role == SFUserRoleGoodsownner;
-    BOOL isReceiveGoods = direction  == SFProvenanceDirectionReceive && [SFAccount currentAccount].role == SFUserRoleCarownner;
+    BOOL isPublishCar = direction  == SFProvenanceDirectionPublish && SF_USER.role == SFUserRoleCarownner;
+    BOOL isPublishGoods = direction  == SFProvenanceDirectionPublish && SF_USER.role == SFUserRoleGoodsownner;
+    BOOL isOrderedCar = direction  == SFProvenanceDirectionReceive && SF_USER.role == SFUserRoleGoodsownner;
+    BOOL isReceiveGoods = direction  == SFProvenanceDirectionReceive && SF_USER.role == SFUserRoleCarownner;
     if (isPublishCar) {
         return SFProvenanceTypePublishCar;
     }else if (isPublishGoods){

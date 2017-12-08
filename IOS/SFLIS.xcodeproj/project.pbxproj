@@ -25,7 +25,6 @@
 		472B9B611FBC3E8400B88ABC /* SFCarrierModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B601FBC3E8400B88ABC /* SFCarrierModel.m */; };
 		472B9B641FBC468900B88ABC /* SFDriversView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B631FBC468900B88ABC /* SFDriversView.m */; };
 		472E84471FD64DB000CA3F6C /* SFBookingCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */; };
-		472E844C1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */; };
 		472E844F1FD67AAE00CA3F6C /* SFMoreDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */; };
 		4732F10A1FCFA21300530A45 /* SFChooseReleaerTimePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */; };
 		4732F10E1FCFA29100530A45 /* SFChooseReleaseTimeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */; };
@@ -128,9 +127,8 @@
 		47FA3CA91FD0EEC800D2188E /* SFCarDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CA41FD0EEC700D2188E /* SFCarDetailHeaderView.m */; };
 		47FA3CAF1FD0F07D00D2188E /* SFBookingCarOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CAE1FD0F07D00D2188E /* SFBookingCarOrderViewController.m */; };
 		47FA3CB21FD0F5E900D2188E /* SFBookingCarOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3CB11FD0F5E900D2188E /* SFBookingCarOrderCell.m */; };
-		47FD06691FD538C300B17A80 /* SFChooseCarPlguin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */; };
+		47FD06691FD538C300B17A80 /* SFChooseCarPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FD06681FD538C300B17A80 /* SFChooseCarPlugin.m */; };
 		47FD06701FD54F6E00B17A80 /* SFCarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FD066E1FD54F6E00B17A80 /* SFCarListModel.m */; };
-		720806091F8F45160041BDBC /* SFDataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 720806081F8F45160041BDBC /* SFDataBaseHelper.m */; };
 		7208060C1F8F45990041BDBC /* SFUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7208060B1F8F45990041BDBC /* SFUserInfo.m */; };
 		720CC14E1FA2C6360064BC2A /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 720CC14D1FA2C6360064BC2A /* UIViewController+Extension.m */; };
 		7210EDD91FB4334100979599 /* SFAuthStatusModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7210EDD81FB4334100979599 /* SFAuthStatusModle.m */; };
@@ -181,7 +179,6 @@
 		72935A021F988E6C003C0630 /* SFOrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 72935A011F988E6C003C0630 /* SFOrderManage.m */; };
 		72978ED21F8F5ADE00DAD6E8 /* SFTipableTextfiled.m in Sources */ = {isa = PBXBuildFile; fileRef = 72978ED11F8F5ADE00DAD6E8 /* SFTipableTextfiled.m */; };
 		72978ED51F8F6F8B00DAD6E8 /* AuthcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72978ED41F8F6F8B00DAD6E8 /* AuthcodeView.m */; };
-		72A987451F8F14C000157F0B /* SFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A987441F8F14C000157F0B /* SFAccount.m */; };
 		72AD7B7A1F9856630041339B /* SFOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AD7B781F9856630041339B /* SFOrderListViewController.m */; };
 		72AD7B7B1F9856630041339B /* SFOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AD7B791F9856630041339B /* SFOrderListViewController.xib */; };
 		72B433AC1FA036FE007AAA07 /* NSDictionary+jlExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B433A91FA036FD007AAA07 /* NSDictionary+jlExtension.m */; };
@@ -244,8 +241,6 @@
 		472B9B631FBC468900B88ABC /* SFDriversView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDriversView.m; sourceTree = "<group>"; };
 		472E84451FD64DB000CA3F6C /* SFBookingCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarModel.h; sourceTree = "<group>"; };
 		472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarModel.m; sourceTree = "<group>"; };
-		472E844A1FD67A9300CA3F6C /* SFDateMorePickerPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDateMorePickerPlugin.h; sourceTree = "<group>"; };
-		472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDateMorePickerPlugin.m; sourceTree = "<group>"; };
 		472E844D1FD67AAE00CA3F6C /* SFMoreDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMoreDatePickerView.h; sourceTree = "<group>"; };
 		472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMoreDatePickerView.m; sourceTree = "<group>"; };
 		4732F1081FCFA21300530A45 /* SFChooseReleaerTimePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseReleaerTimePlugin.h; sourceTree = "<group>"; };
@@ -436,15 +431,13 @@
 		47FA3CAE1FD0F07D00D2188E /* SFBookingCarOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarOrderViewController.m; sourceTree = "<group>"; };
 		47FA3CB01FD0F5E900D2188E /* SFBookingCarOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarOrderCell.h; sourceTree = "<group>"; };
 		47FA3CB11FD0F5E900D2188E /* SFBookingCarOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarOrderCell.m; sourceTree = "<group>"; };
-		47FD06671FD538C300B17A80 /* SFChooseCarPlguin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseCarPlguin.h; sourceTree = "<group>"; };
-		47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseCarPlguin.m; sourceTree = "<group>"; };
+		47FD06671FD538C300B17A80 /* SFChooseCarPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseCarPlugin.h; sourceTree = "<group>"; };
+		47FD06681FD538C300B17A80 /* SFChooseCarPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseCarPlugin.m; sourceTree = "<group>"; };
 		47FD066A1FD54E7D00B17A80 /* SFCarrierProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarrierProtocol.h; sourceTree = "<group>"; };
 		47FD066E1FD54F6E00B17A80 /* SFCarListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarListModel.m; sourceTree = "<group>"; };
 		47FD066F1FD54F6E00B17A80 /* SFCarListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarListModel.h; sourceTree = "<group>"; };
 		5657EA3B6B305EA752832181 /* Pods-TestHybird.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestHybird.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestHybird/Pods-TestHybird.debug.xcconfig"; sourceTree = "<group>"; };
 		5C025349F5A5E8E9C1CF446F /* libPods-TestHybird.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestHybird.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		720806071F8F45160041BDBC /* SFDataBaseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDataBaseHelper.h; sourceTree = "<group>"; };
-		720806081F8F45160041BDBC /* SFDataBaseHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDataBaseHelper.m; sourceTree = "<group>"; };
 		7208060A1F8F45990041BDBC /* SFUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFUserInfo.h; sourceTree = "<group>"; };
 		7208060B1F8F45990041BDBC /* SFUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFUserInfo.m; sourceTree = "<group>"; };
 		720CC14C1FA2C6360064BC2A /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
@@ -543,8 +536,6 @@
 		72978ED11F8F5ADE00DAD6E8 /* SFTipableTextfiled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTipableTextfiled.m; sourceTree = "<group>"; };
 		72978ED31F8F6F8B00DAD6E8 /* AuthcodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthcodeView.h; sourceTree = "<group>"; };
 		72978ED41F8F6F8B00DAD6E8 /* AuthcodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthcodeView.m; sourceTree = "<group>"; };
-		72A987431F8F14C000157F0B /* SFAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAccount.h; sourceTree = "<group>"; };
-		72A987441F8F14C000157F0B /* SFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAccount.m; sourceTree = "<group>"; };
 		72AD7B771F9856630041339B /* SFOrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFOrderListViewController.h; sourceTree = "<group>"; };
 		72AD7B781F9856630041339B /* SFOrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFOrderListViewController.m; sourceTree = "<group>"; };
 		72AD7B791F9856630041339B /* SFOrderListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SFOrderListViewController.xib; sourceTree = "<group>"; };
@@ -748,16 +739,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		472E84481FD67A7100CA3F6C /* DateMorePickerPlguin */ = {
-			isa = PBXGroup;
-			children = (
-				472E84491FD67A7100CA3F6C /* View */,
-				472E844A1FD67A9300CA3F6C /* SFDateMorePickerPlugin.h */,
-				472E844B1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m */,
-			);
-			path = DateMorePickerPlguin;
-			sourceTree = "<group>";
-		};
 		472E84491FD67A7100CA3F6C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +746,14 @@
 				472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4731291D1FD922D0001F58C2 /* ActionSheetTypePicker */ = {
+			isa = PBXGroup;
+			children = (
+				472E84491FD67A7100CA3F6C /* View */,
+			);
+			path = ActionSheetTypePicker;
 			sourceTree = "<group>";
 		};
 		4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */ = {
@@ -887,6 +876,7 @@
 			children = (
 				475289431F974B2D003A0ABD /* SFDatePickerPlugin.h */,
 				475289441F974B2D003A0ABD /* SFDatePickerPlugin.m */,
+				4731291D1FD922D0001F58C2 /* ActionSheetTypePicker */,
 				4752891E1F974B2D003A0ABD /* DatePicker */,
 			);
 			path = "DatePickerPlugin(日历选择器)";
@@ -1177,7 +1167,6 @@
 				47138AAC1FA1885A00801E99 /* SFPhotoPicker(拍摄插件) */,
 				47D152AF1F987BE50093CB16 /* SFNetworkingPlugin(网络请求) */,
 				47D1529F1F9838000093CB16 /* MoreSelectedPicker(多选选择器) */,
-				472E84481FD67A7100CA3F6C /* DateMorePickerPlguin */,
 				4752891D1F974B2D003A0ABD /* DatePickerPlugin(日历选择器) */,
 				475649F71F8F55FA002E3AFE /* SFAdressPickerView(地址选择器) */,
 				47432A951F90A25400653191 /* SFOtherPickerView(其他规格选择) */,
@@ -1395,8 +1384,8 @@
 		47FD06661FD538A900B17A80 /* SFChooseCarPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				47FD06671FD538C300B17A80 /* SFChooseCarPlguin.h */,
-				47FD06681FD538C300B17A80 /* SFChooseCarPlguin.m */,
+				47FD06671FD538C300B17A80 /* SFChooseCarPlugin.h */,
+				47FD06681FD538C300B17A80 /* SFChooseCarPlugin.m */,
 			);
 			path = SFChooseCarPlugin;
 			sourceTree = "<group>";
@@ -1426,8 +1415,8 @@
 		722CD4711F8CA34E00684DA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				72A987431F8F14C000157F0B /* SFAccount.h */,
-				72A987441F8F14C000157F0B /* SFAccount.m */,
+				7208060A1F8F45990041BDBC /* SFUserInfo.h */,
+				7208060B1F8F45990041BDBC /* SFUserInfo.m */,
 				72BDBB391F8F1A6500992321 /* LoginRequest.h */,
 				72BDBB3A1F8F1A6500992321 /* LoginRequest.m */,
 			);
@@ -1519,8 +1508,6 @@
 		722CD47F1F8CAB6800684DA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7208060A1F8F45990041BDBC /* SFUserInfo.h */,
-				7208060B1F8F45990041BDBC /* SFUserInfo.m */,
 				47533EBC1FA6BD4400668E12 /* CarownerList.plist */,
 				47533EBE1FA6BD5A00668E12 /* GoodsownerList.plist */,
 				7210EDD71FB4334100979599 /* SFAuthStatusModle.h */,
@@ -1595,8 +1582,6 @@
 				72E220381FAC4BE600B4261B /* GlobalType.m */,
 				726A002E1F8B371B00AE17FC /* SFNetworkManage.h */,
 				726A002F1F8B371B00AE17FC /* SFNetworkManage.m */,
-				720806071F8F45160041BDBC /* SFDataBaseHelper.h */,
-				720806081F8F45160041BDBC /* SFDataBaseHelper.m */,
 				72491D041FA99A8700AD63A1 /* SFImagePicker.h */,
 				72491D051FA99A8700AD63A1 /* SFImagePicker.m */,
 				47A18E4D1FC5685F00F5AA5B /* SFDriverSignAlerView.h */,
@@ -1889,14 +1874,13 @@
 				474B83CD1FB94BB100CAA8FF /* SFChangePasswordController.m in Sources */,
 				726A00551F8B676B00AE17FC /* SFDetailView.m in Sources */,
 				475FF8BA1F9D7F040078858C /* SFPersonCenterCell.m in Sources */,
-				72A987451F8F14C000157F0B /* SFAccount.m in Sources */,
 				471877131F99CF7900A36D3A /* SFPersonalNavBar.m in Sources */,
 				47138AB21FA18A2200801E99 /* SFSinglePickerView.m in Sources */,
 				47138ABE1FA1DB4600801E99 /* SFAlertViewPlugin.m in Sources */,
 				47FA3CB21FD0F5E900D2188E /* SFBookingCarOrderCell.m in Sources */,
 				726A00501F8B674A00AE17FC /* HomeViewCell.m in Sources */,
 				4775B1071F7F79DA00894967 /* BaseViewController.m in Sources */,
-				47FD06691FD538C300B17A80 /* SFChooseCarPlguin.m in Sources */,
+				47FD06691FD538C300B17A80 /* SFChooseCarPlugin.m in Sources */,
 				726A00591F8B6A8400AE17FC /* NSString+FontSize.m in Sources */,
 				47A18E491FC55BB700F5AA5B /* SFAddressMessageView.m in Sources */,
 				477BD96F1FCBAF3F0085196F /* SFChooseCarrierCarController.m in Sources */,
@@ -1962,7 +1946,6 @@
 				7290902C1FAC40D1002DE082 /* SFOrder.m in Sources */,
 				4732F1111FCFDCBB00530A45 /* SFReleaseGoodsViewController.m in Sources */,
 				475289491F974B2D003A0ABD /* RMCalendarModel.m in Sources */,
-				472E844C1FD67A9300CA3F6C /* SFDateMorePickerPlugin.m in Sources */,
 				47D193851FAC78AF0072BEFC /* SFMessageViewPlugin.m in Sources */,
 				475649E91F8EF82B002E3AFE /* AppDelegate.mm in Sources */,
 				722CD47B1F8CAB4600684DA2 /* SFOrderManageController.m in Sources */,
@@ -1971,7 +1954,6 @@
 				47432A8F1F905C7500653191 /* SFAdressPickerCell.m in Sources */,
 				7208060C1F8F45990041BDBC /* SFUserInfo.m in Sources */,
 				474B83C21FB93DE100CAA8FF /* SFChangeNickNameController.m in Sources */,
-				720806091F8F45160041BDBC /* SFDataBaseHelper.m in Sources */,
 				47FA3CA91FD0EEC800D2188E /* SFCarDetailHeaderView.m in Sources */,
 				726A004B1F8B390F00AE17FC /* SFHomeViewController.m in Sources */,
 				726A00431F8B379900AE17FC /* HomeRequestHelper.m in Sources */,

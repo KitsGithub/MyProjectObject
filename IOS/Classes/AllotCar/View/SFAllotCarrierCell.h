@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SFCarrierProtocol.h"
+#import "SFCarrierModel.h"
 @class SFAllotCarrierCell;
 @protocol SFAllotCarrierCellDelegate <NSObject>
 
@@ -25,10 +25,11 @@
 
 @interface SFAllotCarrierCell : UITableViewCell
 
-@property (nonatomic, weak) id <SFCarrierProtocol> model;
+@property (nonatomic, weak) SFCarrierModel *model;
 
 @property (nonatomic, weak) id <SFAllotCarrierCellDelegate> delegate;
 
 @property (nonatomic, assign) BOOL enableEdditting;
+
 
 @end

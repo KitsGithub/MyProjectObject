@@ -33,7 +33,7 @@
     [_userIcon addTarget:self action:@selector(userIconDidClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_userIcon];
     
-    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[SFAccount currentAccount].head_src] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:SF_USER.small_head_src] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"Default_Head"]];
     
     _searchBtn = [UIButton new];
     [_searchBtn setImage:[UIImage imageNamed:@"Home_Search"] forState:UIControlStateNormal];

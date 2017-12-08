@@ -42,7 +42,7 @@ static NSString *CarListCellReusedID = @"CarListCellReusedID";
 
 - (void)requestCarList {
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"UserId"] = [SFAccount currentAccount].user_id;
+    params[@"UserId"] = USER_ID;
     [[SFNetworkManage shared] postWithPath:@"CarTeam/GetMyCarList"
                                     params:params
                                    success:^(id result)

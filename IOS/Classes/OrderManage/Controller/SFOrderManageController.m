@@ -7,7 +7,6 @@
 //
 
 #import "SFOrderManageController.h"
-#import "SFOrderTableViewCell.h"
 #import "SFOrderListTableViewDelegate.h"
 #import "SFEvalViewController.h"
 
@@ -32,7 +31,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic,strong)SFOrderListTableViewDelegate *orderDelegate;
+@property (nonatomic,strong) SFOrderListTableViewDelegate *orderDelegate;
 
 @end
 
@@ -52,7 +51,7 @@
     
     [(BaseNavigationController *)self.navigationController SetBottomLineViewHiden:NO];
     
-    self.toBarTop.constant  = [UIApplication sharedApplication].statusBarFrame.size.height + 44.0;
+    self.toBarTop.constant  = STATUSBAR_HEIGHT + 44.0;
     [self.view updateConstraintsIfNeeded];
     
     self.automaticallyAdjustsScrollViewInsets  = NO;

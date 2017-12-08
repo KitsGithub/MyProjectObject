@@ -9,7 +9,6 @@
 #import "LoginViewController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
-#import "SFAccount.h"
 #import "LoginRequest.h"
 #import "SFInnerShadowableView.h"
 #import "AuthcodeView.h"
@@ -19,8 +18,6 @@
 @interface LoginViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navTop;
-
-@property (nonatomic,strong)SFAccount *account;
 
 @property (nonatomic,assign)SFUserRole currentRole;
 
@@ -129,8 +126,10 @@
     [self completeWithAccount:nil];
 }
 
-- (void)completeWithAccount:(SFAccount *)account
+- (void)completeWithAccount:(SFUserInfo *)account
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SF_LOGIN_SUCCESS_N object:nil];
+    
     __block typeof(self.completeBlock) block  = self.completeBlock;
     [self dismissViewControllerAnimated:YES completion:^{
         if (block) {
@@ -192,13 +191,16 @@
         return;
     }
     
-    [LoginRequest loginWithAccount:userName pwd:pwd succuss:^(SFAccount *account) {
-        [[SFDataBaseHelper shared] saveAccount:account];
+    [LoginRequest loginWithAccount:userName pwd:pwd succuss:^(SFUserInfo *account) {
+        
         [[SFTipsView shareView] showSuccessWithTitle:@"登陆成功"];
+        
+        [account saveUserInfo];
+        
         [self requestUserIndentfly:account];
         [self completeWithAccount:account];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:SF_LOGIN_SUCCESS_N object:nil];
+        
         
     } fault:^(SFNetworkError *err) {
         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
@@ -209,7 +211,7 @@
 /**
  请求当前用户的认证信息
  */
-- (void)requestUserIndentfly:(SFAccount *)account {
+- (void)requestUserIndentfly:(SFUserInfo *)account {
     [[SFNetworkManage shared] postWithPath:@"Certificate/GetCertificateInfo"
                                     params:@{
                                              @"UserId" : account.user_id
@@ -217,7 +219,11 @@
                                    success:^(id result)
      {
          SFAuthStatusModle *auth = [SFAuthStatusModle mj_objectWithKeyValues:result];
-         [[SFDataBaseHelper shared] saveAuthStatus:auth];
+         
+         SFUserInfo *info = [SFUserInfo defaultInfo];
+         info.authStatus = auth;
+//         [info saveUserInfo];
+         
      } fault:^(SFNetworkError *err) {
          
      }];
@@ -254,14 +260,16 @@
     }
     
 
-    [LoginRequest registWithAccount:userName pwd:pwd mobile:mobile role:self.currentRole succuss:^(SFAccount *account) {
-        [[SFDataBaseHelper shared] saveAccount:account];
+    [LoginRequest registWithAccount:userName pwd:pwd mobile:mobile role:self.currentRole succuss:^(SFUserInfo *account) {
+
         [[SFTipsView shareView] showSuccessWithTitle:@"注册成功"];
+        
         [self completeWithAccount:account];
         self.loginUserNameTestfiled.text  = userName;
         self.loginPwdTestfiled.text = nil;
         [self changeScrollViewIsLogin:YES isAnimotion:YES];
         [self changeSegmentIsLogin:YES isAnimotion:YES];
+        
     } fault:^(SFNetworkError *err) {
         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
     }];

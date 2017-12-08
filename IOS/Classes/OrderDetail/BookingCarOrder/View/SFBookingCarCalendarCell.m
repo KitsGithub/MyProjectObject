@@ -10,6 +10,10 @@
 #import "RMCalendarController.h"
 #import "SFMoreDatePickerView.h"
 
+@interface SFBookingCarCalendarCell () <SFMoreDatePickerDelegate>
+
+@end
+
 @implementation SFBookingCarCalendarCell {
     UIImageView *_calendarImage;
     UILabel *_tipsLabel;
@@ -120,39 +124,36 @@
 }
 
 - (void)calendarClick {
-    NSLog(@"点击选择日历");
     
-    SFMoreDatePickerView *pick = [[SFMoreDatePickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [[UIApplication sharedApplication].keyWindow addSubview:pick];
+    NSString *timeStr = [NSString stringWithFormat:@"%@ %@",_moreTime.text,_time.text];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+    NSDate *selectedDate = [formatter dateFromString:timeStr];
     
-    
-//    RMCalendarController *c = [RMCalendarController calendarWithDays:365 showType:CalendarShowTypeMultiple];
-//    c.hidesBottomBarWhenPushed = YES;
-//    c.isEnable = YES;
-//    c.title = @"日历";
-////    c.selectedDate = selectedDate;
-//    c.calendarBlock = ^(RMCalendarModel *model) {
-//        NSString *year = [NSString stringWithFormat:@"%lu",(unsigned long)model.year];
-//        NSString *month = [NSString stringWithFormat:@"%lu",(unsigned long)model.month];
-//        NSString *day = [NSString stringWithFormat:@"%lu",(unsigned long)model.day];
-//        NSLog(@"year-%@ month-%@ day-%@",year,month,day);
-////        [weakSelf.viewController.navigationController popViewControllerAnimated:YES];
-//
-//    };
-//
-//    UIViewController *vc = [self getVc];
-//    [vc.navigationController pushViewController:c animated:YES];
+    SFMoreDatePickerView *pick = [[SFMoreDatePickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) dateType:DateType_SingleTime];
+    pick.delegate = self;
+    pick.startDate = selectedDate;
+    [pick show];
 }
 
-//- (UIViewController *)getVc {
-//    for (UIView* next = [self superview]; next; next = next.superview) {
-//        UIResponder* nextResponder = [next nextResponder];
-//        if ([nextResponder isKindOfClass:[UIViewController class]]) {
-//            return (UIViewController*)nextResponder;
-//        }
-//    }
-//    return nil;
-//}
+- (void)SFMoreDatePickerView:(SFMoreDatePickerView *)picker didSelectedDateStr:(NSString *)dateStr date:(NSDate *)date {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY.MM.dd"];
+    NSString *moreTime = [formatter stringFromDate:date];
+    
+    [formatter setDateFormat:@"HH:mm"];
+    NSString *time = [formatter stringFromDate:date];
+    
+    _moreTime.text = moreTime;
+    _time.text = time;
+    [self setNeedsLayout];
+}
+
+- (NSString *)calendarTime {
+    NSString *timeStr = [NSString stringWithFormat:@"%@ %@",_moreTime.text,_time.text];
+    return timeStr;
+}
 
 
 - (void)layoutSubviews {

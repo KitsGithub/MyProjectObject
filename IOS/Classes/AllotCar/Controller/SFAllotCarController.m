@@ -16,7 +16,7 @@ static NSString *AllotCarrierCellID = @"SFAllotCarrierCell";
 
 @interface SFAllotCarController () <UITableViewDelegate,UITableViewDataSource,SFAllotCarrierCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray <id <SFCarrierProtocol>>*dataArray;
+@property (nonatomic, strong) NSMutableArray <SFCarrierModel *>*dataArray;
 
 @end
 
@@ -45,22 +45,65 @@ static NSString *AllotCarrierCellID = @"SFAllotCarrierCell";
     [_tableView reloadData];
 }
 
+#pragma mark - Networking
 - (void)getCarrierList {
-    NSString *orderId = self.orderId;
-    if (!orderId.length) {
-        orderId = @"";
-    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"OrderId"] = self.orderId;
     [[SFNetworkManage shared] postWithPath:@"Order/GetOrderDriverAndCar"
-                                    params:@{ @"OrderId" : orderId }
+                                    params:params
                                    success:^(id result)
     {
+        [_tableView.mj_header endRefreshing];
         self.dataArray = [SFCarrierModel mj_objectArrayWithKeyValuesArray:result];
         [_tableView reloadData];
     } fault:^(SFNetworkError *err) {
-        
+        [[SFTipsView shareView] showFailureWithTitle:@"获取分配车辆/司机列表失败"];
     }];
 }
 
+- (void)delCarrierWithCell:(SFAllotCarrierCell *)cell {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"OrderId"] = self.orderId;
+    params[@"CarNo"] = cell.model.carNum;
+    
+    [[SFNetworkManage shared] postWithPath:@"Order/DeleteDriverAndCarByOrder"
+                                    params:params
+                                   success:^(id result)
+    {
+        [[SFTipsView shareView] showSuccessWithTitle:@"删除成功"];
+        NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+        [self.dataArray removeObjectAtIndex:indexPath.section];
+        [_tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:(UITableViewRowAnimationFade)];
+        
+    } fault:^(SFNetworkError *err) {
+        [[SFTipsView shareView] showFailureWithTitle:@"删除失败"];
+    }];
+    
+    
+}
+
+- (void)setFistCar:(SFAllotCarrierCell *)cell {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"OrderId"] = self.orderId;
+    params[@"CarNo"] = cell.model.carNum;
+    params[@"DriverId"] = cell.model.driver_id;
+    [[SFNetworkManage shared] postWithPath:@"/Order/SetFirstCar"
+                                    params:params
+                                   success:^(id result)
+    {
+        if (result) {
+            [[SFTipsView shareView] showSuccessWithTitle:@"设置成功"];
+            
+            
+            
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"设置失败"];
+        }
+        
+    } fault:^(SFNetworkError *err) {
+        [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+    }];
+}
 
 #pragma mark - UIAction
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,15 +114,20 @@ static NSString *AllotCarrierCellID = @"SFAllotCarrierCell";
 /**
  跳转到编辑承运人界面
  */
-- (void)eddittingCarrier:(id <SFCarrierProtocol>)model {
+- (void)eddittingCarrier:(SFCarrierModel *)model {
     SFAddCarrierCarController *add = [[SFAddCarrierCarController alloc] init];
     if (model) {
-        add.model = (SFCarrierModel *)model;
         [add setCustomTitle:@"编辑司机/车辆"];
+        add.model = model;
     } else {
         [add setCustomTitle:@"添加司机/车辆"];
     }
     
+    __weak typeof(self) weakSelf = self;
+    [add setSuccessRetrun:^{
+        [weakSelf getCarrierList];
+    }];
+    add.orderId = self.orderId;
     [self.navigationController pushViewController:add animated:YES];
 }
 
@@ -98,11 +146,11 @@ static NSString *AllotCarrierCellID = @"SFAllotCarrierCell";
 - (void)SFAllotCarrierCell:(SFAllotCarrierCell *)cell didSelectedOptionsWithIndex:(NSInteger)index {
     if (index == 0) {
         NSLog(@"设置首发车辆");
+        [self setFistCar:cell];
     } else {
         NSLog(@"删除车辆");
-        NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-        [self.dataArray removeObjectAtIndex:indexPath.section];
-        [_tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:(UITableViewRowAnimationFade)];
+        [self delCarrierWithCell:cell];
+        
     }
 }
 
@@ -126,6 +174,10 @@ static NSString *AllotCarrierCellID = @"SFAllotCarrierCell";
     }
 #endif
     
+    __weak typeof(self) weakSelf = self;
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf getCarrierList];
+    }];
     
     _addCarrier = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
     [_addCarrier setBackgroundColor:THEMECOLOR];

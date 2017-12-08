@@ -10,6 +10,8 @@ function showData(){
 	    	return{
 	    		datas:{},		//订单数据	json
 	    		carrierList:[],	//承运人列表 	array
+	    		isNumber:null,
+				appUrl:"http://172.16.100.147/devlis",
 	    	}
 	    },
 	    created:function(){	            
@@ -26,10 +28,10 @@ function showData(){
 			        data :SFAppData,
 			        success: function (data) {
 			        	console.log(data)
-			        	if (data.Data.goods_details.head_src != ""||data.Data.goods_details.head_src !="undefined") {
-			        		var head_src = appResourceURL + "/"+ data.Data.head_src
-			        		data.Data.goods_details.head_src = head_src
-			        	}
+//			        	if (data.Data.goods_details.head_src != ""||data.Data.goods_details.head_src !="undefined") {
+//			        		var head_src = appResourceURL + "/"+ data.Data.head_src
+//			        		data.Data.goods_details.head_src = head_src
+//			        	}
 			        	that.datas 			= data.Data.goods_details;
 			        	that.carrierList 	= data.Data.carrier_by;
 			        	$("#orderDetail").css("opacity",'1');
@@ -45,10 +47,14 @@ function showData(){
 	        	//跳转到承运人详情
 	        	console.log(11)
 	        	navigation.pushToVC("SFCarrierMessageController",null,null);
-	        }
-	    },
-	    mounted:function(){
-	    	this.isShow=false;	
+	        },
+	        isShow:function(item,index){   //点击显示隐藏，手风琴效果
+						if(this.isNumber==index){
+		    			this.isNumber=null;	
+		    		}else{
+		    			this.isNumber=index;
+		    		}
+		    },
 	    }
 	    
 	});

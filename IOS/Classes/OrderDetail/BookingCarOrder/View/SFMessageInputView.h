@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    MessageKeyBoardType_ALLLetter,
-    MessageKeyBoardType_NumberOnly,
-    MessageKeyBoardType_FloatOnly,
+    MessageKeyBoardType_ALLLetter,      //所有字符串
+    MessageKeyBoardType_NumberOnly,     //所有数字
+    MessageKeyBoardType_FloatOnly,      //数字 + .
 } MessageKeyBoardType;
 
 @protocol SFMessageInputViewDelegate <NSObject>

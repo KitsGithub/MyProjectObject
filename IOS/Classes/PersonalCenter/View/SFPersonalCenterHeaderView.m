@@ -69,7 +69,7 @@ static CGFloat IdentflyTopPadding;
     }
     
     
-    SFAccount *account = [SFAccount currentAccount];
+    SFUserInfo *account = SF_USER;
     
     
     _coverView = [UIView new];
@@ -95,7 +95,7 @@ static CGFloat IdentflyTopPadding;
     _userIcon.clipsToBounds = YES;
     [_contentView addSubview:_userIcon];
     
-    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[SFAccount currentAccount].head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:account.small_head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
     
     //头像的阴影
     CALayer *layer = [[CALayer alloc]init];
@@ -166,7 +166,7 @@ static CGFloat IdentflyTopPadding;
     [_contentView addSubview:_count];
     
     BOOL IconSelected = NO;
-    if ([[SFAccount currentAccount].verify_status isEqualToString:@"D"]) {
+    if ([account.verify_status isEqualToString:@"D"]) {
         IconSelected = YES;
     }
     //认证状态

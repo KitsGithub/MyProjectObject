@@ -26,7 +26,7 @@
 				
 				<div class="sf_divwrap hmyHiscontent"  >
 					<!--人物信息开始-->
-						<div>
+						<!--<div>
 							<div class="sf_w">
 								<div>
 									<div class="GDmanmews">
@@ -41,17 +41,17 @@
 									</div>
 								</div>		
 							</div>	
-						</div>
+						</div>-->
 					<!--人物信息结束-->
 				</div>
 				<div class="sf_divwrap hMYsection"  >
 					<!--车辆信息开始-->
 					<div class="allcarlist">
 						<ul id="carWraps">
-							<li v-for="(item,index) in arrs">
+							<li v-for="(item,index) in demand_Info">
 								<div class="carWrapsleft">
-									<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1">粤B 12345</span><span class="gray_color">保温车 4.2米 1吨 1方<span></span></div>
-									<div class="bottomnews"><i class="iconcar"></i><span class="red_color">1方</span></div>
+									<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1">粤B 12345</span><span class="gray_color">{{item.car_type}} {{item.car_long}} {{item.dead_weight}} {{item.car_size}}方<span></span></div>
+									<div class="bottomnews"><i class="iconcar"></i><span class="red_color">800元/车</span></div>
 								</div>
 								<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show = "!item.islook">	
 								</div>		

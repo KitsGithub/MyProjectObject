@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SFCarListModel.h"
 @interface SFCarOrderDetailModel : NSObject
 
 @property (nonatomic, copy) NSString *from_province;
@@ -24,14 +24,16 @@
 @property (nonatomic, copy) NSString *guid;
 @property (nonatomic, copy) NSString *order_status;
 @property (nonatomic, copy) NSString *connect_mobile;
+@property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, copy) NSString *depart_date;
 
-@property (nonatomic, copy) NSString *car_long;
-@property (nonatomic, copy) NSString *car_count;
-@property (nonatomic, copy) NSString *dead_weight;
-@property (nonatomic, copy) NSString *weight_unit;
-@property (nonatomic, copy) NSString *car_type;
-@property (nonatomic, copy) NSString *car_size;
+@property (nonatomic, strong) NSMutableArray <SFCarListModel *>*car_info;
+//@property (nonatomic, copy) NSString *car_long;
+//@property (nonatomic, copy) NSString *car_count;
+//@property (nonatomic, copy) NSString *dead_weight;
+//@property (nonatomic, copy) NSString *weight_unit;
+//@property (nonatomic, copy) NSString *car_type;
+//@property (nonatomic, copy) NSString *car_size;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *head_src;
@@ -41,5 +43,6 @@
 
 
 @property (nonatomic, copy) NSString *car_remark;
+@property (nonatomic, copy) NSString *attention_remark;
 
 @end

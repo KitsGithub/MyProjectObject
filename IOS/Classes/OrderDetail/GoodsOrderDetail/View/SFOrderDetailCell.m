@@ -33,6 +33,8 @@
 }
 
 - (void)setupView {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     _titleLabel = [UILabel new];
     _titleLabel.font = FONT_COMMON_16;
     _titleLabel.textColor = COLOR_TEXT_COMMON;

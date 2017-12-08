@@ -15,7 +15,8 @@
 - (instancetype)initWithOrderID:(NSString *)orderID;
 
 /**
- 0 不展示报价  1展示报价
+ 0:可预订
+ 1:不可预定
  */
-@property (nonatomic, assign) BOOL showType;
+@property (nonatomic, assign) NSInteger showType;
 @end

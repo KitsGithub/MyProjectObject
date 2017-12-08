@@ -57,14 +57,22 @@
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
-    
 }
 
 - (void)comfirmButtonClick {
     [self.view endEditing:YES];
     
+    NSString *carCount = _carCount.inputStr;
+    if (!carCount.length) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请填写预定车辆数"];
+        return;
+    }
+    
+    NSString *price = _price.inputStr;
+    if (!price.length) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请填写报价"];
+        return;
+    }
     
     NSString *carType;
     if (_carType.inputStr.length) {
@@ -80,31 +88,22 @@
         carLong = @"任意车长";
     }
     
-    NSString *carCount;
-    if (_carCount.inputStr.length) {
-        carCount = _carCount.inputStr;
-    } else {
-        carCount = @"任意数量";
-    }
+    
     NSString *carWight;
     if (_goodWeight.inputStr.length) {
         carWight = _goodWeight.inputStr;
     } else {
         carWight = @"0";
     }
+    
     NSString *carSize;
     if (_goodSize.inputStr.length) {
         carSize = _goodSize.inputStr;
     } else {
         carSize = @"0";
     }
-    NSString *price = _price.inputStr;
     
     
-    if (!price.length) {
-        [[SFTipsView shareView] showFailureWithTitle:@"请填写报价"];
-        return;
-    }
     
     SFBookingCarModel *model = [SFBookingCarModel new];
     model.car_Type = carType;
@@ -201,28 +200,49 @@
     
     _carCount = [[SFMessageInputView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_carLong.frame) + 30, SCREEN_WIDTH - 40, 48)];
     _carCount.keyBoardType = MessageKeyBoardType_NumberOnly;
-    _carCount.placeHolder = @"填写所需车数量";
+    _carCount.placeHolder = @"请填写所需车数量";
     _carCount.tipsStr = @"辆";
     [_scrollView addSubview:_carCount];
     
     _goodWeight = [[SFMessageInputView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_carCount.frame) + 20, SCREEN_WIDTH - 40, 48)];
     _goodWeight.keyBoardType = MessageKeyBoardType_FloatOnly;
-    _goodWeight.placeHolder = @"填写货物重量";
+    _goodWeight.placeHolder = @"货物重量";
     _goodWeight.tipsStr = @"吨";
     [_scrollView addSubview:_goodWeight];
     
     _goodSize = [[SFMessageInputView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_goodWeight.frame) + 10, SCREEN_WIDTH - 40, 48)];
     _goodSize.keyBoardType = MessageKeyBoardType_FloatOnly;
-    _goodSize.placeHolder = @"填写货物体积";
+    _goodSize.placeHolder = @"货物体积";
     _goodSize.tipsStr = @"方";
     [_scrollView addSubview:_goodSize];
     
     _price = [[SFMessageInputView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_goodSize.frame) + 20, SCREEN_WIDTH - 40, 48)];
     _price.keyBoardType = MessageKeyBoardType_FloatOnly;
-    _price.placeHolder = @"填写报价";
+    _price.placeHolder = @"请填写报价";
     _price.tipsStr = @"元/车";
     [_scrollView addSubview:_price];
     
+    
+    if (self.bookingModel) {
+        if (![self.bookingModel.car_Type isEqualToString:@"任意车型"]) {
+            [_carType setTitleWithStr:self.bookingModel.car_Type];
+        }
+        
+        if (![self.bookingModel.car_Long isEqualToString:@"任意车长"]) {
+            [_carLong setTitleWithStr:self.bookingModel.car_Long];
+        }
+        
+        if (![self.bookingModel.good_weight isEqualToString:@"0"]) {
+            [_goodWeight setTitleStr:self.bookingModel.good_weight];
+        }
+        
+        if (![self.bookingModel.good_size isEqualToString:@"0"]) {
+            [_goodSize setTitleStr:self.bookingModel.good_size];
+        }
+        
+        [_carCount setTitleStr:self.bookingModel.car_Count];
+        [_price setTitleStr:self.bookingModel.price];
+    }
     
     
     _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(_price.frame));

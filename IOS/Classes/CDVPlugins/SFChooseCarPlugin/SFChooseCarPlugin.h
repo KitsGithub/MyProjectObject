@@ -8,7 +8,7 @@
 
 #import <Cordova/CDVPlugin.h>
 
-@interface SFChooseCarPlguin : CDVPlugin
+@interface SFChooseCarPlugin : CDVPlugin
 
 - (void)chooseCar:(CDVInvokedUrlCommand *)command;
 

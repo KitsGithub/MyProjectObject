@@ -6,10 +6,10 @@
 //  Copyright © 2017年 chaocaiwei. All rights reserved.
 //
 
-#import "SFChooseCarPlguin.h"
+#import "SFChooseCarPlugin.h"
 #import "SFChooseCarrierCarController.h"
 #import "SFCarListModel.h"
-@implementation SFChooseCarPlguin {
+@implementation SFChooseCarPlugin {
     NSMutableArray *_carNum;
     CDVInvokedUrlCommand *_command;
     NSString *_fromId;

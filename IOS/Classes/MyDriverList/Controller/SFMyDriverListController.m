@@ -45,7 +45,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
 
 //请求司机列表
 - (void)requestDriverList {
-    SFAccount *account = [SFAccount currentAccount];
+    SFUserInfo *account = SF_USER;
     [[SFNetworkManage shared]postWithPath:@"Driver/GetMyDriverList"
                                    params:@{
                                             @"UserId" : account.user_id
@@ -86,7 +86,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
 #pragma mark - UIAction
 - (void)addDriver {
     
-    SFAuthStatusModle *statusModel = [SFAccount currentAccount].authStatus;
+    SFAuthStatusModle *statusModel = SF_USER.authStatus;
     
     if ([statusModel.verify_status isEqualToString:@"B"]) {
         [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加司机！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
@@ -97,7 +97,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
         __weak typeof(self)wself = self;
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:[SFAccount currentAccount].authStatus];
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
             [wself.navigationController pushViewController:authView animated:YES];
             
         }];
@@ -114,7 +114,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
         __weak typeof(self)wself = self;
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:[SFAccount currentAccount].authStatus];
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
             [wself.navigationController pushViewController:authView animated:YES];
             
         }];

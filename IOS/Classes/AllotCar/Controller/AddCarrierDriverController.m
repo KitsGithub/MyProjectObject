@@ -55,24 +55,21 @@ static NSString *SFAddCarrierDriverCellReusedID = @"SFAddCarrierDriverCell";
 
 - (void)saveDriver {
     
-    NSString *driversStr = [NSString string];
+    NSMutableArray *drivers = [NSMutableArray array];
     NSArray *cellArray = _tableView.visibleCells;
     for (SFAddCarrierDriverCell *cell in cellArray) {
         if (cell.selectedDriver) {
-            driversStr = [driversStr stringByAppendingString:[NSString stringWithFormat:@"%@",cell.driverModel.driver_by]];
-            if (cell != cellArray.lastObject) {
-                driversStr = [driversStr stringByAppendingString:@","];
-            }
+            [drivers addObject:cell.driverModel];
         }
     }
     
-    if (!driversStr.length) {
+    if (!drivers.count) {
         [[SFTipsView shareView] showFailureWithTitle:@"请选择至少一个司机"];
         return;
     }
     
     if (self.returnBlock) {
-        self.returnBlock(driversStr);
+        self.returnBlock(drivers);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -13,6 +13,8 @@ typedef void(^addCarComfirmBlock)(SFBookingCarModel *model);
 
 @interface SFCarDemandViewController : BaseViewController
 
+@property (nonatomic, weak) SFBookingCarModel *bookingModel;
+
 @property (nonatomic, copy) addCarComfirmBlock returnBlock;
 
 @end

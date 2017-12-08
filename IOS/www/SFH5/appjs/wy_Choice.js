@@ -1,11 +1,15 @@
-	var SFAppData = saveUid();
-	var HmyAppurl = 'http://172.16.100.147/devlis';
+	var SFAppData = {
+      	UserId : '4e728b00-ab4b-4e79-af23-3fb05d21f07f',
+      	OrderId : 'bac52025-a407-439e-abb7-340d67319446',
+      	GoodsId:'29a03d9c-ec86-42c7-aacf-7a7dc691897f'
+      };
+	var HmyAppurl = 'http://192.168.112.44/lisapi';
 	var app = new Vue({
 	    el: '#orderDetail',
 	    data:function(){
 	    	return{
 	    		datas:{},		//订单数据	json
-	    		carrierList:[],	//承运人列表 	array
+	    		demand_Info:[],	//承运人列表 	array
 	    		header_src:null,
 	    		arrs:[{
 					time:"2017-11-11",
@@ -38,10 +42,10 @@
 					}],
 					price:200
 				}],
-					isNumber:null,
-					totalPrice:0,
-					islook:true,
-					HmyAppurl:HmyAppurl,
+				isNumber:null,
+				totalPrice:0,
+				islook:true,
+				HmyAppurl:HmyAppurl,
 	    	}
 	    },
 	    created:function(){	            
@@ -56,24 +60,25 @@
 	    methods: {
 	        ajaxgoods: function (event) {
 	        	var that = this;
-	        	var requestURL = appURL + "/GoodsOrder/GetGoodsOrderDetails";
+	        	var requestURL = appURL + "/CarsBooking/GetCarsOrderBookedDetails";
+	        	var urls = 'http://192.168.112.44/lisapi/api/CarsBooking/GetCarsOrderBookedDetails'
 	          $.ajax({
-			        url: requestURL,
+			        url: urls,
 			        type: "POST",
 			        dataType: "json",
 			        data :SFAppData,
 			        success: function (data) {
 			        	console.log(data)
-			        	var head_src = that.HmyAppurl + data.Data.carrier_by[0].head_src;			        	
+//			        	var head_src = that.HmyAppurl + data.Data.carrier_by[0].head_src;			        	
 			        	that.datas 			= data.Data.goods_details;
-			        	that.carrierList 	= data.Data.carrier_by;
-			        	that.header_src = head_src;
+			        	that.demand_Info 	= data.Data.demand_Info;
+//			        	that.header_src = head_src;
 				        $("#orderDetail").css("opacity",'1');
 					    	$("#appLoading").css("opacity",'0');
 					    	$("#appLoading").remove();
 			        },
 			        error: function (error) {
-			        	$("#orderDetail").css("opacity",'1');
+			        		$("#orderDetail").css("opacity",'1');
 					    	$("#appLoading").css("opacity",'0');
 					    	$("#appLoading").remove();
 			        	console.log("请求出错")

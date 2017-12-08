@@ -11,6 +11,7 @@
 
 @interface SFDriverModel : NSObject
 
+@property (nonatomic, copy) NSString *guid;
 /**
  司机名
  */

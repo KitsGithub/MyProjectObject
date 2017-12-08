@@ -108,7 +108,7 @@
         [self.view addSubview:_filtrateBar];
         self.filtrateBar.carTypeArray  = self.carTypeArray;
         self.filtrateBar.goodsTypeArry = self.goodsTypeArry;
-        [self.filtrateBar setGoodstypeBtnHidden:[SFAccount currentAccount].role  == SFUserRoleCarownner];
+        [self.filtrateBar setGoodstypeBtnHidden:[SFUserInfo defaultInfo].role  == SFUserRoleCarownner];
         self.filtrateBar.seletedCompletion = ^(SFFiltrateBarType type, NSInteger seletedIndex, NSString *result) {
             if (result) {
                 if (type == SFFiltrateBarTypeGoods) {
@@ -143,7 +143,7 @@
             make.bottom.equalTo(self.view);
         }];
         
-        if ([SFAccount currentAccount].role  == SFUserRoleCarownner) {
+        if ([SFUserInfo defaultInfo].role  == SFUserRoleCarownner) {
             self.searchType  = SFSearchTypeCars;
             self.searchTextfiled.seletedIndex  = 1;
         }else{
@@ -451,7 +451,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SFAccount *account = [SFAccount currentAccount];
+    SFUserInfo *account = [SFUserInfo defaultInfo];
     if (self.searchType == SFSearchTypeGoods && account.role == SFUserRoleGoodsownner) {
         [[[SFTipsView alloc] init] showFailureWithTitle:@"货主不能预订货物"];
         return;

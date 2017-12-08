@@ -25,8 +25,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSString *reloadAction = @"location.reload();";
-    [self.commandDelegate evalJs:reloadAction];
+//    NSString *reloadAction = @"location.reload();";
+//    [self.commandDelegate evalJs:reloadAction];
 }
 
 - (void)sendMessageToH5 {

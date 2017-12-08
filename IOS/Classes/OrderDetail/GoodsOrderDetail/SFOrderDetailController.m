@@ -20,10 +20,14 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
 
 @property (nonatomic, strong) NSMutableArray *titleArray;
 
+@property (nonatomic, strong) SFCarOrderDetailModel *detailModel;
+
 @end
 
 @implementation SFOrderDetailController {
     UITableView *_tableView;
+    SFCarDetailHeaderView *_header;
+    SFCarDetailFooterView *_footerView;
 }
 
 + (void)pushFromViewController:(UIViewController *)vc orderID:(NSString *)orderId
@@ -43,42 +47,79 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
     return self;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self setupView];
+    [self getOrderDetail];
+}
+
+- (void)getOrderDetail {
+    [SVProgressHUD show];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"Guid"] = self.orderID;
+    [[SFNetworkManage shared] postWithPath:@"Goods/GetGoodsDetails"
+                                    params:params
+                                   success:^(id result)
+    {
+        [SVProgressHUD dismiss];
+        SFCarOrderDetailModel *model = [SFCarOrderDetailModel mj_objectWithKeyValues:result];
+        self.detailModel = model;
+        
+        _header.model = model;
+        _footerView.remark = model.attention_remark;
+        
+        [_tableView reloadData];
+        
+    } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showFailureWithTitle:@"请检查网络"];
+    }];
+    
+    
 }
 
 #pragma mark - UIAction
 - (void)BookingGoodOrder {
     SFBookingGoodOrderController *bookingGoods = [[SFBookingGoodOrderController alloc] init];
+    bookingGoods.orderId = self.orderID;
     [self.navigationController pushViewController:bookingGoods animated:YES];
 }
 
 #pragma mark - 布局
 - (void)setupView {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - STATUSBAR_HEIGHT - 44 - 50) style:(UITableViewStylePlain)];
+    CGFloat footerHeight;
+    if (self.showType) {
+        footerHeight = 0;
+    } else {
+        footerHeight = 50;
+        
+    }
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - STATUSBAR_HEIGHT - 44 - footerHeight) style:(UITableViewStylePlain)];
     [self.view addSubview:_tableView];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerClass:[SFOrderDetailCell class] forCellReuseIdentifier:SFOrderDetailCELL_ID];
     
-    SFCarDetailHeaderView *header = [[SFCarDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
-    _tableView.tableHeaderView = header;
+    _header = [[SFCarDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
+    _tableView.tableHeaderView = _header;
     
-    SFCarDetailFooterView *footerView = [[SFCarDetailFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 115)];
-    _tableView.tableFooterView = footerView;
+    _footerView = [[SFCarDetailFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 115)];
+    _tableView.tableFooterView = _footerView;
     
-    UIButton *footer = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
-    [footer setTitle:@"接单" forState:(UIControlStateNormal)];
-    [footer setBackgroundColor:THEMECOLOR];
-    [footer setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
-    [footer addTarget:self action:@selector(BookingGoodOrder) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:footer];
+    
+    if (footerHeight) {
+        UIButton *footer = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, footerHeight)];
+        [footer setTitle:@"接单" forState:(UIControlStateNormal)];
+        [footer setBackgroundColor:THEMECOLOR];
+        [footer setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+        [footer addTarget:self action:@selector(BookingGoodOrder) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.view addSubview:footer];
+    }
+    
     
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {

@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SFAccount.h"
 
-typedef void(^SFLoginresultBlock)(SFAccount *account);
+typedef void(^SFLoginresultBlock)(SFUserInfo *account);
 typedef void(^SFCodeImageResult)(NSString *imgUrl);
 @interface LoginRequest : NSObject
 

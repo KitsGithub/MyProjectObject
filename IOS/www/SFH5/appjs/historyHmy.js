@@ -1,7 +1,8 @@
 
-      SFAppData = {
-      	GoodsId : 'b9fa498d-5c0e-4c42-a448-decda928c6f6',
-      	UserId 	: '1c66694d-e2a5-41e5-abd8-409afcd92a60'
+     var SFAppData = {
+      	UserId : '4e728b00-ab4b-4e79-af23-3fb05d21f07f',
+      	OrderId : 'bac52025-a407-439e-abb7-340d67319446',
+      	GoodsId:'29a03d9c-ec86-42c7-aacf-7a7dc691897f'
       };
 
 function showData(){
@@ -65,8 +66,8 @@ function showData(){
 			        	that.datas 			= data.Data.goods_details;
 			        	that.carrierList 	= data.Data.carrier_by;
 			        	$("#orderDetail").css("opacity",'1');
-				    	$("#appLoading").css("opacity",'0');
-				    	$("#appLoading").remove();
+				    		$("#appLoading").css("opacity",'0');
+				    		$("#appLoading").remove();
 			        },
 			        error: function (error) {
 			        	alert("请求出错")

@@ -50,12 +50,12 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
         [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的手机号码"];
         return;
     }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    params[@"Type"] = @"change_password";
+    params[@"Mobile"] = SF_USER.mobile;
     [[SFNetworkManage shared] postWithPath:@"Sms/Send"
-                                    params:@{
-                                             @"UserId" : [SFAccount currentAccount].user_id,
-                                             @"Type"   : @"change_password",
-                                             @"Mobile" : phoneNum
-                                             }
+                                    params:params
                                    success:^(id result)
     {
         
@@ -82,7 +82,7 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
     } else if (![newPsw2 isEqualToString:newPsw1]) {
         [[SFTipsView shareView] showFailureWithTitle:@"新密码不一致"];
         return;
-    } else if (!phoneNum.length) {
+    } else if (!SF_USER.mobile.length) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入电话号码"];
         return;
     } else if (!code.length) {
@@ -90,15 +90,16 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
         return;
     }
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    params[@"Account"] = SF_USER.account;
+    params[@"Mobile"] = SF_USER.mobile;
+    params[@"VCode"] = code;
+    params[@"OldPwd"] = [oldPsw md5String];
+    params[@"NewPwd"] = [newPsw1 md5String];
+    
     [[SFNetworkManage shared] postWithPath:@"MyCenter/ModifyPwd"
-                                    params:@{
-                                             @"UserId"  : USER_ID,
-                                             @"Account" : [SFAccount currentAccount].account,
-                                             @"Mobile"  : phoneNum,
-                                             @"VCode"   : code,
-                                             @"OldPwd"  : [oldPsw md5String],
-                                             @"NewPwd"  : [newPsw1 md5String]
-                                             }
+                                    params:params
                                    success:^(id result)
     {
         
@@ -130,8 +131,13 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
     cell.placeHolder = self.titleArray[indexPath.row];
     cell.secureTextEntry = YES;
     if (indexPath.row == 3) {
+        SFUserInfo *account = SF_USER;
         cell.secureTextEntry = NO;
+        NSString *targetStr = [account.mobile stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+        [cell setValeWithStr:targetStr edittingEnable:NO];
         [cell setButtonWithTitle:@"获取验证码" target:self action:@selector(getCode)];
+        
+        
     } else if (indexPath.row == 4) {
         cell.secureTextEntry = NO;
     }

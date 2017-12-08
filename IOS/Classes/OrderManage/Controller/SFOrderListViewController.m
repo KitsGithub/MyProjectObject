@@ -7,7 +7,6 @@
 //
 
 #import "SFOrderListViewController.h"
-#import "SFOrderTableViewCell.h"
 #import "SFOrderListTableViewDelegate.h"
 #import "SFEvalViewController.h"
 #import "SFDetailViewController.h"
@@ -182,7 +181,7 @@
     __weak typeof(self)wself = self;
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"OrderId"]   = orderId;
-    mdic[@"UserId"] = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"] = USER_ID;
     [[SFNetworkManage shared] postWithPath:@"Order/ComfireGoodsDeliver" params:mdic success:^(id result) {
         BOOL isSuc = result;
         if (isSuc) {
@@ -203,7 +202,7 @@
     __weak typeof(self)wself = self;
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"OrderId"]   = orderId;
-    mdic[@"UserId"] = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"] = USER_ID;
     [[SFNetworkManage shared] postWithPath:@"Order/ComfireGoodsReceipt" params:mdic success:^(id result) {
         BOOL isSuc = result;
         if (isSuc) {
@@ -226,7 +225,7 @@
         case SFOrderTypeWaiteForSent:   //等待发货
         {
             SFCommond *cmd = [SFCommond new];
-            if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+            if (SF_USER.role == SFUserRoleGoodsownner) {
                 cmd.name  = @"确认发货";
                 cmd.commond = ^(id  _Nullable obj) {
                     id <SfOrderProtocol> model = obj;
@@ -248,7 +247,7 @@
         case SFOrderTypeWaiteForDelivery: //等待收货
         {
             SFCommond *cmd = [SFCommond new];
-            if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+            if (SF_USER.role == SFUserRoleGoodsownner) {
                 cmd.name  = @"确认收货";
                 cmd.commond = ^(id  _Nullable obj) {
                     id <SfOrderProtocol> model = obj;

@@ -85,7 +85,7 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     if ([viewController isKindOfClass:[UINavigationController class]]  && [[(UINavigationController *)viewController viewControllers].firstObject isKindOfClass:[SFOrderManageController class]]) {
-        if (![SFAccount currentAccount].user_id) {
+        if (!SF_USER.user_id) {
             LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
             BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
             [self presentViewController:nav animated:YES completion:^{}];
@@ -97,18 +97,18 @@
 
 - (void)tabBar:(SFTabBar *)tabBar clickCenterButton:(UIButton *)sender {
     NSLog(@"点击了中间的按钮");
-    SFAccount *account = [SFAccount currentAccount];
-    if (![SFAccount currentAccount].user_id) {
+    SFUserInfo *account = SF_USER;
+    if (!account.user_id) {
         LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         [self presentViewController:nav animated:YES completion:^{}];
         
     }else {
         
-        if ([[SFAccount currentAccount].verify_status isEqualToString:@"D"]) {
+        if ([account.verify_status isEqualToString:@"D"]) {
             SFReleaseViewController *release = [[SFReleaseViewController alloc] init];
             release.wwwFolderName = SFWL_H5_PATH;
-            if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+            if (SF_USER.role == SFUserRoleCarownner) {
                 release.startPage = @"release_car.html";
                 release.title = @"发布车源";
             } else {
@@ -127,7 +127,7 @@
             UIAlertController *alertVc;
             UIAlertAction *action1;
             UIAlertAction *action2;
-            if ([[SFAccount currentAccount].verify_status isEqualToString:@"B"]) {
+            if ([SF_USER.verify_status isEqualToString:@"B"]) {
                 alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"您提交的认证资料正在审核，请耐心等待" preferredStyle:(UIAlertControllerStyleAlert)];
                 action1 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
             } else {

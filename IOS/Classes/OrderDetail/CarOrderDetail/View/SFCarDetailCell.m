@@ -41,19 +41,16 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     _name = [UILabel new];
-    _name.text = @"车辆1详情";
     _name.font = FONT_COMMON_16;
     _name.textColor = COLOR_TEXT_COMMON;
     [self addSubview:_name];
     
     _carType = [UILabel new];
-    _carType.text = @"平板车 5.8米 3辆";
     _carType.font = FONT_COMMON_16;
     _carType.textColor = [UIColor colorWithHexString:@"#666666"];
     [self addSubview:_carType];
     
     _price = [UILabel new];
-    _price.text = @"1400元/车";
     _price.font = FONT_COMMON_16;
     _price.textColor = [UIColor colorWithHexString:@"#666666"];
     [self addSubview:_price];
@@ -61,6 +58,19 @@
     _lineView = [UIView new];
     _lineView.backgroundColor = COLOR_LINE_DARK;
     [self addSubview:_lineView];
+    
+}
+
+- (void)setModel:(SFCarListModel *)model {
+    _model = model;
+    _name.text = model.car_no;
+    _carType.text = [NSString stringWithFormat:@"%@ %@",model.car_type,model.car_long];
+    if ([model.order_fee isEqualToString:@"面议"]) {
+        _price.text = model.order_fee;
+    } else {
+        _price.text = [NSString stringWithFormat:@"%@元/车",model.order_fee];
+    }
+    
 }
 
 - (void)layoutSubviews {

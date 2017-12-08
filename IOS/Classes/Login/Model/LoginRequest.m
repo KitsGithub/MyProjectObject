@@ -21,15 +21,12 @@
     if (pwd.length  < 16) {
         pwd  = [pwd md5String];
     }
-    NSDictionary *param = @{
-                            @"account":account,
-                            @"password":pwd
-                            };
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"account"] = account;
+    param[@"password"] = pwd;
+    
     [[SFNetworkManage shared] postWithPath:@"account/Login" params:param success:^(NSDictionary *result) {
-        SFAccount *account = [SFAccount mj_objectWithKeyValues:result];
-        if(account.guid == nil){
-            account.guid  = account.user_id;
-        }
+        SFUserInfo *account = [SFUserInfo mj_objectWithKeyValues:result];
         succuss(account);
     } fault:fault];
 }
@@ -48,13 +45,10 @@
                             @"account":account,
                             @"password":pwd,
                             @"mobile":mobile,
-                            @"role_type":[SFAccount roleTypeWithRole:role]
+                            @"role_type":SF_USER.role_type
                             };
     [[SFNetworkManage shared] postWithPath:@"account/Reg" params:param success:^(NSDictionary *result) {
-        SFAccount *account = [SFAccount mj_objectWithKeyValues:result];
-        if(account.guid == nil){
-            account.guid  = account.user_id;
-        }
+        SFUserInfo *account = [SFUserInfo mj_objectWithKeyValues:result];
         succuss(account);
     } fault:fault];
     

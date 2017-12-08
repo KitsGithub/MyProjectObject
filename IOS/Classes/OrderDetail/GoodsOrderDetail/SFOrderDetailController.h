@@ -8,12 +8,15 @@
 
 #import "BaseViewController.h"
 
-
-
 @interface SFOrderDetailController : BaseViewController
 
 @property (nonatomic, copy) NSString *orderID;
 
+/**
+ 0:可预订
+ 1:不可预定
+ */
+@property (nonatomic, assign) NSInteger showType;
 
 - (instancetype)initWithOrderID:(NSString *)orderID;
 + (void)pushFromViewController:(UIViewController *)vc orderID:(NSString *)orderId;

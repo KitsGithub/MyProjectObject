@@ -7,10 +7,7 @@
 //
 
 #import "SFNetworkManage.h"
-#import <AFNetworking.h>
 #import "LoginViewController.h"
-#import "SFAccount.h"
-#import "SFDataBaseHelper.h"
 
 static SFNetworkManage *_instance;
 
@@ -59,7 +56,7 @@ static SFNetworkManage *_instance;
 
 - (NSDictionary *)addTokenIfNeed:(NSDictionary *)params
 {
-    NSString *token   = [SFAccount currentAccount].token;
+    NSString *token   = SF_USER.token;
     if (![params objectForKey:@"token"] && token) {
         NSMutableDictionary *mdic = !params ? [NSMutableDictionary new] : [params mutableCopy];
         mdic[@"token"] = token;
@@ -150,9 +147,9 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 - (void)handleError:(SFNetworkError *)error
 {
     if (error.isTokenError) {
-        SFAccount *account = [[SFDataBaseHelper shared] currentAccount];
+        SFUserInfo *account = SF_USER;
         account.token  = nil;
-        [[SFDataBaseHelper shared] saveAccount:account];
+        [account saveUserInfo];
         [[[[UIApplication sharedApplication].delegate window] rootViewController] presentViewController:[[LoginViewController alloc]init] animated:YES completion:^{}];
     }
 }

@@ -10,4 +10,6 @@
 
 @interface SFCarDetailFooterView : UIView
 
+@property (nonatomic, copy) NSString *remark;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface SFBookingGoodOrderController : BaseViewController
 
+@property (nonatomic, copy) NSString *orderId;
+
 @end

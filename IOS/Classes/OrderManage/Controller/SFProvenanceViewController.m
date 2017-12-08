@@ -17,6 +17,7 @@
 #import "SFDetailViewController.h"
 #import "SFCarDetailController.h"
 #import "SFReleaseViewController.h"
+#import "SFOrderDetailController.h" //货源详情
 
 @interface SFProvenanceViewController ()
 
@@ -26,8 +27,6 @@
 @property (nonatomic,strong)SFSegmentView *segmentToolBar;
 
 @property (nonatomic,strong)UITableView  *tableView;
-
-@property (nonatomic,strong)NSMutableArray *dataArray;
 
 @property (nonatomic,strong)SFOrderListTableViewDelegate *orderDelegate;
 
@@ -59,7 +58,7 @@
 
 - (NSArray *)titleItems
 {
-    if([SFAccount currentAccount].role  == SFUserRoleCarownner){
+    if(SF_USER.role  == SFUserRoleCarownner){
         return @[@"我发的车",@"我接的单"];
     }else{
         return @[@"我发的货",@"我订的车",];
@@ -122,20 +121,20 @@
     };
     
     [self.orderDelegate setSelectedCellWithModle:^(id<SfOrderProtocol>model) {
-        if (([SFAccount currentAccount].role == SFUserRoleGoodsownner && wself.currentDirection == 0) || ([SFAccount currentAccount].role == SFUserRoleCarownner && wself.currentDirection == 1)) {
+        if ((SF_USER.role == SFUserRoleGoodsownner && wself.currentDirection == 0) || (SF_USER.role == SFUserRoleCarownner && wself.currentDirection == 1)) {
             SFDetailViewController *detail = [[SFDetailViewController alloc] init];
             detail.wwwFolderName = SFWL_H5_PATH;
-            detail.startPage = @"ProvenanceDetail.html";
-            detail.title = @"物源详情";
+            detail.startPage = @"wuyuanDetail.html";
             detail.orderID = model.guid;
+            if (SF_USER.role == SFUserRoleCarownner) {
+                detail.title = @"货源详情";
+            } else {
+                detail.title = @"车源详情";
+            }
             [wself.navigationController pushViewController:detail animated:YES];
-        } else if (([SFAccount currentAccount].role == SFUserRoleGoodsownner && wself.currentDirection == 1) || ([SFAccount currentAccount].role == SFUserRoleCarownner && wself.currentDirection == 0)) {
-            SFCarDetailController *carDetail = [[SFCarDetailController alloc] init];
-//            carDetail.wwwFolderName = SFWL_H5_PATH;
-//            carDetail.startPage = @"carsDetail.html";
-//            carDetail.orderID = model.guid;
-//            carDetail.showType = NO;
-//            carDetail.title = @"车辆详情";
+        } else if ((SF_USER.role == SFUserRoleGoodsownner && wself.currentDirection == 1) || (SF_USER.role == SFUserRoleCarownner && wself.currentDirection == 0)) {
+            SFCarDetailController *carDetail = [[SFCarDetailController alloc] initWithOrderID:model.guid];
+            carDetail.showType = 1;
             [wself.navigationController pushViewController:carDetail animated:YES];
         }
         
@@ -165,49 +164,86 @@
             cmd.name  = @"编辑";
             cmd.commond = ^(id<SfOrderProtocol> model) {
                 SFReleaseViewController *release = [[SFReleaseViewController alloc] init];
-                if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+                if (SF_USER.role == SFUserRoleCarownner) {
                     release.startPage = @"release_car.html";
                     release.title = @"发布车源";
                 } else {
-                    release.startPage = @"release_good.html";
+                    release.startPage = @"release_Goods.html";
                     release.title = @"发布货源";
                 }
                 
                 release.orderId = model.guid;
                 [wSelf.navigationController pushViewController:release animated:YES];
             };
-            return @[cmd];
-        } else {
+            
+            SFCommond *cmd2 = [SFCommond new];
+            cmd2.name = @"删除";
+            cmd2.commond = ^(id  _Nullable obj) {
+//                NSMutableDictionary *dic = [obj mj_keyValues];
+                NSInteger count = 0;
+                for (id targetObj in wSelf.orderDelegate.dataArray) {
+                    if (targetObj == obj) {
+                        break;
+                    }
+                    count++;
+                }
+                
+                [wSelf.orderDelegate.dataArray removeObject:obj];
+                [wSelf.orderDelegate.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:count inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
+                
+            };
+            
+            return @[cmd,cmd2];
+        } else {        //我发的车or 我发的货 - 已发布状态
             SFCommond *cmd = [SFCommond new];
-            cmd.name  = @"撤销";
+            cmd.name  = @"撤回";
             __weak typeof(self)wself = self;
             cmd.commond = ^(id<SfOrderProtocol> model) {
                 [SFOrderManage recallCarOrderWithId:[model guid] Success:^(BOOL isSuc) {
                     if (isSuc) {
-                        [[SFTipsView shareView] showSuccessWithTitle:@"撤销成功"];
+                        [[SFTipsView shareView] showSuccessWithTitle:@"撤回成功"];
                         [wself.orderDelegate loadNewData];
                     }else{
-                        [[SFTipsView shareView] showFailureWithTitle:@"撤销失败"];
+                        [[SFTipsView shareView] showFailureWithTitle:@"撤回失败"];
                     }
 
                 } fault:^(SFNetworkError *err) {
                     [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
                 }];
             };
-            return @[cmd];
+            
+            SFCommond *cmd2 = [SFCommond new];
+            if (SF_USER.role == SFUserRoleCarownner) { //我发的车 or 我发的货 的详情
+                cmd2.name = @"查看预定";
+                cmd2.commond = ^(id<SfOrderProtocol> model) {
+                    NSLog(@"查看预定");
+                    SFDetailViewController *detail = [[SFDetailViewController alloc] init];
+                    detail.wwwFolderName = SFWL_H5_PATH;
+                    detail.startPage = @"wuyuanDetail.html";
+                    if (SF_USER.role == SFUserRoleCarownner) {
+                        detail.title = @"车源详情";
+                    } else {
+                        detail.title = @"货源详情";
+                    }
+                    detail.orderID = model.guid;
+                    [wself.navigationController pushViewController:detail animated:YES];
+                };
+            }
+            
+            return @[cmd2,cmd];
         }
     }else{
         if (status  == SFTakingStatusPublished) {
             SFCommond *cmd = [SFCommond new];
-            cmd.name  = @"撤销";
+            cmd.name  = @"撤回";
             __weak typeof(self)wself = self;
             cmd.commond = ^(id<SfOrderProtocol> model) {
                 [SFOrderManage cancelGoodOrderWithId:[model guid] Success:^(BOOL isSuc) {
                     if (isSuc) {
-                        [[SFTipsView shareView] showSuccessWithTitle:@"撤销成功"];
+                        [[SFTipsView shareView] showSuccessWithTitle:@"撤回成功"];
                         [wself.orderDelegate loadNewData];
                     }else{
-                        [[SFTipsView shareView] showFailureWithTitle:@"撤销失败"];
+                        [[SFTipsView shareView] showFailureWithTitle:@"撤回失败"];
                     }
 
                 } fault:^(SFNetworkError *err) {
@@ -250,14 +286,14 @@
 
 - (NSArray *)codeArr
 {
-    SFProvenanceType type = SFProvenanceTypeCreate([SFAccount currentAccount].role, self.currentDirection);
+    SFProvenanceType type = SFProvenanceTypeCreate(SF_USER.role, self.currentDirection);
     NSArray *arr = SFProvenanceTypeGetCodeArr(type);
     return [@[@""] arrayByAddingObjectsFromArray:arr];
 }
 
 - (NSArray *)items
 {
-    SFProvenanceType type = SFProvenanceTypeCreate([SFAccount currentAccount].role, self.currentDirection);
+    SFProvenanceType type = SFProvenanceTypeCreate(SF_USER.role, self.currentDirection);
     NSArray *arr = SFProvenanceTypeGetDescArr(type);
     return [@[@"全部"] arrayByAddingObjectsFromArray:arr];
 }

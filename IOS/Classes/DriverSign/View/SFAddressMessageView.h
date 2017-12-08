@@ -10,4 +10,11 @@
 
 @interface SFAddressMessageView : UIView
 
+@property (nonatomic, copy) NSString *fromAddress;
+@property (nonatomic, copy) NSString *fromDistrict;
+
+@property (nonatomic, copy) NSString *toAddress;
+@property (nonatomic, copy) NSString *toDistrict;
+
+
 @end

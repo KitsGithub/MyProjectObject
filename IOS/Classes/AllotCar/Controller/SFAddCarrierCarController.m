@@ -8,7 +8,9 @@
 
 #import "SFAddCarrierCarController.h"
 #import "SFAllotCarrierCell.h"
+
 #import "SFCarrierModel.h"
+#import "SFCarListModel.h"
 
 #import "AddCarryController.h"
 #import "SFChooseCarrierCarController.h"
@@ -17,8 +19,7 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
 
 @interface SFAddCarrierCarController () <UITableViewDelegate,UITableViewDataSource,SFAllotCarrierCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray <NSString *>*carNumArray;
-
+@property (nonatomic, strong) NSMutableArray <NSString *>*driverIds;
 @end
 
 @implementation SFAddCarrierCarController {
@@ -36,8 +37,6 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
     self.navigationItem.backBarButtonItem.action = @selector(backAction);
     
     [self setupView];
-    
-    [self getUserIdentiflyCar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,11 +46,11 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
 
 - (void)backAction {
     if (_isChange) {
-        
         __weak typeof(self) weakSelf = self;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"你有修改操作，需要保存吗？" preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"确认保存" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"保存");
+            [weakSelf saveCarrier];
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"继续退出" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -64,39 +63,35 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/**
- 获取所有认证车辆
- */
-- (void)getUserIdentiflyCar {
-    [[SFNetworkManage shared] postWithPath:@"cars/GetCarNoList"
-                                    params:@{@"UserId" : USER_ID}
-                                   success:^(id result)
-     {
-         NSArray *objecArray = result;
-         if (objecArray.count) {
-             for (NSMutableDictionary *dic in objecArray) {
-                 [self.carNumArray addObject:dic[@"car_no"]];
-             }
-         }
-         
-     } fault:^(SFNetworkError *err) {
-         
-     }];
-}
 
 #pragma mark - UIAction
 - (void)saveCarrier {
+    if (!self.model.carNum) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请选择车牌"];
+        return;
+    }
     
-    [[SFNetworkManage shared] post:@"Order/GetOrderDriverAndCar"
-                            params:@{}
-                           success:^(id result)
+    if (!self.driverIds.count) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请分配司机"];
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"OrderId"] = self.orderId;
+    params[@"CarNo"] = self.model.carNum;
+    params[@"DriverIds"] = self.driverIds;
+    [[SFNetworkManage shared] postWithPath:@"Order/AddDriverAndCarByOrder"
+                                    params:params
+                                   success:^(id reslut)
     {
-        
-        
+        [[SFTipsView shareView] showSuccessWithTitle:@"分配成功"];
+        if (self.successRetrun) {
+            self.successRetrun();
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     } fault:^(SFNetworkError *err) {
-        
+        [[SFTipsView shareView] showFailureWithTitle:@"分配成功"];
     }];
-    
     
 }
 
@@ -116,8 +111,10 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
     __weak typeof(self) weakSelf = self;
     AddCarryController *driver = [[AddCarryController alloc] init];
     driver.driverArray = self.model.driverNameArray;
-    [driver setBlock:^(NSString *driverStr) {
+    [driver setBlock:^(NSString *driverStr,NSMutableArray *driverIds) {
+        _isChange = YES;
         weakSelf.model.driver_by = driverStr;
+        weakSelf.driverIds = driverIds;
         [_tableView reloadData];
     }];
     [self.navigationController pushViewController:driver animated:YES];
@@ -128,10 +125,15 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
  */
 - (void)chooseCarNum {
     SFChooseCarrierCarController *car = [[SFChooseCarrierCarController alloc] init];
-    car.selectedCarArray = @[self.model.carNum];
+    if (self.model) {
+        car.selectedCarArray = [NSMutableArray arrayWithObjects:self.model.carNum, nil];
+    }
+    __weak typeof(self) weakSelf = self;
     [car setResultReturnBlock:^(NSArray<SFCarListModel *> *modelArray) {
         SFCarListModel *model = modelArray.firstObject;
-        self.model = model;
+        NSDictionary *modelDic = [model mj_keyValues];
+        SFCarrierModel *carrier = [SFCarrierModel mj_objectWithKeyValues:modelDic];
+        weakSelf.model = carrier;
         _isChange = YES;
         [_tableView reloadData];
     }];
@@ -176,11 +178,10 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
     return 152;
 }
 
-- (NSMutableArray<NSString *> *)carNumArray {
-    if (!_carNumArray) {
-        _carNumArray = [NSMutableArray array];
+- (NSMutableArray<NSString *> *)driverIds {
+    if (!_driverIds) {
+        _driverIds = [NSMutableArray array];
     }
-    return _carNumArray;
+    return _driverIds;
 }
-
 @end

@@ -17,80 +17,207 @@
 })(document, window);
 //此段代码请勿动
 
-var appURL = 'http://192.168.112.160/api'
+/*基础网络路径*/
+var appURL = "http://192.168.112.44/lisapi/api"
+// var appURL = 'http://192.168.112.160/api'
+/*基础资源路径*/
 var appResourceURL = 'http://172.16.100.147/devlis'
 
 /*
     原生代码给HTML传值接口
-    @params data  json格式
+    @params 
+    data : {
+        内容根据不同页面，传值不一样
+    }
 */
 var SFAppData;
 
-//datas前端传值给手机端数据包含id以及data
 /*
  * 打开地址 选择器
 
  @params
- datas 	: 参数数组 [<str>]
+ datas 	: [{
+    "fromId" :  <str>,  //控件Class
+ }]
+ 
+ *
+ * @params successFn 
+ 回调参数 : {
+    "fromId" :  <str>,  //控件Class
+    "message":  <str>,  //用户选择的地址信息
+    "isCheck":  1<int>, //固定值
+ }
 */
 function openAdressPickerMethod(datas,successFn,failFn) {
    Cordova.exec(successFn, failFn, "SFAdressPickerPlugin", "adressPicker", datas);
 }
 
 /*
- * 打开单选 选择器
+ * 单选选择器 样式一
+ _____
+|     |
+|_____|
+|_|_|_|
+|_|_|_|
+|_|_|_|
+ *
+ * datas : [{
+    "title"  :  <str>,  //显示的标题
+    "fromId" :  <str>,  //控件Class
+    "data"   :  [ //需要展示的数据源
+        "数据源1",
+        "数据源2",
+        ...
+    ] 
+ }]
+
+ *
+ * @params successFn 
+ 回调参数 : {
+    "fromId" :  <str>,  //控件Class
+    "message":  <str>   //用户选择的内容
+ }
 */
 function openOtherPickerMethod(datas,successFn,failFn) {
 	Cordova.exec(successFn, failFn, "SFOtherPickerViewPlugin", "otherSelectePicker", datas);
 }
 
-
+/*
+ * 单选选择器 样式二 
+ _____
+|     |
+|_____|
+|_____|
+|_____|
+|_____| 
+ *              
+ * datas : [{
+    "title"  :  <str>,  //显示的标题
+    "fromId" :  <str>,  //控件Class
+    "data"   :  [
+        "数据源1",
+        "数据源2",
+        ...
+    ]
+ }]
+ 
+ *
+ * @params successFn 
+ 回调参数 : {
+    "fromId" :  <str>,  //控件Class
+    "message":  <str>   //用户选择的内容
+ }
+*/
 function openLeftAlignPicker(datas) {
     Cordova.exec(successFunction, failFunction, "SFOtherPickerViewPlugin", "singleTablePicker", datas);
 }
 
 
-/* 展示成功提示框 */
+/* 展示成功提示框 
+ *
+ * message : <str> // 展示成功的信息
+*/
 function showSuccessMessage(message) {
-    Cordova.exec(null, null, "SFMessageViewPlugin", "showSuccessMessage", message);
+    Cordova.exec(null, null, "SFMessageViewPlugin", "showSuccessMessage", [message]);
 }
 
-/* 展示失败提示框 */
+/* 展示失败提示框 
+ *
+ * message : <str> // 展示成功的信息
+*/
 function showErrorMessage(message) {
-    Cordova.exec(null, null, "SFMessageViewPlugin", "showErrorMessage", message);
+    Cordova.exec(null, null, "SFMessageViewPlugin", "showErrorMessage", [message]);
 }
 
 
 /*
  * 打开多选 选择器
+ * 
+ * datas : [{
+    "title" :  <str>, //标题
+    "class" :  <str>, 控件class
+    "data"  :  [
+        "数据源1",
+        "数据源2",
+        ...
+    ]
+ }]
+
+ *
+ * @params successFn 
+ 回调参数 : {
+    "class"   :  <str>,  //控件Class
+    "message" :  <str>   //用户选择的内容
+    "numbers" :  [{
+        "用户选中数据源一",
+        "用户选中数据源二",
+        "用户选中数据源三",
+        ...
+    }]
+ }
 */
-function openMoreSelectedPickerMehtod(datas) {
+function openMoreSelectedPickerMehtod(datas,successFn,failFn) {
 	Cordova.exec(successFunction, failFunction, "SFMoreSelectedPickerPlugin", "moreSelectedPicker", datas);
 }
 
 /*
  * 打开日历 选择器
+ *
+ * datas : [{
+    "class" :  <str>, //控件class
+    "data"  :   //当前选择的日期，如果没有就传空
+ }]
 */
 function openDatePickerMethod(datas,successDayFunction,failFunction) {
 	Cordova.exec(successDayFunction, failFunction, "SFDatePickerPlugin", "datePicker", datas);
 }
 
+/*
+ * 打开选择时间 + 日历 选择器
+ * 
+ * datas : [{
+    "time"      : <str>, //当前选择的时间 ，如果没有就传空字符串
+    "fromId"    : <str>, //控件class
+    "cycle"     : <str>  //选择的周期
+ }]
+
+ *
+ * @params successDayFunction 
+  回调参数格式
+  {
+    "fromId"    : <str>,
+    "message"   : <str>  //当前选中的时间
+ }
+*/
+function openSheetTypeDatePickerMethod (datas,successDayFunction,failFunction) {
+    Cordova.exec(successDayFunction, failFunction, "SFDatePickerPlugin", "sheetTypePicker", datas);
+}
+
 /* 
  * 打开车辆选择器 
- * datas : ['carNum1','carNum2']
+ * datas : [
+    "carNum1",
+    "carNum2",
+    ...
+ ]
+
  *
- * 回调参数 : {"message" : jsonObject
-              "fromId"  : <str>
-              "price"   : "请输入价格"" (固定值)
-            }
+ * @successDayFunction
+    回调参数 : {
+    "message" : jsonObject
+    "fromId"  : <str>
+    "price"   : "请输入价格"" (固定值)
+    }
 */
 function openSelectedCarMethod(datas,successDayFunction,failFunction) {
-    Cordova.exec(successDayFunction, failFunction, "SFChooseCarPlguin", "chooseCar", datas);
+    Cordova.exec(successDayFunction, failFunction, "SFChooseCarPlugin", "chooseCar", datas);
 }
 
 /*
  * 选择发布周期
- * datas : [{"fromId" : <str>}]
+ * datas : [{
+     "fromId" : <str>
+ }]
  * 
  * 回调参数 : {
     "message" : <str>, (eg.只发布一次)
@@ -187,11 +314,11 @@ SF_ReqestManage.get = function(header,params,success,error){
 
 /*HUD*/
 SF_ReqestManage.showSuccess = function(mes) {
-    cordova.exec(function () {},function () {},"SFNetworkingPlugin", "showSuccess",[mes])
+    cordova.exec(null,null,"SFNetworkingPlugin", "showSuccess",[mes])
 }
 
 SF_ReqestManage.showFault = function showFault(mes) {
-    cordova.exec(function () {},function () {},"SFNetworkingPlugin", "showFault",[mes])
+    cordova.exec(null,null,"SFNetworkingPlugin", "showFault",[mes])
 }
 
 /*
@@ -222,17 +349,6 @@ SF_ReqestManage.getCurrentUser = function (success,error) {
     }, error, "SFNetworkingPlugin","getCurrentUser",[]);
 }
 
-//只允许输入数字和小数
-function onlyNumber(obj) {
-    var t = obj.value.charAt(0);
-    obj.value = obj.value.replace(/[^\d\.]/g, '');
-    obj.value = obj.value.replace(/^\./g, '');
-    obj.value = obj.value.replace(/\.{2,}/g, '.');
-    obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
-    if (t == '-') {
-        t ='0';
-    };
-};
 
 
 

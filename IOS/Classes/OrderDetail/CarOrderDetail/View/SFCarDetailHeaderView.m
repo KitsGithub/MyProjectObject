@@ -37,18 +37,28 @@
     _name = [UILabel new];
     _name.font = FONT_COMMON_16;
     _name.textColor = COLOR_TEXT_COMMON;
-    _name.text = @"陈小鸣";
     [self addSubview:_name];
     
     _phone = [UILabel new];
     _phone.font = FONT_COMMON_16;
     _phone.textColor = [UIColor colorWithHexString:@"#4c90ff"];
-    _phone.text = @"159 9999 9999";
     [self addSubview:_phone];
     
     _lineView = [UIView new];
     _lineView.backgroundColor = COLOR_LINE_DARK;
     [self addSubview:_lineView];
+}
+
+- (void)setModel:(SFCarOrderDetailModel *)model {
+    _address.fromAddress = [NSString stringWithFormat:@"%@-%@-%@",model.from_province,model.from_city,model.from_district];
+    _address.fromDistrict = model.from_address;
+    
+    _address.toAddress = [NSString stringWithFormat:@"%@-%@-%@",model.to_province,model.to_city,model.to_district];
+    _address.toDistrict = model.to_address;
+    
+    _name.text = model.name;
+    _phone.text = model.mobile;
+    [self setNeedsLayout];
 }
 
 - (void)layoutSubviews {

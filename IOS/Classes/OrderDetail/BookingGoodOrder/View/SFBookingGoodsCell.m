@@ -92,7 +92,7 @@
 }
 
 - (void)sfMessageInputViewDidFinishedEditting:(NSString *)str {
-    _model.price = str;
+    _model.order_fee = str;
 }
 
 - (void)setModel:(SFCarListModel *)model {
@@ -100,7 +100,7 @@
     _carNum.text = model.car_no;
     NSString *carType = [NSString stringWithFormat:@"%@ %@ %@ %@",model.car_type,model.car_long,model.dead_weight,model.car_size];
     _carType.text = carType;
-    [_price setTitleStr:[NSString stringWithFormat:@"%@",model.price]];
+    [_price setTitleStr:[NSString stringWithFormat:@"%@",model.order_fee]];
     
 }
 

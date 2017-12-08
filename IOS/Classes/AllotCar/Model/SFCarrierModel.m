@@ -13,11 +13,6 @@
 
 - (NSString *)carNum {
     if (_car_no.length) {
-//        NSArray *carNoArray = [_car_no componentsSeparatedByString:@","];
-//        NSString *carNumStr = [NSString string];
-//        for (NSString *carNum in carNoArray) {
-//            carNumStr = [carNumStr stringByAppendingString:carNum];
-//        }
         return _car_no;
     }
     return @"";

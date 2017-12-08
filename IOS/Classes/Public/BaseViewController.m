@@ -20,9 +20,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    
-   
-    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

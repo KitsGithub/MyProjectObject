@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SFCarOrderDetailModel.h"
 @interface SFCarDetailCell : UITableViewCell
+
+@property (nonatomic, weak) SFCarListModel *model;
 
 @end

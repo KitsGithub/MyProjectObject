@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-typedef void(^ReturnBlock)(NSString *driverStr);
+typedef void(^ReturnBlock)(NSString *driverStr,NSMutableArray *driverIds);
 
 @interface AddCarryController : BaseViewController
 

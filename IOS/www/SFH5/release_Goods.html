@@ -11,13 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/sf_style.css" />
 </head>
 <style type="text/css">
-	.Hmy_width{
-		width:96%;
-		float: none;
-	}
-	.Hmy_widths{
-		width:94%;
-	}
+	
 </style>
 <body>
 <div class="sf_wrap sfRelease"  id="releaseCar" style="opacity:1">
@@ -76,7 +70,7 @@
 				<p class="sf_formadd" id="choseCarlong"><input readonly class="sf_formadd sf_carType" placeholder="选择车长度"  id="carlongType" /><span class="sf_develop"></span></p>
 			</div>
 			<div class="sf_Inputaddress Hmy_width" >
-    			<input class="sf_D sf_Dbottm" type="text" name="number"  value="" id="carNumber" placeholder="请输入车数量" onkeyup="onlyNumber(this)"/>
+    			<input class="sf_D sf_Dbottm" type="text" name="number"  value="" id="carNumber" placeholder="请输入车数量" onkeyup="value = value.replace(/[^\d]/g, '')"/>
     			<span class="sf_text">辆</span>
             </div>
 		</div>

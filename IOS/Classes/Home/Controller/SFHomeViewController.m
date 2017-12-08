@@ -212,7 +212,8 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
  */
 - (void)SFHomeNavBar:(SFHomeNavBar *)navBar didClickUserIcon:(UIButton *)userIcon {
     NSLog(@"点击了头像");
-    if (![SFAccount currentAccount].user_id.length) {
+    SFUserInfo *info = SF_USER;
+    if (!info.user_id.length) {
         LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         [self presentViewController:nav animated:YES completion:^{}];
@@ -253,7 +254,7 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
 - (void)HomeViewCell:(HomeViewCell *)cell didClickOptionButton:(UIButton *)button {
     NSLog(@"点击了功能按钮");
     
-    SFAccount *account = [SFAccount currentAccount];
+    SFUserInfo *account = SF_USER;
     if (account.role == SFUserRoleUnknown) {
         LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
@@ -445,6 +446,7 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
 }
 
 - (NSString *)dbPath {
+    NSLog(@"dbpath = %@",DBPath);
     return DBPath;
 }
 

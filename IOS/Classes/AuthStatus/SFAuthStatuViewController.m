@@ -121,7 +121,7 @@
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"UserId"] = [SFAccount currentAccount].user_id;
+    params[@"UserId"] = SF_USER.user_id;
     params[@"DriverId"]  = self.guid;
     params[@"Name"] = name;
     params[@"Mobile"] = phone;
@@ -192,7 +192,7 @@
         return;
     }
     
-    params[@"UserId"] = [SFAccount currentAccount].user_id;
+    params[@"UserId"] = SF_USER.user_id;
     if (self.guid.length) {
         params[@"CarId"]  = self.guid;
     }
@@ -259,11 +259,11 @@
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"UserId"] = [SFAccount currentAccount].user_id;
+    params[@"UserId"] = SF_USER.user_id;
     params[@"Name"]  = name;
     params[@"IDCard"] = cid;
     
-    NSString *path = [SFAccount currentAccount].role == SFUserRoleCarownner ? @"ApiCertificate/AddCarCertificate" : @"ApiCertificate/AddGoodsCertificate";
+    NSString *path = SF_USER.role == SFUserRoleCarownner ? @"ApiCertificate/AddCarCertificate" : @"ApiCertificate/AddGoodsCertificate";
     
     [SVProgressHUD show];
     [[SFNetworkManage shared] postWithPath:path params:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

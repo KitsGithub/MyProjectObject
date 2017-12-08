@@ -21,43 +21,56 @@
 //环境配置文件
 #import "Constant.h"
 #import "GlobalType.h"
+
 //数据库相关
 #import "FMDB_Manager.h"
 
-//通用头文件
+//用户信息
+#import "SFUserInfo.h"
+
+//基类
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <AFNetworking.h>
 #import "BaseNavigationController.h"
-#import <MJRefresh.h>
-#import <Masonry.h>
-#import <MJExtension/MJExtension.h>
-#import "SFNetworkManage.h"
-#import <UIImageView+WebCache.h>
-#import <UIButton+WebCache.h>
+#import "BaseCordvaViewController.h"
+
+//自定义
+#import "SFTipsView.h"
 #import "UIColor+SF.h"
 #import "NSString+FontSize.h"
 #import "NSString+Extension.h"
-#import "SFTipsView.h"
-#import "SFDataBaseHelper.h"
 #import "UIImage+Extension.h"
 #import "UIButton+Extension.h"
+#import "SFNetworkManage.h"
+
+//通用头文件
+#import <AFNetworking.h>
+#import <MJRefresh.h>
+#import <Masonry.h>
+#import <MJExtension/MJExtension.h>
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 #import <SVProgressHUD.h>
-#import "BaseCordvaViewController.h"
-#import "GlobalType.h"
+
+
 //屏幕宽高
 #define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
 //h5加载路径
 #define SFWL_H5_PATH @"www/SFH5"
+
+//userInfo路径
+#define USERINFO_PATH [DocumentPATH stringByAppendingPathComponent:@"USERINFO.plist"]
+
 //沙盒路径
 #define DocumentPATH  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 //数据库路径
 #define DBPath [DocumentPATH stringByAppendingPathComponent:@"SFWL_DataBase.sqlite"]
 
 //用户数据
-#define USER_ID [SFAccount currentAccount].user_id
+#define SF_USER [SFUserInfo defaultInfo]
+#define USER_ID [SFUserInfo defaultInfo].user_id
 
 //主题色
 #define THEMECOLOR     [UIColor colorWithHexString:@"#FAD64C"]    //app主色

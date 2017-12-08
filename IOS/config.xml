@@ -42,8 +42,8 @@
     </feature>
     
 <!--   车辆选择器-->
-    <feature name="SFChooseCarPlguin">
-        <param name="ios-package" value="SFChooseCarPlguin" />
+    <feature name="SFChooseCarPlugin">
+        <param name="ios-package" value="SFChooseCarPlugin" />
         <param name="onload" value="true" />
     </feature>
     

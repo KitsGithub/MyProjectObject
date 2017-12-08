@@ -19,7 +19,7 @@
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"PageIndex"] = @(page);
     mdic[@"PageSize"]  = @(kSFOrder_numbers_per_page);
-    mdic[@"UserId"]    = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"]    = USER_ID;
     mdic[@"OrderStatus"] = type;
     [[SFNetworkManage shared] postWithPath:@"Order/GetMyOrderList" params:mdic success:^(id result) {
         NSArray <SFOrder *>*arr = [SFOrder mj_objectArrayWithKeyValuesArray:result];
@@ -32,10 +32,10 @@
 
 + (void)getProvenanceListWithDirection:(SFProvenanceDirection)direction Type:(NSString *)type page:(NSInteger)page Success:(void(^)(NSArray <id<SfOrderProtocol>>*))success fault:(SFErrorResultBlock)fault
 {
-    BOOL isPublishCar = direction  == SFProvenanceDirectionPublish && [SFAccount currentAccount].role == SFUserRoleCarownner;
-    BOOL isPublishGoods = direction  == SFProvenanceDirectionPublish && [SFAccount currentAccount].role == SFUserRoleGoodsownner;
-    BOOL isOrderedCar = direction  == SFProvenanceDirectionReceive && [SFAccount currentAccount].role == SFUserRoleGoodsownner;
-    BOOL isReceiveGoods = direction  == SFProvenanceDirectionReceive && [SFAccount currentAccount].role == SFUserRoleCarownner;
+    BOOL isPublishCar = direction  == SFProvenanceDirectionPublish && SF_USER.role == SFUserRoleCarownner;
+    BOOL isPublishGoods = direction  == SFProvenanceDirectionPublish && SF_USER.role == SFUserRoleGoodsownner;
+    BOOL isOrderedCar = direction  == SFProvenanceDirectionReceive && SF_USER.role == SFUserRoleGoodsownner;
+    BOOL isReceiveGoods = direction  == SFProvenanceDirectionReceive && SF_USER.role == SFUserRoleCarownner;
     
     NSString *path;
     if (isPublishCar) {
@@ -49,7 +49,7 @@
     }
     NSInteger number = kSFOrder_numbers_per_page;
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"UserId"]  = [SFAccount currentAccount].user_id;
+    params[@"UserId"]  = SF_USER.user_id;
     params[@"OrderStatus"] = type;
     [[SFNetworkManage shared] postWithPath:path params:params success:^(id result) {
         NSArray <id<SfOrderProtocol>>*arr = nil;
@@ -101,7 +101,7 @@
 {
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"Guid"]   = guid;
-    mdic[@"UserId"] = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"] = SF_USER.user_id;
     [[SFNetworkManage shared] postWithPath:@"CarsBooking/CancelCarOrder" params:mdic success:^(id result) {
         BOOL isSuc = [result isKindOfClass:[NSString class]] && [(NSString *)result isEqualToString:@"true"];
         success(isSuc);
@@ -120,10 +120,10 @@
 + (void)recallCarOrderWithId:(NSString *)carId Success:(SFBoolResultBlock)success fault:(SFErrorResultBlock)fault {
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"OrderId"]   = carId;
-    mdic[@"UserId"] = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"] = SF_USER.user_id;
     
     NSString *header;
-    if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+    if (SF_USER.role == SFUserRoleGoodsownner) {
         header = @"GoodsOrder/RecallGoodsOrder";
     } else {
         header = @"CarsBooking/RecallCarOrder";
@@ -147,10 +147,10 @@
 + (void)cancelGoodOrderWithId:(NSString *)guid Success:(SFBoolResultBlock)success fault:(SFErrorResultBlock)fault {
     NSMutableDictionary *mdic = [NSMutableDictionary new];
     mdic[@"Guid"]   = guid;
-    mdic[@"UserId"] = [SFAccount currentAccount].user_id;
+    mdic[@"UserId"] = SF_USER.user_id;
     
     NSString *header;
-    if ([SFAccount currentAccount].role == SFUserRoleGoodsownner) {
+    if (SF_USER.role == SFUserRoleGoodsownner) {
         header = @"CarsBooking/CancelCarOrder";
     } else {
         header = @"GoodsOrder/CancelGoodsOrder";

@@ -25,6 +25,7 @@ var SFAppData;
 	cartype: ['保温车', '平板车', '飞翼车', '半封闭车', '危险品车', '集装车', '敞篷车', '金杯车', '自卸货车', '高低板车', '高栏车', '冷藏车', '厢式车'],
 	carlength: ['4.2米', '4.8米', '5.2米', '5.8米', '6.2米', '6.8米', '7.2米', '8.6米', '9.6米', '12.0米', '12.5米', '13.5米', '16.0米', '17.5米']
 	};
+//{"name":"市辖区","sub":[{"name":"请选择"},{"name":"东城区"},{"name":"西城区"},{"name":"崇文区"},{"name":"宣武区"},{"name":"朝阳区"},{"name":"海淀区"},{"name":"丰台区"},{"name":"石景山区"},{"name":"房山区"},{"name":"通州区"},{"name":"顺义区"},{"name":"昌平区"},{"name":"大兴区"},{"name":"怀柔区"},{"name":"平谷区"},{"name":"门头沟区"},{"name":"密云县"},{"name":"延庆县"},{"name":"其他"},"type":1]}
 
 /*
  * 
@@ -77,17 +78,8 @@ function CarsModel(fromObj,toObj){
 		IssueCarOrderObj.toCity=toObj.city;
 		IssueCarOrderObj.toDistrict=toObj.district;
 		IssueCarOrderObj.toAddress=input_to_detail;
-		IssueCarOrderObj.carType="";
-		IssueCarOrderObj.carLong="";
-		IssueCarOrderObj.carSize="";
-		IssueCarOrderObj.deadWeight="";
-		IssueCarOrderObj.weightUnit="";
-		IssueCarOrderObj.departDate="";
 		IssueCarOrderObj.selCars=cars.toString();
 		IssueCarOrderObj.selFee=price.toString();
-		IssueCarOrderObj.ConnectBy="";
-		IssueCarOrderObj.ConnectMobile="";
-		IssueCarOrderObj.Price="";
 		IssueCarOrderObj.carRemark=input_remark;
 		return IssueCarOrderObj;
 };
@@ -99,17 +91,20 @@ function GoodsModel(fromObj,toObj){
 		var input_remark = $("#input_remark").val();
 		var input_from_detail = $("#input_from_detail").val();
 		var input_to_detail = $("#input_to_detail").val();
-	
-//		var arrs = $("#carWraps").find("li");
-//		var cars = [];
-//		var price = [];
-//
-//	   for(i=0;i<arrs.length;i++){
-//	   		var idd = $(arrs[i]).children().eq(0).text();
-//			var val = $(arrs[i]).children().eq(2).children().val();
-//			cars.push(idd);
-//			price.push(val?val:"面议");
-//	   }	
+		var carCycleType=$("#carCycleType").val();
+		var cycle;
+		
+		if(carCycleType=="只发布一次"){
+			cycle=0;
+		}else if(carCycleType=="发布一个月"){
+			cycle=1;
+		}else if(carCycleType=="发布半年"){
+			cycle=2;
+		}else if(carCycleType=="发布一年"){
+			cycle=3;
+		}else if(carCycleType=="长期有效"){
+			cycle=4;
+		};
 		//货物及车辆信息
 		var goodsTypename = $("#goodsTypename").val();
 		var goodsType = $("#goodsType").val();
@@ -117,7 +112,7 @@ function GoodsModel(fromObj,toObj){
 		var goodsvolume = $("#goodsvolume").val();
 		var carType= $("#carType").val();
 		var carlongType=$("#carlongType").val();
-		var carCycleType=$("#carCycleType").val();
+		
 		var cartimeType=$("#cartimeType").val();
 		var goodsprice=$("#goodsprice").val();
 		var Consignee=$("#Consignee").val();
@@ -127,7 +122,7 @@ function GoodsModel(fromObj,toObj){
 		var carNumber = $("#carNumber").val();
 		
 		var IssueCarOrderObj={};
-		IssueCarOrderObj.car_id=SFAppData.car_id == undefined ? "" : SFAppData.car_id;
+//		IssueCarOrderObj.car_id=SFAppData.car_id == undefined ? "" : SFAppData.car_id;
 		IssueCarOrderObj.issue_by=SFAppData.UserId;
 		IssueCarOrderObj.order_status="A";
 		IssueCarOrderObj.from_province=fromObj.province;
@@ -139,20 +134,20 @@ function GoodsModel(fromObj,toObj){
 		IssueCarOrderObj.to_district=toObj.district;
 		IssueCarOrderObj.to_address=input_to_detail;
 		IssueCarOrderObj.goods_name=goodsTypename;
-		IssueCarOrderObj.goods_size=goodsvolume;
-		IssueCarOrderObj.goods_type=goodsType;
-		IssueCarOrderObj.goods_weight=goodsweight;
+		IssueCarOrderObj.goods_size=parseFloat(goodsvolume);
+		IssueCarOrderObj.goods_type=goodsType;		
+		IssueCarOrderObj.goods_weight=parseFloat(goodsweight);
 		IssueCarOrderObj.weightUnit="";
 		IssueCarOrderObj.car_type=carType;
 		IssueCarOrderObj.car_long=carlongType;
-		IssueCarOrderObj.car_count=carNumber;
+		IssueCarOrderObj.car_count=parseInt(carNumber);
 		IssueCarOrderObj.car_remark=input_remark;
-		IssueCarOrderObj.cycle=carCycleType;
+		IssueCarOrderObj.cycle=cycle;
 		IssueCarOrderObj.zctime=cartimeType;
 		IssueCarOrderObj.delivery_by=Consignee;
-		IssueCarOrderObj.delivery_date=""; //收货日期
+		IssueCarOrderObj.delivery_date=0; //收货日期
 		IssueCarOrderObj.delivery_mobile=phoneNumber;
-		IssueCarOrderObj.Price="";
+		IssueCarOrderObj.price=goodsprice;
 		return IssueCarOrderObj;
 };
 
@@ -172,6 +167,9 @@ function successFn(obj){
     }else if(obj.fromId=="carlongType"){
     	$("#carlongType").val(obj.message);
     }else if(obj.fromId=="carCycleType"){
+    	if($("#carCycleType").val()!=obj.message){
+    		$("#cartimeType").val("");
+    	}
     	$("#carCycleType").val(obj.message);
     }else if(obj.fromId=="cartimeType"){
     	$("#cartimeType").val(obj.message);
@@ -183,20 +181,24 @@ function successFn(obj){
 
 //请求原生地址回调失败方法
 function failFn(errorData){
-	showErrorMessage(["请求失败"]);
+	showErrorMessage("未进行任何选择");
 	 $(".sf_develop").removeClass("active");
 };
 
 //只允许输入数字和小数
 function onlyNumber(obj) {
     var t = obj.value.charAt(0);
+    console.log(t)
     obj.value = obj.value.replace(/[^\d\.]/g, '');
     obj.value = obj.value.replace(/^\./g, '');
     obj.value = obj.value.replace(/\.{2,}/g, '.');
     obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
     if (t == '-') {
-        t ='0';
-    };
+        obj.value ='';
+    };  
+    if (t == '0') {
+        obj.value ='';
+    };  
 };
 
 //获取路由中档额参数

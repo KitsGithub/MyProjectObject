@@ -33,14 +33,12 @@
     _from = [UILabel new];
     _from.numberOfLines = 2;
     _from.textColor = COLOR_TEXT_COMMON;
-    _from.text = @"河北省-石家庄市-长安区";
     _from.font = textFont;
     [self addSubview:_from];
     
     _fromDetail = [UILabel new];
     _fromDetail.numberOfLines = 2;
     _fromDetail.textColor = [UIColor colorWithHexString:@"#999999"];
-    _fromDetail.text = @"东山门街道李记水果店";
     _fromDetail.font = smallFont;
     [self addSubview:_fromDetail];
     
@@ -48,13 +46,11 @@
     _to.numberOfLines = 2;
     _to.textColor = COLOR_TEXT_COMMON;
     _to.font = textFont;
-    _to.text = @"天津市-市辖区-河东区";
     [self addSubview:_to];
     
     _toDetail = [UILabel new];
     _toDetail.numberOfLines = 2;
     _toDetail.textColor = [UIColor colorWithHexString:@"#999999"];
-    _toDetail.text = @"中山门街道张记包子铺";
     _toDetail.font = smallFont;
     [self addSubview:_toDetail];
     
@@ -76,16 +72,35 @@
     [self addSubview:_to_tips];
 }
 
+
+- (void)setFromAddress:(NSString *)fromAddress {
+    _from.text = fromAddress;
+    [self setNeedsLayout];
+}
+
+- (void)setFromDistrict:(NSString *)fromDistrict {
+    _fromDetail.text = fromDistrict;
+}
+
+- (void)setToAddress:(NSString *)toAddress {
+    _to.text = toAddress;
+}
+
+- (void)setToDistrict:(NSString *)toDistrict {
+    _toDetail.text = toDistrict;
+    [self setNeedsLayout];
+}
+
 - (void)layoutSubviews {
     CGSize fromSize = [_from.text sizeWithFont:textFont maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
     _from.frame = CGRectMake(37, 0, fromSize.width, fromSize.height);
     
-    CGSize fromDetailSize = [_fromDetail.text sizeWithFont:smallFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    CGSize fromDetailSize = [_fromDetail.text sizeWithFont:smallFont maxSize:CGSizeMake(SCREEN_WIDTH - CGRectGetMinX(_from.frame) - 10, MAXFLOAT)];
     _fromDetail.frame = CGRectMake(CGRectGetMinX(_from.frame), CGRectGetMaxY(_from.frame) + 5, fromDetailSize.width, fromDetailSize.height);
     
     
     CGSize toSize = [_to.text sizeWithFont:textFont maxSize:CGSizeMake(SCREEN_WIDTH - 37, MAXFLOAT)];
-    _to.frame = CGRectMake(CGRectGetMinX(_from.frame), CGRectGetMaxY(_fromDetail.frame) + 20, toSize.width, toSize.height);
+    _to.frame = CGRectMake(CGRectGetMinX(_from.frame), CGRectGetMaxY(_fromDetail.frame) + 10, toSize.width, toSize.height);
     
     CGSize toDetailSize = [_toDetail.text sizeWithFont:smallFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
     _toDetail.frame = CGRectMake(CGRectGetMinX(_from.frame), CGRectGetMaxY(_to.frame) + 5, toDetailSize.width, toDetailSize.height);

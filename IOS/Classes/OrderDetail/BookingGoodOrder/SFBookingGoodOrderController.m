@@ -23,7 +23,7 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
 
 @interface SFBookingGoodOrderController () <UITableViewDelegate,UITableViewDataSource,SFBookingGoodsCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray <SFCarListModel *>*dataArray;
 
 @end
 
@@ -43,10 +43,61 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)bookGoodRequset {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    NSMutableArray *selectedCarJsonArray = [NSMutableArray array];
+    for (SFCarListModel *model in self.dataArray) {
+        [selectedCarJsonArray addObject:[model mj_JSONObject]];
+    }
+    
+    SFBookingCarCalendarCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    NSString *time;
+    if ([cell isKindOfClass:[SFBookingCarCalendarCell class]]) {
+        time = cell.calendarTime;
+    }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+    NSDate *selectedDate = [formatter dateFromString:time];
+    [formatter setDateFormat:@"YYY-MM-dd HH:mm"];
+    NSString *sendTime = [formatter stringFromDate:selectedDate];
+    
+    params[@"cars"] = selectedCarJsonArray;
+    params[@"time"] = sendTime;
+    [[SFNetworkManage shared] postWithPath:@"GoodsOrder/AddGoodsOrder"
+                                    params:params
+                                   success:^(id result)
+    {
+        if (result) {
+            [[SFTipsView shareView] showSuccessWithTitle:@"预订成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[SFTipsView shareView] showSuccessWithTitle:@"预订失败"];
+        }
+        
+    } fault:^(SFNetworkError *err) {
+        [[SFTipsView shareView] showSuccessWithTitle:err.description];
+    }];
+    
+}
+
 #pragma mark - UIAction
 - (void)bookingGoodNow {
-    SFChooseReleaseTimeController *time = [[SFChooseReleaseTimeController alloc] init];
-    [self.navigationController pushViewController:time animated:YES];
+    
+    if (!self.dataArray.count) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请选择接单车辆"];
+        return;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否确认接单" message:@"请仔细检查您的发车时间，一旦接单将无法修改" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf bookGoodRequset];
+    }];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)SFBookingGoodsCellDidSelectedDel:(SFBookingGoodsCell *)cell {

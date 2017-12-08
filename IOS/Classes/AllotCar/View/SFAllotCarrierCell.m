@@ -136,12 +136,14 @@
 }
 
 
-- (void)setModel:(id<SFCarrierProtocol>)model {
+- (void)setModel:(SFCarrierModel *)model {
     _model = model;
     _driverTips.text = @"司机管理";
     _carNum.text = model.carNum;
     
     _dvriverView.driverList = [model.driverNameArray copy];
+    
+    _firstCar.selected = model.is_firstcar;
     
     [self setNeedsLayout];
 }
@@ -150,9 +152,6 @@
     _enableEdditting = enableEdditting;
     _eddittingView.hidden = _lineView2.hidden =  !enableEdditting;
 }
-
-
-
 
 
 - (void)layoutSubviews {

@@ -7,8 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "SFDriverModel.h"
 
-typedef void(^AddDriverReturnBlock)(NSString *driversStr);
+typedef void(^AddDriverReturnBlock)(NSMutableArray <SFDriverModel *>*drivers);
 
 @interface AddCarrierDriverController : BaseViewController
 

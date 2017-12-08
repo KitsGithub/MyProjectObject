@@ -12,4 +12,6 @@
 
 - (void)datePicker:(CDVInvokedUrlCommand *)command;
 
+- (void)sheetTypePicker:(CDVInvokedUrlCommand *)command;
+
 @end

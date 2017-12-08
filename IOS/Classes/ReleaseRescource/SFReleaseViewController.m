@@ -52,17 +52,29 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"UserId"] = USER_ID;
-    if ([SFAccount currentAccount].role == SFUserRoleCarownner) {
+    if (SF_USER.role == SFUserRoleCarownner) {
         dic[@"CarId"] = self.orderId;
     } else {
-        dic[@"goods_id"] = self.orderId;
+        dic[@"GoodsId"] = self.orderId;
     }
     NSString *htmlMethod = [NSString stringWithFormat:@"SFAppData = %@",[dic mj_JSONString]];
     [self.commandDelegate evalJs:htmlMethod];
     
     if (self.orderId.length) {
-        NSString *method = [NSString stringWithFormat:@"requestCardetail()"];
+        NSString *js = [NSString stringWithFormat:@"orderId=\"%@\"",self.orderId];
+        [self.commandDelegate evalJs:js];
+        
+        NSString *method = @"";
+        if (SF_USER.role == SFUserRoleCarownner) {
+            method = [NSString stringWithFormat:@"requestCardetail()"];
+        } else {
+            method = [NSString stringWithFormat:@"requestGoodsDetail()"];
+        }
+        
         [self.commandDelegate evalJs:method];
+    } else {
+        NSString *js = [NSString stringWithFormat:@"orderId=\"\""];
+        [self.commandDelegate evalJs:js];
     }
 }
 
@@ -89,9 +101,6 @@
     NSLog(@"－－－－－结束等待------");
     NSLog(@"h5加载完成");
     [SVProgressHUD dismiss];
-    
-    NSString *js = [NSString stringWithFormat:@"orderId=\"%@\"",self.orderId];
-    [self.commandDelegate evalJs:js];
     
     [self sendMessageToH5];
 }

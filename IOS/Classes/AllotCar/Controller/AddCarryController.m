@@ -15,6 +15,9 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 
 @interface AddCarryController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, copy) NSString *drivers;
+
+@property (nonatomic, strong) NSMutableArray *driverIds;
+
 @end
 
 @implementation AddCarryController {
@@ -51,16 +54,20 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 - (void)addDriver {
     __weak typeof(self) weakSelf = self;
     AddCarrierDriverController *add = [[AddCarrierDriverController alloc] init];
-    [add setReturnBlock:^(NSString *driversStr) {
-        weakSelf.drivers = driversStr;
-        NSArray *driverArray = [driversStr componentsSeparatedByString:@","];
-        NSMutableArray *dataArray = [NSMutableArray array];
-        for (NSString *str in driverArray) {
-            if (str.length) {
-                [dataArray addObject:str];
-            }
+    [add setReturnBlock:^(NSMutableArray <SFDriverModel *>*drivers) {
+        NSMutableArray *driverArray = [NSMutableArray array];
+        NSMutableArray *driverIds = [NSMutableArray array];
+        NSString *driverStr = @"";
+        for (SFDriverModel *model in drivers) {
+            [driverArray addObject:model.driver_by];
+            [driverIds addObject:model.guid];
+            driverStr = [driverStr stringByAppendingString:[NSString stringWithFormat:@"%@,",model.driver_by]];
         }
-        weakSelf.driverArray = dataArray;
+        weakSelf.driverIds = driverIds;
+        weakSelf.drivers = driverStr;
+        weakSelf.driverArray = driverArray;
+        
+        [[SFTipsView shareView] showSuccessWithTitle:@"新增司机成功"];
         [_tableView reloadData];
         
     }];
@@ -74,7 +81,7 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 
 - (void)backAction {
     if (self.block) {
-        self.block(self.drivers);
+        self.block(self.drivers,self.driverIds);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -99,26 +106,25 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 #endif
     
     
-    
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
     [self.view addSubview:bottomView];
-    UIButton *addDriver = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.5, 50)];
+    UIButton *addDriver = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 50)];
     [addDriver addTarget:self action:@selector(addDriver) forControlEvents:(UIControlEventTouchUpInside)];
-    [addDriver setTitle:@"添加司机" forState:(UIControlStateNormal)];
+    [addDriver setTitle:@"添加/删除司机" forState:(UIControlStateNormal)];
     [addDriver setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     addDriver.titleLabel.font = [UIFont systemFontOfSize:18];
     [bottomView addSubview:addDriver];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.5, 14, 1, 22)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
-    [bottomView addSubview:lineView];
-    
-    UIButton *delDriver = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.5, 0, SCREEN_WIDTH * 0.5, 50)];
-    [delDriver addTarget:self action:@selector(delDriver) forControlEvents:(UIControlEventTouchUpInside)];
-    [delDriver setTitle:@"删除司机" forState:(UIControlStateNormal)];
-    [delDriver setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
-    delDriver.titleLabel.font = [UIFont systemFontOfSize:18];
-    [bottomView addSubview:delDriver];
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.5, 14, 1, 22)];
+//    lineView.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
+//    [bottomView addSubview:lineView];
+//
+//    UIButton *delDriver = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 0.5, 0, SCREEN_WIDTH * 0.5, 50)];
+//    [delDriver addTarget:self action:@selector(delDriver) forControlEvents:(UIControlEventTouchUpInside)];
+//    [delDriver setTitle:@"删除司机" forState:(UIControlStateNormal)];
+//    [delDriver setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+//    delDriver.titleLabel.font = [UIFont systemFontOfSize:18];
+//    [bottomView addSubview:delDriver];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -131,6 +137,7 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AddCarrierDriverCellReusedID forIndexPath:indexPath];
+    
     cell.textLabel.font = FONT_COMMON_16;
     cell.textLabel.text = self.driverArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -142,5 +149,11 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
     return 56;
 }
 
+- (NSMutableArray *)driverIds {
+    if (!_driverIds) {
+        _driverIds = [NSMutableArray array];
+    }
+    return _driverIds;
+}
 
 @end
