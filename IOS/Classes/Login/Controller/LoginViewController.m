@@ -76,7 +76,9 @@
 
 @property (weak, nonatomic) IBOutlet UIView *chooseRoleView;
 
-@property (nonatomic,strong)AuthcodeView *regitAuthView;
+@property (nonatomic,strong)UIButton *regitAuthView;
+@property (nonatomic, assign) NSInteger countDown;
+@property (nonatomic, strong) dispatch_source_t timer;
 
 @end
 
@@ -109,9 +111,14 @@
     self.registNameTextFile.delegate  = self;
     
     
-    AuthcodeView *view = [[AuthcodeView alloc] initWithFrame:self.registCodeImageView.superview.bounds];
-    self.regitAuthView = view;
-    [self.registCodeImageView.superview addSubview:view];
+    self.regitAuthView = [[UIButton alloc] initWithFrame:self.registCodeImageView.superview.bounds];
+    self.regitAuthView.backgroundColor = THEMECOLOR;
+    [self.regitAuthView setTitle:@"获取验证码" forState:(UIControlStateNormal)];
+    [self.regitAuthView addTarget:self action:@selector(getRegestCode) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.regitAuthView setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+    self.regitAuthView.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.registCodeImageView.superview addSubview:self.regitAuthView];
     
     [self.registCodeTestfiled setValue:@4 forKey:@"limit"];
     [self.registMobilTestfiled setValue:@11 forKey:@"limit"];
@@ -139,6 +146,7 @@
 }
 
 - (IBAction)segmentBtnClick:(UIButton *)sender {
+    
     [self changeScrollViewIsLogin:sender == self.loginSegmentBtn isAnimotion:NO];
     [self changeSegmentIsLogin:sender == self.loginSegmentBtn isAnimotion:NO];
 }
@@ -153,10 +161,91 @@
     
 }
 
+- (void)getRegestCode {
+    
+    //获取注册验证码
+    NSString *mobile = [self.registMobilTestfiled.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (![mobile isAvailableMobile]) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    [self startCountDown];
+    [SVProgressHUD show];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"Type"] = @"register";
+    params[@"Mobile"] = mobile;
+    
+    [[SFNetworkManage shared] postWithPath:@"Sms/Send"
+                                    params:params
+                                   success:^(id result)
+    {
+        [SVProgressHUD dismiss];
+        if (result) {
+            [[SFTipsView shareView] showSuccessWithTitle:@"发送验证码成功,请注意查收"];
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"发送验证码失败,请重试"];
+            dispatch_source_cancel(_timer);
+        }
+        
+        
+    } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+    }];
+    
+}
+
+/**
+ 开始定时器
+ */
+- (void)startCountDown {
+    self.regitAuthView.backgroundColor = COLOR_LINE_BLACK;
+    self.regitAuthView.userInteractionEnabled = NO;
+    __weak typeof(self) weakSelf = self;
+    
+    if (self.timer) {
+        return;
+    }
+    
+    self.countDown = 60;
+    
+    //1.创建类型为 定时器类型的 Dispatch Source
+    //1.1将定时器设置在主线程
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1ull * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        self.countDown--;
+        if (self.countDown < 0) {
+            dispatch_source_cancel(_timer);
+        } else {
+            [self.regitAuthView setTitle:[NSString stringWithFormat:@"%lds",weakSelf.countDown] forState:(UIControlStateNormal)];
+        }
+    });
+    
+    dispatch_source_set_cancel_handler(_timer, ^{
+        self.regitAuthView.userInteractionEnabled = YES;
+        [self.regitAuthView setTitle:@"获取验证码" forState:(UIControlStateNormal)];
+        [self.regitAuthView setBackgroundColor:THEMECOLOR];
+        _timer = nil;
+    });
+    
+    dispatch_resume(_timer);
+}
+
 - (void)changeSegmentIsLogin:(BOOL)isLogin isAnimotion:(BOOL)animotion
 {
     [self.segmentLineView.superview removeConstraint:self.lineCenterX];
     UIButton *sender = isLogin  ? self.loginSegmentBtn : self.registSegmentBtn;
+    if (isLogin) {
+        [self.loginSegmentBtn setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+        [self.registSegmentBtn setTitleColor:COLOR_TEXT_DARK forState:(UIControlStateNormal)];
+    } else {
+        [self.loginSegmentBtn setTitleColor:COLOR_TEXT_DARK forState:(UIControlStateNormal)];
+        [self.registSegmentBtn setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
+    }
     NSLayoutConstraint *cons = [NSLayoutConstraint constraintWithItem:self.segmentLineView attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:sender attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:0];
     self.lineCenterX  = cons;
     [self.segmentLineView.superview addConstraint:self.lineCenterX];
@@ -176,8 +265,8 @@
 
 
 - (IBAction)loginAction:(id)sender {
-    
-    
+    [self.view endEditing:YES];
+    [SVProgressHUD show];
     NSString *userName = [self.loginUserNameTestfiled.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *pwd    = [self.loginPwdTestfiled.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
@@ -203,6 +292,7 @@
         
         
     } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
     }];
     
@@ -218,6 +308,7 @@
                                              }
                                    success:^(id result)
      {
+         [SVProgressHUD dismiss];
          SFAuthStatusModle *auth = [SFAuthStatusModle mj_objectWithKeyValues:result];
          
          SFUserInfo *info = [SFUserInfo defaultInfo];
@@ -253,15 +344,9 @@
         [self alertInputError:@"请输入正确的手机号"];
         return;
     }
-    
-    if (![[code uppercaseString] isEqualToString:[self.regitAuthView.authCodeStr uppercaseString]]) {
-        [self alertInputError:@"验证码错误"];
-        return;
-    }
-    
-
-    [LoginRequest registWithAccount:userName pwd:pwd mobile:mobile role:self.currentRole succuss:^(SFUserInfo *account) {
-
+    [SVProgressHUD show];
+    [LoginRequest registWithAccount:userName pwd:pwd mobile:mobile  role:self.currentRole code:code succuss:^(SFUserInfo *account) {
+        [SVProgressHUD dismiss];
         [[SFTipsView shareView] showSuccessWithTitle:@"注册成功"];
         
         [self completeWithAccount:account];
@@ -271,6 +356,7 @@
         [self changeSegmentIsLogin:YES isAnimotion:YES];
         
     } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
     }];
     
@@ -417,7 +503,7 @@
         [self showRegistUserNameError:NO messsage:nil];
         self.registNameAvailableBtn.hidden  = NO;
     }else{
-        [self showRegistUserNameError:YES messsage:self.registNameTextFile.text.length ?  @"该用户名已经被占用" : @"用户名不能为空"];
+        [self showRegistUserNameError:YES messsage:self.registNameTextFile.text.length ?  @"该用户名已经被使用" : @"用户名不能为空"];
         self.registNameAvailableBtn.hidden  = YES;
     }
 }

@@ -75,7 +75,6 @@
 }
 
 - (void)messageButtonClick:(UIButton *)sender {
-    [sender addBudgeView:(BudgeDirectionRight)];
     
     if ([self.delegate respondsToSelector:@selector(SFPersonalNavBar:didClickMessageButton:)]) {
         [self.delegate SFPersonalNavBar:self didClickMessageButton:sender];
@@ -104,6 +103,10 @@
         default:
             break;
     }
+}
+
+- (void)setUnreadMessage {
+    [_message addBudgeView:(BudgeDirectionRight)];
 }
 
 #pragma mark - layout

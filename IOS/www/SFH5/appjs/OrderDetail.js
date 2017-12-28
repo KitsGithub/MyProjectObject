@@ -1,7 +1,7 @@
-   SFAppData = {
-      	GoodsId : '58bd4210-10e0-40c6-b8e7-87235be89e8a',
-      	UserId 	: '968c6b04-406c-42e7-a194-66c8a3c18a45'
-   };
+      // SFAppData = {
+      //    	OrderId : 'febcef57-e15f-11e7-8e38-005056b66c79',
+      //    	UserId 	: 'd1068e3c-b459-4322-8751-3250d476a1b4'
+      // };
 
 function showData(){
 	var app = new Vue({
@@ -10,17 +10,22 @@ function showData(){
 	    	return{
 	    		datas:{},		//订单数据	json
 	    		carrierList:[],	//承运人列表 	array
+	    		order_dates:{},
+	    		allocation_info:[],
 	    		isNumber:null,
-				appUrl:"http://172.16.100.147/devlis",
+				appUrl:appURL,
+				isError:false,
+				isWiFi:false,
 	    	}
 	    },
-	    created:function(){	            
+	    created:function(){	
+	    	//navigation.setTitle("货源详情");
 		    this.ajaxgoods();
 		},
 	    methods: {
 	        ajaxgoods: function (event) {
 	        	var that = this;
-	        	var requestURL = appURL + "/GoodsOrder/GetGoodsOrderDetails";
+	        	var requestURL = appURL+"/Order/GetGoodsOrderDetails";
 	          $.ajax({
 			        url: requestURL,
 			        type: "POST",
@@ -28,18 +33,23 @@ function showData(){
 			        data :SFAppData,
 			        success: function (data) {
 			        	console.log(data)
-//			        	if (data.Data.goods_details.head_src != ""||data.Data.goods_details.head_src !="undefined") {
-//			        		var head_src = appResourceURL + "/"+ data.Data.head_src
-//			        		data.Data.goods_details.head_src = head_src
-//			        	}
-			        	that.datas 			= data.Data.goods_details;
-			        	that.carrierList 	= data.Data.carrier_by;
+			        	if(data.Code==0){
+			         		that.datas 			= data.Data.goods_details;
+				        	that.carrierList 	= data.Data.carrier_by;
+				        	that.order_dates 	= data.Data.order_dates;
+				        	that.allocation_info = data.Data.allocation_info;
+			        	}else{
+			        		that.isError=true;
+			        	};
 			        	$("#orderDetail").css("opacity",'1');
 			        	$("#appLoading").css("opacity",'0');
 			        	$("#appLoading").remove();
 			        },
 			        error: function (error) {
-			        	confirm("请检查网络")
+			        	$("#orderDetail").css("opacity",'1');
+				    	$("#appLoading").css("opacity",'0');
+				    	$("#appLoading").remove();
+				    	that.isWiFi=true;
 			        }
 			    });
 	        },
@@ -55,6 +65,9 @@ function showData(){
 		    			this.isNumber=index;
 		    		}
 		    },
+		    loadingagain:function(){
+	   			window.location.reload();
+			},
 	    }
 	    
 	});
@@ -71,5 +84,4 @@ function orderDetail_success(){
 function orderDetail_error(errorData){
 	showErrorMessage([errorData.message])
 };
-
-   showData();
+//    showData();

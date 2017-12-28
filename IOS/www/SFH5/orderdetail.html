@@ -24,70 +24,87 @@
 	      <img src="image/sf_loading.gif" alt="loading" />
 	    </div>
 		<div id="orderDetail" >
+				<!--请求错误的反馈-->
+			<div v-if="isError===true" @click="loadingagain" class="errorimg">
+				<img src="image/errorbg.png" />
+				加载不成功，点击屏幕重新加载
+			</div>
+			<div v-else-if="isWiFi===true" class="errorimg" @click="loadingagain">
+				<img src="image/wifi.png" />
+				网络错误，点击屏幕重新加载
+			</div>
+			<!--请求反馈结束-->
+			<div v-else>
 				<div class="sf_wrap orderheader" > 
 					<section class="sf_ODheader">
 						<ul>
 							<li >
 								<span class="sf_Fbbg1"></span>
 								<span>订单生成</span>
-								<span><p>2017-10-10</p><p>05:00</p></span>
+								<span><p>{{order_dates.created_date}}</p></span>
 							</li>
 							<li >
-								<span class="sf_Fbbg2" v-if="datas.order_status === 'A'"></span>
+								<span class="sf_Fbbg2" v-if="order_dates.allocation_date===''"></span>
 								<span class="sf_Fbbg6" v-else></span>
-								<span>待派车</span>
-								<span v-if="datas.order_status !== 'A'"><p>2017-10-10</p><p>05:35</p></span>
+								<span  v-if="order_dates.allocation_date===''">待派车</span>
+								<span  v-else>已派车</span>
+								<span  v-show="order_dates.allocation_date!==''"><p>{{order_dates.allocation_date}}</p></span>
 							</li>
 							<li >
-								<span class="sf_Fbbg2" v-if="datas.order_status === 'B' || datas.order_status === 'A'"></span>
+								<span class="sf_Fbbg2" v-if="order_dates.deliver_date===''"></span>
 								<span class="sf_Fbbg6" v-else></span>
-								<span>待收货</span>
-								<span v-if="datas.order_status !== 'B' || datas.order_status !== 'A'"><p>2017-10-10</p><p>05:35</p></span>
+								<span  v-if="order_dates.deliver_date===''">待发货</span>
+								<span  v-else>已发货</span>
+								<span  v-show="order_dates.deliver_date!==''"><p>{{order_dates.deliver_date}}</p></span>
 							</li>
 							<li >
-								<span class="sf_Fbbg2" v-if="datas.order_status === 'B' || datas.order_status === 'A'"></span>
+								<span class="sf_Fbbg2" v-if="order_dates.receipt_date===''"></span>
 								<span class="sf_Fbbg6" v-else></span>
-								<span>待支付</span>
-								<span v-if="datas.order_status !== 'B' || datas.order_status !== 'A'"><p>2017-10-10</p><p>05:35</p></span>
+								<span  v-if="order_dates.receipt_date===''">待收货</span>
+								<span  v-else>已收货</span>
+								<span  v-show="order_dates.receipt_date!==''"><p>{{order_dates.receipt_date}}</p></span>
 							</li>
 							<li >
-								<span class="sf_Fbbg6" v-if="datas.order_status === 'F' "></span>
-								<span class="sf_Fbbg2" v-else></span>
-								<span>待评价</span>
-								<span v-if="datas.order_status === 'F' " ><p>2017-10-10</p><p>05:35</p></span>
+								<span class="sf_Fbbg2" v-if="order_dates.assess_date===''"></span>
+								<span class="sf_Fbbg6" v-else></span>
+								<span  v-if="order_dates.assess_date===''">待评价</span>
+								<span  v-else>已评价</span>
+								<span  v-show="order_dates.assess_date!==''"><p>{{order_dates.assess_date}}</p></span>
 							</li>
 							<li >
-								<span class="sf_Fbbg5" v-if="datas.order_status === 'F'"></span>
-								<span class="sf_Fbbg4" v-else></span>
-								<span>已完成</span>
-								<span v-if="datas.order_status === 'F'"><p>2017-10-10</p><p>05:35</p></span>
+								<span class="sf_Fbbg4" v-if="order_dates.assess_date===''"></span>
+								<span class="sf_Fbbg5" v-else></span>
+								<span  v-if="order_dates.assess_date===''">未完成</span>
+								<span  v-else>已完成</span>
+								<span  v-show="order_dates.assess_date!==''"><p>{{order_dates.assess_date}}</p></span>
 							</li>
 						</ul>
 					</section>
 				</div>
 				<div class="sf_wrap" id="sfCardetail">
 				<!--历史接单人开始-->
-				<div class="sf_divwrap hmyHiscontent"  >
+					<div class="sf_divwrap hmyHiscontent"  >
 					<div class="histroyWrap">
 						<span>接单人</span>
-						<!--<span>历史接单人<i></i></span>-->
+						<i></i>
 					</div>
-					<div class="hisCenter his_pt" >
+					<div class="hisCenter" >
 						<dl>
 							<dd class="hisCenterlist" v-for="(item,index) in carrierList">
 								<div v-on:click="isShow(item,index)"><p>{{item.order_date}}</p><span  :class="{active:isNumber===index}"></span></div>
 								<ul class="hisCenterlist_ul" v-show="isNumber===index">
 									<li v-for="(items,index) in carrierList[index].demand_info">
-										<a :href="'wy_Choice.html?GoodsId='+items.goods_id+',orderId='+items.order_id">
+										<a :href="'wy_OrderService.html?GoodsId='+items.cars_id+'&UserId='+items.order_user+'&OrderId='+items.order_id">
 											<div class="hisCenterlist_header" >
 												<img :src="appUrl+items.head_src" alt="货满运头像" v-if="item.head_src!==''"/>
 												<img src="image/header.png" alt="货满运头像" v-else/>
 												<span>{{items.user_name}}</span>
+												<!--<span><i class="yellow_color">已接受</i></span>-->
 											</div>
 											<div class="cartotal">
-												<span>{{items.car_count}}辆车</span>
+												<span>{{items.car_no}}</span>
 												<span>报价共</span>
-												<span>¥{{items.order_fee}}</span>
+												<span style="color: #e65c5c;">¥{{items.order_fee}}</span>
 											</div>
 										</a>
 									</li>
@@ -97,66 +114,7 @@
 					</div>
 				</div>
 				<!--历史接单人结束-->
-			</div>
-				<div class="sf_wrap" style="margin-bottom: 1rem;"> 
-					
-					<!--<div class="sf_divwrap">-->
-						<!--人物信息开始-->
-						<!--<div>
-							<div class="sf_w">
-								<div>
-									<div class="GDmanmews">
-										<span class="sf_imgheaderbig">
-											<img :src="datas.head_src" v-if="datas.head_src!==''" />
-											<img src="image/header.png"  v-else />
-										</span>
-										<span class="sf_imgheaderbignews">
-											<p class="sf_Fhtitle">发货人：<i class="">{{datas.delivery_by}}</i></p>
-											<span class="sf_Fhtitlephone"><i class="sf_iconphone" ></i>{{datas.delivery_mobile}}</span> 
-										</span>
-									</div>
-								</div>		
-							</div>	
-						</div>-->
-						<!--人物信息结束-->
-					<!--</div>-->
 				</div>
-				<!--<div class="sf_wrap" style="margin-bottom: 1rem;"> 
-					<img src="" alt="" />
-		
-					<div class="sf_divwrap">
-						<!--人物信息开始-->
-						<!--<div 	>
-							<div class="sf_w">								
-								<div  v-for ='(carrier,index ) in carrierList'>
-									<div v-on:click="carrierMessage(carrier.guid)">
-										<h1 class="sf_order_title">接单用户</h1>
-										<div class="GDmanmews" >
-											<span class="GDheaderImg">
-												<img :src="carrier.head_src" v-if="carrier.head_src!==''" />
-												<img src="image/header.png"  v-else />
-											</span>
-											<span class="GDheaderMx">
-												<p><span class="GDheaderName">{{carrier.order_user}}</span>发货：<i class="GDheaderNum">1</i>次</p>
-												<span class="sf_order_p"><i class="sf_order_i sf-icons_1" ></i>湘L WZ811</span>
-												<span class="sf_order_p" style="color:#e65c5c;"><i class="sf_order_i sf-icons_2" ></i>{{carrier.order_fee}}元/车</span>
-											</span>
-										</div>
-									</div>
-									<div class="sf_order_buts">
-										<span class="sf_order_span1" v-if="carrier.status === 'B'" v-on:click="orderCarOptionMethod('B',carrier)">接受</span>
-										<span class="sf_order_span1" v-else-if="carrier.status === 'A'">已接单</span>
-										<span class="sf_order_span1" v-else-if="carrier.status === 'C'">已取消</span>
-										<span class="sf_order_span1" v-else >已回绝</span>
-										
-										<span class="sf_order_span2" v-if="carrier.status === 'B'" v-on:click="orderCarOptionMethod('D',carrier)">拒绝</span>
-									</div>
-								</div>		
-							</div>	
-						</div>-->
-						<!--人物信息结束-->
-					<!--</div>
-				</div>-->
 				<div class="sf_wrap">
 					<div class="sf_divwrap">
 						<!--发车路线开始-->
@@ -165,14 +123,14 @@
 							<div>
 			                	<div>
 			                		<div class="icon_frombg"></div>
-				                    <p class="sftitle">
+				                    <p class="sftitle" >
 				                    	{{datas.from_province}}-{{datas.from_city}}-{{datas.from_district}}
 				                    </p>   
 				                </div>
 				                <div>
-				                	<div>
+				                	<div v-show="datas.from_address!==''">
 				                		<div class="icon_detailwarpbg"></div>
-					                    <p class="sftitle showfontcolor">
+					                    <p class="sftitle showfontcolor" >
 					                    	{{datas.from_address}}
 					                    </p> 
 				                	</div>
@@ -184,11 +142,12 @@
 				                	<div class="icon_tobg"></div>
 				                    <p class="sftitle2 " >{{datas.to_province}}-{{datas.to_city}}-{{datas.to_district}}</p>
 				                </div>
-				                <div >
+				                <div v-show="datas.to_address!==''">
 				                	<div class="icon_detailnormal"></div>
 				                    <p class="sftitle2 showfontcolor" >{{datas.to_address}}</p>
 				                </div>
 			               </div>		
+							<p class="Order_p">订单号：{{datas.order_no}}</p>
 						</div>
 						<!--发车路线结束-->
 						<!--货物类型选择-->
@@ -200,13 +159,13 @@
 						<!--车辆类型开始-->
 						<div class="sf_w">
 							<p class="sf_GDtitle">车辆需求</p>
-							<p ><span class="sf_GDlist" >{{datas.car_type}}</span><span class="sf_GDlist" >{{datas.car_long}}</span><span class="sf_GDlist">{{datas.car_count}}辆</span></p>
+							<p ><span class="sf_GDlist" v-show="datas.car_type!==''">{{datas.car_type}}</span><span class="sf_GDlist"  v-show="datas.car_long!=='0'">{{datas.car_long}}</span><span class="sf_GDlist" v-show="datas.car_count!==0">{{datas.car_count}}辆</span></p>
 						</div>
 						<!--车辆类型结束-->
 						<!--价格意向开始-->
 						<div class="sf_w">
 							<p class="sf_GDtitle">意向价格</p>
-							<p ><span class="sf_GDPrice" >{{datas.price}}元/车</span></p>
+							<p ><span class="sf_GDPrice" >{{datas.price}}<i class="sf_GDPrice" v-if="datas.price!==''&&datas.price!==null">元/车</i></span></p>
 						</div>
 						<!--价格意向结束-->
 						<!--装车时间开始-->
@@ -233,8 +192,20 @@
 							<p ><span class="sf_GDlist" >{{datas.attention_remark}}</span></p>
 						</div>
 						<!--备注结束-->
+						<!--查看司机开始-->
+						<div class="sf_w">
+							<p class="sf_GDtitle">用车需求</p>
+							<div v-for="cars in allocation_info">
+								<b class="flr carpai">{{cars.car_no}} / </b>
+								<ul class="carnumberstotal flr">
+									<li v-for="its in cars.driver_info"><p ><span class="sf_GDlist" v-cloak>{{its.driver_by}}</span><span  v-cloak ><a :href="its.driver_mobile" class="sf_GDphone">{{its.driver_mobile}}</a></span></p></li>
+								</ul>
+							</div>
+						</div>
+						<!--查看司机结束-->
 					</div>
-				</div>
+				</div>	
+			</div>
 		</div>
 		
 	</body>

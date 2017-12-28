@@ -32,6 +32,10 @@ static NSString *CarListCellReusedID = @"CarListCellReusedID";
     [self CreatDB];
     [self setNav];
     [self setupView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self requestCarList];
 }
 
@@ -41,12 +45,16 @@ static NSString *CarListCellReusedID = @"CarListCellReusedID";
 }
 
 - (void)requestCarList {
+    
+    [SFLoaddingView loaddingToView:self.view];
+    
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"UserId"] = USER_ID;
     [[SFNetworkManage shared] postWithPath:@"CarTeam/GetMyCarList"
                                     params:params
                                    success:^(id result)
     {
+        [self.dataArray removeAllObjects];
         for (NSMutableDictionary *dic in result) {
             SFCarListModel *model = [SFCarListModel mj_objectWithKeyValues:dic];
             SFAuthStatusModle *status = [SFAuthStatusModle mj_objectWithKeyValues:dic];
@@ -54,10 +62,20 @@ static NSString *CarListCellReusedID = @"CarListCellReusedID";
             [self.dataArray addObject:model];
         }
         
+        if (!self.dataArray.count) {
+            [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_NoMoreData) toView:_tableView reloadBlock:nil];
+            return ;
+        }
+        
+        
+        [SFLoaddingView dismiss];
         [_tableView reloadData];
         
     } fault:^(SFNetworkError *err) {
-        [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+        __weak typeof(self) weakSelf = self;
+        [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+            [weakSelf requestCarList];
+        }];
     }];
 }
 
@@ -100,56 +118,58 @@ static NSString *CarListCellReusedID = @"CarListCellReusedID";
 
 #pragma mark - UIAction
 - (void)addCar {
-//    SFAuthStatusModle *statusModel = [SFAccount currentAccount].authStatus;
-//    if (![statusModel.verify_status isEqualToString:@"B"]) { //审核中
-//        [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加车辆！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
-//        return;
-//    } else if ([statusModel.verify_status isEqualToString:@"F"]) {  //审核失败
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息未通过，请前往重新提交" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
-//
-//        __weak typeof(self)wself = self;
-//        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//
-//            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:[SFAccount currentAccount].authStatus];
-//            [wself.navigationController pushViewController:authView animated:YES];
-//
-//        }];
-//
-//        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
-//
-//        [alert addAction:action1];
-//        [alert addAction:action2];
-//        [self.navigationController presentViewController:alert animated:YES completion:^{}];
-//        return;
-//    } else if ([statusModel.verify_status isEqualToString:@"C"]) {  //未审核
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息尚未提交，请前往审核" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
-//
-//        __weak typeof(self)wself = self;
-//        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//
-//            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:[SFAccount currentAccount].authStatus];
-//            [wself.navigationController pushViewController:authView animated:YES];
-//
-//        }];
-//
-//        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
-//
-//        [alert addAction:action1];
-//        [alert addAction:action2];
-//        [self.navigationController presentViewController:alert animated:YES completion:^{}];
-//        return;
-//    }
-    
-    [self jumpToSFAuth:nil];
-    
-//    SFAddCarsViewController *addCar = [[SFAddCarsViewController alloc] init];
-//    [self.navigationController pushViewController:addCar animated:YES];
+    if ([SF_USER.verify_status isEqualToString:@"B"]) { //审核中
+        [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加车辆！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
+        return;
+    } else if ([SF_USER.verify_status isEqualToString:@"F"]) {  //审核失败
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息未通过，请前往重新提交" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
+
+        __weak typeof(self)wself = self;
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
+            [wself.navigationController pushViewController:authView animated:YES];
+
+        }];
+
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self.navigationController presentViewController:alert animated:YES completion:^{}];
+        return;
+    } else if ([SF_USER.verify_status isEqualToString:@"D"]) {
+        //审核成功
+        [self jumpToSFAuth:nil];
+    } else {  //未审核
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息尚未提交，请前往审核" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        __weak typeof(self)wself = self;
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
+            [wself.navigationController pushViewController:authView animated:YES];
+            
+        }];
+        
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self.navigationController presentViewController:alert animated:YES completion:^{}];
+        return;
+    }
 }
 
 - (void)SFCarListCell:(SFCarListCell *)cell didSelectedOptionsWithIndex:(NSInteger)index {
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     if (index == 0) {
-        [self deletedCar:cell.model withIndexPath:indexPath];
+        if ([cell.model.verify_status isEqualToString:@"D"]) {
+            //认证成功
+            [self jumpToSFAuth:cell.model];
+        } else {
+            [self deletedCar:cell.model withIndexPath:indexPath];
+        }
     } else {
         if ([cell.model.verify_status isEqualToString:@"D"]) {
             //认证成功

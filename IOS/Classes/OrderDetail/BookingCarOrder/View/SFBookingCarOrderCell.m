@@ -70,8 +70,36 @@
 - (void)setModel:(SFBookingCarModel *)model {
     _model = model;
     
-    _message1.text = [NSString stringWithFormat:@"%@ %@ %@辆",model.car_Type,model.car_Long,model.car_Count];
-    _message2.text = [NSString stringWithFormat:@"%@吨 %@方  %@元/车",model.good_weight,model.good_size,model.price];
+    NSString *carType;
+    if (model.car_type.length) {
+        carType = model.car_type;
+    } else {
+        carType = @"任意车类型";
+    }
+    
+    NSString *carLong;
+    if (model.car_long.length) {
+        carLong = model.car_long;
+    } else {
+        carLong = @"任意车长";
+    }
+    
+    NSString *carWeight;
+    if (model.car_weight.length) {
+        carWeight = model.car_weight;
+    } else {
+        carWeight = @"0";
+    }
+    
+    NSString *carSize;
+    if (model.car_size.length) {
+        carSize = model.car_size;
+    } else {
+        carSize = @"0";
+    }
+    
+    _message1.text = [NSString stringWithFormat:@"%@ %@ %@辆",carType,carLong,model.car_count];
+    _message2.text = [NSString stringWithFormat:@"%@吨 %@方  %@元/车",carWeight,carSize,model.car_fee];
     
 }
 

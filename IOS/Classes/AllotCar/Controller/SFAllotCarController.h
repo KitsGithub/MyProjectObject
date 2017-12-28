@@ -8,8 +8,12 @@
 
 #import "BaseViewController.h"
 
+typedef void(^ReturnBlock)(void);
+
 @interface SFAllotCarController : BaseViewController
 
 @property (nonatomic, copy) NSString *orderId;
+
+@property (nonatomic, copy) ReturnBlock returnBlock;
 
 @end

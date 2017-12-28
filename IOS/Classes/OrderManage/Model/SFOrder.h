@@ -12,12 +12,6 @@
 @interface SFOrder : NSObject<SfOrderProtocol>
 
 
-//"guid": "0b192294-bf9d-11e7-8e38-005056b66c79",（订单id）
-//"order_no": "20171102000005",（单据编号）
-//"goods_owner": "linje",（货主）
-//"cars_owner": "广东广运运输有限公司",（车主）
-//"order_date": "2017-11-02T15:12:05",（下单时间）
-//"order_status": "A"（订单状态）
 @property (nonatomic,copy)NSString *cars_owner;
 @property (nonatomic,copy)NSString *goods_owner;
 @property (nonatomic,copy)NSString *to_district;
@@ -53,8 +47,10 @@
 @property (nonatomic,copy)NSString *delivery_by;
 @property (nonatomic,copy)NSString *guid;
 @property (nonatomic,copy)NSString *goods_order;
+@property (nonatomic,copy)NSString *cars_order;
 @property (nonatomic,copy)NSString *issue_by;
 @property (nonatomic,copy)NSString *order_fee;
+@property (nonatomic,copy)NSString *order_date;
 
 - (NSArray *)statusCodeArr;
 - (NSArray *)statusDescArr;

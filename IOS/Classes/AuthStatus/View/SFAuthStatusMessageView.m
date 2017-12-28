@@ -117,6 +117,7 @@
 }
 
 - (void)carOwner {
+    _name.placeholder = @"请输入司机姓名";
     _phone.placeholder = @"请输入司机的电话号码";
     _idNum.placeholder = @"请输入身份证号码";
     _carId.placeholder = @"请输入驾驶证号";

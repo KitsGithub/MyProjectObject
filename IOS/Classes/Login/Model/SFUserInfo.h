@@ -58,6 +58,11 @@
 @property (nonatomic, copy) NSString *sex;
 
 /**
+ 接单数
+ */
+@property (nonatomic, assign) NSNumber *accept_count;
+
+/**
  大头像
  */
 @property (nonatomic, copy) NSString *big_head_src;

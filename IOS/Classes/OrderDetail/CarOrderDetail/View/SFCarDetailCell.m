@@ -65,7 +65,7 @@
     _model = model;
     _name.text = model.car_no;
     _carType.text = [NSString stringWithFormat:@"%@ %@",model.car_type,model.car_long];
-    if ([model.order_fee isEqualToString:@"面议"]) {
+    if ([model.order_fee isEqualToString:@"面议"] || !model.order_fee.length) {
         _price.text = model.order_fee;
     } else {
         _price.text = [NSString stringWithFormat:@"%@元/车",model.order_fee];

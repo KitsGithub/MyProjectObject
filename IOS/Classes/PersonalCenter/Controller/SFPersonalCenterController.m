@@ -13,6 +13,7 @@
 #import "SFMyDriverListController.h"
 #import "SFCarListViewController.h"
 #import "SFPersonSettingController.h"
+#import "MessageCenterController.h"
 
 //自定义控件
 #import "SFPersonalNavBar.h"
@@ -40,6 +41,7 @@ static CGFloat maxDistance = 200;
     
     //认证备注
     NSString *_verify_remark;
+    SFPersonalCenterHeaderView *_headerView;
 }
 
 - (void)viewDidLoad {
@@ -53,6 +55,11 @@ static CGFloat maxDistance = 200;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self requestUnreadMessage];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -62,6 +69,8 @@ static CGFloat maxDistance = 200;
 - (void)addNotification {
     //认证状态改变通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(identiflyStatusChange:) name:SF_Identifly_StatusChangeN object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoChange) name:SF_USER_MESSAGECHANGE_N object:nil];
 }
 
 
@@ -75,6 +84,12 @@ static CGFloat maxDistance = 200;
     }
 }
 
+- (void)UserInfoChange {
+    [_headerView reloadData];
+}
+
+
+
 
 /**
  登出
@@ -82,26 +97,70 @@ static CGFloat maxDistance = 200;
 
 - (void)logout {
     [SF_USER clearUserInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SF_LOGOUT_SUCCESS_N object:nil];
+    
     [[[SFTipsView alloc] init] showSuccessWithTitle:@"退出成功"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
-// 获取当前用户的信誉认证状态
+/**
+ 请求未读消息
+ */
+- (void)requestUnreadMessage {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    [[SFNetworkManage shared] postWithPath:@"Account/GetVerfiyInfo"
+                                    params:params
+                                   success:^(id result)
+    {
+        if (result) {
+            NSNumber *unreadCount = result[@"msg_count"];
+            if (![unreadCount isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                [_navBar setUnreadMessage];
+            }
+            
+            SFUserInfo *info = SF_USER;
+            NSString *verfiy_status = result[@"verfiy_status"];
+            if (verfiy_status.length) {
+                info.verify_status = verfiy_status;
+            }
+            
+            
+            NSNumber *accept_count = result[@"accept_count"];
+            info.accept_count = accept_count;
+            
+            [info saveUserInfo];
+            [_headerView reloadData];
+            
+        }
+        
+        
+    } fault:^(SFNetworkError *err) {
+        
+    }];
+}
+
+
+/**
+ 更新用户认证状态
+ */
 - (void)getCertificationInfo {
-    
     _verify_remark = SF_USER.authStatus.verify_remark;
     
-    SFUserInfo *account = SF_USER;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
     [[SFNetworkManage shared] postWithPath:@"Certificate/GetCertificateInfo"
-                                    params:@{
-                                             @"UserId" : account.user_id
-                                             }
+                                    params:params
                                    success:^(id result)
     {
         SFAuthStatusModle *auth = [SFAuthStatusModle mj_objectWithKeyValues:result];
-        SF_USER.authStatus = auth;
         
+        SFUserInfo *info = SF_USER;
+        info.authStatus = auth;
+        info.verify_status = auth.verify_status;
+        [info saveUserInfo];
         
         _verify_remark = auth.statusDesc;
         self.authStatus  = auth;
@@ -110,6 +169,8 @@ static CGFloat maxDistance = 200;
         } else if (SF_USER.role == SFUserRoleGoodsownner) {
             [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
         }
+        
+        [_headerView reloadData];
 
     } fault:^(SFNetworkError *err) {
 
@@ -125,14 +186,14 @@ static CGFloat maxDistance = 200;
     self.fd_prefersNavigationBarHidden = YES;
     _bjView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.5)];
     _bjView.clipsToBounds = YES;
-    _bjView.contentMode = UIViewContentModeTop;
+    _bjView.contentMode = UIViewContentModeScaleToFill;
     [_bjView setImage:[UIImage imageNamed:@"Personal_BJ"]];
     [self.view addSubview:_bjView];
     
     CGFloat scale = 335.0 / 191.0;
     CGFloat contentHeight = (SCREEN_WIDTH - 40) / scale;
-    SFPersonalCenterHeaderView *headerView = [[SFPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, contentHeight + 64 + 30 + STATUSBAR_HEIGHT)];
-    headerView.backgroundColor = [UIColor clearColor];
+    _headerView = [[SFPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, contentHeight + 64 + 30 + STATUSBAR_HEIGHT)];
+    _headerView.backgroundColor = [UIColor clearColor];
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -140,7 +201,7 @@ static CGFloat maxDistance = 200;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.tableHeaderView = headerView;
+    _tableView.tableHeaderView = _headerView;
     [self.view addSubview:_tableView];
     
 #ifdef __IPHONE_11_0
@@ -178,7 +239,8 @@ static CGFloat maxDistance = 200;
 }
 
 - (void)SFPersonalNavBar:(SFPersonalNavBar *)navBar didClickMessageButton:(UIButton *)messageButton {
-    NSLog(@"消息按钮");
+    MessageCenterController *message = [[MessageCenterController alloc] init];
+    [self.navigationController pushViewController:message animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

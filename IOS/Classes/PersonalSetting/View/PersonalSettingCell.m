@@ -51,12 +51,10 @@
     
     _headerView = [UIImageView new];
     _headerView.hidden = YES;
+    _headerView.image = [UIImage imageNamed:@"Default_Head"];
     _headerView.clipsToBounds = YES;
     _headerView.layer.cornerRadius = 19;
-    _headerView.backgroundColor = RandomColor;
     [self addSubview:_headerView];
-    
-    [_headerView sd_setImageWithURL:[NSURL URLWithString:SF_USER.small_head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
     
     _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PersonalCenter_arrow"]];
     [self addSubview:_arrowImage];
@@ -76,6 +74,10 @@
 - (void)setDetailStr:(NSString *)detailStr {
     _detailLabel.text = detailStr;
     [self setNeedsLayout];
+}
+
+- (void)setImageURL:(NSString *)imageURL {
+    [_headerView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
 }
 
 - (void)setShowArrowImage:(BOOL)showArrowImage {

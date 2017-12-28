@@ -13,7 +13,6 @@
 #import "SFOtherPickerView.h"
 
 @interface SFCarDemandViewController () <SFSinglePickerProtocol>
-@property (nonatomic, strong) NSMutableArray <NSString *>*CarTypeArray;
 @property (nonatomic, strong) NSMutableArray <NSString *>*CarLongArray;
 @end
 
@@ -77,41 +76,31 @@
     NSString *carType;
     if (_carType.inputStr.length) {
         carType = _carType.inputStr;
-    } else {
-        carType = @"任意车型";
     }
     
     NSString *carLong;
     if (_carLong.inputStr.length) {
         carLong = _carLong.inputStr;
-    } else {
-        carLong = @"任意车长";
     }
     
     
     NSString *carWight;
     if (_goodWeight.inputStr.length) {
         carWight = _goodWeight.inputStr;
-    } else {
-        carWight = @"0";
     }
     
     NSString *carSize;
     if (_goodSize.inputStr.length) {
         carSize = _goodSize.inputStr;
-    } else {
-        carSize = @"0";
     }
     
-    
-    
     SFBookingCarModel *model = [SFBookingCarModel new];
-    model.car_Type = carType;
-    model.car_Long = carLong;
-    model.car_Count = carCount;
-    model.good_weight = carWight;
-    model.good_size = carSize;
-    model.price = price;
+    model.car_type = carType;
+    model.car_long = carLong;
+    model.car_count = carCount;
+    model.car_weight = carWight;
+    model.car_size = carSize;
+    model.car_fee = price;
     
     if (self.returnBlock) {
         self.returnBlock(model);
@@ -172,7 +161,7 @@
     [_carType setAction:^(SFAddCarView *view) {
         [weakSelf.view endEditing:YES];
         [view animation];
-        SFOtherPickerView *picker = [[SFOtherPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) withResourceArray:weakSelf.CarTypeArray];
+        SFOtherPickerView *picker = [[SFOtherPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) withResourceArray:weakSelf.carTypeArray];
         picker.delegate = weakSelf;
         picker.title = @"请选择车辆类型";
         picker.tag = 1;
@@ -224,24 +213,24 @@
     
     
     if (self.bookingModel) {
-        if (![self.bookingModel.car_Type isEqualToString:@"任意车型"]) {
-            [_carType setTitleWithStr:self.bookingModel.car_Type];
+        if (![self.bookingModel.car_type isEqualToString:@"任意车型"]) {
+            [_carType setTitleWithStr:self.bookingModel.car_type];
         }
         
-        if (![self.bookingModel.car_Long isEqualToString:@"任意车长"]) {
-            [_carLong setTitleWithStr:self.bookingModel.car_Long];
+        if (![self.bookingModel.car_long isEqualToString:@"任意车长"]) {
+            [_carLong setTitleWithStr:self.bookingModel.car_long];
         }
         
-        if (![self.bookingModel.good_weight isEqualToString:@"0"]) {
-            [_goodWeight setTitleStr:self.bookingModel.good_weight];
+        if (![self.bookingModel.car_weight isEqualToString:@"0"]) {
+            [_goodWeight setTitleStr:self.bookingModel.car_weight];
         }
         
-        if (![self.bookingModel.good_size isEqualToString:@"0"]) {
-            [_goodSize setTitleStr:self.bookingModel.good_size];
+        if (![self.bookingModel.car_size isEqualToString:@"0"]) {
+            [_goodSize setTitleStr:self.bookingModel.car_size];
         }
         
-        [_carCount setTitleStr:self.bookingModel.car_Count];
-        [_price setTitleStr:self.bookingModel.price];
+        [_carCount setTitleStr:self.bookingModel.car_count];
+        [_price setTitleStr:self.bookingModel.car_fee];
     }
     
     
@@ -257,22 +246,6 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (NSMutableArray<NSString *> *)CarTypeArray {
-    if (!_CarTypeArray) {
-        _CarTypeArray  = [NSMutableArray arrayWithObjects:@"保温车",@"平板车",@"飞翼车",@"半封闭车", @"危险品车",@"集装车",@"敞篷车",@"金杯车",@"自卸货车",@"高低板车",@"高栏车",@"冷藏车",@"厢式车", nil];
-    }
-    return _CarTypeArray;
-}
 
 - (NSMutableArray<NSString *> *)CarLongArray {
     if (!_CarLongArray) {

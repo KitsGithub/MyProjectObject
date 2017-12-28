@@ -10,6 +10,8 @@
 
 @interface SFDriverSignAlerView : UIView
 
+@property (nonatomic, copy) NSString *loactionStr;
+
 - (void)showAnimation;
 - (void)hiddenAnimation;
 

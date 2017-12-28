@@ -101,6 +101,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.setTableViewCell) {
+        return self.setTableViewCell(tableView, indexPath);
+    }
     SFOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFOrderTableViewCell" forIndexPath:indexPath];
     id<SfOrderProtocol> model = self.dataArray[indexPath.row];
     cell.model  = model;

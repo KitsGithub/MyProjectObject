@@ -11,7 +11,7 @@
 @interface PersonalSettingCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *titleStr;
-
+@property (nonatomic, copy) NSString *imageURL;
 @property (nonatomic, copy) NSString *detailStr;
 
 @property (nonatomic, assign) BOOL showHeaderView;

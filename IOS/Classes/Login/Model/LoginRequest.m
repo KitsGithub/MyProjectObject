@@ -31,7 +31,7 @@
     } fault:fault];
 }
 
-+ (void)registWithAccount:(NSString *)account pwd:(NSString *)pwd mobile:(NSString *)mobile role:(SFUserRole)role succuss:(SFLoginresultBlock)succuss fault:(SFErrorResultBlock)fault
++ (void)registWithAccount:(NSString *)account pwd:(NSString *)pwd mobile:(NSString *)mobile role:(SFUserRole)role code:(NSString *)code succuss:(SFLoginresultBlock)succuss fault:(SFErrorResultBlock)fault
 {
     if (!account || !pwd || mobile == nil || role == SFUserRoleUnknown) {
         SFNetworkError *err = [[SFNetworkError alloc] initWithDomain:@"参数不完整" code:505 userInfo:nil];
@@ -41,13 +41,21 @@
     if (pwd.length  < 16) {
         pwd  = [pwd md5String];
     }
-    NSDictionary *param = @{
-                            @"account":account,
-                            @"password":pwd,
-                            @"mobile":mobile,
-                            @"role_type":SF_USER.role_type
-                            };
-    [[SFNetworkManage shared] postWithPath:@"account/Reg" params:param success:^(NSDictionary *result) {
+    
+    NSString *roleType;
+    if (role == SFUserRoleCarownner) {
+        roleType = @"Car";
+    } else {
+        roleType = @"Goods";
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"account"] = account;
+    params[@"password"] = pwd;
+    params[@"mobile"] = mobile;
+    params[@"role_type"] = roleType;
+    params[@"reg_valid"] = code;
+    [[SFNetworkManage shared] postWithPath:@"account/Reg" params:params success:^(NSDictionary *result) {
         SFUserInfo *account = [SFUserInfo mj_objectWithKeyValues:result];
         succuss(account);
     } fault:fault];

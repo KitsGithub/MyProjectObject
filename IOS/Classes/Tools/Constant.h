@@ -26,17 +26,24 @@
 
 #else //开发环境
 
-//测试服务器环境
-//#define Default_URL @"http://172.16.100.147/lisapi/api"
-//#define Resource_URL @"http://172.16.100.147/devlis"
-////上传资源服务器域名
-//#define UploadResouce_URL @"http://172.16.100.147/devlis/api"
 
-//本地服务器环境
-#define Default_URL  @"http://192.168.112.44/lisapi/api"
-#define Resource_URL @"http://192.168.112.160:66"
-//上传资源服务器域名
-#define UploadResouce_URL @"http://192.168.112.160:66/api"
+//测试服务器环境
+#define Default_URL @"http://172.16.100.147/lisapi/api"
+#define Resource_URL @"http://172.16.100.147/devlis"
+////上传资源服务器域名
+#define UploadResouce_URL @"http://172.16.100.147/devlis/api"
+
+/*李鑫本地服务器*/
+//#define Default_URL @"http://192.168.112.160/"
+
+/*刘军本地服务器*/
+//#define Default_URL @"http://192.168.112.45:8080/api"
+
+/* 林加尔本地服务器 */
+//#define Default_URL  @"http://192.168.112.44/lisapi/api"
+//#define Resource_URL @"http://192.168.112.160:66"
+////上传资源服务器域名
+//#define UploadResouce_URL @"http://192.168.112.160:66/api"
 
 #endif
 

@@ -92,13 +92,18 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
 
 - (void)addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:SF_LOGIN_SUCCESS_N object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess) name:SF_LOGOUT_SUCCESS_N object:nil];
 }
 
 - (void)loginSuccess {
     self.goodsListPageControl = self.carListPageControl = 1;
-    
     [self requestList:self.goodsListPageControl];
     [self getCarList:self.carListPageControl];
+}
+
+- (void)logoutSuccess {
+    
 }
 
 #pragma mark - 网络请求
@@ -261,13 +266,14 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
         [self presentViewController:nav animated:YES completion:^{}];
         return;
     }
-//    if (self.resourceType == Resource_Order && account.role == SFUserRoleGoodsownner) {
-//        [[[SFTipsView alloc] init] showFailureWithTitle:@"货主不能预订货物"];
-//        return;
-//    } else if (self.resourceType == Resource_Car && account.role == SFUserRoleCarownner) {
-//        [[[SFTipsView alloc] init] showFailureWithTitle:@"车主不能预订车辆"];
-//        return;
-//    }
+    
+    if (self.resourceType == Resource_Order && account.role == SFUserRoleGoodsownner) {
+        [[[SFTipsView alloc] init] showFailureWithTitle:@"货主不能预订货物"];
+        return;
+    } else if (self.resourceType == Resource_Car && account.role == SFUserRoleCarownner) {
+        [[[SFTipsView alloc] init] showFailureWithTitle:@"车主不能预订车辆"];
+        return;
+    }
     
     BaseViewController *ToVc;
     if (self.resourceType == Resource_Order) {
@@ -290,7 +296,7 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
 }
 
 - (void)setupBanner {
-    SDCycleScrollView *cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:[UIImage new]];
+    SDCycleScrollView *cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 170) delegate:self placeholderImage:[UIImage new]];
     cycleView.localizationImageNamesGroup = @[@"Banner_Driver"];
     cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     cycleView.currentPageDotColor = THEMECOLOR;
@@ -306,11 +312,11 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
     __weak typeof(self) weakSelf = self;
     
     //tableView初始化
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     
     _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (weakSelf.resourceType == Resource_Order) {
@@ -336,6 +342,10 @@ static NSString *HomeViewCellReusedID = @"HomeViewCellReusedID";
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        
+        _tableView.estimatedRowHeight = 0;
+        _tableView.estimatedSectionHeaderHeight = 10;
+        _tableView.estimatedSectionFooterHeight = 0;
     } else {
         // Fallback on earlier versions
         self.automaticallyAdjustsScrollViewInsets = NO;

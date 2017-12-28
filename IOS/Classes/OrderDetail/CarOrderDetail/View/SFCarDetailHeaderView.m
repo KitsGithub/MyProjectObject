@@ -50,6 +50,9 @@
 }
 
 - (void)setModel:(SFCarOrderDetailModel *)model {
+    
+    [_userV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Resource_URL,model.head_src]] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    
     _address.fromAddress = [NSString stringWithFormat:@"%@-%@-%@",model.from_province,model.from_city,model.from_district];
     _address.fromDistrict = model.from_address;
     

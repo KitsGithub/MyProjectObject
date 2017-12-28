@@ -3,11 +3,11 @@
 // 	UserId :"88383c70-f27b-43cc-98a5-d073a67de55",
 //	CarId:"a30e7b8c-b9fd-4766-a214-55688afca4b9"
 //};
-   var orderId;
+// var orderId;
    
    //原生调用暂存的方法
 function rendCardetail(){
-		justCar();	    
+		justCar("B");	    
 }
 
 
@@ -29,12 +29,12 @@ function appendCarNumber(datas){
 	var html="";
 	if(jQuery.isArray(datas)){
 		for(var i=0; i<datas.length;i++){
-			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+datas[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+datas[i].car_type+'</span><span>'+datas[i].car_long+'米  </span><span>'+datas[i].dead_weight+'吨  </span><span>'+datas[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas[i].order_fee+'"  value= "'+datas[i].order_fee+'"  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
+			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+datas[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+datas[i].car_type+'</span><span>'+datas[i].car_long+' </span><span>'+datas[i].dead_weight+'</span><span>'+datas[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas[i].order_fee+'"  value= "'+datas[i].order_fee+'"  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
 		}
 	}else{
 		var data =datas.message;
 		for(var i=0; i<data.length;i++){
-			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+data[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+data[i].car_type+'</span><span>'+data[i].car_long+'米  </span><span>'+data[i].dead_weight+'吨  </span><span>'+data[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas.price+'"  value= ""  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
+			html+='<li><div><i class="iconcar"></i><span class="carNumber">'+data[i].car_no+'</span><i class="iconcloose" onclick="closeCar(this)"></i></div><div><span>'+data[i].car_type+'</span><span>'+data[i].car_long+' </span><span>'+data[i].dead_weight+'</span><span>'+data[i].car_size+'方</span></div><div><input type="text" placeholder="'+datas.price+'"  value= ""  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" /><i class="iconprice"></i></div></li>'
 		}
 	}
 	$("#carWraps").append(html);
@@ -68,7 +68,7 @@ function closeCar(obj){
 
 
 ////点击立即发布
-function justCar(){
+function justCar(toAB){
 	//出发城市
 	var sf_fromAdd=$("#sf_fromAdd");
 	var input_from_detail = $("#input_from_detail");
@@ -105,15 +105,22 @@ function justCar(){
 		}
 		var fromObj = toCityObj($("#sf_fromAdd").val()); 
 		var toObj   = toCityObj($("#toAddress").val());	
-		var carsmodel = CarsModel(fromObj,toObj);
-		releaseCarnews(carsmodel);
+		var carsmodel = CarsModel(fromObj,toObj,toAB);
+		if (toAB == "B") {
+			releaseCarnews(carsmodel,"暂存成功","暂存失败");
+		} else {
+			releaseCarnews(carsmodel,"发布成功","发布失败");
+		};
+		
 	}
 };
 
 
 
 //点立即发布，发送数据给后台
-function releaseCarnews(datas){
+function releaseCarnews(datas,message,errorMessage){
+	$(".contents").css("display","none");
+	$("#appLoading").css("display","block");
 	$.ajax({
 	        url: appURL+"/Cars/IssueCarOrder",
 	        type: "post",
@@ -122,19 +129,22 @@ function releaseCarnews(datas){
 	        success: function (data) {
 	            console.log(data);
 	            if(data.Code!=1){
-		            showSuccessMessage("发布成功");
+		            showSuccessMessage(message);
 		            if (!orderId.length) {
 		            	navigation.dismiss(null,null);
 		            } else {
 		            	navigation.pop(null,null);
 		            };
 	            }else{
-	            	showErrorMessage("发布失败");
+	            	showErrorMessage(errorMessage);
 	            };
-	            
+	            $(".contents").css("display","block");
+				$("#appLoading").css("display","none");
 	        },
 	        error: function (error) {
-	            showErrorMessage("发布失败")
+	            showErrorMessage(errorMessage);
+	             $(".contents").css("display","block");
+				$("#appLoading").css("display","none");
 	        }
 		});
 }
@@ -170,12 +180,12 @@ function temporaryDetail(data,cars_info){
 		var input_remark = $("#input_remark").val(data.car_remark);
 		
 		//去掉默认值
-		var sf_fromAddPlac=$("#sf_fromAdd").attr("placeholder","");
-		var input_from_detailPlac =  $("#input_from_detail").attr("placeholder","");;
-		
-		var toAddressPlac=$("#toAddress").attr("placeholder","");;
-		var input_to_detailPlac = $("#input_to_detail").attr("placeholder","");;
-		var input_remarkPlac = $("#input_remark").attr("placeholder","");;
+//		var sf_fromAddPlac=$("#sf_fromAdd").attr("placeholder","");
+//		var input_from_detailPlac =  $("#input_from_detail").attr("placeholder","");;
+//		
+//		var toAddressPlac=$("#toAddress").attr("placeholder","");;
+//		var input_to_detailPlac = $("#input_to_detail").attr("placeholder","");;
+//		var input_remarkPlac = $("#input_remark").attr("placeholder","");;
 		
 		appendCarNumber(cars_info);	
 }

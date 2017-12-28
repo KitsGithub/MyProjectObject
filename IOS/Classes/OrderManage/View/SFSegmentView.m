@@ -104,6 +104,9 @@
 - (void)setCurrentIndex:(NSInteger)currentIndex
 {
     _currentIndex  = currentIndex;
+    if (self.selectedBlock) {
+        self.selectedBlock(currentIndex);
+    }
     [self updateAnimotion];
 }
 

@@ -86,8 +86,8 @@
     NSString *carId = _messageView.textField4;
     NSDictionary *imageDic = [_showImageView getImageArray];
     
-    NSData *DrivingCardA = imageDic[@"机动车行驶证正面"];
-    NSData *DrivingCardB = imageDic[@"机动车行驶证背面"];
+    NSData *DrivingCardA = imageDic[@"行驶证主页"];
+    NSData *DrivingCardB = imageDic[@"行驶证副页"];
     NSData *LifePic = imageDic[@"生活照"];
     
     if (![name length]) {
@@ -105,14 +105,17 @@
     if (![carId length]) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入驾驶证号"];
         return;
+    } else if (carId.length != 18){
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的驾驶证号"];
+        return;
     }
     
     if (!DrivingCardA) {
-        [[SFTipsView shareView] showFailureWithTitle:@"请上传机动车行驶证正面图片"];
+        [[SFTipsView shareView] showFailureWithTitle:@"请上传行驶证主页图片"];
         return;
     }
     if (!DrivingCardB) {
-        [[SFTipsView shareView] showFailureWithTitle:@"请上传机动车行驶证背面图片"];
+        [[SFTipsView shareView] showFailureWithTitle:@"请上传行驶证副页图片"];
         return;
     }
     if (!LifePic) {
@@ -156,7 +159,6 @@
 - (void)authCar {
     
     NSMutableDictionary *params = [_carMessageView getCarMessageJson];
-    NSLog(@"%zd",params.allKeys.count)
     if (!params.allKeys.count) {
         return;
     }
@@ -164,19 +166,19 @@
     NSDictionary *imageDic = [_showImageView getImageArray];
     
     
-    NSData *DrivingCardA = imageDic[@"机动车行驶证正面"];
-    NSData *DrivingCardB = imageDic[@"机动车行驶证背面"];
+    NSData *DrivingCardA = imageDic[@"行驶证主页"];
+    NSData *DrivingCardB = imageDic[@"行驶证副页"];
     NSData *CarPicA = imageDic[@"车头照"];
     NSData *CarPicB = imageDic[@"车侧照"];
     NSData *CarPicC = imageDic[@"车尾照"];
     
     
     if (!DrivingCardA) {
-        [[SFTipsView shareView] showFailureWithTitle:@"请上传机动车行驶证正面图片"];
+        [[SFTipsView shareView] showFailureWithTitle:@"请上传行驶证主页图片"];
         return;
     }
     if (!DrivingCardB) {
-        [[SFTipsView shareView] showFailureWithTitle:@"请上传机动车行驶证背面图片"];
+        [[SFTipsView shareView] showFailureWithTitle:@"请上传行驶证副页图片"];
         return;
     }
     if (!CarPicB) {
@@ -261,9 +263,9 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"UserId"] = SF_USER.user_id;
     params[@"Name"]  = name;
-    params[@"IDCard"] = cid;
+    params[@"IdNo"] = cid;
     
-    NSString *path = SF_USER.role == SFUserRoleCarownner ? @"ApiCertificate/AddCarCertificate" : @"ApiCertificate/AddGoodsCertificate";
+    NSString *path = SF_USER.role == SFUserRoleCarownner ? @"/Certificate/AddCarCertificate" : @"/Certificate/AddGoodsCertificate";
     
     [SVProgressHUD show];
     [[SFNetworkManage shared] postWithPath:path params:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -284,6 +286,12 @@
         
         //审核状态改变通知
         [[NSNotificationCenter defaultCenter] postNotificationName:SF_Identifly_StatusChangeN object:nil];
+        
+        //更改用户认证状态
+        SFUserInfo *info = SF_USER;
+        info.verify_status = @"B";
+        [info saveUserInfo];
+        
         
         [[SFTipsView shareView] showSuccessWithTitle:@"提交成功，请耐心等待审核"];
         self.isSaved  = YES;
@@ -348,6 +356,63 @@
 }
 
 - (void)setup {
+    if (self.type == SFAuthTypeUser && SF_USER.role == SFUserRoleCarownner) {
+        [self setCustomTitle:@"信誉认证"];
+    } else if (self.type == SFAuthTypeUser && SF_USER.role == SFUserRoleGoodsownner) {
+        [self setCustomTitle:@"信誉认证"];
+    } else if (self.type == SFAuthTypeCar) {
+        [self setCustomTitle:@"车辆认证"];
+    } else if (self.type == SFAuthTypeCarOwnner) {
+        [self setCustomTitle:@"司机认证"];
+    }
+
+    UIView *messageLabel;
+    if (self.type == SFAuthTypeCarOwnner) {
+        messageLabel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 54)];
+        messageLabel.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        [self.view addSubview:messageLabel];
+        
+        UILabel *label = [UILabel new];
+        label.text = @"您所上传的所有信息都将用于核实您的身份，不会向任何第三方泄露，请放心上传。";
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = [UIColor colorWithHexString:@"#666666"];
+        label.numberOfLines = 0;
+        CGSize textSize = [label.text sizeWithFont:FONT_COMMON_14 maxSize:CGSizeMake(SCREEN_WIDTH - 40, MAXFLOAT)];
+        label.frame = CGRectMake(20, (CGRectGetHeight(messageLabel.frame) - textSize.height) * 0.5, textSize.width, textSize.height);
+        [messageLabel addSubview:label];
+    }
+    
+    
+    if (self.type == SFAuthTypeUser) {
+        messageLabel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 54)];
+        messageLabel.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        [self.view addSubview:messageLabel];
+        
+        UILabel *label = [UILabel new];
+        NSString *textStr;
+        NSString *target;
+        if (SF_USER.role == SFUserRoleCarownner) {
+            textStr = @"您当前的身份为车主，如果身份不符请重新注册";
+            target = @"车主";
+        } else {
+            textStr = @"您当前的身份为货主，如果身份不符请重新注册";
+            target = @"货主";
+        }
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:textStr];
+        [attStr setAttributes:@{NSForegroundColorAttributeName : THEMECOLOR} range:[textStr rangeOfString:target]];
+        label.attributedText = attStr;
+        
+        
+        label.numberOfLines = 0;
+        CGSize textSize = [textStr sizeWithFont:FONT_COMMON_14 maxSize:CGSizeMake(SCREEN_WIDTH - 40, MAXFLOAT)];
+        label.frame = CGRectMake(20, (CGRectGetHeight(messageLabel.frame) - textSize.height) * 0.5, textSize.width, textSize.height);
+        [messageLabel addSubview:label];
+    }
+    
+    
     __weak typeof(self) weakSelf = self;
     self.edittingEnable = NO;
     if ([self.statusModel.verify_status isEqualToString:@"C"] || [self.statusModel.verify_status isEqualToString:@"F"] || !self.statusModel || self.statusModel.verify_status == nil ) {
@@ -360,7 +425,7 @@
     } else {
         height = 54;
     }
-    SFAuthIdentflyTipsView *identflyTipsView = [[SFAuthIdentflyTipsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+    SFAuthIdentflyTipsView *identflyTipsView = [[SFAuthIdentflyTipsView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(messageLabel.frame), SCREEN_WIDTH, height)];
     identflyTipsView.statusModel = self.statusModel;
     [self.view addSubview:identflyTipsView];
     
@@ -381,8 +446,8 @@
         
     } else {
         _messageView = [[SFAuthStatusMessageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(identflyTipsView.frame) + 30, SCREEN_WIDTH, height) authType:self.type];
-        _messageView.status = self.statusModel;
         _messageView.edittingEnable = self.edittingEnable;
+        _messageView.status = self.statusModel;
         [self.view addSubview:_messageView];
         view = _messageView;
     }

@@ -129,6 +129,8 @@ SFOrderType orderType_initWithStr(NSString *str)
         return SFOrderTypeWaiteForDelivery;
     }else if ([str isEqualToString:@"A"]){
         return SFOrderTypeWaiteForSent;
+    } else if ([str isEqualToString:@"G"]) {
+        return SFOrderTypeWaiteToSelecterCar;
     }
     return SFOrderTypeAll;
 }
@@ -178,16 +180,16 @@ SFProvenanceType SFProvenanceTypeCreate(SFUserRole role,SFProvenanceDirection di
 NSArray *SFProvenanceTypeGetCodeArr(SFProvenanceType type)
 {
     switch (type) {
-        case SFProvenanceTypePublishGoods:
+        case SFProvenanceTypePublishGoods:  //我发的货
             return [[SFGoodsProvenance new] statusCodeArr];
             break;
-        case SFProvenanceTypePublishCar:
+        case SFProvenanceTypePublishCar:    //我发的车
             return [[SFCarProvenance new] statusCodeArr];
             break;
-        case SFProvenanceTypeReceiveGoods:
+        case SFProvenanceTypeReceiveGoods:  //我订的货
             return [[SFReceiveGoods new] statusCodeArr];
             break;
-        case SFProvenanceTypeBookingCar:
+        case SFProvenanceTypeBookingCar:    //我订的车
             return [[SFBookingCar new] statusCodeArr];
             break;
         default:

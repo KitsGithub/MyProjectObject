@@ -10,16 +10,12 @@
 
 @implementation SFOrder
 
-
-
-- (NSString *)from
-{
+- (NSString *)from {
     return [self toAddr:self.from_province city:self.from_city dis:self.from_district addr:self.from_address];
    
 }
 
-- (NSString *)to
-{
+- (NSString *)to {
     return [self toAddr:self.to_province city:self.to_city dis:self.to_district addr:self.to_address];
 }
 
@@ -32,25 +28,34 @@
     }
 }
 
-- (NSString *)cost
-{
-    if (_price.length) {
-        return [NSString stringWithFormat:@"%@",_price];
+- (NSString *)cost {
+    if (_order_fee.length) {
+        return [NSString stringWithFormat:@"%@",_order_fee];
     }
     return @"0";
 }
 
-- (NSString *)carownnerName
-{
-    return _order_user ? _order_user : _cars_owner;
+- (NSString *)carownnerName {
+    return _cars_owner;
 }
 
 - (NSString *)goodownnerName {
     return _goods_owner;
 }
 
-- (NSString *)licensePlateNumber
-{
+- (NSString *)order_no {
+    return _order_no;
+}
+
+- (NSString *)order_date {
+    return _order_date;
+}
+
+- (SFOrderType)orderType {
+    return orderType_initWithStr(_order_status);
+}
+
+- (NSString *)licensePlateNumber {
     return nil;
 }
 
@@ -69,6 +74,8 @@
             return @"待评价";
         case SFOrderTypeFinish:
             return @"已完成";
+        case SFOrderTypeWaiteToSelecterCar:
+            return @"待派车";
         default:
             return @"";
             break;
@@ -76,23 +83,19 @@
 //    return [self statusDescArr][self.takingStatus];
 }
 
-- (NSString *)goodsNameOrType
-{
-    return self.goods_type;
+- (NSString *)goodsNameOrType {
+    return self.goods_name;
 }
 
-- (NSString *)goodsWeight
-{
+- (NSString *)goodsWeight {
     return [NSString stringWithFormat:@"%@%@",self.goods_weight,self.weight_unit];
 }
 
-- (NSString *)carType
-{
+- (NSString *)carType {
     return self.car_type;
 }
 
-- (NSString *)carLone
-{
+- (NSString *)carLone {
     return _car_long;
 }
 
@@ -109,26 +112,29 @@
     return [self orderType];
 }
 
-- (SFOrderType)orderType {
-    NSArray *arr = [self statusCodeArr];
-    for (int i = 0;i < arr.count ;i++) {
-        NSString *code = arr[i];
-        if ([code isEqualToString:self.order_status]) {
-            return i;
-        }
-    }
-    return 0;
+//- (SFOrderType)orderType {
+//    NSArray *arr = [self statusCodeArr];
+//    for (int i = 0;i < arr.count ;i++) {
+//        NSString *code = arr[i];
+//        if ([code isEqualToString:self.order_status]) {
+//            return i;
+//        }
+//    }
+//    return 0;
+//}
+
+- (NSString *)order_id {
+    return _guid;
 }
 
-- (NSArray *)statusCodeArr
-{
-//    return @[@"A",@"B",@"C",@"D",@"F"];
-    return @[@"",@"A",@"B",@"D",@"F"];
+
+
+- (NSArray *)statusCodeArr {
+    return @[@"",@"G",@"A",@"B",@"D",@"F"];
 }
 
-- (NSArray *)statusDescArr
-{
-    return @[@"待发货",@"待收货",@"待评价",@"已完成"];
+- (NSArray *)statusDescArr {
+    return @[@"待派车",@"待发货",@"待收货",@"待评价",@"已完成",];
 }
 
 

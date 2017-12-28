@@ -10,6 +10,12 @@
 
 @interface SFBookingGoodOrderController : BaseViewController
 
+
+/**
+ 指定某种车型
+ */
+@property (nonatomic, copy) NSString *carType;
+
 @property (nonatomic, copy) NSString *orderId;
 
 @end

@@ -47,7 +47,7 @@
 
 - (void)setupView {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    _remarkStr = @"";
     
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -124,7 +124,7 @@
 }
 
 - (void)calendarClick {
-    
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
     NSString *timeStr = [NSString stringWithFormat:@"%@ %@",_moreTime.text,_time.text];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
@@ -153,6 +153,11 @@
 - (NSString *)calendarTime {
     NSString *timeStr = [NSString stringWithFormat:@"%@ %@",_moreTime.text,_time.text];
     return timeStr;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    _remarkStr = textView.text;
+    return YES;
 }
 
 

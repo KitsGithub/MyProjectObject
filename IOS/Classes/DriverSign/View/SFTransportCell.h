@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFTransportModel.h"
+
 @class SFTransportCell;
 typedef enum : NSUInteger {
     DataType_Transprot = 0,
@@ -25,6 +27,7 @@ typedef enum : NSUInteger {
 
 @interface SFTransportCell : UITableViewCell
 
+@property (nonatomic, weak) SFTransportModel *model;
 @property (nonatomic, assign) DataType dataType;
 
 @property (nonatomic, weak) id <SFTransportCellDelegate> delegate;

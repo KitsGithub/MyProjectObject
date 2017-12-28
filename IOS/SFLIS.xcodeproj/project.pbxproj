@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47017DE81FECE78400368732 /* SFTransportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47017DE71FECE78400368732 /* SFTransportModel.m */; };
+		470C903B1FF49736001EEB23 /* SFMoreDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90131FF49735001EEB23 /* SFMoreDatePickerView.m */; };
+		470C903C1FF49736001EEB23 /* NSDate+RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90171FF49735001EEB23 /* NSDate+RMCalendarLogic.m */; };
+		470C903D1FF49736001EEB23 /* UIView+CustomFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90191FF49735001EEB23 /* UIView+CustomFrame.m */; };
+		470C903E1FF49736001EEB23 /* RMCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C901C1FF49735001EEB23 /* RMCalendarController.m */; };
+		470C903F1FF49736001EEB23 /* RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C901F1FF49735001EEB23 /* RMCalendarLogic.m */; };
+		470C90401FF49736001EEB23 /* RMCalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90221FF49735001EEB23 /* RMCalendarModel.m */; };
+		470C90411FF49736001EEB23 /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90241FF49735001EEB23 /* TicketModel.m */; };
+		470C90421FF49736001EEB23 /* CalendarDisableDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90261FF49735001EEB23 /* CalendarDisableDate.png */; };
+		470C90431FF49736001EEB23 /* CalendarNormalDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90271FF49735001EEB23 /* CalendarNormalDate.png */; };
+		470C90441FF49736001EEB23 /* CalendarPreviousMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90281FF49735001EEB23 /* CalendarPreviousMonth.png */; };
+		470C90451FF49736001EEB23 /* CalendarPreviousMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90291FF49735001EEB23 /* CalendarPreviousMonth@2x.png */; };
+		470C90461FF49736001EEB23 /* CalendarRow.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902A1FF49735001EEB23 /* CalendarRow.png */; };
+		470C90471FF49736001EEB23 /* CalendarRow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902B1FF49735001EEB23 /* CalendarRow@2x.png */; };
+		470C90481FF49736001EEB23 /* CalendarRowBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902C1FF49735001EEB23 /* CalendarRowBottom.png */; };
+		470C90491FF49736001EEB23 /* CalendarRowBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902D1FF49735001EEB23 /* CalendarRowBottom@2x.png */; };
+		470C904A1FF49736001EEB23 /* CalendarSelectedDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902E1FF49735001EEB23 /* CalendarSelectedDate.png */; };
+		470C904B1FF49736001EEB23 /* CalendarSelectedDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C902F1FF49735001EEB23 /* CalendarSelectedDate@2x.png */; };
+		470C904C1FF49736001EEB23 /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90301FF49735001EEB23 /* CalendarTodaysDate.png */; };
+		470C904D1FF49736001EEB23 /* CalendarTodaysDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470C90311FF49735001EEB23 /* CalendarTodaysDate@2x.png */; };
+		470C904E1FF49736001EEB23 /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90341FF49735001EEB23 /* RMCalendarCollectionViewLayout.m */; };
+		470C904F1FF49736001EEB23 /* RMCalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90361FF49735001EEB23 /* RMCalendarMonthHeaderView.m */; };
+		470C90501FF49736001EEB23 /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C90381FF49735001EEB23 /* RMCollectionCell.m */; };
+		470C90511FF49736001EEB23 /* SFDatePickerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C903A1FF49735001EEB23 /* SFDatePickerPlugin.m */; };
 		470D75311FC3BF3B00C1DF2C /* SFAuthIdentflyTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D75301FC3BF3B00C1DF2C /* SFAuthIdentflyTipsView.m */; };
 		470D75341FC3C83B00C1DF2C /* SFAuthImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D75331FC3C83B00C1DF2C /* SFAuthImageView.m */; };
 		470D753B1FC42F9500C1DF2C /* SFIdentflyPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D753A1FC42F9500C1DF2C /* SFIdentflyPhoneController.m */; };
@@ -25,10 +49,13 @@
 		472B9B611FBC3E8400B88ABC /* SFCarrierModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B601FBC3E8400B88ABC /* SFCarrierModel.m */; };
 		472B9B641FBC468900B88ABC /* SFDriversView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B9B631FBC468900B88ABC /* SFDriversView.m */; };
 		472E84471FD64DB000CA3F6C /* SFBookingCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */; };
-		472E844F1FD67AAE00CA3F6C /* SFMoreDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */; };
+		4732D5201FE9F2C90071F4AA /* SFLoaddingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732D51F1FE9F2C90071F4AA /* SFLoaddingView.m */; };
 		4732F10A1FCFA21300530A45 /* SFChooseReleaerTimePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */; };
 		4732F10E1FCFA29100530A45 /* SFChooseReleaseTimeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */; };
 		4732F1111FCFDCBB00530A45 /* SFReleaseGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4732F1101FCFDCBB00530A45 /* SFReleaseGoodsViewController.m */; };
+		473885A41FE7555500A91C19 /* SFOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 473885A31FE7555500A91C19 /* SFOrderCell.m */; };
+		473885A71FE7697700A91C19 /* SFSegmentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473885A61FE7697700A91C19 /* SFSegmentScrollView.m */; };
+		473C45651FEA0BFB006EE6AE /* SFOrderDetailViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 473C45641FEA0BFB006EE6AE /* SFOrderDetailViewContoller.m */; };
 		473E93291FC287A0002648AC /* SFAuthStatuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E93281FC287A0002648AC /* SFAuthStatuViewController.m */; };
 		473E932E1FC28860002648AC /* SFAuthStausTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E932D1FC28860002648AC /* SFAuthStausTipsView.m */; };
 		473E93311FC2AD74002648AC /* SFAuthStatusMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473E93301FC2AD74002648AC /* SFAuthStatusMessageView.m */; };
@@ -44,28 +71,6 @@
 		474B21E71FB191D70025A426 /* SFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 474B21E61FB191D70025A426 /* SFDetailViewController.m */; };
 		474B83C21FB93DE100CAA8FF /* SFChangeNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 474B83C11FB93DE100CAA8FF /* SFChangeNickNameController.m */; };
 		474B83CD1FB94BB100CAA8FF /* SFChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 474B83CC1FB94BB100CAA8FF /* SFChangePasswordController.m */; };
-		475289451F974B2D003A0ABD /* NSDate+RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289211F974B2D003A0ABD /* NSDate+RMCalendarLogic.m */; };
-		475289461F974B2D003A0ABD /* UIView+CustomFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289231F974B2D003A0ABD /* UIView+CustomFrame.m */; };
-		475289471F974B2D003A0ABD /* RMCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289261F974B2D003A0ABD /* RMCalendarController.m */; };
-		475289481F974B2D003A0ABD /* RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289291F974B2D003A0ABD /* RMCalendarLogic.m */; };
-		475289491F974B2D003A0ABD /* RMCalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4752892C1F974B2D003A0ABD /* RMCalendarModel.m */; };
-		4752894A1F974B2D003A0ABD /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4752892E1F974B2D003A0ABD /* TicketModel.m */; };
-		4752894B1F974B2D003A0ABD /* CalendarDisableDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289301F974B2D003A0ABD /* CalendarDisableDate.png */; };
-		4752894C1F974B2D003A0ABD /* CalendarNormalDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289311F974B2D003A0ABD /* CalendarNormalDate.png */; };
-		4752894D1F974B2D003A0ABD /* CalendarPreviousMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289321F974B2D003A0ABD /* CalendarPreviousMonth.png */; };
-		4752894E1F974B2D003A0ABD /* CalendarPreviousMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289331F974B2D003A0ABD /* CalendarPreviousMonth@2x.png */; };
-		4752894F1F974B2D003A0ABD /* CalendarRow.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289341F974B2D003A0ABD /* CalendarRow.png */; };
-		475289501F974B2D003A0ABD /* CalendarRow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289351F974B2D003A0ABD /* CalendarRow@2x.png */; };
-		475289511F974B2D003A0ABD /* CalendarRowBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289361F974B2D003A0ABD /* CalendarRowBottom.png */; };
-		475289521F974B2D003A0ABD /* CalendarRowBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289371F974B2D003A0ABD /* CalendarRowBottom@2x.png */; };
-		475289531F974B2D003A0ABD /* CalendarSelectedDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289381F974B2D003A0ABD /* CalendarSelectedDate.png */; };
-		475289541F974B2D003A0ABD /* CalendarSelectedDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 475289391F974B2D003A0ABD /* CalendarSelectedDate@2x.png */; };
-		475289551F974B2D003A0ABD /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 4752893A1F974B2D003A0ABD /* CalendarTodaysDate.png */; };
-		475289561F974B2D003A0ABD /* CalendarTodaysDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4752893B1F974B2D003A0ABD /* CalendarTodaysDate@2x.png */; };
-		475289571F974B2D003A0ABD /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4752893E1F974B2D003A0ABD /* RMCalendarCollectionViewLayout.m */; };
-		475289581F974B2D003A0ABD /* RMCalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289401F974B2D003A0ABD /* RMCalendarMonthHeaderView.m */; };
-		475289591F974B2D003A0ABD /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289421F974B2D003A0ABD /* RMCollectionCell.m */; };
-		4752895A1F974B2D003A0ABD /* SFDatePickerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 475289441F974B2D003A0ABD /* SFDatePickerPlugin.m */; };
 		47533EBD1FA6BD4400668E12 /* CarownerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47533EBC1FA6BD4400668E12 /* CarownerList.plist */; };
 		47533EBF1FA6BD5A00668E12 /* GoodsownerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47533EBE1FA6BD5A00668E12 /* GoodsownerList.plist */; };
 		47533EC91FA6CCD100668E12 /* SFCarListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47533EC81FA6CCD100668E12 /* SFCarListViewController.m */; };
@@ -82,6 +87,8 @@
 		475FF8BA1F9D7F040078858C /* SFPersonCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475FF8B91F9D7F040078858C /* SFPersonCenterCell.m */; };
 		475FF8BD1F9DF1770078858C /* UIButton+SFBudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 475FF8BC1F9DF1770078858C /* UIButton+SFBudge.m */; };
 		4765A13C1F948BFF001C1325 /* SFOtherPickerViewPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4765A13B1F948BFF001C1325 /* SFOtherPickerViewPlugin.m */; };
+		476849FC1FF0F5830054F537 /* SFSignInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476849FB1FF0F5830054F537 /* SFSignInfoModel.m */; };
+		47694C3A1FE3616E008062DC /* SFProvenanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47694C391FE3616E008062DC /* SFProvenanceCell.m */; };
 		4771B9FF1FBD433C00FFE73E /* AddCarryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4771B9FE1FBD433C00FFE73E /* AddCarryController.m */; };
 		4771BA021FBD6B5400FFE73E /* DelCarrierDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4771BA011FBD6B5400FFE73E /* DelCarrierDriverViewController.m */; };
 		4771BA051FBD6BEC00FFE73E /* AddCarrierDriverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4771BA041FBD6BEC00FFE73E /* AddCarrierDriverController.m */; };
@@ -118,6 +125,7 @@
 		47EB13931FA9C8C100E92978 /* SFPersonSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB13921FA9C8C100E92978 /* SFPersonSettingController.m */; };
 		47EB139A1FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB13991FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m */; };
 		47EB4B001FC66DB600A8F9F1 /* SFTransportDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EB4AFF1FC66DB600A8F9F1 /* SFTransportDetailCell.m */; };
+		47EBFBEB1FF255C300BA4A58 /* MessageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EBFBEA1FF255C300BA4A58 /* MessageCenterController.m */; };
 		47F269F81FA07A5C003A3CB7 /* FMDB_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F269F41FA07A5C003A3CB7 /* FMDB_Manager.m */; };
 		47F269F91FA07A5C003A3CB7 /* ManagerConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F269F71FA07A5C003A3CB7 /* ManagerConst.m */; };
 		47FA3CA51FD0EEC800D2188E /* SFCarOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FA3C9B1FD0EEC700D2188E /* SFCarOrderDetailModel.m */; };
@@ -198,11 +206,48 @@
 		72F828531FB1A02B0083A119 /* SFOprationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F828521FB1A02B0083A119 /* SFOprationImageView.m */; };
 		72F828561FB1A04C0083A119 /* SFMultiOprationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F828541FB1A04B0083A119 /* SFMultiOprationImageView.m */; };
 		B21DB07DA61B98C137F8889C /* libPods-SFLIS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6ABBAB60BB76AA75B34C96 /* libPods-SFLIS.a */; };
+		F12AAEF61FDFC78D006EA062 /* SFGoodsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F12AAEF51FDFC78D006EA062 /* SFGoodsDetailModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		30D7E53B8C222103FD71630D /* Pods-SFLIS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFLIS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SFLIS/Pods-SFLIS.debug.xcconfig"; sourceTree = "<group>"; };
 		3F6ABBAB60BB76AA75B34C96 /* libPods-SFLIS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SFLIS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47017DE61FECE78400368732 /* SFTransportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFTransportModel.h; sourceTree = "<group>"; };
+		47017DE71FECE78400368732 /* SFTransportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTransportModel.m; sourceTree = "<group>"; };
+		470C90121FF49735001EEB23 /* SFMoreDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMoreDatePickerView.h; sourceTree = "<group>"; };
+		470C90131FF49735001EEB23 /* SFMoreDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMoreDatePickerView.m; sourceTree = "<group>"; };
+		470C90161FF49735001EEB23 /* NSDate+RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RMCalendarLogic.h"; sourceTree = "<group>"; };
+		470C90171FF49735001EEB23 /* NSDate+RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RMCalendarLogic.m"; sourceTree = "<group>"; };
+		470C90181FF49735001EEB23 /* UIView+CustomFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CustomFrame.h"; sourceTree = "<group>"; };
+		470C90191FF49735001EEB23 /* UIView+CustomFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CustomFrame.m"; sourceTree = "<group>"; };
+		470C901B1FF49735001EEB23 /* RMCalendarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarController.h; sourceTree = "<group>"; };
+		470C901C1FF49735001EEB23 /* RMCalendarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarController.m; sourceTree = "<group>"; };
+		470C901E1FF49735001EEB23 /* RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarLogic.h; sourceTree = "<group>"; };
+		470C901F1FF49735001EEB23 /* RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarLogic.m; sourceTree = "<group>"; };
+		470C90211FF49735001EEB23 /* RMCalendarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarModel.h; sourceTree = "<group>"; };
+		470C90221FF49735001EEB23 /* RMCalendarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarModel.m; sourceTree = "<group>"; };
+		470C90231FF49735001EEB23 /* TicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketModel.h; sourceTree = "<group>"; };
+		470C90241FF49735001EEB23 /* TicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketModel.m; sourceTree = "<group>"; };
+		470C90261FF49735001EEB23 /* CalendarDisableDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarDisableDate.png; sourceTree = "<group>"; };
+		470C90271FF49735001EEB23 /* CalendarNormalDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarNormalDate.png; sourceTree = "<group>"; };
+		470C90281FF49735001EEB23 /* CalendarPreviousMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarPreviousMonth.png; sourceTree = "<group>"; };
+		470C90291FF49735001EEB23 /* CalendarPreviousMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarPreviousMonth@2x.png"; sourceTree = "<group>"; };
+		470C902A1FF49735001EEB23 /* CalendarRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRow.png; sourceTree = "<group>"; };
+		470C902B1FF49735001EEB23 /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRow@2x.png"; sourceTree = "<group>"; };
+		470C902C1FF49735001EEB23 /* CalendarRowBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRowBottom.png; sourceTree = "<group>"; };
+		470C902D1FF49735001EEB23 /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
+		470C902E1FF49735001EEB23 /* CalendarSelectedDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarSelectedDate.png; sourceTree = "<group>"; };
+		470C902F1FF49735001EEB23 /* CalendarSelectedDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarSelectedDate@2x.png"; sourceTree = "<group>"; };
+		470C90301FF49735001EEB23 /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
+		470C90311FF49735001EEB23 /* CalendarTodaysDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTodaysDate@2x.png"; sourceTree = "<group>"; };
+		470C90331FF49735001EEB23 /* RMCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		470C90341FF49735001EEB23 /* RMCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		470C90351FF49735001EEB23 /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
+		470C90361FF49735001EEB23 /* RMCalendarMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarMonthHeaderView.m; sourceTree = "<group>"; };
+		470C90371FF49735001EEB23 /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
+		470C90381FF49735001EEB23 /* RMCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCollectionCell.m; sourceTree = "<group>"; };
+		470C90391FF49735001EEB23 /* SFDatePickerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDatePickerPlugin.h; sourceTree = "<group>"; };
+		470C903A1FF49735001EEB23 /* SFDatePickerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDatePickerPlugin.m; sourceTree = "<group>"; };
 		470D752F1FC3BF3B00C1DF2C /* SFAuthIdentflyTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthIdentflyTipsView.h; sourceTree = "<group>"; };
 		470D75301FC3BF3B00C1DF2C /* SFAuthIdentflyTipsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAuthIdentflyTipsView.m; sourceTree = "<group>"; };
 		470D75321FC3C83B00C1DF2C /* SFAuthImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthImageView.h; sourceTree = "<group>"; };
@@ -231,6 +276,7 @@
 		471877121F99CF7900A36D3A /* SFPersonalNavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPersonalNavBar.m; sourceTree = "<group>"; };
 		471877141F99D9EE00A36D3A /* SFPersonalCenterHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPersonalCenterHeaderView.h; sourceTree = "<group>"; };
 		471877151F99D9EE00A36D3A /* SFPersonalCenterHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPersonalCenterHeaderView.m; sourceTree = "<group>"; };
+		471D15191FE3A4520013E61E /* SFProvenanceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFProvenanceProtocol.h; sourceTree = "<group>"; };
 		472B9B581FBBEC2B00B88ABC /* SFAddCarrierCarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAddCarrierCarController.h; sourceTree = "<group>"; };
 		472B9B591FBBEC2B00B88ABC /* SFAddCarrierCarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAddCarrierCarController.m; sourceTree = "<group>"; };
 		472B9B5B1FBC140600B88ABC /* SFAllotCarrierCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAllotCarrierCell.h; sourceTree = "<group>"; };
@@ -241,14 +287,20 @@
 		472B9B631FBC468900B88ABC /* SFDriversView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDriversView.m; sourceTree = "<group>"; };
 		472E84451FD64DB000CA3F6C /* SFBookingCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBookingCarModel.h; sourceTree = "<group>"; };
 		472E84461FD64DB000CA3F6C /* SFBookingCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFBookingCarModel.m; sourceTree = "<group>"; };
-		472E844D1FD67AAE00CA3F6C /* SFMoreDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMoreDatePickerView.h; sourceTree = "<group>"; };
-		472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMoreDatePickerView.m; sourceTree = "<group>"; };
+		4732D51E1FE9F2C90071F4AA /* SFLoaddingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFLoaddingView.h; sourceTree = "<group>"; };
+		4732D51F1FE9F2C90071F4AA /* SFLoaddingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFLoaddingView.m; sourceTree = "<group>"; };
 		4732F1081FCFA21300530A45 /* SFChooseReleaerTimePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseReleaerTimePlugin.h; sourceTree = "<group>"; };
 		4732F1091FCFA21300530A45 /* SFChooseReleaerTimePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseReleaerTimePlugin.m; sourceTree = "<group>"; };
 		4732F10C1FCFA29100530A45 /* SFChooseReleaseTimeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChooseReleaseTimeController.h; sourceTree = "<group>"; };
 		4732F10D1FCFA29100530A45 /* SFChooseReleaseTimeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChooseReleaseTimeController.m; sourceTree = "<group>"; };
 		4732F10F1FCFDCBB00530A45 /* SFReleaseGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFReleaseGoodsViewController.h; sourceTree = "<group>"; };
 		4732F1101FCFDCBB00530A45 /* SFReleaseGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFReleaseGoodsViewController.m; sourceTree = "<group>"; };
+		473885A21FE7555500A91C19 /* SFOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFOrderCell.h; sourceTree = "<group>"; };
+		473885A31FE7555500A91C19 /* SFOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFOrderCell.m; sourceTree = "<group>"; };
+		473885A51FE7697700A91C19 /* SFSegmentScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFSegmentScrollView.h; sourceTree = "<group>"; };
+		473885A61FE7697700A91C19 /* SFSegmentScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFSegmentScrollView.m; sourceTree = "<group>"; };
+		473C45631FEA0BFB006EE6AE /* SFOrderDetailViewContoller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFOrderDetailViewContoller.h; sourceTree = "<group>"; };
+		473C45641FEA0BFB006EE6AE /* SFOrderDetailViewContoller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFOrderDetailViewContoller.m; sourceTree = "<group>"; };
 		473E93271FC287A0002648AC /* SFAuthStatuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthStatuViewController.h; sourceTree = "<group>"; };
 		473E93281FC287A0002648AC /* SFAuthStatuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAuthStatuViewController.m; sourceTree = "<group>"; };
 		473E932C1FC28860002648AC /* SFAuthStausTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAuthStausTipsView.h; sourceTree = "<group>"; };
@@ -278,38 +330,6 @@
 		474B83C11FB93DE100CAA8FF /* SFChangeNickNameController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChangeNickNameController.m; sourceTree = "<group>"; };
 		474B83CB1FB94BB100CAA8FF /* SFChangePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFChangePasswordController.h; sourceTree = "<group>"; };
 		474B83CC1FB94BB100CAA8FF /* SFChangePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFChangePasswordController.m; sourceTree = "<group>"; };
-		475289201F974B2D003A0ABD /* NSDate+RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RMCalendarLogic.h"; sourceTree = "<group>"; };
-		475289211F974B2D003A0ABD /* NSDate+RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RMCalendarLogic.m"; sourceTree = "<group>"; };
-		475289221F974B2D003A0ABD /* UIView+CustomFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CustomFrame.h"; sourceTree = "<group>"; };
-		475289231F974B2D003A0ABD /* UIView+CustomFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CustomFrame.m"; sourceTree = "<group>"; };
-		475289251F974B2D003A0ABD /* RMCalendarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarController.h; sourceTree = "<group>"; };
-		475289261F974B2D003A0ABD /* RMCalendarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarController.m; sourceTree = "<group>"; };
-		475289281F974B2D003A0ABD /* RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarLogic.h; sourceTree = "<group>"; };
-		475289291F974B2D003A0ABD /* RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarLogic.m; sourceTree = "<group>"; };
-		4752892B1F974B2D003A0ABD /* RMCalendarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarModel.h; sourceTree = "<group>"; };
-		4752892C1F974B2D003A0ABD /* RMCalendarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarModel.m; sourceTree = "<group>"; };
-		4752892D1F974B2D003A0ABD /* TicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketModel.h; sourceTree = "<group>"; };
-		4752892E1F974B2D003A0ABD /* TicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketModel.m; sourceTree = "<group>"; };
-		475289301F974B2D003A0ABD /* CalendarDisableDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarDisableDate.png; sourceTree = "<group>"; };
-		475289311F974B2D003A0ABD /* CalendarNormalDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarNormalDate.png; sourceTree = "<group>"; };
-		475289321F974B2D003A0ABD /* CalendarPreviousMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarPreviousMonth.png; sourceTree = "<group>"; };
-		475289331F974B2D003A0ABD /* CalendarPreviousMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarPreviousMonth@2x.png"; sourceTree = "<group>"; };
-		475289341F974B2D003A0ABD /* CalendarRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRow.png; sourceTree = "<group>"; };
-		475289351F974B2D003A0ABD /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRow@2x.png"; sourceTree = "<group>"; };
-		475289361F974B2D003A0ABD /* CalendarRowBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRowBottom.png; sourceTree = "<group>"; };
-		475289371F974B2D003A0ABD /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
-		475289381F974B2D003A0ABD /* CalendarSelectedDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarSelectedDate.png; sourceTree = "<group>"; };
-		475289391F974B2D003A0ABD /* CalendarSelectedDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarSelectedDate@2x.png"; sourceTree = "<group>"; };
-		4752893A1F974B2D003A0ABD /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
-		4752893B1F974B2D003A0ABD /* CalendarTodaysDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTodaysDate@2x.png"; sourceTree = "<group>"; };
-		4752893D1F974B2D003A0ABD /* RMCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
-		4752893E1F974B2D003A0ABD /* RMCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
-		4752893F1F974B2D003A0ABD /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
-		475289401F974B2D003A0ABD /* RMCalendarMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarMonthHeaderView.m; sourceTree = "<group>"; };
-		475289411F974B2D003A0ABD /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
-		475289421F974B2D003A0ABD /* RMCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCollectionCell.m; sourceTree = "<group>"; };
-		475289431F974B2D003A0ABD /* SFDatePickerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDatePickerPlugin.h; sourceTree = "<group>"; };
-		475289441F974B2D003A0ABD /* SFDatePickerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDatePickerPlugin.m; sourceTree = "<group>"; };
 		47533EBC1FA6BD4400668E12 /* CarownerList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CarownerList.plist; sourceTree = "<group>"; };
 		47533EBE1FA6BD5A00668E12 /* GoodsownerList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GoodsownerList.plist; sourceTree = "<group>"; };
 		47533EC71FA6CCD100668E12 /* SFCarListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCarListViewController.h; sourceTree = "<group>"; };
@@ -338,6 +358,10 @@
 		475FF8BC1F9DF1770078858C /* UIButton+SFBudge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SFBudge.m"; sourceTree = "<group>"; };
 		4765A13A1F948BFF001C1325 /* SFOtherPickerViewPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFOtherPickerViewPlugin.h; sourceTree = "<group>"; };
 		4765A13B1F948BFF001C1325 /* SFOtherPickerViewPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFOtherPickerViewPlugin.m; sourceTree = "<group>"; };
+		476849FA1FF0F5830054F537 /* SFSignInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFSignInfoModel.h; sourceTree = "<group>"; };
+		476849FB1FF0F5830054F537 /* SFSignInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFSignInfoModel.m; sourceTree = "<group>"; };
+		47694C381FE3616E008062DC /* SFProvenanceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFProvenanceCell.h; sourceTree = "<group>"; };
+		47694C391FE3616E008062DC /* SFProvenanceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFProvenanceCell.m; sourceTree = "<group>"; };
 		4771B9FD1FBD433C00FFE73E /* AddCarryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCarryController.h; sourceTree = "<group>"; };
 		4771B9FE1FBD433C00FFE73E /* AddCarryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCarryController.m; sourceTree = "<group>"; };
 		4771BA001FBD6B5400FFE73E /* DelCarrierDriverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelCarrierDriverViewController.h; sourceTree = "<group>"; };
@@ -413,6 +437,8 @@
 		47EB13991FA9CDDD00E92978 /* SFPersonalSettingHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPersonalSettingHeaderView.m; sourceTree = "<group>"; };
 		47EB4AFE1FC66DB600A8F9F1 /* SFTransportDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFTransportDetailCell.h; sourceTree = "<group>"; };
 		47EB4AFF1FC66DB600A8F9F1 /* SFTransportDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTransportDetailCell.m; sourceTree = "<group>"; };
+		47EBFBE91FF255C300BA4A58 /* MessageCenterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCenterController.h; sourceTree = "<group>"; };
+		47EBFBEA1FF255C300BA4A58 /* MessageCenterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCenterController.m; sourceTree = "<group>"; };
 		47F269F31FA07A5C003A3CB7 /* FMDB_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB_Manager.h; sourceTree = "<group>"; };
 		47F269F41FA07A5C003A3CB7 /* FMDB_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDB_Manager.m; sourceTree = "<group>"; };
 		47F269F61FA07A5C003A3CB7 /* ManagerConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerConst.h; sourceTree = "<group>"; };
@@ -567,6 +593,8 @@
 		72F828541FB1A04B0083A119 /* SFMultiOprationImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMultiOprationImageView.m; sourceTree = "<group>"; };
 		72F828551FB1A04B0083A119 /* SFMultiOprationImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMultiOprationImageView.h; sourceTree = "<group>"; };
 		90D134D28BA01EF14C377F2B /* Pods-TestHybird.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestHybird.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestHybird/Pods-TestHybird.release.xcconfig"; sourceTree = "<group>"; };
+		F12AAEF41FDFC78D006EA062 /* SFGoodsDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFGoodsDetailModel.h; sourceTree = "<group>"; };
+		F12AAEF51FDFC78D006EA062 /* SFGoodsDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFGoodsDetailModel.m; sourceTree = "<group>"; };
 		FCBFD01E566DA7C85E3E3E2B /* Pods-SFLIS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFLIS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SFLIS/Pods-SFLIS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -597,12 +625,145 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		47017DE51FECE76800368732 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47017DE61FECE78400368732 /* SFTransportModel.h */,
+				47017DE71FECE78400368732 /* SFTransportModel.m */,
+				476849FA1FF0F5830054F537 /* SFSignInfoModel.h */,
+				476849FB1FF0F5830054F537 /* SFSignInfoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		470C900F1FF49735001EEB23 /* DatePickerPlugin(日历选择器) */ = {
+			isa = PBXGroup;
+			children = (
+				470C90101FF49735001EEB23 /* ActionSheetTypePicker */,
+				470C90141FF49735001EEB23 /* DatePicker */,
+				470C90391FF49735001EEB23 /* SFDatePickerPlugin.h */,
+				470C903A1FF49735001EEB23 /* SFDatePickerPlugin.m */,
+			);
+			path = "DatePickerPlugin(日历选择器)";
+			sourceTree = "<group>";
+		};
+		470C90101FF49735001EEB23 /* ActionSheetTypePicker */ = {
+			isa = PBXGroup;
+			children = (
+				470C90111FF49735001EEB23 /* View */,
+			);
+			path = ActionSheetTypePicker;
+			sourceTree = "<group>";
+		};
+		470C90111FF49735001EEB23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				470C90121FF49735001EEB23 /* SFMoreDatePickerView.h */,
+				470C90131FF49735001EEB23 /* SFMoreDatePickerView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		470C90141FF49735001EEB23 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				470C90151FF49735001EEB23 /* Category */,
+				470C901A1FF49735001EEB23 /* Controller */,
+				470C901D1FF49735001EEB23 /* Logic */,
+				470C90201FF49735001EEB23 /* Model */,
+				470C90251FF49735001EEB23 /* Other */,
+				470C90321FF49735001EEB23 /* View */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		470C90151FF49735001EEB23 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				470C90161FF49735001EEB23 /* NSDate+RMCalendarLogic.h */,
+				470C90171FF49735001EEB23 /* NSDate+RMCalendarLogic.m */,
+				470C90181FF49735001EEB23 /* UIView+CustomFrame.h */,
+				470C90191FF49735001EEB23 /* UIView+CustomFrame.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		470C901A1FF49735001EEB23 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				470C901B1FF49735001EEB23 /* RMCalendarController.h */,
+				470C901C1FF49735001EEB23 /* RMCalendarController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		470C901D1FF49735001EEB23 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				470C901E1FF49735001EEB23 /* RMCalendarLogic.h */,
+				470C901F1FF49735001EEB23 /* RMCalendarLogic.m */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		470C90201FF49735001EEB23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				470C90211FF49735001EEB23 /* RMCalendarModel.h */,
+				470C90221FF49735001EEB23 /* RMCalendarModel.m */,
+				470C90231FF49735001EEB23 /* TicketModel.h */,
+				470C90241FF49735001EEB23 /* TicketModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		470C90251FF49735001EEB23 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				470C90261FF49735001EEB23 /* CalendarDisableDate.png */,
+				470C90271FF49735001EEB23 /* CalendarNormalDate.png */,
+				470C90281FF49735001EEB23 /* CalendarPreviousMonth.png */,
+				470C90291FF49735001EEB23 /* CalendarPreviousMonth@2x.png */,
+				470C902A1FF49735001EEB23 /* CalendarRow.png */,
+				470C902B1FF49735001EEB23 /* CalendarRow@2x.png */,
+				470C902C1FF49735001EEB23 /* CalendarRowBottom.png */,
+				470C902D1FF49735001EEB23 /* CalendarRowBottom@2x.png */,
+				470C902E1FF49735001EEB23 /* CalendarSelectedDate.png */,
+				470C902F1FF49735001EEB23 /* CalendarSelectedDate@2x.png */,
+				470C90301FF49735001EEB23 /* CalendarTodaysDate.png */,
+				470C90311FF49735001EEB23 /* CalendarTodaysDate@2x.png */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		470C90321FF49735001EEB23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				470C90331FF49735001EEB23 /* RMCalendarCollectionViewLayout.h */,
+				470C90341FF49735001EEB23 /* RMCalendarCollectionViewLayout.m */,
+				470C90351FF49735001EEB23 /* RMCalendarMonthHeaderView.h */,
+				470C90361FF49735001EEB23 /* RMCalendarMonthHeaderView.m */,
+				470C90371FF49735001EEB23 /* RMCollectionCell.h */,
+				470C90381FF49735001EEB23 /* RMCollectionCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		470C90521FF49751001EEB23 /* CDVNavigationManage */ = {
+			isa = PBXGroup;
+			children = (
+				725A86801F7F6F3C006EF808 /* CDVNavigationManage.h */,
+				725A86811F7F6F3C006EF808 /* CDVNavigationManage.m */,
+			);
+			path = CDVNavigationManage;
+			sourceTree = "<group>";
+		};
 		470D75351FC42F0800C1DF2C /* DriverSign */ = {
 			isa = PBXGroup;
 			children = (
 				470D75361FC42F2400C1DF2C /* ViewController */,
+				47017DE51FECE76800368732 /* Model */,
 				470D75371FC42F2400C1DF2C /* View */,
-				470D75381FC42F2400C1DF2C /* Model */,
 			);
 			path = DriverSign;
 			sourceTree = "<group>";
@@ -633,13 +794,6 @@
 				47A18E541FC57B7B00F5AA5B /* SFTransportLineView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		470D75381FC42F2400C1DF2C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		471088DE1FA3043B00013203 /* MyDriverList */ = {
@@ -677,13 +831,6 @@
 				471088E31FA3048E00013203 /* SFMyDriverListController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		47138AAC1FA1885A00801E99 /* SFPhotoPicker(拍摄插件) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "SFPhotoPicker(拍摄插件)";
 			sourceTree = "<group>";
 		};
 		47138ABF1FA1DB9B00801E99 /* view */ = {
@@ -739,21 +886,70 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		472E84491FD67A7100CA3F6C /* View */ = {
+		471D15151FE39E420013E61E /* Provenance(物源) */ = {
 			isa = PBXGroup;
 			children = (
-				472E844D1FD67AAE00CA3F6C /* SFMoreDatePickerView.h */,
-				472E844E1FD67AAE00CA3F6C /* SFMoreDatePickerView.m */,
+				471D15161FE39E420013E61E /* Controller */,
+				471D15171FE39E420013E61E /* Model */,
+				471D15181FE39E420013E61E /* View */,
+			);
+			path = "Provenance(物源)";
+			sourceTree = "<group>";
+		};
+		471D15161FE39E420013E61E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				728BE6901FA6C5F40004A0F5 /* SFProvenanceViewController.h */,
+				728BE6911FA6C5F40004A0F5 /* SFProvenanceViewController.m */,
+				474B21E51FB191D70025A426 /* SFDetailViewController.h */,
+				474B21E61FB191D70025A426 /* SFDetailViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		471D15171FE39E420013E61E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				471D15191FE3A4520013E61E /* SFProvenanceProtocol.h */,
+				7290902E1FAC40DC002DE082 /* SFCarProvenance.h */,
+				7290902F1FAC40DC002DE082 /* SFCarProvenance.m */,
+				729090281FAC40D1002DE082 /* SFGoodsProvenance.h */,
+				7290902B1FAC40D1002DE082 /* SFGoodsProvenance.m */,
+				72F828471FB1483E0083A119 /* SFBookingCar.h */,
+				72F828481FB1483E0083A119 /* SFBookingCar.m */,
+				72F8284A1FB148530083A119 /* SFReceiveGoods.h */,
+				72F8284B1FB148530083A119 /* SFReceiveGoods.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		471D15181FE39E420013E61E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47694C381FE3616E008062DC /* SFProvenanceCell.h */,
+				47694C391FE3616E008062DC /* SFProvenanceCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		4731291D1FD922D0001F58C2 /* ActionSheetTypePicker */ = {
+		4732D51C1FE9F2770071F4AA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				472E84491FD67A7100CA3F6C /* View */,
+				726A002C1F8B371B00AE17FC /* SFNetworkError.h */,
+				726A002D1F8B371B00AE17FC /* SFNetworkError.m */,
+				726A002E1F8B371B00AE17FC /* SFNetworkManage.h */,
+				726A002F1F8B371B00AE17FC /* SFNetworkManage.m */,
 			);
-			path = ActionSheetTypePicker;
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4732D51D1FE9F2B10071F4AA /* LoaddingResult */ = {
+			isa = PBXGroup;
+			children = (
+				4732D51E1FE9F2C90071F4AA /* SFLoaddingView.h */,
+				4732D51F1FE9F2C90071F4AA /* SFLoaddingView.m */,
+			);
+			path = LoaddingResult;
 			sourceTree = "<group>";
 		};
 		4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */ = {
@@ -840,8 +1036,6 @@
 				47FA3CAA1FD0F06A00D2188E /* BookingCarOrder */,
 				47FA3C981FD0EEC700D2188E /* CarOrderDetail */,
 				475705621FD4E33900EF5730 /* GoodsOrderDetail */,
-				474B21E51FB191D70025A426 /* SFDetailViewController.h */,
-				474B21E61FB191D70025A426 /* SFDetailViewController.m */,
 			);
 			name = "OrderDetail(详情)";
 			path = OrderDetail;
@@ -869,102 +1063,6 @@
 				47432A8E1F905C7500653191 /* SFAdressPickerCell.m */,
 			);
 			path = AdressPicker;
-			sourceTree = "<group>";
-		};
-		4752891D1F974B2D003A0ABD /* DatePickerPlugin(日历选择器) */ = {
-			isa = PBXGroup;
-			children = (
-				475289431F974B2D003A0ABD /* SFDatePickerPlugin.h */,
-				475289441F974B2D003A0ABD /* SFDatePickerPlugin.m */,
-				4731291D1FD922D0001F58C2 /* ActionSheetTypePicker */,
-				4752891E1F974B2D003A0ABD /* DatePicker */,
-			);
-			path = "DatePickerPlugin(日历选择器)";
-			sourceTree = "<group>";
-		};
-		4752891E1F974B2D003A0ABD /* DatePicker */ = {
-			isa = PBXGroup;
-			children = (
-				4752891F1F974B2D003A0ABD /* Category */,
-				475289241F974B2D003A0ABD /* Controller */,
-				475289271F974B2D003A0ABD /* Logic */,
-				4752892A1F974B2D003A0ABD /* Model */,
-				4752892F1F974B2D003A0ABD /* Other */,
-				4752893C1F974B2D003A0ABD /* View */,
-			);
-			path = DatePicker;
-			sourceTree = "<group>";
-		};
-		4752891F1F974B2D003A0ABD /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				475289201F974B2D003A0ABD /* NSDate+RMCalendarLogic.h */,
-				475289211F974B2D003A0ABD /* NSDate+RMCalendarLogic.m */,
-				475289221F974B2D003A0ABD /* UIView+CustomFrame.h */,
-				475289231F974B2D003A0ABD /* UIView+CustomFrame.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		475289241F974B2D003A0ABD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				475289251F974B2D003A0ABD /* RMCalendarController.h */,
-				475289261F974B2D003A0ABD /* RMCalendarController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		475289271F974B2D003A0ABD /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				475289281F974B2D003A0ABD /* RMCalendarLogic.h */,
-				475289291F974B2D003A0ABD /* RMCalendarLogic.m */,
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		4752892A1F974B2D003A0ABD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4752892B1F974B2D003A0ABD /* RMCalendarModel.h */,
-				4752892C1F974B2D003A0ABD /* RMCalendarModel.m */,
-				4752892D1F974B2D003A0ABD /* TicketModel.h */,
-				4752892E1F974B2D003A0ABD /* TicketModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4752892F1F974B2D003A0ABD /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				475289301F974B2D003A0ABD /* CalendarDisableDate.png */,
-				475289311F974B2D003A0ABD /* CalendarNormalDate.png */,
-				475289321F974B2D003A0ABD /* CalendarPreviousMonth.png */,
-				475289331F974B2D003A0ABD /* CalendarPreviousMonth@2x.png */,
-				475289341F974B2D003A0ABD /* CalendarRow.png */,
-				475289351F974B2D003A0ABD /* CalendarRow@2x.png */,
-				475289361F974B2D003A0ABD /* CalendarRowBottom.png */,
-				475289371F974B2D003A0ABD /* CalendarRowBottom@2x.png */,
-				475289381F974B2D003A0ABD /* CalendarSelectedDate.png */,
-				475289391F974B2D003A0ABD /* CalendarSelectedDate@2x.png */,
-				4752893A1F974B2D003A0ABD /* CalendarTodaysDate.png */,
-				4752893B1F974B2D003A0ABD /* CalendarTodaysDate@2x.png */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		4752893C1F974B2D003A0ABD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4752893D1F974B2D003A0ABD /* RMCalendarCollectionViewLayout.h */,
-				4752893E1F974B2D003A0ABD /* RMCalendarCollectionViewLayout.m */,
-				4752893F1F974B2D003A0ABD /* RMCalendarMonthHeaderView.h */,
-				475289401F974B2D003A0ABD /* RMCalendarMonthHeaderView.m */,
-				475289411F974B2D003A0ABD /* RMCollectionCell.h */,
-				475289421F974B2D003A0ABD /* RMCollectionCell.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		47533EC01FA6CC6000668E12 /* MyCarList */ = {
@@ -1020,6 +1118,7 @@
 		475705621FD4E33900EF5730 /* GoodsOrderDetail */ = {
 			isa = PBXGroup;
 			children = (
+				F12AAEF31FDFC77D006EA062 /* model */,
 				475705631FD4E37400EF5730 /* View */,
 				4747477F1F8DC131004EBAC8 /* SFOrderDetailController.h */,
 				474747801F8DC131004EBAC8 /* SFOrderDetailController.m */,
@@ -1157,24 +1256,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		47D152AE1F98582C0093CB16 /* CDVPlugins */ = {
-			isa = PBXGroup;
-			children = (
-				47FD06661FD538A900B17A80 /* SFChooseCarPlugin */,
-				4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */,
-				47D193821FAC78AF0072BEFC /* SFMessageViewPlugin */,
-				47138AC01FA1DBD800801E99 /* SFAlertViewPlugin */,
-				47138AAC1FA1885A00801E99 /* SFPhotoPicker(拍摄插件) */,
-				47D152AF1F987BE50093CB16 /* SFNetworkingPlugin(网络请求) */,
-				47D1529F1F9838000093CB16 /* MoreSelectedPicker(多选选择器) */,
-				4752891D1F974B2D003A0ABD /* DatePickerPlugin(日历选择器) */,
-				475649F71F8F55FA002E3AFE /* SFAdressPickerView(地址选择器) */,
-				47432A951F90A25400653191 /* SFOtherPickerView(其他规格选择) */,
-				47432A901F9063DF00653191 /* View */,
-			);
-			path = CDVPlugins;
-			sourceTree = "<group>";
-		};
 		47D152AF1F987BE50093CB16 /* SFNetworkingPlugin(网络请求) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1290,6 +1371,31 @@
 				474B83CC1FB94BB100CAA8FF /* SFChangePasswordController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		47EBFBE61FF255A500BA4A58 /* MessageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				47EBFBE91FF255C300BA4A58 /* MessageCenterController.h */,
+				47EBFBEA1FF255C300BA4A58 /* MessageCenterController.m */,
+				47EBFBE71FF255A500BA4A58 /* Model */,
+				47EBFBE81FF255A500BA4A58 /* View */,
+			);
+			path = MessageCenter;
+			sourceTree = "<group>";
+		};
+		47EBFBE71FF255A500BA4A58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47EBFBE81FF255A500BA4A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		47F269F21FA07A5C003A3CB7 /* FMDBManager */ = {
@@ -1445,10 +1551,10 @@
 				72AD7B791F9856630041339B /* SFOrderListViewController.xib */,
 				7250C52D1F9DCBE700DF5804 /* SFEvalViewController.h */,
 				7250C52E1F9DCBE700DF5804 /* SFEvalViewController.m */,
-				728BE6901FA6C5F40004A0F5 /* SFProvenanceViewController.h */,
-				728BE6911FA6C5F40004A0F5 /* SFProvenanceViewController.m */,
 				47E232081FBAE650001D1063 /* SFCarrierMessageController.h */,
 				47E232091FBAE650001D1063 /* SFCarrierMessageController.m */,
+				473C45631FEA0BFB006EE6AE /* SFOrderDetailViewContoller.h */,
+				473C45641FEA0BFB006EE6AE /* SFOrderDetailViewContoller.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1456,19 +1562,11 @@
 		722CD4791F8CAB4600684DA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7290902E1FAC40DC002DE082 /* SFCarProvenance.h */,
-				7290902F1FAC40DC002DE082 /* SFCarProvenance.m */,
-				729090281FAC40D1002DE082 /* SFGoodsProvenance.h */,
-				7290902B1FAC40D1002DE082 /* SFGoodsProvenance.m */,
-				72F828471FB1483E0083A119 /* SFBookingCar.h */,
-				72F828481FB1483E0083A119 /* SFBookingCar.m */,
-				72F8284A1FB148530083A119 /* SFReceiveGoods.h */,
-				72F8284B1FB148530083A119 /* SFReceiveGoods.m */,
+				72827C961F999879007C860A /* SfOrderProtocol.h */,
 				729090291FAC40D1002DE082 /* SFOrder.h */,
 				7290902A1FAC40D1002DE082 /* SFOrder.m */,
 				72935A001F988E6C003C0630 /* SFOrderManage.h */,
 				72935A011F988E6C003C0630 /* SFOrderManage.m */,
-				72827C961F999879007C860A /* SfOrderProtocol.h */,
 				725D16881F999A4C006118D7 /* SFOpration.h */,
 				725D16891F999A4C006118D7 /* SFOpration.m */,
 				723405F51F9D757E001C686A /* SFOrderListTableViewDelegate.h */,
@@ -1492,6 +1590,10 @@
 				7250C52B1F9DCB3B00DF5804 /* SFCustomTextView.m */,
 				728BE68D1FA6BD4D0004A0F5 /* SFSegmentView.h */,
 				728BE68E1FA6BD4D0004A0F5 /* SFSegmentView.m */,
+				473885A21FE7555500A91C19 /* SFOrderCell.h */,
+				473885A31FE7555500A91C19 /* SFOrderCell.m */,
+				473885A51FE7697700A91C19 /* SFSegmentScrollView.h */,
+				473885A61FE7697700A91C19 /* SFSegmentScrollView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1546,16 +1648,17 @@
 				722CD46F1F8CA34E00684DA2 /* Login */,
 				470D75351FC42F0800C1DF2C /* DriverSign */,
 				726A00351F8B379900AE17FC /* Home(首页) */,
+				474747791F8DC02E004EBAC8 /* OrderDetail(详情) */,
+				471D15151FE39E420013E61E /* Provenance(物源) */,
 				4775B10F1F7F825200894967 /* OrderManage(订单管理) */,
 				47E232011FBAC1BB001D1063 /* AllotCar */,
-				474747791F8DC02E004EBAC8 /* OrderDetail(详情) */,
-				473E932A1FC28819002648AC /* AuthStatus */,
 				4775B1101F7F825200894967 /* PersonalCenter(个人中心) */,
 				47EB13941FA9CAE400E92978 /* PersonalSetting */,
+				473E932A1FC28819002648AC /* AuthStatus */,
 				471088DE1FA3043B00013203 /* MyDriverList */,
 				47533EC01FA6CC6000668E12 /* MyCarList */,
 				474747831F8DCAFB004EBAC8 /* ReleaseRescource(发布) */,
-				47D152AE1F98582C0093CB16 /* CDVPlugins */,
+				47EBFBE61FF255A500BA4A58 /* MessageCenter */,
 				725A866C1F7F6F33006EF808 /* AppDelegate.h */,
 				475649E81F8EF82B002E3AFE /* AppDelegate.mm */,
 				47B5CA681F8B0D7C007D5D05 /* SFImage.xcassets */,
@@ -1574,14 +1677,12 @@
 				4775B1201F7F8C1B00894967 /* Constant.h */,
 				47F269F21FA07A5C003A3CB7 /* FMDBManager */,
 				474747781F8DBF6F004EBAC8 /* SFTipsView(提示框) */,
+				4732D51D1FE9F2B10071F4AA /* LoaddingResult */,
 				726606331F9060F900A70C8B /* LimitInput.h */,
 				726606341F9060FA00A70C8B /* LimitInput.m */,
-				726A002C1F8B371B00AE17FC /* SFNetworkError.h */,
-				726A002D1F8B371B00AE17FC /* SFNetworkError.m */,
+				4732D51C1FE9F2770071F4AA /* Networking */,
 				729090271FAC4082002DE082 /* GlobalType.h */,
 				72E220381FAC4BE600B4261B /* GlobalType.m */,
-				726A002E1F8B371B00AE17FC /* SFNetworkManage.h */,
-				726A002F1F8B371B00AE17FC /* SFNetworkManage.m */,
 				72491D041FA99A8700AD63A1 /* SFImagePicker.h */,
 				72491D051FA99A8700AD63A1 /* SFImagePicker.m */,
 				47A18E4D1FC5685F00F5AA5B /* SFDriverSignAlerView.h */,
@@ -1594,8 +1695,17 @@
 		725A867F1F7F6F3C006EF808 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				725A86801F7F6F3C006EF808 /* CDVNavigationManage.h */,
-				725A86811F7F6F3C006EF808 /* CDVNavigationManage.m */,
+				470C90521FF49751001EEB23 /* CDVNavigationManage */,
+				470C900F1FF49735001EEB23 /* DatePickerPlugin(日历选择器) */,
+				47FD06661FD538A900B17A80 /* SFChooseCarPlugin */,
+				4732F1071FCF9EFC00530A45 /* SFChoostReleaseTime */,
+				47D193821FAC78AF0072BEFC /* SFMessageViewPlugin */,
+				47138AC01FA1DBD800801E99 /* SFAlertViewPlugin */,
+				47D152AF1F987BE50093CB16 /* SFNetworkingPlugin(网络请求) */,
+				47D1529F1F9838000093CB16 /* MoreSelectedPicker(多选选择器) */,
+				475649F71F8F55FA002E3AFE /* SFAdressPickerView(地址选择器) */,
+				47432A951F90A25400653191 /* SFOtherPickerView(其他规格选择) */,
+				47432A901F9063DF00653191 /* View */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -1672,6 +1782,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F12AAEF31FDFC77D006EA062 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F12AAEF41FDFC78D006EA062 /* SFGoodsDetailModel.h */,
+				F12AAEF51FDFC78D006EA062 /* SFGoodsDetailModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1736,29 +1855,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				72AD7B7B1F9856630041339B /* SFOrderListViewController.xib in Resources */,
+				470C904B1FF49736001EEB23 /* CalendarSelectedDate@2x.png in Resources */,
 				72343DCA1F7DECD7007D08DE /* www in Resources */,
+				470C90471FF49736001EEB23 /* CalendarRow@2x.png in Resources */,
 				725A867A1F7F6F33006EF808 /* LaunchScreen.storyboard in Resources */,
-				475289561F974B2D003A0ABD /* CalendarTodaysDate@2x.png in Resources */,
+				470C904A1FF49736001EEB23 /* CalendarSelectedDate.png in Resources */,
 				725B8E2F1F98440C0063BE4F /* SFOrderManageController.xib in Resources */,
-				4752894E1F974B2D003A0ABD /* CalendarPreviousMonth@2x.png in Resources */,
-				475289531F974B2D003A0ABD /* CalendarSelectedDate.png in Resources */,
-				4752894F1F974B2D003A0ABD /* CalendarRow.png in Resources */,
-				4752894C1F974B2D003A0ABD /* CalendarNormalDate.png in Resources */,
 				47533EBD1FA6BD4400668E12 /* CarownerList.plist in Resources */,
-				4752894D1F974B2D003A0ABD /* CalendarPreviousMonth.png in Resources */,
+				470C90451FF49736001EEB23 /* CalendarPreviousMonth@2x.png in Resources */,
+				470C90491FF49736001EEB23 /* CalendarRowBottom@2x.png in Resources */,
+				470C90481FF49736001EEB23 /* CalendarRowBottom.png in Resources */,
+				470C90461FF49736001EEB23 /* CalendarRow.png in Resources */,
 				475649FB1F8F55FA002E3AFE /* city.json in Resources */,
-				475289511F974B2D003A0ABD /* CalendarRowBottom.png in Resources */,
-				4752894B1F974B2D003A0ABD /* CalendarDisableDate.png in Resources */,
 				47533EBF1FA6BD5A00668E12 /* GoodsownerList.plist in Resources */,
+				470C90431FF49736001EEB23 /* CalendarNormalDate.png in Resources */,
 				725A86791F7F6F33006EF808 /* Assets.xcassets in Resources */,
+				470C90441FF49736001EEB23 /* CalendarPreviousMonth.png in Resources */,
+				470C904D1FF49736001EEB23 /* CalendarTodaysDate@2x.png in Resources */,
 				72827C951F998FF1007C860A /* SFOrderTableViewCell.xib in Resources */,
 				7250C5291F9DC79A00DF5804 /* SFRatingView.xib in Resources */,
-				475289541F974B2D003A0ABD /* CalendarSelectedDate@2x.png in Resources */,
 				47B5CA691F8B0D7D007D5D05 /* SFImage.xcassets in Resources */,
-				475289551F974B2D003A0ABD /* CalendarTodaysDate.png in Resources */,
-				475289521F974B2D003A0ABD /* CalendarRowBottom@2x.png in Resources */,
-				475289501F974B2D003A0ABD /* CalendarRow@2x.png in Resources */,
 				72CFF1531F8DFA4F00386DF6 /* LoginViewController.xib in Resources */,
+				470C904C1FF49736001EEB23 /* CalendarTodaysDate.png in Resources */,
+				470C90421FF49736001EEB23 /* CalendarDisableDate.png in Resources */,
 				72343DC61F7DE983007D08DE /* config.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1843,12 +1962,12 @@
 				7263C4641F94600B00923426 /* SFSearchViewController.m in Sources */,
 				470D753B1FC42F9500C1DF2C /* SFIdentflyPhoneController.m in Sources */,
 				475705711FD4F6E800EF5730 /* SFBookingGoodsHeaderView.m in Sources */,
-				475289591F974B2D003A0ABD /* RMCollectionCell.m in Sources */,
 				72CFF1591F8E1CE300386DF6 /* SFDesignableView.m in Sources */,
 				725A86821F7F6F3C006EF808 /* CDVNavigationManage.m in Sources */,
 				47404ABB1FAAB19D0030D93C /* PersonalSettingCell.m in Sources */,
 				47138AB51FA1B9C600801E99 /* SFSinglePickerCell.m in Sources */,
 				47432A981F90A27200653191 /* SFOtherPickerView.m in Sources */,
+				47017DE81FECE78400368732 /* SFTransportModel.m in Sources */,
 				722CD4811F8CAB6900684DA2 /* SFPersonalCenterController.m in Sources */,
 				72AD7B7A1F9856630041339B /* SFOrderListViewController.m in Sources */,
 				47EB13931FA9C8C100E92978 /* SFPersonSettingController.m in Sources */,
@@ -1859,21 +1978,24 @@
 				72225C911F95A278001DD3BF /* SFMutilBtnMenuView.m in Sources */,
 				726A00301F8B371B00AE17FC /* SFNetworkError.m in Sources */,
 				72491D001FA9600A00AD63A1 /* SFCommond.m in Sources */,
-				4752894A1F974B2D003A0ABD /* TicketModel.m in Sources */,
 				4757056B1FD4F18F00EF5730 /* SFBookingGoodOrderController.m in Sources */,
 				472B9B611FBC3E8400B88ABC /* SFCarrierModel.m in Sources */,
 				726606351F9060FA00A70C8B /* LimitInput.m in Sources */,
 				47533EC91FA6CCD100668E12 /* SFCarListViewController.m in Sources */,
 				47FA3CAF1FD0F07D00D2188E /* SFBookingCarOrderViewController.m in Sources */,
 				47A4322F1FC6A36800E24989 /* SFForgetPswViewController.m in Sources */,
+				F12AAEF61FDFC78D006EA062 /* SFGoodsDetailModel.m in Sources */,
 				72978ED21F8F5ADE00DAD6E8 /* SFTipableTextfiled.m in Sources */,
 				72B433AC1FA036FE007AAA07 /* NSDictionary+jlExtension.m in Sources */,
 				47FA3CA61FD0EEC800D2188E /* SFCarDetailController.m in Sources */,
 				477BD9721FCBB1D00085196F /* SFChooseCarCell.m in Sources */,
 				47533ED81FA71A1D00668E12 /* SFAddCarView.m in Sources */,
 				474B83CD1FB94BB100CAA8FF /* SFChangePasswordController.m in Sources */,
+				470C90401FF49736001EEB23 /* RMCalendarModel.m in Sources */,
 				726A00551F8B676B00AE17FC /* SFDetailView.m in Sources */,
+				470C90411FF49736001EEB23 /* TicketModel.m in Sources */,
 				475FF8BA1F9D7F040078858C /* SFPersonCenterCell.m in Sources */,
+				470C90501FF49736001EEB23 /* RMCollectionCell.m in Sources */,
 				471877131F99CF7900A36D3A /* SFPersonalNavBar.m in Sources */,
 				47138AB21FA18A2200801E99 /* SFSinglePickerView.m in Sources */,
 				47138ABE1FA1DB4600801E99 /* SFAlertViewPlugin.m in Sources */,
@@ -1881,11 +2003,11 @@
 				726A00501F8B674A00AE17FC /* HomeViewCell.m in Sources */,
 				4775B1071F7F79DA00894967 /* BaseViewController.m in Sources */,
 				47FD06691FD538C300B17A80 /* SFChooseCarPlugin.m in Sources */,
+				470C904F1FF49736001EEB23 /* RMCalendarMonthHeaderView.m in Sources */,
 				726A00591F8B6A8400AE17FC /* NSString+FontSize.m in Sources */,
 				47A18E491FC55BB700F5AA5B /* SFAddressMessageView.m in Sources */,
 				477BD96F1FCBAF3F0085196F /* SFChooseCarrierCarController.m in Sources */,
 				470D75341FC3C83B00C1DF2C /* SFAuthImageView.m in Sources */,
-				472E844F1FD67AAE00CA3F6C /* SFMoreDatePickerView.m in Sources */,
 				72F828561FB1A04C0083A119 /* SFMultiOprationImageView.m in Sources */,
 				4715CC4F1FCC053D00E72466 /* SFAddCarrierDriverCell.m in Sources */,
 				72935A021F988E6C003C0630 /* SFOrderManage.m in Sources */,
@@ -1894,8 +2016,8 @@
 				72978ED51F8F6F8B00DAD6E8 /* AuthcodeView.m in Sources */,
 				474B21E71FB191D70025A426 /* SFDetailViewController.m in Sources */,
 				72F8284C1FB148530083A119 /* SFReceiveGoods.m in Sources */,
+				47694C3A1FE3616E008062DC /* SFProvenanceCell.m in Sources */,
 				7263C4611F945B7400923426 /* UIImage+Extension.m in Sources */,
-				475289461F974B2D003A0ABD /* UIView+CustomFrame.m in Sources */,
 				47E309B01FD137B7004FD59B /* SFCarDemandViewController.m in Sources */,
 				72BDBB3B1F8F1A6500992321 /* LoginRequest.m in Sources */,
 				7290902D1FAC40D1002DE082 /* SFGoodsProvenance.m in Sources */,
@@ -1903,12 +2025,13 @@
 				47A18E461FC54A8D00F5AA5B /* SFDriverTransportDetailController.m in Sources */,
 				72F828491FB1483E0083A119 /* SFBookingCar.m in Sources */,
 				47D152AD1F9844950093CB16 /* SFMoreSelectedPickerPlugin.m in Sources */,
+				47EBFBEB1FF255C300BA4A58 /* MessageCenterController.m in Sources */,
 				4765A13C1F948BFF001C1325 /* SFOtherPickerViewPlugin.m in Sources */,
+				470C903B1FF49736001EEB23 /* SFMoreDatePickerView.m in Sources */,
 				4732F10A1FCFA21300530A45 /* SFChooseReleaerTimePlugin.m in Sources */,
 				47A18E4C1FC55C5600F5AA5B /* SFTransportCell.m in Sources */,
 				47B5CA641F8B05B3007D5D05 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				4771BA051FBD6BEC00FFE73E /* AddCarrierDriverController.m in Sources */,
-				475289471F974B2D003A0ABD /* RMCalendarController.m in Sources */,
 				47D1632D1FB97F95008525CD /* SFChangePswFooterView.m in Sources */,
 				7250C52C1F9DCB3B00DF5804 /* SFCustomTextView.m in Sources */,
 				475705661FD4E38E00EF5730 /* SFOrderDetailCell.m in Sources */,
@@ -1918,8 +2041,7 @@
 				474747861F8DCB19004EBAC8 /* SFReleaseViewController.m in Sources */,
 				475FF8BD1F9DF1770078858C /* UIButton+SFBudge.m in Sources */,
 				72827C941F998FF1007C860A /* SFOrderTableViewCell.m in Sources */,
-				475289571F974B2D003A0ABD /* RMCalendarCollectionViewLayout.m in Sources */,
-				475289581F974B2D003A0ABD /* RMCalendarMonthHeaderView.m in Sources */,
+				4732D5201FE9F2C90071F4AA /* SFLoaddingView.m in Sources */,
 				7210EDD91FB4334100979599 /* SFAuthStatusModle.m in Sources */,
 				47F269F91FA07A5C003A3CB7 /* ManagerConst.m in Sources */,
 				7250C52F1F9DCBE700DF5804 /* SFEvalViewController.m in Sources */,
@@ -1927,15 +2049,16 @@
 				479FAFFE1FD14BC900F9BDA7 /* SFMessageInputView.m in Sources */,
 				473E93341FC2C332002648AC /* SFAuthStatusShowImageView.m in Sources */,
 				474747811F8DC131004EBAC8 /* SFOrderDetailController.m in Sources */,
+				470C903C1FF49736001EEB23 /* NSDate+RMCalendarLogic.m in Sources */,
 				47138AC31FA1DC7600801E99 /* SFAuthenticationView.m in Sources */,
 				7250C5271F9DC6D300DF5804 /* SFRatingView.m in Sources */,
 				724C73E71F94B02C00C0C07E /* SFFiltrateBar.m in Sources */,
 				475649FC1F8F55FA002E3AFE /* SFAdressPickerView.m in Sources */,
 				47E232071FBAC1E0001D1063 /* SFAllotCarController.m in Sources */,
 				4771BA021FBD6B5400FFE73E /* DelCarrierDriverViewController.m in Sources */,
+				470C903D1FF49736001EEB23 /* UIView+CustomFrame.m in Sources */,
 				47A432321FC6B90500E24989 /* SFAuthCarMessageView.m in Sources */,
 				728BE68F1FA6BD4D0004A0F5 /* SFSegmentView.m in Sources */,
-				4752895A1F974B2D003A0ABD /* SFDatePickerPlugin.m in Sources */,
 				726A00311F8B371B00AE17FC /* SFNetworkManage.m in Sources */,
 				47FA3CA81FD0EEC800D2188E /* SFCarDetailFooterView.m in Sources */,
 				473E932E1FC28860002648AC /* SFAuthStausTipsView.m in Sources */,
@@ -1945,17 +2068,20 @@
 				4771B9FF1FBD433C00FFE73E /* AddCarryController.m in Sources */,
 				7290902C1FAC40D1002DE082 /* SFOrder.m in Sources */,
 				4732F1111FCFDCBB00530A45 /* SFReleaseGoodsViewController.m in Sources */,
-				475289491F974B2D003A0ABD /* RMCalendarModel.m in Sources */,
 				47D193851FAC78AF0072BEFC /* SFMessageViewPlugin.m in Sources */,
+				470C90511FF49736001EEB23 /* SFDatePickerPlugin.m in Sources */,
 				475649E91F8EF82B002E3AFE /* AppDelegate.mm in Sources */,
 				722CD47B1F8CAB4600684DA2 /* SFOrderManageController.m in Sources */,
-				475289481F974B2D003A0ABD /* RMCalendarLogic.m in Sources */,
 				47B5CA671F8B0BEF007D5D05 /* SFTabBar.m in Sources */,
 				47432A8F1F905C7500653191 /* SFAdressPickerCell.m in Sources */,
 				7208060C1F8F45990041BDBC /* SFUserInfo.m in Sources */,
+				473C45651FEA0BFB006EE6AE /* SFOrderDetailViewContoller.m in Sources */,
 				474B83C21FB93DE100CAA8FF /* SFChangeNickNameController.m in Sources */,
 				47FA3CA91FD0EEC800D2188E /* SFCarDetailHeaderView.m in Sources */,
+				470C903F1FF49736001EEB23 /* RMCalendarLogic.m in Sources */,
+				470C903E1FF49736001EEB23 /* RMCalendarController.m in Sources */,
 				726A004B1F8B390F00AE17FC /* SFHomeViewController.m in Sources */,
+				476849FC1FF0F5830054F537 /* SFSignInfoModel.m in Sources */,
 				726A00431F8B379900AE17FC /* HomeRequestHelper.m in Sources */,
 				471088E41FA3048E00013203 /* SFMyDriverListController.m in Sources */,
 				726A00441F8B379900AE17FC /* SFSegmentControl.m in Sources */,
@@ -1966,6 +2092,8 @@
 				726A00561F8B676B00AE17FC /* SFUserView.m in Sources */,
 				72DB634C1FA1C90900647672 /* CarsSupply.m in Sources */,
 				47D3A5ED1FD103AC00E913F7 /* SFBookingCarFooter.m in Sources */,
+				470C904E1FF49736001EEB23 /* RMCalendarCollectionViewLayout.m in Sources */,
+				473885A41FE7555500A91C19 /* SFOrderCell.m in Sources */,
 				72B433AD1FA036FE007AAA07 /* NSArray+jlExtension.m in Sources */,
 				728BE6921FA6C5F40004A0F5 /* SFProvenanceViewController.m in Sources */,
 				72E220391FAC4BE600B4261B /* GlobalType.m in Sources */,
@@ -1977,6 +2105,7 @@
 				726A00341F8B377800AE17FC /* UIColor+SF.m in Sources */,
 				475649F01F8F52DB002E3AFE /* SFAdressPickerPlugin.m in Sources */,
 				72F828531FB1A02B0083A119 /* SFOprationImageView.m in Sources */,
+				473885A71FE7697700A91C19 /* SFSegmentScrollView.m in Sources */,
 				72CFF1561F8E037900386DF6 /* SFInnerShadowableView.m in Sources */,
 				47E980871F8CA9DC00BE1660 /* SFHomeNavBar.m in Sources */,
 				47EB4B001FC66DB600A8F9F1 /* SFTransportDetailCell.m in Sources */,
@@ -1988,7 +2117,6 @@
 				473E93291FC287A0002648AC /* SFAuthStatuViewController.m in Sources */,
 				47FD06701FD54F6E00B17A80 /* SFCarListModel.m in Sources */,
 				4775B1191F7F837400894967 /* BaseNavigationController.m in Sources */,
-				475289451F974B2D003A0ABD /* NSDate+RMCalendarLogic.m in Sources */,
 				47A18E521FC5769F00F5AA5B /* SFTransportDetailController.m in Sources */,
 				725A867C1F7F6F33006EF808 /* main.m in Sources */,
 				4732F10E1FCFA29100530A45 /* SFChooseReleaseTimeController.m in Sources */,
@@ -2128,6 +2256,9 @@
 			baseConfigurationReference = 30D7E53B8C222103FD71630D /* Pods-SFLIS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9S5N38HXJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2177,6 +2308,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.LESSO.LESSO-SFLIS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2186,6 +2319,9 @@
 			baseConfigurationReference = FCBFD01E566DA7C85E3E3E2B /* Pods-SFLIS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9S5N38HXJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2235,6 +2371,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.LESSO.LESSO-SFLIS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

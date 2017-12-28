@@ -15,7 +15,7 @@ typedef void(^SFCodeImageResult)(NSString *imgUrl);
 
 + (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd succuss:(SFLoginresultBlock)succuss fault:(SFErrorResultBlock)fault;
 
-+ (void)registWithAccount:(NSString *)account pwd:(NSString *)pwd mobile:(NSString *)mobile role:(SFUserRole)role succuss:(SFLoginresultBlock)succuss fault:(SFErrorResultBlock)fault;
++ (void)registWithAccount:(NSString *)account pwd:(NSString *)pwd mobile:(NSString *)mobile role:(SFUserRole)role code:(NSString *)code succuss:(SFLoginresultBlock)succuss fault:(SFErrorResultBlock)fault;
 
 + (void)logOutWithSuccuss:(SFEmptyResultBlock)succuss fault:(SFErrorResultBlock)fault;
 

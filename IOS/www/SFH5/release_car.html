@@ -15,63 +15,85 @@
 </style>
 <body>
 <div class="sf_wrap sfRelease"  id="releaseCar" style="opacity:1">
-	<div class="sf_divwrap">
+	<div class="contents"  style="display: block;">
+		<div class="sf_divwrap">
 		<!--发车路线开始-->
-		<div class="sf_w">
-			<h1 class="sf_h1">发车路线</h1>
-				 <div>
-                	<div>
-                		<div class="icon_frombg"></div>
-	                    <p class="sftitle" >
-	                    	<input readonly class="sf_formadd sf_fromAdd" id="sf_fromAdd" placeholder="请选择出发省、市、县" value=""   /><span class="sf_develop"  ></span>
-	                    </p>   
+			<div class="sf_w">
+				<h1 class="sf_h1">发车路线</h1>
+					 <div>
+	                	<div>
+	                		<div class="icon_frombg"></div>
+		                    <p class="sftitle" >
+		                    	<input readonly class="sf_formadd sf_fromAdd" id="sf_fromAdd" placeholder="请选择出发省、市、县" value=""   /><span class="sf_develop"  ></span>
+		                    </p>   
+		                </div>
+		                <div>
+		                	<div class="icon_contenbg"></div>
+		                	<div class="sf_Inputaddress">
+		                    	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_from_detail" value=""   placeholder="请填写出发地详细地址" />
+		                	</div>
+		                </div>
+		                <div>
+		                	<div class="icon_tobg"></div>
+		                    <p class="sftitle2"  ><input readonly class="sf_formadd sf_toAdd" id="toAddress" placeholder="请选择到达省、市、县"   /><span class="sf_develop"></span></p>
+		                </div>
+		                <div>
+		                	<div class="icon_tobglast"></div>
+		                	<div class="sf_Inputaddress">
+	                        	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_to_detail" value="" placeholder="请填写目的地详细地址" />
+	                    	</div>
+		                </div>
 	                </div>
-	                <div>
-	                	<div class="icon_contenbg"></div>
-	                	<div class="sf_Inputaddress">
-	                    	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_from_detail" value=""   placeholder="请填写出发地详细地址" />
-	                	</div>
-	                </div>
-	                <div>
-	                	<div class="icon_tobg"></div>
-	                    <p class="sftitle2"  ><input readonly class="sf_formadd sf_toAdd" id="toAddress" placeholder="请选择到达省、市、县"   /><span class="sf_develop"></span></p>
-	                </div>
-	                <div>
-	                	<div class="icon_tobglast"></div>
-	                	<div class="sf_Inputaddress">
-                        	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_to_detail" value="" placeholder="请填写目的地详细地址" />
-                    	</div>
-	                </div>
-                </div>
-                
-		</div>
-		<!--发车路线结束-->
-		<!--车辆类型选择-->
-		<div class="sf_w">
-			<h1 class="sf_h1">车辆信息</h1>
-			<div class="hui-accordion ss">
-				<p class="sf_title3 sf_bbt" id="choseCarnumber"><input readonly class="sf_formadd sf_carType" placeholder="选择车辆"  id="carNumber" /><span class="sf_develop"></span></p>
+	                
 			</div>
-			<div class="caiList">
-				<ul id="carWraps">
-				</ul>
+			<!--发车路线结束-->
+			<!--车辆类型选择-->
+			<div class="sf_w">
+				<h1 class="sf_h1">车辆信息</h1>
+				<div class="hui-accordion ss">
+					<p class="sf_title3 sf_bbt" id="choseCarnumber"><input readonly class="sf_formadd sf_carType" placeholder="选择车辆"  id="carNumber" /><span class="sf_develop"></span></p>
+				</div>
+				<div class="caiList">
+					<ul id="carWraps">
+						<!--<li>
+							<div>
+								<i class="iconcar"></i>
+								<span class="carNumber">'+datas[i].car_no+'</span>
+								<i class="iconcloose" onclick="closeCar(this)"></i>
+							</div>
+							<div>
+								<span>1</span>
+								<span>1 </span>
+								<span>1</span>
+								<span>1方</span>
+							</div>
+							<div>
+								<input type="text" placeholder="xzX"  value= "sadasd"  onkeyup="onlyNumber(this)"  id="releaseCarprice" class="releaseCarprice" />
+								<i class="iconprice"></i>
+							</div>	
+						</li>-->
+					</ul>
+				</div>
 			</div>
-		</div>
-		<!--车辆类型选择结束-->
-		<!-- 备注 -->
-		<div class="sf_w" style="margin-bottom: 5rem;">
-			<h1 class="sf_h1">其他信息</h1>
-			<div class="sf_bzright">
-				<textarea class="sf_Bz" name="beizhu" id="input_remark" placeholder="填写备注"  v-model="textvalue"></textarea>
+			<!--车辆类型选择结束-->
+			<!-- 备注 -->
+			<div class="sf_w" style="margin-bottom: 5rem;">
+				<h1 class="sf_h1">其他信息</h1>
+				<div class="sf_bzright">
+					<textarea class="sf_Bz" name="beizhu" id="input_remark" placeholder="填写备注"  v-model="textvalue"></textarea>
+				</div>
 			</div>
+			<!--备注结束-->
+			
 		</div>
-		<!--备注结束-->
-		
-	</div>
-	<div class="sf_Fb" onclick="justCar()">
-			立即发布
+		<div class="sf_Fb" onclick="justCar('A')">
+				立即发布
+		</div>	
 	</div>
 	
+	<div id="appLoading" style="display: none;">
+      <img src="image/sf_loading.gif" alt="loading" />
+    </div>
 
 </div>
 <!-- 资源 -->

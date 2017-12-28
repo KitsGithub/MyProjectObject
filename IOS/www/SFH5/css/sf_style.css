@@ -11,17 +11,23 @@ h1{font-size:24px;}
 h2{font-size:20px;}
 h3{font-size:16px}
 input{font-size:16px}
-input.sf_Day::-webkit-input-placeholder,input.sf_Mont::-webkit-input-placeholder,input.sf_year::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #ffffff;
+input.sf_D::-webkit-input-placeholder{ /* WebKit browsers */
+    color:#999999;
 }
-input.sf_Day:-moz-placeholder,input.sf_Mont::-webkit-input-placeholder,input.sf_year::-webkit-input-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    #ffffff;
+input.sf_D:-moz-placeholder{ /* Mozilla Firefox 4 to 18 */
+    color:#999999;
 }
-input.sf_Day::-moz-placeholder,input.sf_Mont::-webkit-input-placeholder,input.sf_year::-webkit-input-placeholder { /* Mozilla Firefox 19+ */
-    color:    #ffffff;
+input.sf_D::-moz-placeholder{ /* Mozilla Firefox 19+ */
+    color:#999999;
 }
-input.sf_Day:-ms-input-placeholder,input.sf_Mont::-webkit-input-placeholder,input.sf_year::-webkit-input-placeholder { /* Internet Explorer 10+ */
-    color:    #ffffff;
+input.sf_D:-ms-input-placeholder{ /* Internet Explorer 10+ */
+    color:#999999;
+}
+#sf_fromAdd::-webkit-input-placeholder{ /* WebKit browsers */
+    color:#666666;
+}
+#toAddress::-webkit-input-placeholder{ /* WebKit browsers */
+    color:#666666;
 }
 [v-cloak] {
     display: none;
@@ -59,6 +65,9 @@ b{
 .sf_mtp1{
 	margin-top: 1rem;
 }
+.sf_mtp8{
+	margin-top: 1.8rem;
+}
 .sf_mtp3{
 	margin-top: 3rem;
 }
@@ -76,6 +85,30 @@ b{
 }
 .sf_mrt1{
 	margin-right: 1rem;
+}
+.sf_mrL2{
+	margin-left: 2rem;
+}
+.sf_font{
+	font-size: 16px;
+}
+.hmyhui{
+	background: #999999;
+}
+.hmyhuang{
+	background: #ffd74c;
+}
+.hmygreen{
+	background: #4ABA7B;
+}
+.hmyhui_color{
+	color: #999999;
+}
+.hmyhuang_color{
+	color: #ffd74c;
+}
+.hmygreen_color{
+	color: #4ABA7B;
 }
 .icon_frombg,.icon_tobg,.icon_detailwarpbg,.icon_detailnormal{
 	width:1.7rem;
@@ -129,13 +162,13 @@ b{
 	padding: 0 5%;
 }
 .sf_h1{
-	font-weight: 500;
+	font-weight: bold;
   	line-height: 1;
   	text-align: left;
   	color: #3d3d3d;
   	padding-bottom: 22px;
 	font-family: PingFangSC;
-	font-size: 25px;
+	font-size: 21px;
 }	
 .sf_kongdiv{
 	height: 3.4rem;
@@ -150,9 +183,12 @@ b{
 .sf_D,.sf_F{
 	border: none;
 	width: 86%;
-  	height: 4.8rem;
+  	height: 1.6rem;
+  	padding: 1.6rem 0;
   	display: block;
   	background: none;
+  	line-height: 1.6rem;
+  	color:#666666;
 }
 .sf_D.sf_Dbottm{
 	float: left;
@@ -182,8 +218,8 @@ b{
 	border-radius: 10px;
   	background-color: #f1f1f3;
   	margin:2rem auto 1.5rem;
-  	padding: 0 2%;
-  	width:90%;
+  	padding: 0 1rem;
+  	width:28.2rem;
   	overflow: hidden;
   	float: left;
 }
@@ -216,7 +252,6 @@ b{
 	margin-top: 15px;
 }
 .sf_bzright{
-	width:84%;
 	height: 11rem;
   	border-radius: 10px;
   	background-color: #f1f1f3;
@@ -568,6 +603,19 @@ b{
   margin-top:0.6rem;
   margin-right: 1.7rem;
 }
+.carnumberstotal{
+	display: inline-block;	
+}
+.carnumberstotal>li{
+	margin-bottom:1.8rem;
+}
+.carpai{
+font-size: 16px;
+  line-height: 1.6rem;
+  text-align: left;
+  color: #666666;
+  margin-right: 1rem;;
+}
 /****************************************物源详情页面*************************************************/
 .orderheader{
 	height: 11.2rem;
@@ -712,6 +760,9 @@ b{
 	float: left;
 	font-size: 16px;
 }
+.sf_PJwrap_p{
+	font-size: 16px;
+}
 .sf_name{
 	font-size: 16px;
 	line-height: 1.6rem;
@@ -721,6 +772,11 @@ b{
 	height: 1.6rem;
 	display: inline-block;
 	margin-right: 1rem;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.sf_name::after{
+	content: "...";
 }
 .sf_Dz{
 	overflow: hidden;
@@ -757,14 +813,16 @@ b{
 #appLoading img {
   	position:absolute;
   	z-index: 222;
-  	left:36.7%;
+  	left:30.7%;
   	top:30%;
   }
 #orderDetail,.sfRelease{
       	opacity: 0;
       	transition:opacity 3s;
       }
-
+.caDeOrder{
+	font-size: 16px;
+}
 /*********************************发布车源*********************************************/
 	/*.caiList{
 		
@@ -803,11 +861,12 @@ b{
   		border: none;
   		text-indent: 1rem;
   		background-color: #f1f1f3;
-  		height: 5rem;
-  		line-height: 5rem;
+  		height: 1.6rem;
+  		line-height: 1.6rem;
   		width:90%;
+  		padding:1.7rem 0 ;
 	}
-	.iconcar{
+	.iconcar,.iconmoney,.iconpeople,.status,.iconhuman{
 		display: inline-block;
 		width:2rem;
 		height: 1.6rem;
@@ -816,11 +875,37 @@ b{
 		margin-right: 1rem;
 		vertical-align: middle;
 	}
+	.iconhuman{
+		background:url(../image/renicon.png) no-repeat left center;
+		background-size:cover;
+	}
+	.iconmoney{
+		background:url(../image/icons.png) no-repeat left center;
+		background-size:cover;
+	}
+	.iconpeople{
+		background:url(../image/icons.png) no-repeat left center;
+		background-size:cover;
+	}
+	/*******************************************状态太框颜色改变*************************************/
+	.status{
+		width:4.1rem;
+		height: 1.8rem;
+		font-size: 12px;
+		line-height: 1.8rem;
+		text-align: center;
+		background: #ffffff;
+		color: #ffffff;
+		vertical-align: middle;
+	}
+	
+	.verticalm{
+		vertical-align: middle;
+	}
 	.iconcloose{
 		width:1.2rem;height: 1.2rem;
 		background: url(../image/closeicon.png) no-repeat left center;
 		background-size: cover;
-		
 		float: right;
 	}
 	.iconprice{
@@ -833,7 +918,7 @@ b{
 	}
 /**********************************发布货源*********************************************/
 	.Hmy_width{
-		width:96%;
+		width:31.5rem;
 		float: none;
 	}
 	.Hmy_widths{
@@ -890,7 +975,7 @@ b{
 		  text-indent: 0.5rem;
 		  display: inline-block;
 		  width:50%;
-		  	
+		  margin:0.5rem 0;
     }
     .hisCenterlist>div>span{
     	display: inline-block;
@@ -911,7 +996,7 @@ b{
     }
     .hisCenterlist_ul>li{
     	 	width: 31.5rem;
-		  height: 5.6rem;
+		 /* height: 9.6rem;*/
 		  border-radius: 2px;
 		  background-color: #f6f6f6;
 		  border: solid 1px #eeeeee;
@@ -965,8 +1050,11 @@ b{
 		  color: #3d3d3d;
 		  margin-right:1rem;
 	  }
-	  .cartotal>span:nth-child(3){
-		  color: #e65c5c;
+	  .cartotal>.red_color{
+		  color: #e65c5c;		  
+	  }
+	  .cartotal>.number_car{
+		  margin-top:1.8rem;	  
 	  }
 /******************历史接单人********************************/
 #sfCardetail{
@@ -986,7 +1074,7 @@ b{
       	border: none;
       	background: none;
       	line-height: 2.6rem;
-      	width:80%;
+      	width:77%;
       }
       .searchDaytime>span{
 		width:1.8rem;
@@ -997,12 +1085,27 @@ b{
 		display: inline-block;
 		float: left;
       }
+      .iconcloosebut{
+      	width:1.5rem;
+      	height: 1.5rem;
+      	display: block;
+      	background: url(../image/closebut.png)no-repeat left center;
+      	background-size:cover;
+      	margin:1rem 1rem 0 0;
+      	float: right;
+      }
 /****************************接单人详情**********************************/
-.red_color{
-		  color: #e65c5c;
+.bottomnews{
+	font-size: 12px;
+}
+	.red_color{
+		color: #e65c5c;
       }
       .gray_color{
       	color:#999999;
+      }
+      .yellow_color{
+      	color:#ffb600;
       }
       .carWrapsleft,.iconcarright{
       	float: left;
@@ -1067,7 +1170,137 @@ b{
 		background: url(../image/icons.png) no-repeat left center;
 		background-size: cover;
 	}
+	.buttonHmy{
+		text-align: right;
+		overflow: hidden;
+	}
+	.buttonHmy>span{
+		width: 10.4rem;
+		height: 2.4rem;
+		border-radius: 2px;
+		background-color: #f0f0f0;
+		display: inline-block;
+		font-size: 14px;
+		line-height: 2.4rem;
+	  text-align: center;
+	  color: #3d3d3d;
+	}
+.iconnext{
+	display: inline-block;
+	height: 1.6rem;
+	width:0.8rem;
+	background: url(../image/back-icon.png) no-repeat left top;
+	background-size: cover;
+	float: right;
+	margin:2.2rem 0;
+}
+.Order_p{
+	font-size: 16px;
+  line-height: 1.6rem;
+  text-align: left;
+  color: #3d3d3d;
+  margin-top:2rem;
+}
+/**********************************/
+.errorimg{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 14px;
+  	color: #999999;
+}
+.errorimg img{
+	width:12rem;
+	height: 10rem;
+	margin: 16rem 34% 3rem 34%;
+	display: inline-block;
+}
+/*****************司机行车路线****************************/
+  .addresswarp{
+	margin: 3rem 0;
+}
+.addresstop{
+	height: 1.5rem;
+	line-height: 1.5rem;
+	overflow: hidden;
+}
+.addresstop>i{
+	width: 1.2rem;
+	height: 1.5rem;background: red;display: inline-block;
+	margin: 0 2rem;
+	vertical-align: middle;float: left;
+}
+.addresstop>span{
+	display: inline-block;line-height: 1.5rem;vertical-align: middle;float: left;
+}
+.addressbtm>b{
+	width: 0.1rem;
+	height: 2rem;
+	background: green; margin:  0 2.5rem 0 2.6rem;display: inline-block;float: left;
+}
+.addressbtm>div{
+	display: inline-block;
+	width: 29.9rem;float: left;
+}
+.addressbtm>div>span,.addressbtm>div>i{
+display: inline-block;width: 29.9rem;
+}
+.addressbtm>div>i{
+height: 4rem;
+}
+/*面板*/
+.panel{
+    width: 100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0, 0, 0, .6);
+}
 
+.panel_is_show{
+   display: none;
+}
+
+.panel_content{
+    width:76%;
+    position: absolute;
+    left:12%;
+    top: 200px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.panel_title{
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 11rem;
+    line-height:11rem;
+}
+
+.panel_footer{
+    width: 100%;
+    height: 5rem;
+    background:url(../image/lines.png) repeat-y center;
+}
+.panel_footer button{
+    border:0;
+    width:48%;
+    height: 5rem;
+    background:none;
+}
+
+.panel_footer .cancel{
+    float: left;
+    border: none;
+}
+
+.panel_footer .submit{
+    float: right;
+    border: none;
+}
 
 
 
@@ -1095,7 +1328,7 @@ b{
 		}
 
 		.sf_h1{
-			font-size: 20px;
+			font-size: 18px;
 		}	
 		.sf_text{
 			font-size: 15px;
@@ -1182,15 +1415,16 @@ b{
 		.GDheaderMx span.sf_order_p{
 			font-size: 13px;
 		}
+		
 	/**********************************************物源详情*******************************************************/
 		.sf_ODheader>ul>li>span{
 			font-size: 12px;
 		}
 		.sf_ODheader>ul>li>span>p{
-			font-size: 10px;
+			font-size: 9px;
 		}
 		.sf_Fhtitle{
-			font-size: 18px;
+			font-size: 15px;
 		}
 		
 		.sf_WY_detail>dd>span{
@@ -1201,6 +1435,9 @@ b{
 		}
 /*******************************************货主评价************************************/
 		.sf_PJwrap>span{
+			font-size: 14px;
+		}
+		.sf_PJwrap_p{
 			font-size: 14px;
 		}
 		.sf_name{
@@ -1237,6 +1474,9 @@ b{
 	  .cartotal>span{
 	  	font-size: 16px;
 	  }
+	  .cartotal>.number_car span{
+		  font-size: 16px;
+	  }
 /*********************************发布车源*********************************************/
 	.caiList>ul>li>div{
 		font-size: 14px;
@@ -1265,6 +1505,38 @@ b{
 	  .cartotal>span{
 	  	font-size: 14px;
 	  }
+	  .cartotal>.number_car span{
+		  font-size: 14px;
+	  }
+	.buttonHmy>span{
+		font-size: 12px;
+	}
+	.bottomnews{
+		font-size: 10px;
+	}
+	.allcarlist>ul>li{
+      	font-size:14px;
+      }
+	.status{
+		font-size: 10px;
+	}
+.Order_p{
+	font-size: 12px;
+}
+.carpai{
+font-size: 14px;
+
+}
+.errorimg{
+	font-size: 10px;
+}
+.caDeOrder{
+	font-size: 14px;
+}
+.sf_font{
+	font-size: 14px;
+}
+
 
 
 
@@ -1284,7 +1556,7 @@ b{
 		}
 
 	.sf_h1{
-		font-size: 22px;
+		font-size: 19px;
 	}	
 	.sf_text{
 		font-size: 16px;
@@ -1370,7 +1642,7 @@ b{
 		font-size: 11px;
 	}
 	.sf_Fhtitle{
-		font-size: 19px;
+		font-size: 17px;
 	}
 	
 	.sf_WY_detail>dd>span{
@@ -1383,6 +1655,9 @@ b{
 	.sf_PJwrap>span{
 		font-size: 15px;
 	}
+	.sf_PJwrap_p{
+	font-size: 15px;
+}
 	.sf_name{
 		font-size: 15px;
 	}
@@ -1398,7 +1673,7 @@ b{
 	}
 /************************************我的物源的货源详情*************************************************/
     .histroyWrap>span:nth-child(1){
-    	font-size: 9px;
+    	font-size: 20px;
     }
     .histroyWrap>span:nth-child(2){
     	font-size: 15px;
@@ -1417,6 +1692,40 @@ b{
 	  .cartotal>span{
 	  	font-size: 15px;
 	  }
+	  .cartotal>.number_car span{
+		  font-size: 15px;
+	  }
+	.buttonHmy>span{
+			font-size: 13px;
+		}
+	.bottomnews{
+		font-size: 10px;
+	}
+	.allcarlist>ul>li{
+      	font-size:15px;
+      }
+	.status{
+			font-size: 10px;
+		}
+.Order_p{
+	font-size: 14px;
+}
+.carpai{
+font-size: 15px;
+
+}
+.errorimg{
+	font-size: 12px;
+}
+.caDeOrder{
+	font-size: 15px;
+}
+.sf_font{
+	font-size: 15px;
+}
+
+
+
 	
 	
 	
@@ -1434,7 +1743,7 @@ b{
 			font-size: 14px;
 		}
 	.sf_h1{
-		font-size: 25px;
+		font-size: 21px;
 	}	
 	.sf_text{
 		font-size: 18px;
@@ -1523,7 +1832,7 @@ b{
 		font-size: 10px;
 	}
 	.sf_Fhtitle{
-		font-size: 20px;
+		font-size: 18px;
 	}
 	
 	.sf_WY_detail>dd>span{
@@ -1536,6 +1845,9 @@ b{
 		.sf_PJwrap>span{
 			font-size: 16px;
 		}
+		.sf_PJwrap_p{
+	font-size: 16px;
+}
 		.sf_name{
 			font-size: 16px;
 		}
@@ -1570,7 +1882,43 @@ b{
 	  .cartotal>span{
 	  	font-size: 16px;
 	  }
-		
+	  .cartotal>.number_car span{
+		  font-size: 16px;
+	  }
+	.buttonHmy>span{
+		font-size: 14px;
+	}
+	.bottomnews{
+		font-size: 12px;
+	}
+	.allcarlist>ul>li{
+      	font-size:16px;
+      }
+	.status{
+		font-size: 12px;
+	}
+	.Order_p{
+	font-size: 16px;
+}
+.carpai{
+font-size: 15px;
+
+}
+.errorimg{
+	font-size: 14px;
+}
+.caDeOrder{
+	font-size: 16px;
+}		
+.sf_font{
+	font-size: 16px;
+}
+
+
+
+
+
+
 		
 }
 /*1.5倍*/
@@ -1585,7 +1933,7 @@ b{
 			font-size: 18px;
 		}
 	.sf_h1{
-		font-size: 35px;
+		font-size: 31px;
 	}	
 	.sf_text{
 		font-size: 24px;
@@ -1684,6 +2032,9 @@ b{
 		.sf_PJwrap>span{
 			font-size: 24px;
 		}
+		.sf_PJwrap_p{
+	font-size: 24px;
+}
 		.sf_name{
 			font-size: 24px;
 		}
@@ -1717,7 +2068,43 @@ b{
 
 	  .cartotal>span{
 	  	font-size: 24px;
-	  }		
+	  }	
+	  .cartotal>.number_car span{
+		  font-size: 24px;
+	  }	
+	.buttonHmy>span{
+		font-size: 20px;
+	}
+.bottomnews{
+	font-size: 18px;
+}	
+.allcarlist>ul>li{
+      	font-size:24px;
+      }	
+	.status{
+		font-size: 18px;
+	}
+	.Order_p{
+	font-size: 24px;
+}
+.carpai{
+font-size: 24px;
+}
+.errorimg{
+	font-size: 21px;
+}
+.caDeOrder{
+	font-size: 24px;
+}
+.sf_font{
+	font-size: 24px;
+}
+
+
+
+
+	
+	
 		
 }
 
@@ -1733,7 +2120,7 @@ b{
 			font-size: 24px;
 		}
 	.sf_h1{
-		font-size: 50px;
+		font-size: 42px;
 	}	
 	.sf_text{
 		font-size: 36px;
@@ -1819,7 +2206,7 @@ b{
 		font-size: 20px;
 	}
 	.sf_Fhtitle{
-		font-size: 40px;
+		font-size: 37px;
 	}
 	
 	.sf_WY_detail>dd>span{
@@ -1832,6 +2219,9 @@ b{
 		.sf_PJwrap>span{
 			font-size: 32px;
 		}
+		.sf_PJwrap_p{
+	font-size: 32px;
+}
 		.sf_name{
 			font-size: 32px;
 		}
@@ -1865,7 +2255,41 @@ b{
 
 	  .cartotal>span{
 	  	font-size: 32px;
-	  }		
+	  }	
+	  .cartotal>.number_car span{
+		  font-size: 32px;
+	  }
+	 .buttonHmy>span{
+		font-size: 22px;
+	} 
+	.bottomnews{
+		font-size: 22px;
+	}	  
+	.allcarlist>ul>li{
+	  	font-size:30px;
+	  }	  
+	.status{
+		font-size: 22px;
+	}  	
+	.Order_p{
+	font-size: 30px;
+	}
+	.carpai{
+font-size: 32px;
+
+}
+.errorimg{
+	font-size: 28px;
+}	
+.caDeOrder{
+	font-size: 32px;
+}
+.sf_font{
+	font-size: 30px;
+}
+
+
+	
 		
 }
 

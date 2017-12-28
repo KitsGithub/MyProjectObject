@@ -10,4 +10,6 @@
 
 @interface SFTransportDetailController : BaseViewController
 
+@property (nonatomic, copy) NSString *orderId;
+@property (nonatomic, copy) NSString *carNo;
 @end

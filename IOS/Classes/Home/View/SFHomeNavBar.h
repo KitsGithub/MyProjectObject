@@ -25,6 +25,8 @@
 @interface SFHomeNavBar : UIView
 
 @property (nonatomic, copy) NSString *searchImage;
+@property (nonatomic, assign) NSInteger currentIndex;
+
 - (void)setLineViewHidden:(BOOL)hidden;
 
 @property (nonatomic, weak) id <SFHomeNavBarDelegate> delegate;

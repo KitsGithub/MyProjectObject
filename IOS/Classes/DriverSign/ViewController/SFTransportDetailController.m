@@ -13,7 +13,7 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
 
 @interface SFTransportDetailController () <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray <SFSignInfoModel *>*dataArray;
 
 @end
 
@@ -27,12 +27,38 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
     [self setCustomTitle:@"详情"];
     
     [self setupView];
-    
+    [self requestDetailWithAnimation:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)requestDetailWithAnimation:(BOOL)animation {
+    if (animation) {
+        [SFLoaddingView loaddingToView:self.view];
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"OrderId"] = self.orderId;
+    params[@"CarNo"] = self.carNo;
+    [[SFNetworkManage shared] postWithPath:@"/Driver/GetDriverTransport"
+                                    params:params
+                                   success:^(id result)
+    {
+        NSMutableArray *dataArray = [SFSignInfoModel mj_objectArrayWithKeyValuesArray:result];
+        [_tableView.mj_header endRefreshing];
+        if (!dataArray.count) {
+            [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_NoMoreData) toView:self.view reloadBlock:nil];
+        }
+        [SFLoaddingView dismiss];
+        self.dataArray = dataArray;
+        [_tableView reloadData];
+        
+    } fault:^(SFNetworkError *err) {
+        [_tableView.mj_header endRefreshing];
+    }];
 }
 
 - (void)setupView {
@@ -51,6 +77,11 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
 #endif
+    
+    __weak typeof(self) weakSelf = self;
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf requestDetailWithAnimation:NO];
+    }];
 }
 
 
@@ -59,7 +90,7 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,6 +107,7 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
         cell.showLineView = YES;
     }
     
+    cell.model = self.dataArray[indexPath.row];
     return cell;
 }
 
@@ -87,9 +119,6 @@ static NSString *TransportDetailCellReusedID = @"TransportDetailCellReusedID";
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
-        for (NSInteger index = 0; index < 10; index++) {
-            [_dataArray addObject:@(index)];
-        }
     }
     return _dataArray;
 }

@@ -43,7 +43,6 @@
     _message = [UILabel new];
     _message.font = FONT_COMMON_16;
     _message.textColor = [UIColor colorWithHexString:@"#666666"];
-    _message.text = @"水果 10吨 50方";
     _message.numberOfLines = 0;
     [self addSubview:_message];
     
@@ -54,6 +53,10 @@
 
 - (void)setTitleStr:(NSString *)titleStr {
     _titleLabel.text = titleStr;
+}
+
+- (void)setMessageStr:(NSString *)messageStr {
+    _message.text = messageStr;
 }
 
 - (void)layoutSubviews {

@@ -1,43 +1,60 @@
-SFAppData = {
-   	CarrierId : '88383c70-f27b-43cc-98a5-d073a67de554'
+var SFAppDatas={
+	 UserId:$.query.get("UserId"),
+	 OrderId:$.query.get("OrderId")
 };
-
-function showData(){
-	var app = new Vue({
-	    el: '#carrierDetail',
-	    data:function(){
-	    	return{
-	    		carrierMessage:{},		//承运人基本信息	json
-	    		assess_list:[]	//承运人评价列表  [object,...]
-	    	}
-	    },
-	    created:function(){	            
-		    this.ajaxgoods();
+console.log(SFAppDatas);
+var app = new Vue({
+    el: '#orderDetail',
+    data:function(){
+    	return{
+    		datas:{},		//订单数据	json
+			arrs:[],
+			header_src:"",
+			isError:false,
+			isWiFi:false,
+    	}
+    },
+    created:function(){	
+    	// navigation.setTitle("接单人信息");
+	    this.ajaxgoods();
+	},
+    methods: {
+        ajaxgoods: function (event) {
+        	var that = this;
+        	var requestURL = appURL + "/Order/GetUserAssess";
+          $.ajax({
+		        url: requestURL,
+		        type: "POST",
+		        dataType: "json",
+		        data :SFAppDatas,
+		        success: function (data) {
+		        	console.log(data)
+		        	if(data.Code==0){
+		        		that.datas 			= data.Data.user_info;
+	        			that.arrs 	= data.Data.assess_Info;
+	        			that.header_src = that.HmyAppurl +data.Data.user_info.head_src;	
+		        	}else{
+		        		that.isError=true;	
+		        	}
+		        	
+	        		$("#orderDetail").css("opacity",'1');
+			    	$("#appLoading").css("opacity",'0');
+			    	$("#appLoading").remove();
+		        },
+		        error: function (error) {
+		        	$("#orderDetail").css("opacity",'1');
+			    	$("#appLoading").css("opacity",'0');
+			    	$("#appLoading").remove();
+			    	that.isWiFi=true;
+		        }
+		    });
+        },
+        loadingagain:function(){
+	   		window.location.reload();
 		},
-	    methods: {
-	        ajaxgoods: function (event) {
-	        	var that = this;
-	        	var requestURL = appURL + "/Cars/GetCarrierInfo";
-	          $.ajax({
-			        url: requestURL,
-			        type: "POST",
-			        dataType: "json",
-			        data :SFAppData,
-			        success: function (data) {
-			        	// var head_src = appResourceURL + "/"+ data.Data.head_src
-			        	// data.Data.goods_details.head_src = head_src
-			        	// alert(data.Data.name)
-			        	that.carrierMessage = data.Data;
-			        	that.assess_list 	= data.Data.assess_list;
-			        },
-			        error: function (error) {
-			        	confirm("请检查网络")
-			        }
-			    });
-	        }
-	    }
-	});
-};
+    }
+});
+
 
 
 function carrierDetail_success(){
@@ -51,4 +68,4 @@ function carrierDetail_error(errorData){
 };
 
 
-showData();
+//showData();

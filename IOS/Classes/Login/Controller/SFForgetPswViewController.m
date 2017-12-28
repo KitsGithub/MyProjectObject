@@ -61,8 +61,28 @@
         return;
     }
     
-    [[SFTipsView shareView] showSuccessWithTitle:@"修改密码成功"];
-    [self backAction];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"Mobile"] = self.phone;
+    params[@"NewPwd"] = [pasword1 md5String];
+    [[SFNetworkManage shared] postWithPath:@"MyCenter/ResetPassword"
+                                    params:params
+                                   success:^(id result)
+     {
+         [SVProgressHUD dismiss];
+         if (result) {
+             [[SFTipsView shareView] showSuccessWithTitle:@"修改密码成功"];
+             [self backAction];
+             
+         }
+         
+     } fault:^(SFNetworkError *err) {
+         [SVProgressHUD dismiss];
+         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+     }];
+    
+    
+    
 }
 
 - (void)setupView {

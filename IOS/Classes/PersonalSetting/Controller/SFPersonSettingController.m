@@ -35,11 +35,17 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
     
     [self setNav];
     [self setupView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoChange) name:SF_USER_MESSAGECHANGE_N object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)UserInfoChange {
+    [_tableView reloadData];
 }
 
 
@@ -66,24 +72,67 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-    NSLog(@"%@",info);
-    
     UIImage *image = info[@"UIImagePickerControllerEditedImage"];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
     [SVProgressHUD show];
-    
-    [[SFNetworkManage shared] postWithPath:@"" params:@{} success:^(id result) {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *url = [UploadResouce_URL stringByAppendingString:@"/PersonalData/AddHeadPic"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    [manager POST:url parameters:params  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
-    } fault:^(SFNetworkError *err) {
+        [formData appendPartWithFileData:imageData name:@"HeadPic" fileName:@"file" mimeType:@"image/jpeg"];
         
-    }];
-    
-    [[SFNetworkManage shared] postWithPath:@"/MyCenter/ModifyProfile" params:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
         
-    } progress:^(double progress) {
-        
-    } success:^(id result) {
-        
-    } fault:^(SFNetworkError *err) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        NSMutableDictionary *result = (NSMutableDictionary *)responseObject;
+        if ([result[@"Code"] intValue] == 0) {
+            NSString *smallHead = result[@"Data"][@"small_head_src"];
+            
+            
+            NSMutableDictionary *params = [NSMutableDictionary dictionary];
+            params[@"UserId"] = USER_ID;
+            params[@"HeadSrc"] = smallHead;
+            
+            [[SFNetworkManage shared] postWithPath:@"MyCenter/ModifyProfile"
+                                            params:params
+                                           success:^(id result)
+             {
+                 if (result) {
+                     [[SFTipsView shareView] showSuccessWithTitle:@"修改头像成功"];
+                     
+                     //保存新的用户信息
+                     SFUserInfo *account = SF_USER;
+                     if (smallHead.length) {
+                         account.small_head_src = smallHead;
+                         [account saveUserInfo];
+                     }
+                     
+                     [[NSNotificationCenter defaultCenter] postNotificationName:SF_USER_MESSAGECHANGE_N object:nil];
+                     
+                     
+                 } else {
+                     [[SFTipsView shareView] showFailureWithTitle:@"修改昵称失败"];
+                 }
+                 
+                 
+             } fault:^(SFNetworkError *err) {
+                 [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+             }];
+            
+            
+            
+            
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"修改头像失败"];
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[SFTipsView shareView] showFailureWithTitle:@"修改头像失败"];
+        [SVProgressHUD dismiss];
         
     }];
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -156,6 +205,7 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
     NSArray *detailArray = self.detailArray[indexPath.section];
     if (indexPath.section == 0 && indexPath.row == 0) {
         cell.showHeaderView = YES;
+        cell.imageURL = detailArray[0];
     } else if (indexPath.section == 1) {
         cell.showArrowImage = NO;
     }
@@ -188,7 +238,7 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
 
 - (NSMutableArray<NSArray *> *)titleArray {
     if (!_titleArray) {
-        NSArray *arr1 = @[@"头像",@"昵称",@"性别"];
+        NSArray *arr1 = @[@"头像",@"昵称"];
         NSArray *arr2 = @[@"我的账户",@"绑定手机",@"修改密码"];
         _titleArray = [NSMutableArray arrayWithObjects:arr1,arr2, nil];
     }
@@ -196,12 +246,10 @@ static NSString *PersonalSettingHeaderId = @"PersonalSettingHeaderId";
 }
 
 - (NSMutableArray<NSArray *> *)detailArray {
-    if (!_detailArray) {
-        SFUserInfo *account = SF_USER;
-        NSArray *arr1 = @[account.small_head_src,account.name,account.sex];
-        NSArray *arr2 = @[account.name,account.mobile,@""];
-        _detailArray = [NSMutableArray arrayWithObjects:arr1,arr2, nil];
-    }
+    SFUserInfo *account = SF_USER;
+    NSArray *arr1 = @[[NSString stringWithFormat:@"%@%@",Resource_URL,account.small_head_src],account.name];
+    NSArray *arr2 = @[account.account,account.mobile,@""];
+    _detailArray = [NSMutableArray arrayWithObjects:arr1,arr2, nil];
     return _detailArray;
 }
 

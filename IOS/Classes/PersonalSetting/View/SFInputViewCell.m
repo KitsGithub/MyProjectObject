@@ -12,7 +12,6 @@
     UIView *_conterView;
     UITextField *_textField;
     
-    UIButton *_button;
 }
 
 - (void)awakeFromNib {
@@ -49,7 +48,7 @@
     _textField.clearsOnBeginEditing = YES;
     _textField.delegate = self;
     
-    _button = [UIButton new];
+    self.button = [UIButton new];
     [self addSubview:_button];
     _button.backgroundColor = THEMECOLOR;
     _button.layer.cornerRadius = 4;
@@ -76,7 +75,7 @@
     
 }
 
-- (void)setButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action; {
+- (void)setButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action {
     _button.hidden = NO;
     
     [_button setTitle:title forState:(UIControlStateNormal)];

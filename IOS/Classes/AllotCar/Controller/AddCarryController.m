@@ -27,8 +27,8 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationItem.backBarButtonItem.action = @selector(backAction);
-    self.title = @"匹配司机";
+    
+    
 //    [self setCustomTitle:@"匹配司机"];
     [self setupView];
 }
@@ -87,6 +87,9 @@ static NSString *AddCarrierDriverCellReusedID = @"AddCarrierDriverCellReusedID";
 }
 
 - (void)setupView {
+    self.title = @"匹配司机";
+//    self.navigationController.navigationItem.backBarButtonItem.action = @selector(backAction);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:(UIBarButtonItemStylePlain) target:self action:@selector(backAction)];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 50) style:(UITableViewStylePlain)];
     [self.view addSubview:_tableView];

@@ -10,6 +10,7 @@
 
 //跳转
 #import "SFBookingCarOrderViewController.h"
+#import "SFAuthStatuViewController.h"
 
 //自定义控件
 #import "SFCarDetailHeaderView.h"
@@ -48,6 +49,10 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
     [self requestCarOrderDetail];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,33 +60,65 @@ static NSString *CARDETAILCELL_ID = @"CARDETAILCELLID";
 
 - (void)requestCarOrderDetail {
     if (self.orderID.length) {
-        [SVProgressHUD show];
+        [SFLoaddingView loaddingToView:self.view];
         [[SFNetworkManage shared] postWithPath:@"Cars/GetCarDetails"
                                         params:@{
                                                  @"Guid" : self.orderID
                                                  }
                                        success:^(id result)
          {
-             [SVProgressHUD dismiss];
+             [SFLoaddingView dismiss];
              SFCarOrderDetailModel *model = [SFCarOrderDetailModel mj_objectWithKeyValues:result];
              self.carDetailModel = model;
              
              self.dataArray = model.car_info;
              
              _headerView.model = model;
-             _footerView.remark = model.attention_remark;
+             _footerView.remark = model.car_remark;
              
              [_tableView reloadData];
          } fault:^(SFNetworkError *err) {
-             [SVProgressHUD dismiss];
              [[SFTipsView shareView] showFailureWithTitle:@"请检查网络"];
+             __weak typeof(self) weakSelf = self;
+             [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+                 [weakSelf requestCarOrderDetail];
+             }];
          }];
     }
 }
 
 
 - (void)BookingCarOrder {
+    __weak typeof(self) weasSelf = self;
+    if (![SF_USER.verify_status isEqualToString:@"D"]) {
+        UIAlertController *alertVc;
+        UIAlertAction *action1;
+        UIAlertAction *action2;
+        if ([SF_USER.verify_status isEqualToString:@"B"]) {
+            alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"您提交的认证资料正在审核，请耐心等待" preferredStyle:(UIAlertControllerStyleAlert)];
+            action1 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+        } else {
+            alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未进行身份认证，请先去认证" preferredStyle:(UIAlertControllerStyleAlert)];
+            action1 = [UIAlertAction actionWithTitle:@"下次再说" style:(UIAlertActionStyleCancel) handler:nil];
+            action2 = [UIAlertAction actionWithTitle:@"去认证" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                SFAuthStatuViewController *auth = [[SFAuthStatuViewController alloc] initWithType:(SFAuthTypeUser) Status:SF_USER.authStatus];
+                auth.hidesBottomBarWhenPushed = YES;
+                [weasSelf.navigationController pushViewController:auth animated:YES];
+            }];
+        }
+        
+        [alertVc addAction:action1];
+        if (action2) {
+            [alertVc addAction:action2];
+        }
+        
+        
+        [self presentViewController:alertVc animated:YES completion:nil];
+        return;
+    }
     SFBookingCarOrderViewController *booking = [[SFBookingCarOrderViewController alloc] init];
+    booking.orderId = self.orderID;
+    booking.carListArray = [self.dataArray copy];
     [self.navigationController pushViewController:booking animated:YES];
 }
 

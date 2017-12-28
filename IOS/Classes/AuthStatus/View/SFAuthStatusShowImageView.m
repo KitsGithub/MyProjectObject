@@ -255,19 +255,24 @@
         NSString *url;
         switch (index) {
             case 0:
-                url = self.statusModel.idCardUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.idCardUrl];;
+                
                 break;
             case 1:
-                url = self.statusModel.idCardBackUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.idCardBackUrl];;
+                
                 break;
             case 2:
-                url = self.statusModel.lifePhotoUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.lifePhotoUrl];;
+                
                 break;
             case 3:
-                url = self.statusModel.businessLicenseUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.businessLicenseUrl];;
+                
                 break;
             case 4:
-                url = self.statusModel.shopPhotoUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.shopPhotoUrl];;
+                
             default:
                 break;
         }
@@ -283,19 +288,23 @@
         NSString *url;
         switch (index) {
             case 0:
-                url = self.statusModel.driverUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.DrivingCard];
                 break;
             case 1:
-                url = self.statusModel.driverBUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.DrivingCardBack];
+                
                 break;
             case 2:
-                url = self.statusModel.carHeadUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.CarAPhoto];
+                
                 break;
             case 3:
-                url = self.statusModel.carUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.CarBPhoto];
+                
                 break;
-            case 5:
-                url = self.statusModel.carTailUrl;
+            case 4:
+                url = [NSString stringWithFormat:@"%@",self.statusModel.CarCPhoto];
+                
             default:
                 break;
         }
@@ -312,13 +321,16 @@
         NSString *url;
         switch (index) {
             case 0:
-                url = self.statusModel.driverUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.driverUrl];;
+                
                 break;
             case 1:
-                url = self.statusModel.driverBUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.driverBUrl];;
+                
                 break;
             case 2:
-                url = self.statusModel.lifePhotoUrl;
+                url = [NSString stringWithFormat:@"%@",self.statusModel.lifePhotoUrl];;
+                
                 break;
             default:
                 break;
@@ -329,6 +341,7 @@
         [self.imageViewArray addObject:imageView];
     }
 }
+
 
 #pragma mark - 布局
 - (void)setupView {
@@ -347,8 +360,9 @@
     _titleLabel.frame = CGRectMake(20, 0, SCREEN_WIDTH - 40, 21);
     _lineView.frame = CGRectMake(20, CGRectGetHeight(self.frame) - 1, SCREEN_WIDTH - 40, 1);
     
-    CGFloat imageW = 142;
-    CGFloat imageH = 88;
+    
+    CGFloat imageW = (CGRectGetWidth(self.frame) - 60) / 2 > 140 ? 140 : (SCREEN_WIDTH - 60) / 2;
+    CGFloat imageH = imageW / (140 / 88.0);
     CGFloat baseY = CGRectGetMaxY(_titleLabel.frame) + 30;
     UIView *lastView;
     for (NSInteger index = 0; index < self.imageViewArray.count; index++) {
@@ -383,9 +397,9 @@
         if (self.type == SFAuthTypeUser) {
             [_placeHolderImageArray addObjectsFromArray:@[@"身份证正面",@"身份证背面",@"生活照",@"营业执照",@"门头照"]];
         } else if (self.type == SFAuthTypeCar) {
-            [_placeHolderImageArray addObjectsFromArray:@[@"机动车行驶证正面",@"机动车行驶证背面",@"车侧照",@"车头照",@"车尾照"]];
+            [_placeHolderImageArray addObjectsFromArray:@[@"行驶证主页",@"行驶证副页",@"车侧照",@"车头照",@"车尾照"]];
         } else {
-            [_placeHolderImageArray addObjectsFromArray:@[@"机动车行驶证正面",@"机动车行驶证背面",@"生活照"]];
+            [_placeHolderImageArray addObjectsFromArray:@[@"行驶证主页",@"行驶证副页",@"生活照"]];
         }
     }
     return _placeHolderImageArray;

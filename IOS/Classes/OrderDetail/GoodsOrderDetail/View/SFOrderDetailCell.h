@@ -11,5 +11,6 @@
 @interface SFOrderDetailCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *titleStr;
+@property (nonatomic, copy) NSString *messageStr;
 
 @end

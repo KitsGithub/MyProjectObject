@@ -16,6 +16,8 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
 @interface SFChangePasswordController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray <NSString *>*titleArray;
+@property (nonatomic, assign) NSInteger countDown;
+@property (nonatomic, strong) dispatch_source_t timer;
 
 @end
 
@@ -28,13 +30,15 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
     NSString *newPsw2;
     NSString *phoneNum;
     NSString *code;
+    
+    UIButton *_codeBtn;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setCustomTitle:@"修改密码"];
-    
+    phoneNum = SF_USER.mobile;
     [self setupView];
 }
 
@@ -43,13 +47,23 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    if (_timer) {
+       dispatch_source_cancel(_timer);
+    }
+}
+
 //获取验证码
 - (void)getCode {
     [self.view endEditing:YES];
-    if (![phoneNum isAvailableMobile]) {
+    if (![SF_USER.mobile isAvailableMobile]) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的手机号码"];
         return;
     }
+    
+    [self startCountDown];
+    
+    [SVProgressHUD show];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"UserId"] = USER_ID;
     params[@"Type"] = @"change_password";
@@ -58,7 +72,7 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
                                     params:params
                                    success:^(id result)
     {
-        
+        [SVProgressHUD dismiss];
         if (result) {
             [[SFTipsView shareView] showSuccessWithTitle:@"发送验证码成功,请注意查收"];
         } else {
@@ -66,7 +80,8 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
         }
         
     } fault:^(SFNetworkError *err) {
-        
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showFailureWithTitle:@"请检查网络"];
     }];
 }
 
@@ -103,9 +118,56 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
                                    success:^(id result)
     {
         
-    } fault:^(SFNetworkError *err) {
+        if (result) {
+            [[SFTipsView shareView] showSuccessWithTitle:@"修改成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"修改失败"];
+        }
         
+        
+    } fault:^(SFNetworkError *err) {
+        [[SFTipsView shareView] showFailureWithTitle:err.description];
     }];
+}
+
+
+/**
+ 开始定时器
+ */
+- (void)startCountDown {
+    _codeBtn.backgroundColor = COLOR_LINE_BLACK;
+    _codeBtn.userInteractionEnabled = NO;
+    __weak typeof(self) weakSelf = self;
+    
+    if (self.timer) {
+        return;
+    }
+    
+    self.countDown = 60;
+    
+    //1.创建类型为 定时器类型的 Dispatch Source
+    //1.1将定时器设置在主线程
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1ull * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        self.countDown--;
+        if (self.countDown < 0) {
+            dispatch_source_cancel(_timer);
+        } else {
+            [_codeBtn setTitle:[NSString stringWithFormat:@"%lds",weakSelf.countDown] forState:(UIControlStateNormal)];
+        }
+    });
+    
+    dispatch_source_set_cancel_handler(_timer, ^{
+        _codeBtn.userInteractionEnabled = YES;
+        [_codeBtn setTitle:@"获取验证码" forState:(UIControlStateNormal)];
+        [_codeBtn setBackgroundColor:THEMECOLOR];
+        _timer = nil;
+    });
+    
+    dispatch_resume(_timer);
 }
 
 
@@ -127,7 +189,10 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SFInputViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellReusedID forIndexPath:indexPath];
+    SFInputViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellReusedID];
+    if (!cell) {
+        cell = [[SFInputViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellReusedID];
+    }
     cell.placeHolder = self.titleArray[indexPath.row];
     cell.secureTextEntry = YES;
     if (indexPath.row == 3) {
@@ -136,7 +201,7 @@ static NSString *CellReusedID = @"SFPasswordInputViewCell";
         NSString *targetStr = [account.mobile stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
         [cell setValeWithStr:targetStr edittingEnable:NO];
         [cell setButtonWithTitle:@"获取验证码" target:self action:@selector(getCode)];
-        
+        _codeBtn = cell.button;
         
     } else if (indexPath.row == 4) {
         cell.secureTextEntry = NO;

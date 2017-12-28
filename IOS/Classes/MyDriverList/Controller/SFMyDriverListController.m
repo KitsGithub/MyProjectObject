@@ -35,6 +35,11 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
     
     [self setNav];
     [self setupView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self requestDriverList];
 }
 
@@ -45,6 +50,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
 
 //请求司机列表
 - (void)requestDriverList {
+    [SFLoaddingView loaddingToView:self.view];
     SFUserInfo *account = SF_USER;
     [[SFNetworkManage shared]postWithPath:@"Driver/GetMyDriverList"
                                    params:@{
@@ -52,6 +58,7 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
                                             }
                                   success:^(id result)
     {
+        [self.dataArray removeAllObjects];
         for (NSMutableDictionary *dic in result) {
             SFDriverModel *model = [SFDriverModel mj_objectWithKeyValues:dic];
             SFAuthStatusModle *status = [SFAuthStatusModle mj_objectWithKeyValues:dic];
@@ -59,10 +66,19 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
             [self.dataArray addObject:model];
         }
         
+        if (!self.dataArray.count) {
+            [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_NoMoreData) toView:_tableView reloadBlock:nil];
+            return ;
+        }
+        
+        [SFLoaddingView dismiss];
         [_tableView reloadData];
         
     } fault:^(SFNetworkError *err) {
-        
+        __weak typeof(self) weakSelf = self;
+        [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+            [weakSelf requestDriverList];
+        }];
     }];
 }
 
@@ -88,11 +104,11 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
     
     SFAuthStatusModle *statusModel = SF_USER.authStatus;
     
-    if ([statusModel.verify_status isEqualToString:@"B"]) {
-        [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加司机！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
+    if ([SF_USER.verify_status isEqualToString:@"B"]) { //审核中
+        [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加车辆！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
         return;
-    } else if ([statusModel.verify_status isEqualToString:@"C"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息尚未提交，请前往审核" message:@"注意：只有认证后的用户才可进行添加司机！" preferredStyle:(UIAlertControllerStyleAlert)];
+    } else if ([SF_USER.verify_status isEqualToString:@"F"]) {  //审核失败
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息未通过，请前往重新提交" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
         
         __weak typeof(self)wself = self;
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -108,8 +124,11 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
         [alert addAction:action2];
         [self.navigationController presentViewController:alert animated:YES completion:^{}];
         return;
-    } else if ([statusModel.verify_status isEqualToString:@"F"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息未通过，请前往重新提交" message:@"注意：只有认证后的用户才可进行添加司机！" preferredStyle:(UIAlertControllerStyleAlert)];
+    } else if ([SF_USER.verify_status isEqualToString:@"D"]) {
+        //审核成功
+        [self jumpToSFAuth:nil];
+    } else {  //未审核
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息尚未提交，请前往审核" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
         
         __weak typeof(self)wself = self;
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -126,12 +145,6 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
         [self.navigationController presentViewController:alert animated:YES completion:^{}];
         return;
     }
-    
-    [self jumpToSFAuth:nil];
-}
-
-- (void)jumpToUserIdentfly {
-    
 }
 
 - (void)SFDriverListCell:(SFDriverListCell *)cell didSelectedOptionsAtIndex:(NSInteger)index {
@@ -154,7 +167,11 @@ static NSString *DrivierListCellReusedID = @"DrivierListCellReusedID";
         
     } else {
         //认证失败
-        [self jumpToSFAuth:cell.model];
+        if (index == 0) {
+            [self deletedDirver:cell.model withIndexPath:indexPath];
+        } else {
+            [self jumpToSFAuth:cell.model];
+        }
     }
 }
 

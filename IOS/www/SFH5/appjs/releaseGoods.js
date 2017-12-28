@@ -1,6 +1,6 @@
 //原生调用暂存的方法
-function rendCardetail(orderId){
-		justCar();		    
+function rendCardetail(){
+		justCar("B");		    
 }
 
 //请求原生地址插件
@@ -58,7 +58,7 @@ ReleaseDayeMehtod($("#cartimeType"),"cartimeType");
 
 
 ////点击立即发布
-function justCar(){
+function justCar(toAB){
 	//出发城市
 	var sf_fromAdd=$("#sf_fromAdd");
 	var input_from_detail = $("#input_from_detail");
@@ -122,8 +122,12 @@ function justCar(){
 		
 		var fromObj = toCityObj($("#sf_fromAdd").val()); 
 		var toObj   = toCityObj($("#toAddress").val());	
-		goodsmodel = GoodsModel(fromObj,toObj);
-		releaseGoodsnews(goodsmodel);
+		goodsmodel = GoodsModel(fromObj,toObj,toAB);
+		if (toAB == "B") {
+			releaseGoodsnews(goodsmodel,"暂存成功","暂存失败");
+		} else {
+			releaseGoodsnews(goodsmodel,"发布成功","发布失败");
+		};
 	}
 	
 	
@@ -131,29 +135,34 @@ function justCar(){
 
 //appURL+"/Goods/PublishGoodsSrc"
 //点立即发布，发送数据给后台
-function releaseGoodsnews(datas){
+function releaseGoodsnews(datas,message,errorMessage){
+	$(".contents").css("display","none");
+	$("#appLoading").css("display","block");
 	$.ajax({
-	        url:"http://192.168.112.157:8888/API/api/Goods/PublishGoodsSrc",
+	        url:appURL+"/Goods/PublishGoodsSrc",
 	        type: "post",
 	        dataType:"json",
 	        data: datas,
 	        success: function (data) {
 	            console.log(data);
 	            if (data.Code != 1) {
-	            	showSuccessMessage("发布成功");
+	            	showSuccessMessage(message);
 		            if (!orderId.length) {
 		            	navigation.dismiss(null,null);
 		            } else {
 		            	navigation.pop(null,null);
 		            };
 	            } else {
-	            	showErrorMessage("发布失败");
+	            	showErrorMessage(errorMessage);
 	            };
-	            
+	             $(".contents").css("display","block");
+				$("#appLoading").css("display","none");
 	            
 	        },
 	        error: function (error) {
-	            showErrorMessage("发布失败")
+	            showErrorMessage(errorMessage);
+	             $(".contents").css("display","block");
+				$("#appLoading").css("display","none");
 	        }
 		});
 }
@@ -191,41 +200,45 @@ function temporaryDetail(data){
 	var toAddress=$("#toAddress").val(data.to_province+"-"+data.from_city+"-"+data.to_district);;
 	var input_to_detail = $("#input_to_detail").val(data.to_address);
 	var input_remark = $("#input_remark").val(data.attention_remark);
-	
+	var carType= $("#carType").val(data.car_type);
 	var goodsTypename = $("#goodsTypename").val(data.goods_name);
 	var goodsType = $("#goodsType").val(data.goods_type);
 	var goodsweight = $("#goodsweight").val(data.goods_weight);
-	var goodsvolume = $("#goodsvolume").val(data.weight_unit);
-	var carType= $("#carType").val(data.car_type);
+	var goodsvolume = $("#goodsvolume").val(data.goods_size);
 	var carlongType=$("#carlongType").val(data.car_long);
-	var carCycleType=$("#carCycleType").val(data.cycle);
-	var cartimeType=$("#cartimeType").val(data.shipment_date);
+	//var carCycleType=$("#carCycleType").val(data.cycle);
+	//var cartimeType=$("#cartimeType").val(data.shipment_date);
 	var goodsprice=$("#goodsprice").val(data.price);
 	var Consignee=$("#Consignee").val(data.delivery_by);
 	var phoneNumber=$("#phoneNumber").val(data.delivery_mobile);
 	var carNumber = $("#carNumber").val(data.car_count);
+	switch (data.cycle){
+		case 0:
+			var carCycleType=$("#carCycleType").val("只发布一次");
+			break;
+		case 1:
+			var carCycleType=$("#carCycleType").val("发布一个月");
+			break;
+		case 2:
+			var carCycleType=$("#carCycleType").val("发布半年");
+			break;
+		case 3:
+			var carCycleType=$("#carCycleType").val("发布一年");
+			break;
+		case 4:
+			var carCycleType=$("#carCycleType").val("长期有效");
+			break;
+		default:
+			break;
+	};
+	if(data.cycle!=0){
+		var cartimeType=$("#cartimeType").val(data.shipment_time);
+	}else{
+		var cartimeType=$("#cartimeType").val(data.shipment_date);
+	};
 	
 	
-	//去掉默认属性值
-	var sf_fromAddPlac=$("#sf_fromAdd").attr("placeholder","");
-	var input_from_detailPlac =  $("#input_from_detail").attr("placeholder","");
-	
-	var toAddressPlac=$("#toAddress").attr("placeholder","");
-	var input_to_detailPlac = $("#input_to_detail").attr("placeholder","");
-	var input_remarkPlac = $("#input_remark").attr("placeholder","");
-	
-	var goodsTypenamePlac = $("#goodsTypename").attr("placeholder","");
-	var goodsTypePlac = $("#goodsType").attr("placeholder","");
-	var goodsweightPlac = $("#goodsweight").attr("placeholder","");
-	var goodsvolumePlac = $("#goodsvolume").attr("placeholder","");
-	var carTypePlac= $("#carType").attr("placeholder","");
-	var carlongTypePlac=$("#carlongType").attr("placeholder","");
-	var carCycleTypePlac=$("#carCycleType").attr("placeholder","");
-	var cartimeTypePlac=$("#cartimeType").attr("placeholder","");
-	var goodspricePlac=$("#goodsprice").attr("placeholder","");
-	var ConsigneePlac=$("#Consignee").attr("placeholder","");
-	var phoneNumberPlac=$("#phoneNumber").attr("placeholder","");
-	var carNumberPlac = $("#carNumber").attr("placeholder","");
-}
+
+};
 
 // requestCardetail()

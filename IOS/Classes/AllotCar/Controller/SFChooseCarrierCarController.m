@@ -35,21 +35,30 @@ static NSString *ChooseCarCellReusedID = @"ChooseCarCellReusedID";
 }
 
 - (void)getIdentflyCarList {
+    [SFLoaddingView loaddingToView:self.view];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    params[@"carType"] = self.carType;
+    params[@"carLong"] = self.carLong;
     [[SFNetworkManage shared] postWithPath:@"Cars/GetCarNoList"
-                                    params:@{
-                                             @"UserId" : USER_ID
-                                             }
+                                    params:params
                                    success:^(id result)
     {
         NSMutableArray *dataArray = [SFCarListModel mj_objectArrayWithKeyValuesArray:result];
-        
-        self.dataArray = [self screenDataFromArray:dataArray];
-        
-        [_tableView reloadData];
-        
+        if (dataArray.count) {
+            [SFLoaddingView dismiss];
+            self.dataArray = [self screenDataFromArray:dataArray];
+            [_tableView reloadData];
+        } else {
+            [[SFTipsView shareView] showFailureWithTitle:@"抱歉，您没有货主需求的车辆"];
+            [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_NoMoreData) toView:self.view reloadBlock:nil];
+        }
         
     } fault:^(SFNetworkError *err) {
-        
+        __weak typeof(self) weakSelf = self;
+        [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+            [weakSelf getIdentflyCarList];
+        }];
     }];
 }
 

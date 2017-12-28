@@ -85,6 +85,8 @@ CGFloat iconWH = 38;
     if (model.head_src.length) {
         NSString *headURL = [NSString stringWithFormat:@"%@%@",Resource_URL,model.head_src];
         [_userIcon sd_setImageWithURL:[NSURL URLWithString:headURL] placeholderImage:[UIImage imageNamed:@"Default_Head"] options:(SDWebImageContinueInBackground)];
+    } else {
+        [_userIcon setImage:[UIImage imageNamed:@"Default_Head"]];
     }
     
     [_detailView setModel:model withIsShowLine:!resourceType];
@@ -104,7 +106,7 @@ CGFloat iconWH = 38;
     if (!model.issueCount.length) {
         model.issueCount = @"0";
     }
-    _times.text = [NSString stringWithFormat:@"发货：%@次",model.issueCount];
+    _times.text = [NSString stringWithFormat:@"发货:%@次",model.issueCount];
     
     hasSubView = YES;
     [self setNeedsLayout];
@@ -121,11 +123,19 @@ CGFloat iconWH = 38;
         
         _userIdentifly.frame = CGRectMake(CGRectGetMaxX(_userIcon.frame) + 10, CGRectGetMaxY(_userIcon.frame) - 15, 36, 14);
         
-        
-        CGSize nameSize = [_userName.text sizeWithFont:NameFont maxSize:CGSizeMake(MAXFLOAT, 20)];
+        CGFloat a = SCREEN_WIDTH;
+        CGSize nameSize;
+        if (a == 320) {
+            nameSize = [_userName.text sizeWithFont:NameFont maxSize:CGSizeMake(100, 20)];
+        } else {
+            nameSize = [_userName.text sizeWithFont:NameFont maxSize:CGSizeMake(MAXFLOAT, 20)];
+        }
         _userName.frame = CGRectMake(CGRectGetMaxX(_userIdentifly.frame) + 5, CGRectGetMinY(_userIdentifly.frame), nameSize.width, nameSize.height);
         
-        CGSize timesSize = [_times.text sizeWithFont:SubFont maxSize:CGSizeMake(MAXFLOAT, 20)];
+        
+        CGFloat width = CGRectGetWidth(self.frame) - CGRectGetMaxX(_userName.frame);
+        
+        CGSize timesSize = [_times.text sizeWithFont:SubFont maxSize:CGSizeMake(width, 20)];
         _times.frame = CGRectMake(CGRectGetMaxX(_userName.frame) + 5, CGRectGetMinY(_userName.frame), timesSize.width, timesSize.height);
         
         hasSubView = NO;

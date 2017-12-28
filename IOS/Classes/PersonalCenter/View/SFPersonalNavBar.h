@@ -30,7 +30,7 @@ typedef enum : NSUInteger {
 @interface SFPersonalNavBar : UIView
 
 - (void)setNavBarStyle:(BarStyle)barStyle;
-
+- (void)setUnreadMessage;
 - (void)setLineViewHidden:(BOOL)hidden;
 
 @property (nonatomic, weak) id <SFPersonalNavBarDelegate>delegate;

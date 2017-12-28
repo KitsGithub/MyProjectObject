@@ -9,18 +9,21 @@
 #import "SFOrderDetailController.h"
 
 #import "SFBookingGoodOrderController.h"
+#import "SFAuthStatuViewController.h"
 
 #import "SFCarDetailHeaderView.h"
 #import "SFCarDetailFooterView.h"
 #import "SFOrderDetailCell.h"
+#import "SFGoodsDetailModel.h"
 
 static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
 
 @interface SFOrderDetailController () <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) NSMutableArray *titleArray;
+@property (nonatomic, strong) NSMutableArray <NSString *>*titleArray;
+@property (nonatomic, strong) NSMutableArray <NSString *>*messageArray;
 
-@property (nonatomic, strong) SFCarOrderDetailModel *detailModel;
+@property (nonatomic, strong) SFGoodsDetailModel *detailModel;
 
 @end
 
@@ -56,33 +59,94 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
 }
 
 - (void)getOrderDetail {
-    [SVProgressHUD show];
+    [SFLoaddingView loaddingToView:self.view];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"Guid"] = self.orderID;
     [[SFNetworkManage shared] postWithPath:@"Goods/GetGoodsDetails"
                                     params:params
                                    success:^(id result)
     {
-        [SVProgressHUD dismiss];
-        SFCarOrderDetailModel *model = [SFCarOrderDetailModel mj_objectWithKeyValues:result];
+        [SFLoaddingView dismiss];
+        SFGoodsDetailModel *model = [SFGoodsDetailModel mj_objectWithKeyValues:result];
         self.detailModel = model;
         
         _header.model = model;
         _footerView.remark = model.attention_remark;
         
+        NSString *weight = @"";
+        if (![model.goods_size isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            weight = [NSString stringWithFormat:@"%@吨",model.goods_weight];
+        }
+        
+        NSString *size = @"";
+        if (![model.goods_size isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            size = [NSString stringWithFormat:@"%@方",model.goods_size];
+        }
+        
+        
+        NSString *orderDetail = [NSString stringWithFormat:@"%@ %@ %@ %@ ",model.goods_type,model.goods_name,weight,size];
+        
+        NSString *carDemand = @"任意车辆";
+        if (model.car_type.length && model.car_long.length && ![model.car_count isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            carDemand = [NSString stringWithFormat:@"%@ %@ %@辆",model.car_type,model.car_long,model.car_count];
+        }
+        
+        
+        NSString *price = @"面议";
+        if (model.price.length) {
+            price = [NSString stringWithFormat:@"%@元/车",model.price];
+        }
+        
+        NSString *message = @"暂无收货人信息";
+        if (model.delivery_by.length && model.delivery_mobile.length) {
+            message = [NSString stringWithFormat:@"%@ %@",model.delivery_by,model.delivery_mobile];
+        }
+        
+        
+        [self.messageArray addObjectsFromArray:@[orderDetail,carDemand,price,message]];
+        
         [_tableView reloadData];
         
     } fault:^(SFNetworkError *err) {
-        [SVProgressHUD dismiss];
         [[SFTipsView shareView] showFailureWithTitle:@"请检查网络"];
+        __weak typeof(self) weakSelf = self;
+        [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+            [weakSelf getOrderDetail];
+        }];
     }];
-    
-    
 }
 
 #pragma mark - UIAction
 - (void)BookingGoodOrder {
+    __weak typeof(self) weasSelf = self;
+    if (![SF_USER.verify_status isEqualToString:@"D"]) {
+        UIAlertController *alertVc;
+        UIAlertAction *action1;
+        UIAlertAction *action2;
+        if ([SF_USER.verify_status isEqualToString:@"B"]) {
+            alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"您提交的认证资料正在审核，请耐心等待" preferredStyle:(UIAlertControllerStyleAlert)];
+            action1 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+        } else {
+            alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未进行身份认证，请先去认证" preferredStyle:(UIAlertControllerStyleAlert)];
+            action1 = [UIAlertAction actionWithTitle:@"下次再说" style:(UIAlertActionStyleCancel) handler:nil];
+            action2 = [UIAlertAction actionWithTitle:@"去认证" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                SFAuthStatuViewController *auth = [[SFAuthStatuViewController alloc] initWithType:(SFAuthTypeUser) Status:SF_USER.authStatus];
+                auth.hidesBottomBarWhenPushed = YES;
+                [weasSelf.navigationController pushViewController:auth animated:YES];
+            }];
+        }
+        
+        [alertVc addAction:action1];
+        if (action2) {
+            [alertVc addAction:action2];
+        }
+        
+        
+        [self presentViewController:alertVc animated:YES completion:nil];
+        return;
+    }
     SFBookingGoodOrderController *bookingGoods = [[SFBookingGoodOrderController alloc] init];
+    bookingGoods.carType = self.detailModel.car_type;
     bookingGoods.orderId = self.orderID;
     [self.navigationController pushViewController:bookingGoods animated:YES];
 }
@@ -94,7 +158,6 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
         footerHeight = 0;
     } else {
         footerHeight = 50;
-        
     }
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + 44, SCREEN_WIDTH, SCREEN_HEIGHT - STATUSBAR_HEIGHT - 44 - footerHeight) style:(UITableViewStylePlain)];
@@ -142,6 +205,9 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SFOrderDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:SFOrderDetailCELL_ID forIndexPath:indexPath];
     cell.titleStr = self.titleArray[indexPath.row];
+    if (self.messageArray.count) {
+        cell.messageStr = self.messageArray[indexPath.row];
+    }
     return cell;
 }
 
@@ -158,5 +224,10 @@ static NSString *SFOrderDetailCELL_ID = @"SFOrderDetailCELL_ID";
     return _titleArray;
 }
 
-
+- (NSMutableArray<NSString *> *)messageArray {
+    if (!_messageArray) {
+        _messageArray = [NSMutableArray array];
+    }
+    return _messageArray;
+}
 @end

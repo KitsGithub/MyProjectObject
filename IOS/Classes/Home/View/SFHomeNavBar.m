@@ -14,6 +14,8 @@
     UIButton *_userIcon;
     UIButton *_searchBtn;
     UIView *_lineView;
+    
+    SFSegmentControl *_seg;
     BOOL hasSubView;
 }
 
@@ -33,7 +35,9 @@
     [_userIcon addTarget:self action:@selector(userIconDidClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_userIcon];
     
-    [_userIcon sd_setImageWithURL:[NSURL URLWithString:SF_USER.small_head_src] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Resource_URL,SF_USER.small_head_src]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    
+    
     
     _searchBtn = [UIButton new];
     [_searchBtn setImage:[UIImage imageNamed:@"Home_Search"] forState:UIControlStateNormal];
@@ -43,15 +47,15 @@
     
     
     __weak typeof(self) weakSelf = self;
-    SFSegmentControl *seg = [[SFSegmentControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 140)  * 0.5, STATUSBAR_HEIGHT + 8, 140, 28) items:@[@"货源",@"车源"]];
-    seg.selectedBlock = ^(NSInteger index) {
+    _seg = [[SFSegmentControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 140)  * 0.5, STATUSBAR_HEIGHT + 8, 140, 28) items:@[@"货源",@"车源"]];
+    _seg.selectedBlock = ^(NSInteger index) {
         
         if ([weakSelf.delegate respondsToSelector:@selector(SFHomeNavBar:didChangeReourceType:)]) {
             [weakSelf.delegate SFHomeNavBar:weakSelf didChangeReourceType:index];
         }
         
     };
-    [self addSubview:seg];
+    [self addSubview:_seg];
     
     
     _lineView = [UIView new];
@@ -59,8 +63,22 @@
     _lineView.hidden = YES;
     [self addSubview:_lineView];
     
+    //用户资料更改通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoChange) name:SF_USER_MESSAGECHANGE_N object:nil];
+    
+    //用户登出通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoChange) name:SF_LOGOUT_SUCCESS_N object:nil];
+    
+    //用户登录通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserInfoChange) name:SF_LOGIN_SUCCESS_N object:nil];
+    
     hasSubView = YES;
 }
+
+- (void)UserInfoChange {
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Resource_URL,SF_USER.small_head_src]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+}
+
 
 - (void)setSearchImage:(NSString *)searchImage {
     _searchImage = searchImage;
@@ -72,6 +90,11 @@
     if (hidden != _lineView.hidden) {
         _lineView.hidden = hidden;
     }
+}
+
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    _currentIndex = currentIndex;
+    _seg.currentIndex = currentIndex;
 }
 
 #pragma mark - UI Action

@@ -27,6 +27,10 @@ typedef void(^ResultReturnBlock)(NSArray <SFCarListModel *> *modelArray);
 
 @property (nonatomic, copy) ResultReturnBlock resultReturnBlock;
 
+//指定某种类型的车型与车长
+@property (nonatomic, copy) NSString *carType;
+@property (nonatomic, copy) NSString *carLong;
+
 @property (nonatomic, assign) TypeMode typeMode;
 
 @end

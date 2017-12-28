@@ -55,11 +55,6 @@
 - (void)setModel:(GoodsSupply *)model {
     _model = model;
     
-    /*
-     "goods_type":"水果","goods_name":"苹果","goods_size":12.0,"goods_weight":12.0,"weight_unit":"吨","car_type":"高栏车","car_long":"13.5","car_count":2,"shipment_date":121212,"valid_date":
-     */
-    
-    
     NSString *carLong = [NSString stringWithFormat:@"%@",model.car_long];
     NSString *carCount = [NSString stringWithFormat:@"%@辆",model.car_count];
     
@@ -67,8 +62,15 @@
     
     if ([model respondsToSelector:@selector(goods_weight)] && model.goods_weight) {
         _isShowLine  = YES;
-        NSString *weight = [NSString stringWithFormat:@"%@%@",model.goods_weight,model.weight_unit];
-        titleArray = @[model.goods_type,model.goods_name,weight,model.car_type,carLong,carCount];
+        NSString *weight = [NSString stringWithFormat:@"%@吨",model.goods_weight];
+        if (model.car_type.length) {
+            titleArray = @[model.goods_name,weight,model.car_type,carLong,carCount];
+            _isShowLine = YES;
+        } else {
+            titleArray = @[model.goods_name,weight];
+            _isShowLine = NO;
+        }
+        
     }else{
         _isShowLine  = NO;
         titleArray = @[model.car_type,carLong,carCount];

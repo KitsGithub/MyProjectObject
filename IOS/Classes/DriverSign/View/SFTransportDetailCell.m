@@ -53,7 +53,6 @@
     _time = [UILabel new];
     _time.textColor = COLOR_TEXT_DARK;
     _time.font = [UIFont systemFontOfSize:14];
-    _time.text = @"2017.11.16 09:37";
     [self addSubview:_time];
     
     
@@ -61,11 +60,17 @@
     _location.textColor = COLOR_TEXT_COMMON;
     _location.font = FONT_COMMON_16;
     _location.numberOfLines = 0;
-    _location.text = @"河北省保定南出口(G4京港澳高速出口西南向)附近";
     [self addSubview:_location];
     
     
     
+    
+}
+
+- (void)setModel:(SFSignInfoModel *)model {
+    _model = model;
+    _time.text = model.sign_date;
+    _location.text = model.sign_location;
     
 }
 

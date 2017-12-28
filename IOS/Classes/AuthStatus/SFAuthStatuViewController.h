@@ -10,7 +10,7 @@
 #import "SFAuthStatusModle.h"
 #import "SFDriverModel.h"
 
-typedef void(^RetrunBlock)();
+typedef void(^RetrunBlock)(void);
 
 @interface SFAuthStatuViewController : BaseViewController
 

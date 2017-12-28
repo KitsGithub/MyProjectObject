@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SFCommond.h"
-#import "SFCarProvenance.h"
 
 
 typedef void(^SFOrderResultBlock)(NSArray *results);
@@ -20,11 +19,33 @@ typedef void(^SFOrderResultBlock)(NSArray *results);
 @property (nonatomic,weak)UIViewController *sourceVc;
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)UITableView    *tableView;
+
+/**
+ 下拉加载最新
+ */
 @property (nonatomic,copy)void (^loadNewDataCommond)(SFOrderResultBlock,SFErrorResultBlock);
+
+/**
+ 上拉加载更多
+ */
 @property (nonatomic,copy)void (^loadMoreDataCommond)(NSInteger page,SFOrderResultBlock,SFErrorResultBlock);
+
+/**
+ 自定义cell
+ */
+@property (nonatomic, copy) UITableViewCell *(^setTableViewCell)(UITableView *tableView, NSIndexPath *indexPath);
+
+/**
+ 选中cell的方法
+ */
+@property (nonatomic,copy)void(^selectedCellWithModle)(id model);
+
+/**
+ 控制可选按钮
+ */
 @property (nonatomic,copy)NSArray <SFCommond *>*(^comondWithStatus)(SFOrderType orderStatus,SFTakingStatus takingStatus);
 
-@property (nonatomic,copy)void(^selectedCellWithModle)(id<SfOrderProtocol>);
+
 
 @property (nonatomic,strong)NSArray *codeArr;
 @property (nonatomic,strong)NSArray *descArr;

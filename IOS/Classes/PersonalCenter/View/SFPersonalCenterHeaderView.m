@@ -27,7 +27,7 @@ static CGFloat IdentflyTopPadding;
     
     UIImageView *_userIcon;
     UILabel *_userName;
-    UILabel *_userIdentfly;
+    UIImageView *_userIdentfly;
     UILabel *_phone;
     UILabel *_count;
     
@@ -95,7 +95,7 @@ static CGFloat IdentflyTopPadding;
     _userIcon.clipsToBounds = YES;
     [_contentView addSubview:_userIcon];
     
-    [_userIcon sd_setImageWithURL:[NSURL URLWithString:account.small_head_src] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Resource_URL,account.small_head_src]] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
     
     //头像的阴影
     CALayer *layer = [[CALayer alloc]init];
@@ -104,7 +104,7 @@ static CGFloat IdentflyTopPadding;
     layer.cornerRadius = _userIcon.layer.cornerRadius;
     layer.backgroundColor = [UIColor whiteColor].CGColor;
     layer.shadowColor = [UIColor blackColor].CGColor;  //设置阴影的颜色
-    layer.shadowRadius = 5;                           //设置阴影的宽度
+    layer.shadowRadius = 2;                           //设置阴影的宽度
     layer.shadowOffset = CGSizeMake(0, 0);            //设置偏移
     layer.shadowOpacity = .2f;
     [_contentView.layer addSublayer:layer];
@@ -131,24 +131,16 @@ static CGFloat IdentflyTopPadding;
      D 认证成功
      F 认证失败
      */
-    
-    _userIdentfly = [UILabel new];
-    if ([account.verify_status isEqualToString:@"F"]) {
-        _userIdentfly.text = @"认证失败";
-    } else if ([account.verify_status isEqualToString:@"B"]) {
-        _userIdentfly.text = @"审核中";
-    } else if ([account.verify_status isEqualToString:@"D"]) {
-        _userIdentfly.text = @"已认证";
+//    User_Unidentification
+//    User_Identification
+    _userIdentfly = [UIImageView new];
+    if ([account.verify_status isEqualToString:@"D"]) {
+        //已认证
+        _userIdentfly.image = [UIImage imageNamed:@"User_Identification"];
     } else {
-        _userIdentfly.text = @"未认证";
+        //未认证
+        _userIdentfly.image = [UIImage imageNamed:@"User_Unidentification"];
     }
-    
-    _userIdentfly.layer.cornerRadius = 2;
-    _userIdentfly.clipsToBounds = YES;
-    _userIdentfly.font = [UIFont systemFontOfSize:10];
-    _userIdentfly.textColor = BLACKCOLOR;
-    _userIdentfly.backgroundColor = THEMECOLOR;
-    _userIdentfly.textAlignment = NSTextAlignmentCenter;
     [_contentView addSubview:_userIdentfly];
     
     _phone = [UILabel new];
@@ -162,7 +154,7 @@ static CGFloat IdentflyTopPadding;
     _count = [UILabel new];
     _count.textColor = BLACKCOLOR;
     _count.font = BodyFont;
-    _count.text = @"接单数：11";
+    _count.text = [NSString stringWithFormat:@"接单数：%@",account.accept_count];
     [_contentView addSubview:_count];
     
     BOOL IconSelected = NO;
@@ -207,8 +199,51 @@ static CGFloat IdentflyTopPadding;
     
 }
 
+- (void)reloadData {
+    SFUserInfo *account = SF_USER;
+    NSString *role;
+    if (account.role == SFUserRoleCarownner) {
+        role = @"车主";
+    } else {
+        role = @"货主";
+    }
+    
+    _userName.text = [account.name stringByAppendingString:[NSString stringWithFormat:@" %@",role]];
+    
+    _count.text = [NSString stringWithFormat:@"接单数：%@",account.accept_count];
+    
+    [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Resource_URL,account.small_head_src]] placeholderImage:[UIImage imageNamed:@"Default_Head"]];
+    
+    _phone.text = account.mobile;
+    
+    BOOL IconSelected = NO;
+    if ([account.verify_status isEqualToString:@"D"]) {
+        IconSelected = YES;
+    }
+    
+    _IDCard.selected = IconSelected;
+    _BusinessLicense.selected = IconSelected;
+    _MenTou.selected = IconSelected;
+    
+    if ([account.verify_status isEqualToString:@"D"]) {
+        //已认证
+        _userIdentfly.image = [UIImage imageNamed:@"User_Identification"];
+    } else if ([account.verify_status isEqualToString:@"B"]) {
+        //认证中
+        _userIdentfly.image = [UIImage imageNamed:@"User_Identify"];
+    } else {
+        //未认证
+        _userIdentfly.image = [UIImage imageNamed:@"User_Unidentification"];
+    }
+    
+    hasSubView = YES;
+    [self setNeedsLayout];
+    
+}
+
 - (void)layoutSubviews {
     if (hasSubView) {
+        
         _coverView.frame = CGRectMake(0, _contentView.center.y, SCREEN_WIDTH, CGRectGetHeight(self.frame) - _contentView.center.y);
         
         CGSize nameSize = [_userName.text sizeWithFont:BodyFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
@@ -221,7 +256,7 @@ static CGFloat IdentflyTopPadding;
         
         _userName.frame = CGRectMake(CGRectGetMaxX(_userIcon.frame) + 24, CGRectGetMinY(_userIcon.frame), nameSize.width, nameSize.height);
         
-        _userIdentfly.frame = CGRectMake(CGRectGetMaxX(_userName.frame) + 10, _userName.center.y - 7, 36, 14);
+        _userIdentfly.frame = CGRectMake(CGRectGetWidth(_contentView.frame) - 50, 0, 50, 50);
         
         CGFloat phoneX = CGRectGetMinX(_userName.frame);
         _phone.frame = CGRectMake(phoneX, CGRectGetMaxY(_userName.frame) + namePadding, SCREEN_WIDTH - phoneX, phoneSize.height);
@@ -242,6 +277,8 @@ static CGFloat IdentflyTopPadding;
         CGRect MTframe = _BusinessCard.frame;
         MTframe.origin.x += (padding + BLFrame.size.width);
         _MenTou.frame = MTframe;
+        
+        hasSubView = NO;
     }
 }
 

@@ -11,6 +11,7 @@
 //跳转
 #import "SFChooseCarrierCarController.h"
 #import "SFChooseReleaseTimeController.h"
+#import "SFProvenanceViewController.h"
 
 //自定义控件
 #import "SFBookingCarCalendarCell.h"
@@ -44,6 +45,7 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
 }
 
 - (void)bookGoodRequset {
+    [SVProgressHUD show];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     NSMutableArray *selectedCarJsonArray = [NSMutableArray array];
@@ -59,24 +61,37 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"YYYY.MM.dd HH:mm"];
     NSDate *selectedDate = [formatter dateFromString:time];
-    [formatter setDateFormat:@"YYY-MM-dd HH:mm"];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
     NSString *sendTime = [formatter stringFromDate:selectedDate];
     
-    params[@"cars"] = selectedCarJsonArray;
-    params[@"time"] = sendTime;
+    params[@"Cars"] = [selectedCarJsonArray mj_JSONString];
+    params[@"Time"] = sendTime;
+    params[@"OrderRemark"] = cell.remarkStr;
+    params[@"OrderId"] = self.orderId;
+    params[@"UserId"] = USER_ID;
+    
     [[SFNetworkManage shared] postWithPath:@"GoodsOrder/AddGoodsOrder"
                                     params:params
                                    success:^(id result)
     {
+        [SVProgressHUD dismiss];
         if (result) {
             [[SFTipsView shareView] showSuccessWithTitle:@"预订成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            SFProvenanceViewController *provence = [[SFProvenanceViewController alloc] init];
+            provence.currentDirection = SFProvenanceDirectionReceive;
+            provence.currentProvenanceIndex = 1;
+            provence.isPopToRootVc = YES;
+            [self.navigationController pushViewController:provence animated:YES];
+            
+            
         } else {
             [[SFTipsView shareView] showSuccessWithTitle:@"预订失败"];
         }
         
     } fault:^(SFNetworkError *err) {
-        [[SFTipsView shareView] showSuccessWithTitle:err.description];
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showSuccessWithTitle:err.errDescription];
     }];
     
 }
@@ -88,6 +103,14 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
         [[SFTipsView shareView] showFailureWithTitle:@"请选择接单车辆"];
         return;
     }
+    
+    for (SFCarListModel *carModel in self.dataArray) {
+        if ([carModel.order_fee isEqualToString:@""]) {
+            [[SFTipsView shareView] showFailureWithTitle:@"请输入车辆价格"];
+            return;
+        }
+    }
+    
     
     __weak typeof(self) weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否确认接单" message:@"请仔细检查您的发车时间，一旦接单将无法修改" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -111,14 +134,21 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
 - (void)selectedCar {
     SFChooseCarrierCarController *addCar = [[SFChooseCarrierCarController alloc] init];
     addCar.typeMode = TypeMode_MoreChooser;
+    if (![self.carType isEqualToString:@"任意车型"]) {
+        addCar.carType = self.carType;
+    }
     
     NSMutableArray *carNumArray = [NSMutableArray array];
     for (SFCarListModel *model in self.dataArray) {
         [carNumArray addObject:model.car_no];
     }
     addCar.selectedCarArray = carNumArray;
+    
     __weak typeof(self) weakSelf = self;
     [addCar setResultReturnBlock:^(NSArray<SFCarListModel *> *modelArray) {
+        for (SFCarListModel *model in modelArray) {
+            model.order_fee = @"";
+        }
         [weakSelf.dataArray addObjectsFromArray:modelArray];
         [_tableView reloadData];
     }];
@@ -205,7 +235,14 @@ static NSString *BookingGoodsHEADER_ID = @"BookingGoodsHEADER_ID";
         goodsCell.model = self.dataArray[indexPath.row];
         goodsCell.delegate = self;
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:BookingCalendarCELL_ID forIndexPath:indexPath];
+        
+        /*在IOS8.3系统下,使用 @sel(dequeueReusableCellWithIdentifier:forIndexPath:)获取注册cell发生了崩溃，因此使用最初的cell注册方法*/
+        SFBookingCarCalendarCell *otherCell = [tableView dequeueReusableCellWithIdentifier:BookingCalendarCELL_ID];
+        if (!otherCell) {
+            otherCell = [[SFBookingCarCalendarCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:BookingCalendarCELL_ID];
+        }
+        
+        cell = otherCell;
     }
     
     return cell;

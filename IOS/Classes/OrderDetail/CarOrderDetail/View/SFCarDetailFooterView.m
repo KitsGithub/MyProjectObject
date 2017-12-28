@@ -45,6 +45,7 @@
     if (remark.length) {
         _message.text = remark;
     }
+    [self setNeedsLayout];
 }
 
 - (void)layoutSubviews {

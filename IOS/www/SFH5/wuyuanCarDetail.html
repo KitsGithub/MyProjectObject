@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>我的物源-车源详情</title>
+		<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+	
+	</head>
+	<style type="text/css">
+	    [v-cloak]{
+	        display: none;
+	    }
+      #sfCardetail{
+      	background:none;
+      }
+	</style>
+	<body>
+		<div id="appLoading">
+	      <img src="image/sf_loading.gif" alt="loading" />
+	    </div>
+		<div id="orderDetail" >	
+			<!--请求错误的反馈-->
+			<div v-if="isError===true" @click="loadingagain" class="errorimg">
+				<img src="image/errorbg.png" />
+				加载不成功，点击屏幕重新加载
+			</div>
+			<div v-else-if="isWiFi===true" class="errorimg" @click="loadingagain">
+				<img src="image/wifi.png" />
+				网络错误，点击屏幕重新加载
+			</div>
+			<!--请求反馈结束-->
+			<div v-else>
+				<div class="sf_wrap" id="sfCardetail">
+					<!--历史接单人开始-->
+					<div class="sf_divwrap hmyHiscontent"  >
+						<div class="histroyWrap">
+							<span>预订人</span>
+							<span v-show="isCloseHistory"><a :href="'historyCarHmy.html?CarId='+CarId+'&UserId='+UserId">历史预订人</a><i></i></span>
+						</div>
+						<div class="hisCenter" v-show="isLook">
+							<dl>
+								<dd class="hisCenterlist" v-for="(item,index) in booked_by">
+									<div v-on:click="isShow(item,index)"><p>{{item.order_date}}</p><span  :class="{active:isNumber===index}"></span></div>
+									<ul class="hisCenterlist_ul" v-show="isNumber===index">
+										<li v-for="(items,index) in booked_by[index].demand_info">
+											<a :href="'wy_Single.html?GoodsId='+items.goods_id+'&UserId='+items.order_user+'&OrderId='+items.order_id+'&BatchId='+BatchId">
+												<div class="hisCenterlist_header" >
+													<img :src="appUrl+items.head_src" alt="货满运头像" v-if="item.head_src!==''" onerror="javascript:this.src='image/header.png';"/>
+													<img src="image/header.png" alt="货满运头像" v-else onerror="javascript:this.src='image/header.png';"/>
+													<span>{{items.user_name}}</span>
+												</div>
+												<div class="cartotal">
+													<span>{{items.car_count}}辆车</span>
+													<span>报价共</span>
+													<span class="red_color sf_font">¥{{items.order_fee}}</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<!--历史接单人结束-->
+				</div>
+				<div class="sf_wrap" style="min-height: 580px;">
+				
+				<div class="sf_divwrap">
+				<!--发车路线开始-->
+					<div class="sf_w">
+						<div class="sf_goodsline">
+							<div>
+			                	<div>
+			                		<div class="icon_frombg"></div>
+				                    <p class="sftitle">
+				                    	{{datas.from_province}}-{{datas.from_city}}-{{datas.from_district}}
+				                    </p>   
+				                </div>
+				                <div>
+				                	<div>
+				                		<div class="icon_detailwarpbg"></div>
+					                    <p class="sftitle showfontcolor">
+					                    	{{datas.from_address}}
+					                    </p> 
+				                	</div>
+				                	<div>
+				                		<div class="icon_normalline"></div>
+				                	</div>	  
+				                </div>
+				                <div >
+				                	<div class="icon_tobg"></div>
+				                    <p class="sftitle2 " >{{datas.to_province}}-{{datas.to_city}}-{{datas.to_district}}</p>
+				                </div>
+				                <div >
+				                	<div class="icon_detailnormal"></div>
+				                    <p class="sftitle2 showfontcolor" >{{datas.to_address}}</p>
+				                </div>
+			               </div>
+							<!--<div class="GDmanmews sf_mtp">
+								<span class="GDheaderImg">
+									<img v-bind:src="datas.head_src" v-if="datas.head_src===''"/>
+									<img src="image/header.png" v-else/> 
+								</span>
+								<span class="GDheaderMx">
+									<p class="sf_mbt1"><span class="GDheaderName" v-cloak></span>发货：<i class="GDheaderNum" v-cloak>{{datas.car_count}}</i>次</p>
+									<buttom class="GDheaderbut" v-cloak v-if="datas.order_status === 'D'">已认证</buttom>
+									<buttom class="GDheaderbut" v-cloak v-else>未认证</buttom>
+								</span>
+							</div>-->
+						</div>
+							
+					</div>
+		<!--发车路线结束-->
+				<!--货物类型选择-->
+				<div class="sf_w" v-for="(itemcar,index) in cars_info">
+					<p class="sf_GDtitle">{{itemcar.car_no}}</p>
+					<p>
+					<span class="sf_GDlist" v-cloak>{{itemcar.car_type}}</span>
+					<span class="sf_GDlist" >{{itemcar.car_long}}</span>
+					<span class="sf_GDlist sf_GDPrice" v-if = "itemcar.order_fee!==''">{{itemcar.order_fee}}元/车</span> <!--<span class="sf_GDlist">3辆</span></p>-->
+					<span class="sf_GDlist sf_GDPrice" v-else>面议</span>
+					</p>
+				</div>
+			
+				<!--备注开始-->
+				<div class="sf_w">
+					<p class="sf_GDtitle">备注</p>
+					<p ><span class="sf_GDlist" v-cloak>{{datas.car_remark}}</span></p>
+				</div>
+				<!--备注结束-->
+			</div>
+			</div>
+			</div>
+		</div>
+		
+	</body>
+	<!--cordove相关JS-->
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../cordova_plugins.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+	<!-- 资源 -->
+	<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/wuyuanCarDetail.js" charset="UTF-8"></script>
+</html>

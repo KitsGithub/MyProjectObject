@@ -10,4 +10,6 @@
 
 @interface SFDriverTransportDetailController : BaseViewController
 
+@property (nonatomic, copy) NSString *driverId;
+
 @end

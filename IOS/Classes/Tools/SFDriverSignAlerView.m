@@ -7,14 +7,6 @@
 //
 
 #import "SFDriverSignAlerView.h"
-#import <CoreLocation/CoreLocation.h>
-
-@interface SFDriverSignAlerView ()
-//定位功能
-@property (nonatomic,strong) CLLocationManager *manager;
-@property (nonatomic,strong) CLGeocoder *geocoder;
-
-@end
 
 @implementation SFDriverSignAlerView {
     UIButton *_bjView;
@@ -29,19 +21,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
-        [self getCurrentLoaction];
         [self setupView];
         [[UIApplication sharedApplication].keyWindow addSubview:self];
     }
     return self;
-}
-
-- (void)getCurrentLoaction {
-    //定位
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-        [self.manager requestWhenInUseAuthorization];
-    }
-    [self.manager startUpdatingLocation];
 }
 
 - (void)setupView {
@@ -72,7 +55,6 @@
     _locationLabel.textAlignment = NSTextAlignmentCenter;
     _locationLabel.font = FONT_COMMON_16;
     _locationLabel.textColor = COLOR_TEXT_COMMON;
-    _locationLabel.text = @"完成此次签到，您已到达 保定市";
     [_contentView addSubview:_locationLabel];
     
     
@@ -84,8 +66,13 @@
     [_comfirmButton setTitle:@"完成" forState:(UIControlStateNormal)];
     _comfirmButton.titleLabel.font = FONT_COMMON_16;
     
-    
 }
+
+
+- (void)setLoactionStr:(NSString *)loactionStr {
+    _locationLabel.text = [NSString stringWithFormat:@"完成此次签到，您已到达%@",loactionStr];
+}
+
 
 #pragma mark - UIAction
 - (void)dismissAction {
@@ -105,41 +92,6 @@
     }];
 }
 
-#pragma mark - 定位功能
-//授权状态发生改变的时候调用
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    if (status == kCLAuthorizationStatusDenied) {
-        NSLog(@"用户拒绝");
-    } else if(status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways)
-    {
-        NSLog(@"授权成功");
-        [self.manager startUpdatingLocation];
-    }
-}
-
-//当更新到用户位置信息的时候调用
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    [self.manager stopUpdatingLocation];
-    //最新用户位置数组的最后一个元素
-    CLLocation *location = [locations lastObject];
-    CLLocationCoordinate2D corrdinate = location.coordinate;
-    NSLog(@"经度%f  纬度%f",corrdinate.longitude,corrdinate.latitude);
-    [self getAddressByLatitude:corrdinate.latitude longitude:corrdinate.longitude];
-}
-
-- (void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-    CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
-    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placemark=[placemarks firstObject];
-        NSString * _provinceName = placemark.addressDictionary[@"City"];
-        NSString * _areaName = placemark.addressDictionary[@"SubLocality"];
-        if (_provinceName.length && _areaName.length) {
-            NSString * currentLoaction = [NSString stringWithFormat:@"%@ %@",placemark.addressDictionary[@"State"],placemark.addressDictionary[@"City"]];
-            NSLog(@"位置信息 ---->  %@",currentLoaction);
-        }
-    }];
-}
 
 
 #pragma mark - layout
@@ -168,21 +120,6 @@
     _comfirmButton.frame = CGRectMake(comfirmX, CGRectGetHeight(_contentView.frame) - 40 - 44, contentW - comfirmX * 2, 44);
 }
 
-
-#pragma mark - lazyLoad
-- (CLLocationManager *)manager {
-    if (!_manager) {
-        _manager = [[CLLocationManager alloc] init];
-    }
-    return _manager;
-}
-
-- (CLGeocoder *)geocoder {
-    if (!_geocoder) {
-        _geocoder = [[CLGeocoder alloc]init];
-    }
-    return _geocoder;
-}
 
 
 @end

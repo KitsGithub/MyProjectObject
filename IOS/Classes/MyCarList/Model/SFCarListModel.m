@@ -39,7 +39,7 @@
     if (_order_fee.length) {
         return _order_fee;
     }
-    return @"面议";
+    return @"";
 }
 
 /**

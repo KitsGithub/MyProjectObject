@@ -29,6 +29,13 @@
     return self.goods_name;
 }
 
+- (NSString *)goods_name {
+    if (_goods_name.length) {
+        return _goods_name;
+    }
+    return _goods_type;
+}
+
 - (NSString *)goodsCount
 {
     return [NSString stringWithFormat:@"%@%@",self.goods_weight,self.weight_unit];

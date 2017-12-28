@@ -15,96 +15,101 @@
 </style>
 <body>
 <div class="sf_wrap sfRelease"  id="releaseCar" style="opacity:1">
-	<div class="sf_divwrap">
-		<!--发车路线开始-->
-		<div class="sf_w">
-			<h1 class="sf_h1">发车路线</h1>
-				 <div>
-                	<div>
-                		<div class="icon_frombg"></div>
-	                    <p class="sftitle" >
-	                    	<input readonly class="sf_formadd" id="sf_fromAdd" placeholder="请选择出发省、市、县" value=""   /><span class="sf_develop"  ></span>
-	                    </p>   
+	<div class="contents" style="display: block;">
+		<div class="sf_divwrap">
+			<!--发车路线开始-->
+			<div class="sf_w">
+				<h1 class="sf_h1">发车路线</h1>
+					 <div>
+	                	<div>
+	                		<div class="icon_frombg"></div>
+		                    <p class="sftitle" >
+		                    	<input readonly class="sf_formadd" id="sf_fromAdd" placeholder="请选择出发省、市、县" value=""   /><span class="sf_develop"  ></span>
+		                    </p>   
+		                </div>
+		                <div>
+		                	<div class="icon_contenbg"></div>
+		                	<div class="sf_Inputaddress">
+		                    	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_from_detail" value=""   placeholder="请填写出发地详细地址" />
+		                	</div>
+		                </div>
+		                <div>
+		                	<div class="icon_tobg"></div>
+		                    <p class="sftitle2"  ><input readonly class="sf_formadd" id="toAddress" placeholder="请选择到达省、市、县"   /><span class="sf_develop"></span></p>
+		                </div>
+		                <div>
+		                	<div class="icon_tobglast"></div>
+		                	<div class="sf_Inputaddress">
+	                        	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_to_detail" value="" placeholder="请填写目的地详细地址" />
+	                    	</div>
+		                </div>
 	                </div>
-	                <div>
-	                	<div class="icon_contenbg"></div>
-	                	<div class="sf_Inputaddress">
-	                    	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_from_detail" value=""   placeholder="请填写出发地详细地址" />
-	                	</div>
-	                </div>
-	                <div>
-	                	<div class="icon_tobg"></div>
-	                    <p class="sftitle2"  ><input readonly class="sf_formadd" id="toAddress" placeholder="请选择到达省、市、县"   /><span class="sf_develop"></span></p>
-	                </div>
-	                <div>
-	                	<div class="icon_tobglast"></div>
-	                	<div class="sf_Inputaddress">
-                        	<input class="sf_D sf_Dbottm" type="text" name="number" id="input_to_detail" value="" placeholder="请填写目的地详细地址" />
-                    	</div>
-	                </div>
-                </div>
-                
+	                
+			</div>
+			<!--发车路线结束-->
+			<!--车辆类型选择-->
+			<div class="sf_w">
+				<h1 class="sf_h1">货物及车辆信息</h1>
+				<div class="sf_Inputaddress Hmy_width" >
+	    			<input class="sf_D sf_Dbottm" type="text" name="number"  id="goodsTypename" value="" placeholder="请输入货物名称" />
+	           </div>
+	        	<div class="sf_mtp3 sf_mbt3" style="float: none;">
+					<p class="sf_formadd" id="choseGoodsnumber"><input readonly class="sf_formadd sf_carType" placeholder="请选择货物类型"  id="goodsType" /><span class="sf_develop"></span></p>
+				</div>
+	            <div class="sf_Inputaddress Hmy_width" >
+	    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsweight" value="" placeholder="请输入货物重量" onkeyup="onlyNumber(this)" />
+	    			<span class="sf_text">吨</span>
+	            </div>
+	            <div class="sf_Inputaddress Hmy_width" >
+	    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsvolume" value="" placeholder="请输入货物体积" onkeyup="onlyNumber(this)" />
+	    			<span class="sf_text">方</span>
+	            </div>
+				<div class="sf_mtp3" style="float: none;">
+					<p class="sf_formadd" id="choseCarnumber"><input readonly class="sf_formadd sf_carType" placeholder="选择车辆类型"  id="carType" /><span class="sf_develop"></span></p>
+				</div>
+				<div class="sf_mtp3 sf_mbt3" style="float: none;">
+					<p class="sf_formadd" id="choseCarlong"><input readonly class="sf_formadd sf_carType" placeholder="选择车长度"  id="carlongType" /><span class="sf_develop"></span></p>
+				</div>
+				<div class="sf_Inputaddress Hmy_width" >
+	    			<input class="sf_D sf_Dbottm" type="text" name="number"  value="" id="carNumber" placeholder="请输入车数量" onkeyup="value = value.replace(/[^\d]/g, '')"/>
+	    			<span class="sf_text">辆</span>
+	            </div>
+			</div>
+			<!--车辆类型选择结束-->
+			<!-- 备注 -->
+			<div class="sf_w" style="margin-bottom: 5rem;">
+				<h1 class="sf_h1">其他信息</h1>
+				<div class="sf_mtp1" style="float: none;">
+					<p class="sf_formadd" id="choseCycle"><input readonly class="sf_formadd sf_carType" placeholder="选择发布周期"  id="carCycleType" /><span class="sf_develop"></span></p>
+				</div>
+				<div class="sf_mtp3 sf_mbt3" style="float: none;">
+					<p class="sf_formadd" id="chosetime"><input readonly class="sf_formadd sf_carType" placeholder="选择发车时间"  id="cartimeType" /><span class="sf_develop"></span></p>
+				</div>
+				<div class="sf_Inputaddress Hmy_width"  >
+	    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsprice" value="" placeholder="请填写价格" onkeyup="onlyNumber(this)"/>
+	    			<span class="sf_text">元/车</span>
+	            </div>
+	            <div class="sf_Inputaddress Hmy_width" style="margin-bottom: 1rem;">
+	    			<input class="sf_D sf_Dbottm" type="text" name="number" id="Consignee" value="" placeholder="请输入收货人姓名" />
+	            </div>
+	            <div class="sf_Inputaddress Hmy_width" style="margin-top: 1rem;">
+	    			<input class="sf_D sf_Dbottm" type="text" name="number" id="phoneNumber" value="" placeholder="请输入收货人手机号码"  onkeyup="value = value.replace(/[^\d]/g, '')" maxlength="11"/>
+	            </div>
+				<div class="sf_bzright Hmy_widths">
+					<textarea class="sf_Bz" name="beizhu" id="input_remark" placeholder="填写备注"  ></textarea>
+				</div>
+			</div>
+			<!--备注结束-->
+			
 		</div>
-		<!--发车路线结束-->
-		<!--车辆类型选择-->
-		<div class="sf_w">
-			<h1 class="sf_h1">货物及车辆信息</h1>
-			<div class="sf_Inputaddress Hmy_width" >
-    			<input class="sf_D sf_Dbottm" type="text" name="number"  id="goodsTypename" value="" placeholder="请输入货物名称" />
-           </div>
-        	<div class="sf_mtp3 sf_mbt3" style="float: none;">
-				<p class="sf_formadd" id="choseGoodsnumber"><input readonly class="sf_formadd sf_carType" placeholder="请选择货物类型"  id="goodsType" /><span class="sf_develop"></span></p>
-			</div>
-            <div class="sf_Inputaddress Hmy_width" >
-    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsweight" value="" placeholder="请输入货物重量" onkeyup="onlyNumber(this)" />
-    			<span class="sf_text">吨</span>
-            </div>
-            <div class="sf_Inputaddress Hmy_width" >
-    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsvolume" value="" placeholder="请输入货物体积" onkeyup="onlyNumber(this)" />
-    			<span class="sf_text">方</span>
-            </div>
-			<div class="sf_mtp3" style="float: none;">
-				<p class="sf_formadd" id="choseCarnumber"><input readonly class="sf_formadd sf_carType" placeholder="选择车辆类型"  id="carType" /><span class="sf_develop"></span></p>
-			</div>
-			<div class="sf_mtp3 sf_mbt3" style="float: none;">
-				<p class="sf_formadd" id="choseCarlong"><input readonly class="sf_formadd sf_carType" placeholder="选择车长度"  id="carlongType" /><span class="sf_develop"></span></p>
-			</div>
-			<div class="sf_Inputaddress Hmy_width" >
-    			<input class="sf_D sf_Dbottm" type="text" name="number"  value="" id="carNumber" placeholder="请输入车数量" onkeyup="value = value.replace(/[^\d]/g, '')"/>
-    			<span class="sf_text">辆</span>
-            </div>
+		<div class="sf_Fb" onclick="justCar('A')">
+				立即发布
 		</div>
-		<!--车辆类型选择结束-->
-		<!-- 备注 -->
-		<div class="sf_w" style="margin-bottom: 5rem;">
-			<h1 class="sf_h1">其他信息</h1>
-			<div class="sf_mtp1" style="float: none;">
-				<p class="sf_formadd" id="choseCycle"><input readonly class="sf_formadd sf_carType" placeholder="选择发布周期"  id="carCycleType" /><span class="sf_develop"></span></p>
-			</div>
-			<div class="sf_mtp3 sf_mbt3" style="float: none;">
-				<p class="sf_formadd" id="chosetime"><input readonly class="sf_formadd sf_carType" placeholder="选择发车时间"  id="cartimeType" /><span class="sf_develop"></span></p>
-			</div>
-			<div class="sf_Inputaddress Hmy_width"  >
-    			<input class="sf_D sf_Dbottm" type="text" name="number" id="goodsprice" value="" placeholder="请填写价格" onkeyup="onlyNumber(this)"/>
-    			<span class="sf_text">元/车</span>
-            </div>
-            <div class="sf_Inputaddress Hmy_width" style="margin-bottom: 1rem;">
-    			<input class="sf_D sf_Dbottm" type="text" name="number" id="Consignee" value="" placeholder="请输入收货人姓名" />
-            </div>
-            <div class="sf_Inputaddress Hmy_width" style="margin-top: 1rem;">
-    			<input class="sf_D sf_Dbottm" type="text" name="number" id="phoneNumber" value="" placeholder="请输入收货人手机号码"  onkeyup="value = value.replace(/[^\d]/g, '')" maxlength="11"/>
-            </div>
-			<div class="sf_bzright Hmy_widths">
-				<textarea class="sf_Bz" name="beizhu" id="input_remark" placeholder="填写备注"  ></textarea>
-			</div>
-		</div>
-		<!--备注结束-->
-		
-	</div>
-	<div class="sf_Fb" onclick="justCar()">
-			立即发布
 	</div>
 	
+	<div id="appLoading" style="display: none;">
+      <img src="image/sf_loading.gif" alt="loading" />
+    </div>
 
 </div>
 <!-- 资源 -->

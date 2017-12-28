@@ -1,106 +1,111 @@
-
-     var SFAppData = {
-      	UserId : '4e728b00-ab4b-4e79-af23-3fb05d21f07f',
-      	OrderId : 'bac52025-a407-439e-abb7-340d67319446',
-      	GoodsId:'29a03d9c-ec86-42c7-aacf-7a7dc691897f'
-      };
-
-function showData(){
-	var app = new Vue({
-	    el: '#orderDetail',
-	    data:function(){
-	    	return{
-	    		datas:{},		//订单数据	json
-	    		carrierList:[],	//承运人列表 	array
-	    		arrs:[{
-	    			id:"",
-					time:"2017-11-11",
-					news:[{
-						aaa:1111,
-						bbbb:2222
-					},{
-						aaa:1212121,
-						bbbb:2323232
-					}],
-					//isCheck:false
-					},{
-					id:"",
-					time:"2017-12-11",
-					news:[{
-						aaa:333,
-						bbbb:444
-					}],
-					//isCheck:false
-					},{
-					id:"",
-					time:"2017-12-22",
-					news:[{
-						aaa:333,
-						bbbb:'4gfhfgh44'
-					},{
-						aaa:5555,
-						bbbb:'dsfsdfs'
-					},{
-						aaa:6666,
-						bbbb:'44dfsfs4'
-					}],
-					//isCheck:false
-				}],
-				isNumber:null
-	    	}
+var SFAppDatas={
+	 GoodsId:$.query.get("GoodsId"),
+	 UserId:$.query.get("UserId"),
+};
+console.log(SFAppDatas);
+var app = new Vue({
+    el: '#orderDetail',
+    data:function(){
+    	return{
+    		arrs:[],
+    		appUrl:appResourceURL,
+    		showLoading: false,
+  			PageIndex:1, //第几页
+  			PageSize:20, //每页显示几条
+    		dayTime:'',
+			isArrs:false,
+			isError:false,
+			isWiFi:false,
+			isiconClose:false,
+    	}
+    },
+    created:function(){		
+	    this.ajaxgoods();
+	    window.addEventListener('scroll', this.handleScroll);
+	},
+    methods: {
+    	handleScroll: function () {
+	　　　　//判断滚动到底部
+	      if ($(window).scrollTop() >=$(document).height() - $(window).height()) {
+	        this.showLoading = true;
+	        this.PageIndex++;
+	        this.ajaxgoods(this.PageIndex);
+	      }
 	    },
-	    created:function(){	            
-		    this.ajaxgoods();
-		},
-	    methods: {
-	        ajaxgoods: function (event) {
-	        	var that = this;
-	        	var requestURL = appURL + "/GoodsOrder/GetGoodsOrderDetails";
-	          $.ajax({
-			        url: requestURL,
-			        type: "POST",
-			        dataType: "json",
-			        data :SFAppData,
-			        success: function (data) {
-			        	console.log(data)
+        ajaxgoods: function () {
+        	var that = this;
+        	var requestURL = appURL + "/GoodsOrder/GetGoodsOrderHistoryUser";
+        	SFAppDatas.PageIndex = this.PageIndex;
+        	SFAppDatas.PageSize = 	this.PageSize;
+        	SFAppDatas.OrderDate =this.dayTime;
+        	console.log(SFAppDatas)
+          $.ajax({
+		        url: requestURL,
+		        type: "POST",
+		        dataType: "json",
+		        data :SFAppDatas,
+		        success: function (data) {
+		        	console.log(data)
+		        	if(data.Code==0){
+			        	that.showLoading = false;
 			        	that.datas 			= data.Data.goods_details;
-			        	that.carrierList 	= data.Data.carrier_by;
-			        	$("#orderDetail").css("opacity",'1');
-				    		$("#appLoading").css("opacity",'0');
-				    		$("#appLoading").remove();
-			        },
-			        error: function (error) {
-			        	alert("请求出错")
-			        }
-			    });
-	        },
-	        isShow:function(item,index){   //点击显示隐藏，手风琴效果
-	        	
-	        	if(typeof item.isCheck === 'undefined'){
-                this.$set(item, 'isCheck', true);
+			        	data.Data.carrier_by.forEach(function(val,index){
+			        		that.arrs.push(val);			    
+			        	});	
+			        	if(that.arrs.length===0){
+			    			that.isArrs=true;
+			    		}else{
+			    		    that.isArrs=false;
+			    		};
+		        	}else{
+		        		that.isError=true;
+		        	};
+		        	
+	        		$("#orderDetail").css("opacity",'1');
+		    		$("#appLoading").css("opacity",'0');
+		    		$("#appLoading").remove();
+		    		
+		        },
+		        error: function (error) {
+		        	$("#orderDetail").css("opacity",'1');
+		    		$("#appLoading").css("opacity",'0');
+		    		$("#appLoading").remove();
+		        	that.isWiFi=true;
+		        }
+		    });
+        },
+        isShow:function(item,index){   //点击显示隐藏，手风琴效果
+        	
+        	if(typeof item.isCheck === 'undefined'){
+	                this.$set(item, 'isCheck', true);
             }else {
                 item.isCheck = !item.isCheck;
             }
-		    	},
-		    	searchDay:function(){
-						var that=this;
-						var elementArr, newArr = [];
-						for(var i= 0; i<that.arrs.length;i++){
-							if(that.arrs[i].time==that.chooseDay){
-								elementArr = that.arrs[i];	
-							}else{
-								newArr.push(that.arrs[i]);
-							}
-						};
-					
-						if(elementArr){
-							newArr.unshift(elementArr);
-						}
-						that.arrs = newArr				
-			    	}
-		    }
-	});
-};
+    	},
+    	supplyDay:function(){
+    		var datas = [{"time":this.dayTime,"fromId":'',"cycle":""}];
+    		openDatePickerMethod(datas,this.supplyDaysuccess,null);
+    	},
+    	supplyDaysuccess:function(obj){
+    		this.dayTime=obj.message;
+    		this.isiconClose = true;
+    		this.choiceDay();
+    	},
+    	choiceDay:function(time){ //选择日期后搜索
+    		this.arrs=[];
+    		this.ajaxgoods();
+    	},
+    	deleteDay:function(){
+    		this.dayTime="";
+    		this.isiconClose = false;
+    		this.arrs=[];
+    		this.ajaxgoods();
+    	},
+    	loadingagain:function(){
+		   	window.location.reload();
+		},
+	}
+});
 
 function orderDetail_success(){
     showSuccessMessage(['成功'])
@@ -112,5 +117,3 @@ function orderDetail_success(){
 function orderDetail_error(errorData){
 	showErrorMessage([errorData.message])
 };
-
-      showData();

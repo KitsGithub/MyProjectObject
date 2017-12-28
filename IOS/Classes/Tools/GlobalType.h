@@ -11,21 +11,32 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    SFLoaddingResultType_NoSearchResult,        //没有搜索结果
+    SFLoaddingResultType_NoMoreData,            //没有数据
+    SFLoaddingResultType_NetworkingFail,        //网络请求失败
+    SFLoaddingResultType_LoaddingFail,          //加载失败
+    SFLoaddingResultType_NoCommonResult,        //没有评论
+    SFLoaddingResultType_WebViewNoFondFail,     //网页加载404
+    SFLoaddingResultType_Loadding,              //加载中
+} SFLoaddingResultType;
+
 
 typedef NS_ENUM(NSUInteger, SFAuthType) {
-    SFAuthTypeUser,
-    SFAuthTypeCar,
-    SFAuthTypeCarOwnner
+    SFAuthTypeUser,         //用户认证
+    SFAuthTypeCar,          //车辆认证
+    SFAuthTypeCarOwnner     //车主认证
 };
 
-// OrderStatus:（订单状态：A待发货 B待收货 C待支付 D待评价 F已完成 字符串选填）
+// OrderStatus:（订单状态：A待发货 B待收货 C待支付 D待评价 F已完成 G待分配司机 字符串选填）
 typedef NS_ENUM(NSUInteger, SFOrderType) {
     SFOrderTypeAll = 0,
     SFOrderTypeWaiteForSent,              //A 等发货
     SFOrderTypeWaiteForDelivery,          //B 等待交付 等待收货 
 //    SFOrderTypeWaiteForPay,               //C 待支付
     SFOrderTypeWaiteForEvaluate,          //D 待评价
-    SFOrderTypeFinish                     //F 已完成
+    SFOrderTypeFinish,                    //F 已完成
+    SFOrderTypeWaiteToSelecterCar         //G 待分配司机
 };
 
 

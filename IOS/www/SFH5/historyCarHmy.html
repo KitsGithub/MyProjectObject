@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>历史预订人</title>
+		<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+	
+	</head>
+	<style type="text/css">
+	    [v-cloak]{
+	        display: none;
+	    }
+      
+	</style>
+	<body>
+		<div id="appLoading">
+	      <img src="image/sf_loading.gif" alt="loading" />
+	    </div>
+		<div id="orderDetail" >	
+			<!--请求错误的反馈-->
+			<div v-if="isError===true" @click="loadingagain" class="errorimg">
+				<img src="image/errorbg.png" />
+				加载不成功，点击屏幕重新加载
+			</div>
+			<div v-else-if="isWiFi===true" class="errorimg" @click="loadingagain">
+				<img src="image/wifi.png" />
+				网络错误，点击屏幕重新加载
+			</div>
+			<!--请求反馈结束-->
+			<div v-else>
+				<div class="sf_wrap" id="sfCardetail" >
+					<!--历史预订人人开始-->
+					<div class="sf_divwrap hmyHiscontent"  style="min-height: 656px;">
+						<div class="searchDaytime" @click="supplyDay">
+							<span></span>
+							<input type="text" placeholder="选择时间"  v-model="dayTime" readonly />
+							<i class="iconcloosebut" @click="deleteDay" v-show="isiconClose"></i>
+						</div>
+						<div class="hisCenter his_pt" >
+							<dl>
+								<dd class="hisCenterlist" v-for="(item,index) in arrs">
+									<div v-on:click="isShow(item,index)"><p>{{item.order_date}}</p><span  :class="{active:item.isCheck}"></span></div>
+									<ul class="hisCenterlist_ul" v-show="item.isCheck">
+										<li v-for="items in arrs[index].demand_info">
+											<a :href="'wy_ ServiceCar.html?GoodsId='+items.goods_id+'&UserId='+items.order_user+'&OrderId='+items.order_id">
+												<div class="hisCenterlist_header"  >
+													<img :src="appUrl+items.head_src" alt="货满运头像" v-if="items.head_src!==''" onerror="javascript:this.src='image/header.png';"/>
+													<img src="image/header.png" alt="货满运头像" v-else onerror="javascript:this.src='image/header.png';"/>
+													<span>{{items.user_name}}</span>
+												</div>
+												<div class="cartotal">
+													<span>分配{{items.car_count}}辆车</span><span>（预定{{items.allocationCar_count}}辆车）</span>
+													<div class="number_car">
+														<span>报价共</span>
+														<span>¥{{items.order_fee}}</span>
+													</div>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+							<dl v-if="isArrs===true">
+								<dd class="errorimg">
+									<img src="image/no-shuju.png" />
+									暂无数据
+								</dd>
+							</dl>
+						</div>
+					</div>
+				<!--历史接单人结束-->
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+	<!--cordove相关JS-->
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../cordova_plugins.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+	<!-- 资源 -->
+	<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+<<<<<<< HEAD
+	<script type="text/javascript" src="appjs/resource/Jquery.Query.js" charset="UTF-8"></script>
+=======
+>>>>>>> 224f26512f6768a9e72858fd8346ee890ea8093f
+	<script type="text/javascript" src="appjs/resource/common.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/historyCarHmy.js" charset="UTF-8"></script>
+</html>

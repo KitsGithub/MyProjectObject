@@ -21,6 +21,10 @@
  */
 #define SF_LOGIN_SUCCESS_N @"SF_LOGIN_SUCCESS_NOTIFICATION"
 
+/**
+ 用户退出登录通知
+ */
+#define SF_LOGOUT_SUCCESS_N @"SF_LOGOUT_SUCCESS_NOTIFICATION"
 
 /**
  用户个人信息更变通知

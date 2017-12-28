@@ -11,5 +11,6 @@
 @interface SFBookingCarCalendarCell : UITableViewCell <UITextViewDelegate>
 
 @property (nonatomic, copy, readonly) NSString *calendarTime;
+@property (nonatomic, copy, readonly) NSString *remarkStr;
 
 @end

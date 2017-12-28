@@ -9,9 +9,11 @@
 #import "SFOrderListViewController.h"
 #import "SFOrderListTableViewDelegate.h"
 #import "SFEvalViewController.h"
-#import "SFDetailViewController.h"
+#import "SFOrderDetailViewContoller.h"
 #import "SFAllotCarController.h"
 #import "SFSegmentView.h"
+
+#import "SFOrderCell.h"
 
 @interface SFOrderListViewController ()
 @property (weak, nonatomic) IBOutlet SFSegmentView *topBar;
@@ -132,6 +134,17 @@
     __weak typeof(self)wself = self;
     self.orderDelegate  = [[SFOrderListTableViewDelegate alloc] initWithViewController:self tableView:self.tableView];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[SFOrderCell class] forCellReuseIdentifier:@"SFOrderLisCell"];
+    
+    [self.orderDelegate setSetTableViewCell:^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath) {
+        SFOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFOrderLisCell"];
+        id <SfOrderProtocol>model =  wself.orderDelegate.dataArray[indexPath.row];
+        cell.model = model;
+        cell.commonds = [wself firstCommondWithTakingStaus:model.orderType];
+        return cell;
+    }];
+    
     self.orderDelegate.loadNewDataCommond = ^(SFOrderResultBlock suc, SFErrorResultBlock err) {
         [SFOrderManage getOrderListWithType:[wself statusStr] page:1 Success:suc fault:err];
     };
@@ -151,11 +164,36 @@
     
     [self.orderDelegate setSelectedCellWithModle:^(id<SfOrderProtocol>model) {
         
-        SFDetailViewController *detail = [[SFDetailViewController alloc] init];
+        
+        SFOrderDetailViewContoller *detail = [[SFOrderDetailViewContoller alloc] init];
         detail.wwwFolderName = SFWL_H5_PATH;
-        detail.startPage = @"orderdetail.html";
         detail.title = @"订单详情";
-        detail.orderID = model.goods_order;
+        detail.orderID = model.guid;
+        if (model.goods_order.length) {
+            detail.startPage = @"orderdetail.html";
+        } else {
+            detail.startPage = @"orderCardetail.html";
+        }
+//        if (SF_USER.role == SFUserRoleCarownner) {
+//            detail.startPage = @"orderCardetail.html";
+//            detail.orderID = model.guid;
+//
+//            NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//            params[@"OrderId"] = model.guid;
+//            params[@"UserId"] = USER_ID;
+//            [[SFNetworkManage shared] postWithPath:@"CarsBooking/GetOrderDetails" params:params success:^(id result) {
+//
+//
+//            } fault:^(SFNetworkError *err) {
+//
+//            }];
+//
+//
+//        } else {
+//            detail.startPage = @"orderdetail.html";
+//            detail.orderID = model.guid;
+//        }
+
         [wself.navigationController pushViewController:detail animated:YES];
         
     }];
@@ -218,7 +256,7 @@
 
 
 
-- (SFCommond *)firstCommondWithTakingStaus:(SFOrderType)status
+- (NSArray <SFCommond *> *)firstCommondWithTakingStaus:(SFOrderType)status
 {
     __weak typeof(self) weakSelf = self;
     switch (status) {
@@ -229,19 +267,32 @@
                 cmd.name  = @"确认发货";
                 cmd.commond = ^(id  _Nullable obj) {
                     id <SfOrderProtocol> model = obj;
-                    [weakSelf comfirSentOrderId:model.guid];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否确认发货" preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
+                    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确认发货" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                        [weakSelf comfirSentOrderId:model.guid];
+                    }];
+                    [alert addAction:action1];
+                    [alert addAction:action2];
+                    [weakSelf presentViewController:alert animated:YES completion:nil];
+                    
                 };
             } else {
-                cmd.name  = @"分配车辆";
-                cmd.commond = ^(id  _Nullable obj) { //分配车辆
-                    id <SfOrderProtocol> model = obj;
-                    SFAllotCarController *vc = [[SFAllotCarController alloc] init];
-                    vc.hidesBottomBarWhenPushed  = YES;
-                    vc.orderId = model.guid;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                cmd.name = @"查看详情";
+                cmd.commond = ^(id <SfOrderProtocol> model) {
+                    SFOrderDetailViewContoller *detail = [[SFOrderDetailViewContoller alloc] init];
+                    detail.wwwFolderName = SFWL_H5_PATH;
+                    detail.title = @"订单详情";
+                    if (SF_USER.role == SFUserRoleCarownner) {
+                        detail.startPage = @"orderCardetail.html";
+                    } else {
+                        detail.startPage = @"orderdetail.html";
+                    }
+                    detail.orderID = model.goods_order;
+                    [weakSelf.navigationController pushViewController:detail animated:YES];
                 };
             }
-            return cmd;
+            return @[cmd];
             break;
         }
         case SFOrderTypeWaiteForDelivery: //等待收货
@@ -251,12 +302,19 @@
                 cmd.name  = @"确认收货";
                 cmd.commond = ^(id  _Nullable obj) {
                     id <SfOrderProtocol> model = obj;
-                    [weakSelf comfireReceiveWithOrderId:model.guid];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否确认收货" preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
+                    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确认收货" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                        [weakSelf comfireReceiveWithOrderId:model.guid];
+                    }];
+                    [alert addAction:action1];
+                    [alert addAction:action2];
+                    [weakSelf presentViewController:alert animated:YES completion:nil];
                 };
             } else {
                 cmd.name  = @"待收货";
             }
-            return cmd;
+            return @[cmd];
             break;
         }
 //        case SFOrderTypeWaiteForPay:
@@ -271,26 +329,59 @@
                 vc.orderId = model.guid;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             };
-            return cmd;
+            return @[cmd];
             break;
         }
         case SFOrderTypeFinish:         //已完成
         {
             SFCommond *cmd = [SFCommond new];
             cmd.name  = @"查看详情";
-            cmd.commond = ^(id  _Nullable obj) {
-                id <SfOrderProtocol> model = obj;
-                SFDetailViewController *detail = [[SFDetailViewController alloc] init];
+            cmd.commond = ^(id <SfOrderProtocol> model) {
+                SFOrderDetailViewContoller *detail = [[SFOrderDetailViewContoller alloc] init];
                 detail.wwwFolderName = SFWL_H5_PATH;
-                detail.startPage = @"orderdetail.html";
                 detail.title = @"订单详情";
+                if (SF_USER.role == SFUserRoleCarownner) {
+                    detail.startPage = @"orderCardetail.html";
+                } else {
+                    detail.startPage = @"orderdetail.html";
+                }
                 detail.orderID = model.goods_order;
                 [weakSelf.navigationController pushViewController:detail animated:YES];
             };
-            return cmd;
+            return @[cmd];
             break;
         }
-        
+        case SFOrderTypeWaiteToSelecterCar: {
+            //待派车
+            if (SF_USER.role == SFUserRoleCarownner) {
+                SFCommond *cmd = [SFCommond new];
+                cmd.name  = @"分配车辆";
+                cmd.commond = ^(id <SfOrderProtocol> model) {
+                    SFAllotCarController *vc = [[SFAllotCarController alloc] init];
+                    vc.hidesBottomBarWhenPushed  = YES;
+                    vc.orderId = model.guid;
+                    [vc setReturnBlock:^{
+                        [weakSelf.orderDelegate loadNewData];
+                    }];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                };
+                
+                SFCommond *cmd2 = [SFCommond new];
+                cmd2.name = @"查看详情";
+                cmd2.commond = ^(id  _Nullable obj) {
+                    NSLog(@"车主查看详情");
+                };
+                return @[cmd,cmd2];
+                
+            } else if (SF_USER.role == SFUserRoleGoodsownner) {
+                SFCommond *cmd = [SFCommond new];
+                cmd.name = @"查看详情";
+                cmd.commond = ^(id  _Nullable obj) {
+                    NSLog(@"货主查看详情");
+                };
+                return @[cmd];
+            }
+        }
         default:
             return nil;
             break;

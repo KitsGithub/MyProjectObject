@@ -13,7 +13,7 @@ typedef void(^EndEdittingBlock)();
 @interface SFInputViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (nonatomic, copy,readonly) NSString *value;
-
+@property (nonatomic, strong) UIButton *button;
 @property (nonatomic, copy) NSString *placeHolder;
 @property (nonatomic, assign) BOOL secureTextEntry;
 

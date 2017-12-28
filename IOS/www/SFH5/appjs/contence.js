@@ -18,8 +18,10 @@
 //此段代码请勿动
 
 /*基础网络路径*/
-var appURL = "http://192.168.112.44/lisapi/api"
-// var appURL = 'http://192.168.112.160/api'
+ var appURL = "http://172.16.100.147/lisapi/api"  //测试服务器
+//var appURL = "http://192.168.112.44/lisapi/api"     //林加尔
+// var appURL = "http://192.168.112.45:8080/api"    //刘军
+
 /*基础资源路径*/
 var appResourceURL = 'http://172.16.100.147/devlis'
 
@@ -31,7 +33,7 @@ var appResourceURL = 'http://172.16.100.147/devlis'
     }
 */
 var SFAppData;
-
+var orderId;
 /*
  * 打开地址 选择器
 
@@ -163,11 +165,20 @@ function openMoreSelectedPickerMehtod(datas,successFn,failFn) {
 /*
  * 打开日历 选择器
  *
- * datas : [{
-    "class" :  <str>, //控件class
-    "data"  :   //当前选择的日期，如果没有就传空
+* datas : [{
+    "time"      : <str>, //传值格式 YYYY-MM-dd (默认为空)
+    "fromId"    : <str>, //传空字符串
+    "cycle"     : <str>  //传空字符串
  }]
+*
+** @params successDayFunction 
+  回调参数格式
+  {
+    "fromId"    : <str>,
+    "message"   : <str>  //当前选中的时间 传值格式 YYYY-MM-dd
+ }
 */
+
 function openDatePickerMethod(datas,successDayFunction,failFunction) {
 	Cordova.exec(successDayFunction, failFunction, "SFDatePickerPlugin", "datePicker", datas);
 }
@@ -231,22 +242,22 @@ function openSelectedReleaseTimeMehtod(datas,successFn,failFn) {
 /** 导航控制器  **/
 var navigation = {};
 navigation.push  = function (target,title,successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","push",[target,title])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","push",[target,title])
 }
 navigation.pushToVC = function (target,successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","pushToViewController",[target])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","pushToViewController",[target])
 }
 navigation.pop  = function (successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","pop",[])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","pop",[])
 }
 navigation.present  = function (target,title,successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","present",[target,title])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","present",[target,title])
 }
 navigation.dismiss  = function (successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","dismiss",[])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","dismiss",[])
 }
 navigation.setTitle  = function (title,successDayFunction,failFunction) {
-    cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","setTitle",[title])
+    Cordova.exec(successDayFunction,failFunction,"CDVNavigationManage","setTitle",[title])
 }
 
 navigation.actionDic = {}
@@ -343,10 +354,7 @@ SF_ReqestManage.showFault = function showFault(mes) {
 * */
 SF_ReqestManage.currentUser = {};
 SF_ReqestManage.getCurrentUser = function (success,error) {
-    cordova.exec(function (result) {
-        this.currentUser = result;
-        success(result);
-    }, error, "SFNetworkingPlugin","getCurrentUser",[]);
+    cordova.exec(success, error, "SFNetworkingPlugin","getCurrentUser",[]);
 }
 
 

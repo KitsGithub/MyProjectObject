@@ -42,6 +42,7 @@
 #import "UIImage+Extension.h"
 #import "UIButton+Extension.h"
 #import "SFNetworkManage.h"
+#import "SFLoaddingView.h"
 
 //通用头文件
 #import <AFNetworking.h>

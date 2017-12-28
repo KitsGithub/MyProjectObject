@@ -25,8 +25,6 @@ static NSString *SFAddCarrierDriverCellReusedID = @"SFAddCarrierDriverCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
     [self setupView];
     [self setupNav];
     [self getIdentflyDriver];
@@ -37,6 +35,7 @@ static NSString *SFAddCarrierDriverCellReusedID = @"SFAddCarrierDriverCell";
  获取已认证的司机列表
  */
 - (void)getIdentflyDriver {
+    [SFLoaddingView loaddingToView:self.view];
     [[SFNetworkManage shared] postWithPath:@"Driver/GetPassedDriverList"
                                     params:@{
                                              @"UserId" : USER_ID
@@ -45,11 +44,20 @@ static NSString *SFAddCarrierDriverCellReusedID = @"SFAddCarrierDriverCell";
     {
         
         self.dataArray = [SFDriverModel mj_objectArrayWithKeyValuesArray:result];
-        [_tableView reloadData];
+        if (self.dataArray.count) {
+            [SFLoaddingView dismiss];
+            [_tableView reloadData];
+        } else {
+            [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_NoMoreData) toView:self.view reloadBlock:nil];
+        }
+        
         
         
     } fault:^(SFNetworkError *err) {
-        
+        __weak typeof(self) weakSelf = self;
+        [SFLoaddingView showResultWithResuleType:(SFLoaddingResultType_LoaddingFail) toView:self.view reloadBlock:^{
+            [weakSelf getIdentflyDriver];
+        }];
     }];
 }
 

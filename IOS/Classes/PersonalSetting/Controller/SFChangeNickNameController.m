@@ -62,12 +62,12 @@
         return;
     }
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"UserId"] = USER_ID;
+    params[@"Name"] = _nickTextField.text;
     
     [[SFNetworkManage shared] postWithPath:@"MyCenter/ModifyProfile"
-                                    params:@{
-                                             @"UserId"  : USER_ID,
-                                             @"Name"    : _nickTextField.text,
-                                             }
+                                    params:params
                                    success:^(id result)
     {
         if (result) {
@@ -75,7 +75,7 @@
             
             //保存新的用户信息
             SFUserInfo *account = SF_USER;
-            account.name = result;
+            account.name = result[@"name"];
             [account saveUserInfo];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:SF_USER_MESSAGECHANGE_N object:nil];

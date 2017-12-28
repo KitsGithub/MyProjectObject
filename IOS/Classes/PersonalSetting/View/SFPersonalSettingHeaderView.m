@@ -20,8 +20,8 @@
 }
 
 - (void)setupView {
-    self.backgroundColor = [UIColor whiteColor];
-    
+
+    self.contentView.backgroundColor = [UIColor whiteColor];
     _titleLabel = [UILabel new];
     _titleLabel.textColor = BLACKCOLOR;
     _titleLabel.font = [UIFont boldSystemFontOfSize:21];

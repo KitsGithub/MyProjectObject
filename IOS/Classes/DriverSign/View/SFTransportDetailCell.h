@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFSignInfoModel.h"
 
 @interface SFTransportDetailCell : UITableViewCell
+
+@property (nonatomic, weak) SFSignInfoModel *model;
 
 @property (nonatomic, assign) BOOL currentLoacted;
 @property (nonatomic, assign) BOOL showLineView;

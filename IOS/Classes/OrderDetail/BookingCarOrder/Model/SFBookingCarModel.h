@@ -10,11 +10,11 @@
 
 @interface SFBookingCarModel : NSObject
 
-@property (nonatomic, copy) NSString *car_Type;
-@property (nonatomic, copy) NSString *car_Long;
-@property (nonatomic, copy) NSString *car_Count;
-@property (nonatomic, copy) NSString *good_weight;
-@property (nonatomic, copy) NSString *good_size;
-@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *car_type;
+@property (nonatomic, copy) NSString *car_long;
+@property (nonatomic, copy) NSString *car_count;
+@property (nonatomic, copy) NSString *car_weight;
+@property (nonatomic, copy) NSString *car_size;
+@property (nonatomic, copy) NSString *car_fee;
 
 @end

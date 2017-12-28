@@ -116,6 +116,21 @@
     }
 }
 
+- (void)setModel:(SFTransportModel *)model {
+    _model = model;
+    
+    NSString *form = [NSString stringWithFormat:@"%@-%@-%@",model.from_province,model.from_city,model.from_district];
+    NSString *to = [NSString stringWithFormat:@"%@%@%@",model.to_province,model.to_city,model.to_district];
+    
+    _address.fromAddress = form;
+    _address.fromDistrict = model.from_address;
+    
+    _address.toAddress = to;
+    _address.toDistrict = model.to_address;
+    
+    _carNum.text = model.car_no;
+    _drivers.text = model.driver_by;
+}
 
 
 

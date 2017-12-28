@@ -49,7 +49,7 @@ function toCityObj(str){
 
 
 //发布车源获取页面数据
-function CarsModel(fromObj,toObj){
+function CarsModel(fromObj,toObj,toAB){
 		//传递给后台的值
 		//备注
 		var input_remark = $("#input_remark").val();
@@ -67,9 +67,9 @@ function CarsModel(fromObj,toObj){
 			price.push(val?val:"面议");
 	   }	
 		var IssueCarOrderObj={};
-		IssueCarOrderObj.car_id=SFAppData.car_id == undefined ? "" : SFAppData.car_id;
+		IssueCarOrderObj.car_id=SFAppData.CarId == undefined ? "" : SFAppData.CarId;
 		IssueCarOrderObj.issue_by=SFAppData.UserId;
-		IssueCarOrderObj.order_status="A";
+		IssueCarOrderObj.order_status=toAB;
 		IssueCarOrderObj.fromProvince=fromObj.province;
 		IssueCarOrderObj.fromCity=fromObj.city;
 		IssueCarOrderObj.fromDistrict=fromObj.district;
@@ -85,7 +85,7 @@ function CarsModel(fromObj,toObj){
 };
 
 //发布货源获取页面数据
-function GoodsModel(fromObj,toObj){
+function GoodsModel(fromObj,toObj,toAB){
 		//传递给后台的值
 		//备注
 		var input_remark = $("#input_remark").val();
@@ -122,9 +122,9 @@ function GoodsModel(fromObj,toObj){
 		var carNumber = $("#carNumber").val();
 		
 		var IssueCarOrderObj={};
-//		IssueCarOrderObj.car_id=SFAppData.car_id == undefined ? "" : SFAppData.car_id;
+		IssueCarOrderObj.goods_id=SFAppData.GoodsId == undefined ? "" : SFAppData.GoodsId;
 		IssueCarOrderObj.issue_by=SFAppData.UserId;
-		IssueCarOrderObj.order_status="A";
+		IssueCarOrderObj.order_status=toAB;
 		IssueCarOrderObj.from_province=fromObj.province;
 		IssueCarOrderObj.from_city=fromObj.city;
 		IssueCarOrderObj.from_district=fromObj.district;
@@ -203,13 +203,32 @@ function onlyNumber(obj) {
 
 //获取路由中档额参数
 function saveUid(){
-	var url = location.search.slice(2);
-    var arrUrl = url.split(",");
-    var GoodsId=arrUrl[0].split("=")[1];
-    var orderId=arrUrl[1].split("=")[1];
-    var HmyAppId={
-      	GoodsId:GoodsId,
-      	orderId:orderId
-      }
+	var HmyAppId={};
+	var url = location.search.slice(1);
+    var arrUrl = url.split("&");
+    if(arrUrl.length==2){
+    	var GoodsId=arrUrl[0].split("=")[1];
+	    var UserId=arrUrl[1].split("=")[1];
+	    HmyAppId={
+	      	GoodsId:GoodsId,
+	      	UserId:UserId
+	      }
+    }else{
+    	var GoodsId=arrUrl[0].split("=")[1];
+	    var UserId=arrUrl[1].split("=")[1];
+	    var OrderId=arrUrl[2].split("=")[1];
+	    HmyAppId={
+	      	GoodsId:GoodsId,
+	      	UserId:UserId,
+	      	OrderId:OrderId
+	      }
+    }
+    
       return HmyAppId;
+}
+
+//返回上一个页面
+function goback()
+{
+	window.history.go(-1);
 }

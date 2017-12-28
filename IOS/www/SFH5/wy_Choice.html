@@ -16,60 +16,103 @@
 	        display: none;
 	    }
       
+
 	</style>
 	<body>
 		<div id="appLoading">
 	      <img src="image/sf_loading.gif" alt="loading" />
 	    </div>
 		<div id="orderDetail" >	
-			<div class="sf_wrap" id="sfCardetail">
-				
-				<div class="sf_divwrap hmyHiscontent"  >
-					<!--人物信息开始-->
-						<!--<div>
-							<div class="sf_w">
-								<div>
-									<div class="GDmanmews">
-										<span class="sf_imgheaderbig">
-											<img :src="header_src" v-if="header_src!==''" />
-											<img src="image/header.png"  v-else />
-										</span>
-										<span class="sf_imgheaderbignews">
-											<p class="sf_Fhtitle">发货人：<i class="">{{datas.delivery_by}}</i></p>
-											<span class="sf_Fhtitlephone"><i class="sf_iconphone" ></i>{{datas.delivery_mobile}}</span> 
-										</span>
-									</div>
-								</div>		
-							</div>	
-						</div>-->
-					<!--人物信息结束-->
-				</div>
-				<div class="sf_divwrap hMYsection"  >
-					<!--车辆信息开始-->
-					<div class="allcarlist">
-						<ul id="carWraps">
-							<li v-for="(item,index) in demand_Info">
-								<div class="carWrapsleft">
-									<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1">粤B 12345</span><span class="gray_color">{{item.car_type}} {{item.car_long}} {{item.dead_weight}} {{item.car_size}}方<span></span></div>
-									<div class="bottomnews"><i class="iconcar"></i><span class="red_color">800元/车</span></div>
-								</div>
-								<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show = "!item.islook">	
-								</div>		
-							</li>
-						</ul>
-					</div>
-					<!--车辆信息结束-->
-				</div>
-				<!--已拒绝或者已接收开始-->
-				<div class="wy_choose_footer">
-					<div class="totalprice flr">
-						{{totalPrice |  moneyFormat(totalPrice)}}
-					</div>
-					<div class="refuse flr" @click="refuseSeclect">回绝</div>
-					<div class="Receive flr" @click="ReceiveSeclect">接受</div>
-				</div>
-				<!--已拒绝或者已接收结束-->
+			<!--请求错误的反馈-->
+			<div v-if="isError===true" @click="loadingagain" class="errorimg">
+				<img src="image/errorbg.png" />
+				加载不成功，点击屏幕重新加载
 			</div>
+			<div v-else-if="isWiFi===true" class="errorimg" @click="loadingagain">
+				<img src="image/wifi.png" />
+				网络错误，点击屏幕重新加载
+			</div>
+			<!--请求反馈结束-->
+			<div v-else>
+				<div class="sf_wrap" id="sfCardetail">
+					<div class="sf_divwrap hmyHiscontent"  >
+						<!--人物信息开始-->
+							<div>
+								<div class="sf_w">
+									<div>
+										<div class="GDmanmews">
+											<span class="sf_imgheaderbig">
+												<img :src="header_src" onerror="javascript:this.src='image/header.png';"/>
+											</span>
+											<span class="sf_imgheaderbignews">
+												<p class="sf_Fhtitle">发货人：<i class="">{{datas.name}}</i></p>
+												<span class="sf_Fhtitlephone"><i class="sf_iconphone" ></i>{{datas.mobile}}</span> 
+											</span>
+										</div>
+									</div>		
+								</div>	
+							</div>
+						<!--人物信息结束-->
+					</div>
+					<div class="sf_divwrap hMYsection"  style="margin-bottom: 5rem;">
+						<!--车辆信息开始-->
+						<div class="allcarlist">
+							<ul id="carWraps">
+								<li v-for="(item,index) in arrs">
+									<div class="carWrapsleft">
+										<div class="topnews">
+											<i class="iconcar"></i>
+											<span class="gray_color">{{item.car_type}} {{item.car_long}}</span>
+											<span class="gray_color" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重量'">吨</span> </span>
+											<span class="gray_color" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
+
+										</div>
+										<div class="bottomnews"><i class="iconcar preciicon"></i>
+											<span class="red_color sf_font" v-if="item.order_fee!=='面议'">{{item.order_fee}}元/车</span>
+											<span class="red_color sf_font" v-else>面议</span>
+										</div>
+									</div>
+									<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show="item.status!=='A'" v-if="Cars">	
+									</div>		
+								</li>
+							</ul>
+						</div>
+						<!--车辆信息结束-->
+					</div>
+					<!--已拒绝或者已接收开始-->
+					<div class="wy_choose_footer" v-if="Cars">
+						<div class="totalprice flr">
+							{{totalPrice |  moneyFormat(totalPrice)}}
+						</div>
+						<div class="refuse flr" @click="isHideDelPanel = false">回绝</div>
+						<div class="Receive flr" @click="isHideDelPanel2 = false">接受</div>
+					</div>
+					<!--已拒绝或者已接收结束-->
+					<!--拒绝弹窗开始-->
+			       <div class="panel" :class="{'panel_is_show': isHideDelPanel}">
+			           <div class="panel_content">
+			               <div class="panel_title">确定回绝这些订单吗？</div>
+			               <div class="panel_footer">
+			                   <button class="cancel" @click="isHideDelPanel = true">取消</button>
+			                   <button class="submit" @click="refuseSeclect">确定</button>
+			               </div>
+			           </div>
+			       </div>
+					<!--拒绝弹窗结束-->
+					<!--接受弹窗开始-->
+			       <div class="panel" :class="{'panel_is_show': isHideDelPanel2}">
+			           <div class="panel_content">
+			               <div class="panel_title">确定接受这些订单吗？</div>
+			               <div class="panel_footer">
+			                   <button class="cancel" @click="isHideDelPanel2 = true">取消</button>
+			                   <button class="submit" @click="ReceiveSeclect">确定</button>
+			               </div>
+			           </div>
+			       </div>
+					<!--接受弹窗结束-->
+				</div>
+			</div>
+			
 		</div>
 		
 	</body>
@@ -83,6 +126,7 @@
 	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
 	
 	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/Jquery.Query.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="appjs/resource/common.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="appjs/wy_Choice.js" charset="UTF-8"></script>
 </html>

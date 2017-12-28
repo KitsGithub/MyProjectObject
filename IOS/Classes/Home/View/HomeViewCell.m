@@ -44,6 +44,7 @@
 
 - (void)setupView {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+//    self.backgroundColor = RandomColor;
     
     _from = [UILabel new];
     _from.numberOfLines = 2;
@@ -148,8 +149,8 @@
     
     _optionButton.frame = CGRectMake(SCREEN_WIDTH - 10 - 56, CGRectGetHeight(self.frame) - 24 - 10, 56, 24);
     
-    CGFloat userY = CGRectGetMaxY(_to.frame) + 20;
-    _userView.frame = CGRectMake(0, userY, SCREEN_WIDTH, CGRectGetHeight(self.frame) - userY);
+    CGFloat userY = CGRectGetHeight(self.frame) - 52;
+    _userView.frame = CGRectMake(0, userY, SCREEN_WIDTH - 56 - 20 , 52);
 }
 
 

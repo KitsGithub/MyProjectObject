@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "SFCarListModel.h"
 
 @interface SFBookingCarOrderViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *orderId;
+@property (nonatomic, strong) NSArray <SFCarListModel *>*carListArray;
 @end

@@ -41,16 +41,70 @@
     }
 }
 
+
 - (void)jumpToDriver {
-    SFDriverTransportDetailController *transport = [[SFDriverTransportDetailController alloc] init];
-    [self.navigationController pushViewController:transport animated:YES];
+    if (![_phone.text isAvailableMobile]) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的手机号码"];
+        return;
+    }
+
+    if (!_code.text.length) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入验证码"];
+        return;
+    }
+    [SVProgressHUD show];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"Mobile"] = _phone.text;
+    params[@"Vercode"] = _code.text;
+    [[SFNetworkManage shared] postWithPath:@"Driver/DriverLogin"
+                                    params:params
+                                   success:^(id result)
+    {
+        [SVProgressHUD dismiss];
+        SFDriverTransportDetailController *transport = [[SFDriverTransportDetailController alloc] init];
+        transport.driverId = result[@"driver_id"];
+        [self.navigationController pushViewController:transport animated:YES];
+
+        
+    } fault:^(SFNetworkError *err) {
+        [SVProgressHUD dismiss];
+        [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+    }];
 }
 
 - (void)jumpToUser {
-    SFForgetPswViewController *forget = [[SFForgetPswViewController alloc] init];
-    forget.phone = _phone.text;
-    forget.vCode = _code.text;
-    [self.navigationController pushViewController:forget animated:YES];
+    
+    if (![_phone.text isAvailableMobile]) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    if (!_code.text.length) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入验证码"];
+        return;
+    }
+    
+    [SVProgressHUD show];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"Mobile"] = _phone.text;
+    params[@"VCode"] = _code.text;
+    [[SFNetworkManage shared] postWithPath:@"MyCenter/VerifyPhoneNumber"
+                                    params:params
+                                   success:^(id result)
+     {
+         [SVProgressHUD dismiss];
+         if (result) {
+             SFForgetPswViewController *forget = [[SFForgetPswViewController alloc] init];
+             forget.phone = _phone.text;
+             [self.navigationController pushViewController:forget animated:YES];
+         }
+         
+     } fault:^(SFNetworkError *err) {
+         [SVProgressHUD dismiss];
+         [[SFTipsView shareView] showFailureWithTitle:err.errDescription];
+     }];
+    
+    
 }
 
 - (void)requestAction {
@@ -79,7 +133,7 @@
             Type = @"change_password";
             break;
         case IdentiflyType_Driver:
-            Type = @"login";
+            Type = @"driver_login";
             break;
         default:
             break;
@@ -120,14 +174,13 @@
 
          if (result) {
              [[SFTipsView shareView] showSuccessWithTitle:@"发送验证码成功,请注意查收"];
-             dispatch_resume(_timer);
+             
          } else {
              [[SFTipsView shareView] showFailureWithTitle:@"发送验证码失败,请重试"];
-             dispatch_source_cancel(_timer);
          }
 
      } fault:^(SFNetworkError *err) {
-
+         
      }];
     
 }
@@ -154,7 +207,7 @@
     dispatch_source_set_event_handler(_timer, ^{
         
         self.countDown--;
-        if (self.countDown < 50) {
+        if (self.countDown < 0) {
             dispatch_source_cancel(_timer);
         } else {
             [_getCodeButton setTitle:[NSString stringWithFormat:@"%lds",weakSelf.countDown] forState:(UIControlStateNormal)];
@@ -167,6 +220,8 @@
         [_getCodeButton setBackgroundColor:THEMECOLOR];
         _timer = nil;
     });
+    
+    dispatch_resume(_timer);
 }
 
 - (void)backAction {

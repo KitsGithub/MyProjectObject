@@ -46,6 +46,13 @@ MJExtensionCodingImplementation
     return @"";
 }
 
+- (NSNumber *)accept_count {
+    if (!_accept_count) {
+        return [NSNumber numberWithInt:0];
+    }
+    return _accept_count;
+}
+
 static SFUserInfo *defaultInfo;
 static dispatch_once_t onceToken;
 + (instancetype)defaultInfo {

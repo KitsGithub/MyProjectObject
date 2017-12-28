@@ -10,6 +10,20 @@
 
 @implementation SFAuthStatusModle
 
+- (NSString *)car_weight {
+    if (_car_weight.length) {
+        return _car_weight;
+    }
+    return @"";
+}
+
+- (NSString *)car_size {
+    if (_car_size.length) {
+        return _car_size;
+    }
+    return @"";
+}
+
 - (NSString *)shopPhotoUrl
 {
     NSString *url  = [self getPicUrlWithKey:@"ShopPhoto" fromArr:self.verify_pic];
@@ -71,7 +85,45 @@
     return nil;
 }
 
+- (NSString *)DrivingCard {
+    NSString *url  = [self getPicUrlWithKey:@"DrivingCard" fromArr:self.verify_pic];
+    if (url) {
+        return [NSString stringWithFormat:@"%@%@",Resource_URL,url];
+    }
+    return nil;
+}
 
+- (NSString *)DrivingCardBack {
+    NSString *url  = [self getPicUrlWithKey:@"DrivingCardBack" fromArr:self.verify_pic];
+    if (url) {
+        return [NSString stringWithFormat:@"%@%@",Resource_URL,url];
+    }
+    return nil;
+}
+
+- (NSString *)CarAPhoto {
+    NSString *url  = [self getPicUrlWithKey:@"CarAPhoto" fromArr:self.verify_pic];
+    if (url) {
+        return [NSString stringWithFormat:@"%@%@",Resource_URL,url];
+    }
+    return nil;
+}
+
+- (NSString *)CarBPhoto {
+    NSString *url  = [self getPicUrlWithKey:@"CarBPhoto" fromArr:self.verify_pic];
+    if (url) {
+        return [NSString stringWithFormat:@"%@%@",Resource_URL,url];
+    }
+    return nil;
+}
+
+- (NSString *)CarCPhoto {
+    NSString *url  = [self getPicUrlWithKey:@"CarCPhoto" fromArr:self.verify_pic];
+    if (url) {
+        return [NSString stringWithFormat:@"%@%@",Resource_URL,url];
+    }
+    return nil;
+}
 
 - (NSString *)getPicUrlWithKey:(NSString *)key fromArr:(NSArray *)arr
 {
@@ -81,6 +133,7 @@
         }
     }
     return nil;
+    
 }
 
 - (SFAuthStatus)status

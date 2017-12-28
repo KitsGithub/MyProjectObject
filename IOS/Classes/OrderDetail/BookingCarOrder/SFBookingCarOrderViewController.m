@@ -9,6 +9,7 @@
 #import "SFBookingCarOrderViewController.h"
 
 #import "SFCarDemandViewController.h"
+#import "SFProvenanceViewController.h"
 
 #import "SFBookingCarOrderCell.h"
 #import "SFBookingCarCalendarCell.h"
@@ -20,7 +21,7 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
 
 @interface SFBookingCarOrderViewController () <UITableViewDelegate,UITableViewDataSource,SFBookingCarOrderCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray <SFBookingCarModel *>*dataArray;
 
 @end
 
@@ -32,7 +33,7 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"填写车辆需求";
+    self.title = @"车辆需求";
     [self setupView];
     
 }
@@ -57,7 +58,17 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
     [formatter setDateFormat:@"YYY-MM-dd HH:mm"];
     NSString *sendTime = [formatter stringFromDate:selectedDate];
     
-    params[@"time"] = sendTime;
+    NSMutableArray *selectedArray = [NSMutableArray array];
+    for (id model in self.dataArray) {
+        [selectedArray addObject:[model mj_JSONObject]];
+    }
+    
+    
+    params[@"UserId"] = USER_ID;
+    params[@"OrderId"] = self.orderId;
+    params[@"ShipmentDate"] = sendTime;
+    params[@"OrderRemark"] = cell.remarkStr;
+    params[@"Demand"] = [selectedArray mj_JSONString];
     
     [[SFNetworkManage shared] postWithPath:@"CarsBooking/BookingCarOrder"
                                     params:params
@@ -66,7 +77,14 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
         [SVProgressHUD dismiss];
         if (result) {
             [[SFTipsView shareView] showSuccessWithTitle:@"预定成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            SFProvenanceViewController *provence = [[SFProvenanceViewController alloc] init];
+            provence.currentDirection = SFProvenanceDirectionReceive;
+            provence.currentProvenanceIndex = 1;
+            provence.isPopToRootVc = YES;
+            [self.navigationController pushViewController:provence animated:YES];
+            
+            
         } else {
             [[SFTipsView shareView] showFailureWithTitle:@"预定失败"];
         }
@@ -106,6 +124,11 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
 - (void)addCarAction {
     __weak typeof(self) weakSelf = self;
     SFCarDemandViewController *carDemand = [[SFCarDemandViewController alloc] init];
+    NSMutableSet *carTypeArray = [NSMutableSet set];
+    for (SFCarListModel *model in self.carListArray) {
+        [carTypeArray addObject:model.car_type];
+    }
+    carDemand.carTypeArray = carTypeArray.allObjects;
     [carDemand setReturnBlock:^(SFBookingCarModel *model) {
         [weakSelf.dataArray insertObject:model atIndex:0];
         [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:(UITableViewRowAnimationNone)];
@@ -165,7 +188,7 @@ static NSString *BookingSectionFooter_ID = @"BookingSectionFooterID";
     
     UIButton *bookingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
     bookingButton.backgroundColor = THEMECOLOR;
-    [bookingButton setTitle:@"立即预定" forState:(UIControlStateNormal)];
+    [bookingButton setTitle:@"确认预定" forState:(UIControlStateNormal)];
     [bookingButton setTitleColor:COLOR_TEXT_COMMON forState:(UIControlStateNormal)];
     [bookingButton addTarget:self action:@selector(bookingCarNow) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:bookingButton];

@@ -51,6 +51,8 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"UserId"]  = SF_USER.user_id;
     params[@"OrderStatus"] = type;
+    params[@"PageSize"] = @(number);
+    params[@"PageIndex"] = @(page);
     [[SFNetworkManage shared] postWithPath:path params:params success:^(id result) {
         NSArray <id<SfOrderProtocol>>*arr = nil;
         if (isPublishCar) {

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>预订人详情</title>
+		<link rel="stylesheet" type="text/css" href="css/sf_style.css" />
+	
+	</head>
+	<style type="text/css">
+	    [v-cloak]{
+	        display: none;
+	    }
+      
+	</style>
+	<body>
+		<div id="appLoading">
+	      <img src="image/sf_loading.gif" alt="loading" />
+	    </div>
+		<div id="orderDetail" >	
+			<!--请求错误的反馈-->
+			<div v-if="isError===true" @click="loadingagain" class="errorimg">
+				<img src="image/errorbg.png" />
+				加载不成功，点击屏幕重新加载
+			</div>
+			<div v-else-if="isWiFi===true" class="errorimg" @click="loadingagain">
+				<img src="image/wifi.png" />
+				网络错误，点击屏幕重新加载
+			</div>
+			<!--请求反馈结束-->
+			<div v-else>
+				<div class="sf_wrap" id="sfCardetail">	
+					<div class="sf_divwrap hmyHiscontent"  >
+						<!--人物信息开始-->
+							<div>
+								<div class="sf_w">
+									<div>
+										<div class="GDmanmews">
+											<span class="sf_imgheaderbig">
+												<img :src="header_src" onerror="javascript:this.src='image/header.png';"/>
+											</span>
+											
+											<span class="sf_imgheaderbignews">
+												<p class="sf_Fhtitle">{{datas.name}}</p>
+												<span class="sf_Fhtitlephone"><i class="sf_iconphone" ></i>{{datas.mobile}}</span> 
+											</span>
+										</div>
+									</div>		
+								</div>	
+							</div>
+						<!--人物信息结束-->
+					</div>
+					<div class="sf_divwrap hMYsection"  >
+						<!--车辆信息开始-->
+						<div class="allcarlist">
+							<ul id="carWraps">
+								<li v-for="(item,index) in arrs">
+									<div class="carWrapsleft" style="width:100%;" >
+										<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1 verticalm" v-show="item.car_no!==null">{{item.car_no}}</span>
+											<span class="gray_color">{{item.car_type}} {{item.car_long}}</span>
+											<span class="gray_color" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重量'">吨</span> </span>
+											<span class="gray_color" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
+										</div>
+										<!--<div class="topnews"><i class="iconmoney"></i><span class="sf_mrt1 red_color verticalm">{{item.order_fee}}元/车</span></div>-->
+										<div class="topnews"><i class="iconhuman"></i><span class="sf_mrt1 verticalm">{{item.driver_by}}</span></div>
+										<div class="bottomnews">
+											<i class="status hmyhuang" v-if="item.status==='A'">已接受</i>
+											<i class="status hmygreen" v-else-if="item.status==='B'">待确认</i>
+											<i class="status hmyhui" v-else-if="item.status==='C'">已取消</i>
+											<i class="status hmyhui" v-else-if="item.status==='D'">已回绝</i>
+											<i class="status hmyhui" v-else>已撤消</i>
+											<span class="gray_color verticalm">发货时间：{{item.deliver_date}}</span>
+										</div>
+										<div class="bottomnews">
+											<i class="status"></i>
+											<span class="gray_color verticalm">到货时间：{{item.receipt_date}}</span>
+										</div>
+											<div class="buttonHmy"><span>查看行车路线</span></div>
+									</div>	
+									
+								</li>
+							</ul>
+						</div>
+						<!--车辆信息结束-->
+					</div>
+				</div>	
+			</div>	
+		</div>
+		
+	</body>
+	<!--cordove相关JS-->
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../cordova_plugins.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+	<!-- 资源 -->
+	<script type="text/javascript" src="appjs/resource/jquery.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/vue.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript" src="appjs/contence.js" charset="UTF-8"></script>
+
+	<script type="text/javascript" src="appjs/resource/Jquery.Query.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/resource/common.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="appjs/wy_ ServiceCar.js" charset="UTF-8"></script>
+</html>

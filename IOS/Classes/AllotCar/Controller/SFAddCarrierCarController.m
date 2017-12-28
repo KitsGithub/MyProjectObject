@@ -14,6 +14,7 @@
 
 #import "AddCarryController.h"
 #import "SFChooseCarrierCarController.h"
+#import "SFAuthStatuViewController.h"
 
 static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
 
@@ -76,6 +77,10 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
         return;
     }
     
+    if (!self.orderId.length) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请传入OrderId"];
+        return;
+    }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"OrderId"] = self.orderId;
     params[@"CarNo"] = self.model.carNum;
@@ -109,6 +114,46 @@ static NSString *AddCarrierCellReusedID = @"AddCarrierCellReusedID";
  */
 - (void)addDriver {
     __weak typeof(self) weakSelf = self;
+    SFAuthStatusModle *statusModel = SF_USER.authStatus;
+    if ([statusModel.verify_status isEqualToString:@"B"]) { //审核中
+        [[[UIAlertView alloc] initWithTitle:@"您的认证信息正在审核中，请耐心等候。" message:@"注意：只有认证后的用户才可进行添加车辆！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil] show];
+        return;
+    } else if ([statusModel.verify_status isEqualToString:@"F"]) {  //审核失败
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息未通过，请前往重新提交" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        __weak typeof(self)wself = self;
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
+            [wself.navigationController pushViewController:authView animated:YES];
+            
+        }];
+        
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self.navigationController presentViewController:alert animated:YES completion:^{}];
+        return;
+    } else if ([statusModel.verify_status isEqualToString:@"C"]) {  //未审核
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您的认证信息尚未提交，请前往审核" message:@"注意：只有认证后的用户才可进行添加车辆！" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        __weak typeof(self)wself = self;
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"前往认证" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            SFAuthStatuViewController *authView  = [[SFAuthStatuViewController alloc] initWithType:SFAuthTypeUser Status:SF_USER.authStatus];
+            [wself.navigationController pushViewController:authView animated:YES];
+            
+        }];
+        
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"知道了" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self.navigationController presentViewController:alert animated:YES completion:^{}];
+        return;
+    }
+    
     AddCarryController *driver = [[AddCarryController alloc] init];
     driver.driverArray = self.model.driverNameArray;
     [driver setBlock:^(NSString *driverStr,NSMutableArray *driverIds) {

@@ -53,6 +53,11 @@
  */
 @property (nonatomic,strong,readonly)NSString *idCardUrl;
 
+@property (nonnull, strong, readonly) NSString *DrivingCard;
+@property (nonnull, strong, readonly) NSString *DrivingCardBack;
+@property (nonnull, strong, readonly) NSString *CarAPhoto;
+@property (nonnull, strong, readonly) NSString *CarBPhoto;
+@property (nonnull, strong, readonly) NSString *CarCPhoto;
 
 /**
  车辆照片

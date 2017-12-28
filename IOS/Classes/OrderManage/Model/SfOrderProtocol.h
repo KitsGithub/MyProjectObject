@@ -18,6 +18,9 @@
 - (NSString *)goods_order;
 
 - (NSString *)order_id;
+- (NSString *)order_no;
+- (NSString *)order_date;
+
 
 - (NSString *)from;
 

@@ -10,4 +10,6 @@
 
 @interface SFPersonalCenterHeaderView : UIView
 
+- (void)reloadData;
+
 @end

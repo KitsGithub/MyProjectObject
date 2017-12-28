@@ -20,6 +20,9 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "SFOrderDetailController.h"
 
+#import "SFOrderDetailController.h"
+#import "SFCarDetailController.h"
+
 @interface SFSearchViewController ()<SFSearchBarViewDelegate,SFAdressPickerViewDelegate,UITableViewDataSource,UITableViewDelegate,HomeViewCellDelegate,UIWebViewDelegate>
 
 @property (nonatomic,copy)void((^textfileCompletion)(NSString *));
@@ -459,8 +462,18 @@
         [[[SFTipsView alloc] init] showFailureWithTitle:@"车主不能预订车辆"];
         return;
     }
-    id<SFSearchResultProtocol>model  = self.dataArray[indexPath.row]; 
-    [SFOrderDetailController pushFromViewController:self orderID:model.guid];
+    
+    id<SFSearchResultProtocol>model  = self.dataArray[indexPath.row];
+    
+    BaseViewController *ToVc;
+    if (self.searchType == SFSearchTypeGoods) {
+        ToVc = (BaseViewController *)[[SFOrderDetailController alloc] initWithOrderID:model.guid];
+    } else {
+        ToVc = (BaseViewController *)[[SFCarDetailController alloc] initWithOrderID:model.guid];
+    }
+    ToVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:ToVc animated:YES];
+    
 }
 
 

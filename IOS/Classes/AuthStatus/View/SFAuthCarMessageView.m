@@ -53,8 +53,6 @@
     [self addSubview:_titleView];
     
     
-    
-    
     __weak typeof(self) weakSelf = self;
     _carProvince = [SFAddCarView new];
     _carProvince.viewStyle = ViewStyle_SelectedStyle;
@@ -98,7 +96,7 @@
     
     _drivingNum = [SFAddCarView new];
     _drivingNum.viewStyle = ViewStyle_InputViewStyle;
-    _drivingNum.placeHolder = @"请输入行驶证号码";
+    _drivingNum.placeHolder = @"请输入车辆识别代号";
     _drivingNum.tag = 3;
     [self addSubview:_drivingNum];
 
@@ -119,6 +117,7 @@
     }];
     [self addSubview:_carType];
 
+    
     _carLong = [SFAddCarView new];
     _carLong.viewStyle = ViewStyle_SelectedStyle;
     _carLong.placeHolder = @"请选择车辆长度";
@@ -157,6 +156,13 @@
 - (void)setEdittingEnable:(BOOL)edittingEnable {
     _edittingEnable = edittingEnable;
     self.userInteractionEnabled = edittingEnable;
+    
+    if (edittingEnable) {
+        _titleView.text = @"填写车辆信息";
+    } else {
+        _titleView.text = @"车辆信息";
+    }
+    
 }
 
 - (void)setStatus:(SFAuthStatusModle *)status {
@@ -171,13 +177,31 @@
     
     _drivingNum.inputViewStr = status.driving_license;
     
+    if (status.car_type.length ) {
+        [_carType setTitleWithStr:status.car_type];
+    }
     
-    [_carType setTitleWithStr:status.car_type];
-    [_carLong setTitleWithStr:status.car_long];
+    if (status.car_long.length) {
+        [_carLong setTitleWithStr:status.car_long];
+    }
+    
+    if (status) {
+        if (status.car_weight.length) {
+            _carWeight.inputViewStr = status.car_weight;
+        } else {
+            _carWeight.placeHolder = @"未填写车辆载重";
+        }
+        
+        if (status.car_size.length) {
+            _carSize.inputViewStr = status.car_size;
+        } else {
+            _carSize.placeHolder = @"未填写承重体积";
+        }
+    }
     
     
-    _carWeight.inputViewStr = status.car_weight;
-    _carSize.inputViewStr = status.car_size;
+    
+    
     
     if ([status.verify_status isEqualToString:@"D"]) {
         _identflyImage.hidden = NO;
@@ -199,7 +223,7 @@
     if (!_carNum.inputStr.length) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入车牌号码"];
         return params;
-    } else if (_carNum.inputStr.length < 6) {
+    } else if (_carNum.inputStr.length != 5) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的车牌号码"];
         return params;
     }
@@ -207,7 +231,11 @@
     if (!_drivingNum.inputStr) {
         [[SFTipsView shareView] showFailureWithTitle:@"请输入车辆识别代号"];
         return params;
+    } else if (_drivingNum.inputStr.length != 17) {
+        [[SFTipsView shareView] showFailureWithTitle:@"请输入正确的车辆识别代号"];
+        return params;
     }
+    
     if (!_carType.inputStr) {
         [[SFTipsView shareView] showFailureWithTitle:@"请选择车辆类型"];
         return params;
@@ -224,8 +252,8 @@
     params[@"DrivingNo"] = _drivingNum.inputStr;
     params[@"CarType"] = _carType.inputStr;
     params[@"CarLong"] = _carLong.inputStr;
-    params[@"CarSize"] = _carWeight.inputStr;
-    params[@"DeadWeight"] = _carSize.inputStr;
+    params[@"CarSize"] = @([_carWeight.inputStr intValue]);
+    params[@"DeadWeight"] = @([_carSize.inputStr intValue]);
     
     return params;
 }
