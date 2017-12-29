@@ -37,7 +37,7 @@
 					<div class="sf_divwrap hmyHiscontent"  >
 						<!--人物信息开始-->
 							<div>
-								<div class="sf_w">
+								<div class="sf_w" style="border: none;">
 									<div>
 										<div class="GDmanmews">
 											<span class="sf_imgheaderbig">
@@ -61,25 +61,30 @@
 								<li v-for="(item,index) in arrs">
 									<div class="carWrapsleft" style="width:100%;" >
 										<div class="topnews"><i class="iconcar"></i><span class="sf_mrt1 verticalm" v-show="item.car_no!==null">{{item.car_no}}</span>
-											<span class="gray_color">{{item.car_type}} {{item.car_long}}</span>
-											<span class="gray_color" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重量'">吨</span> </span>
-											<span class="gray_color" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
+											<span class="gray_color sf_font">{{item.car_type}} {{item.car_long}}</span>
+											<span class="gray_color sf_font" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重'">吨</span> </span>
+											<span class="gray_color sf_font" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
 										</div>
 										<!--<div class="topnews"><i class="iconmoney"></i><span class="sf_mrt1 red_color verticalm">{{item.order_fee}}元/车</span></div>-->
-										<div class="topnews"><i class="iconhuman"></i><span class="sf_mrt1 verticalm">{{item.driver_by}}</span></div>
+										<div class="topnews"><i class="iconhuman"></i>
+											<span class="sf_mrt1 verticalm" v-if="item.driver_by!==''&&item.driver_by!==null&&item.driver_by!==undefined">{{item.driver_by}}</span>
+											<span class="sf_mrt1 verticalm" v-else>未分配司机</span>
+										</div>
 										<div class="bottomnews">
 											<i class="status hmyhuang" v-if="item.status==='A'">已接受</i>
 											<i class="status hmygreen" v-else-if="item.status==='B'">待确认</i>
 											<i class="status hmyhui" v-else-if="item.status==='C'">已取消</i>
 											<i class="status hmyhui" v-else-if="item.status==='D'">已回绝</i>
 											<i class="status hmyhui" v-else>已撤消</i>
-											<span class="gray_color verticalm">发货时间：{{item.deliver_date}}</span>
+											<span class="gray_color verticalm" v-if="item.deliver_date!==''&&item.deliver_date!==null&&item.deliver_date!==undefined">发货时间：{{item.deliver_date}}</span>
+											<span class="gray_color verticalm" v-else>发货时间：未发货</span>
 										</div>
 										<div class="bottomnews">
 											<i class="status"></i>
-											<span class="gray_color verticalm">到货时间：{{item.receipt_date}}</span>
+											<span class="gray_color verticalm" v-if="item.receipt_date!==''&&item.receipt_date!==null&&item.receipt_date!==undefined">到货时间：{{item.receipt_date}}</span>
+											<span class="gray_color verticalm" v-else>到货时间：未到货</span>
 										</div>
-											<div class="buttonHmy"><span>查看行车路线</span></div>
+											<!--<div class="buttonHmy"><span>查看行车路线</span></div>-->
 									</div>	
 									
 								</li>

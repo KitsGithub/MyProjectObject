@@ -266,11 +266,12 @@
     return 1;
 }
 
-- (NSArray *)areaList
-{
+- (NSArray *)areaList {
     if (!_areaList.count) {
-        NSDictionary *title = self.cityList[[_picker selectedRowInComponent:1]];
-        _areaList = @[title].mutableCopy;
+        if (self.cityList.count) {
+            NSDictionary *title = self.cityList[[_picker selectedRowInComponent:1]];
+            _areaList = @[title].mutableCopy;
+        }
     }
     return _areaList;
 }

@@ -3,8 +3,10 @@ var SFAppDataN={
 	 GoodsId:$.query.get("GoodsId"),
 	 UserId:$.query.get("UserId"),
 	 OrderId:$.query.get("OrderId"),
-	 BatchId:$.query.get("BatchId")
+	 BatchId:$.query.get("BatchId")	 
 }
+
+
 console.log(SFAppDataN)
 
 var HmyAppurl = appResourceURL;
@@ -20,9 +22,9 @@ var HmyAppurl = appResourceURL;
 				issue_by:'',
 				isError:false,
 				isWiFi:false,
-				Goods:true,
 				isHideDelPanel:true,
 				isHideDelPanel2:true,
+				BatchId:SFAppDataN.BatchId,
 	    	}
 	    },
 	    created:function(){	 
@@ -48,7 +50,7 @@ var HmyAppurl = appResourceURL;
 			        success: function (data) {
 			        	console.log(data)
 			        	if(data.Code==0){
-			        		SF_ReqestManage.getCurrentUser(that.userType, null);
+			        		//SF_ReqestManage.getCurrentUser(that.userType, null);
 			        		if(data.Data.demand_Info.length!==0){
 				        		that.datas = data.Data.user_info;
 					        	that.header_src = that.HmyAppurl+data.Data.user_info.header_src;
@@ -176,11 +178,6 @@ var HmyAppurl = appResourceURL;
 		    loadingagain:function(){
 		   		window.location.reload();
 			},
-			userType:function(result){
-				//alert(result.role_type);
-				if(result.role_type==='Goods'){
-					this.Goods = false;
-				}
-			}
+
 	    }
 	});

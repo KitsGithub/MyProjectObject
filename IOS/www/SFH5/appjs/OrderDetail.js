@@ -1,7 +1,9 @@
-      // SFAppData = {
-      //    	OrderId : 'febcef57-e15f-11e7-8e38-005056b66c79',
-      //    	UserId 	: 'd1068e3c-b459-4322-8751-3250d476a1b4'
-      // };
+
+//    SFAppData = {
+//       	OrderId : '23510e1a-e536-11e7-8e38-005056b66c79',
+//       	UserId 	: 'fe563e28-3b0d-43af-9876-2125e2ad4384'
+//    };
+
 
 function showData(){
 	var app = new Vue({
@@ -13,9 +15,11 @@ function showData(){
 	    		order_dates:{},
 	    		allocation_info:[],
 	    		isNumber:null,
-				appUrl:appURL,
+				appUrl:appResourceURL,
 				isError:false,
 				isWiFi:false,
+				isShownews:false,
+				ismore:false,
 	    	}
 	    },
 	    created:function(){	
@@ -38,6 +42,13 @@ function showData(){
 				        	that.carrierList 	= data.Data.carrier_by;
 				        	that.order_dates 	= data.Data.order_dates;
 				        	that.allocation_info = data.Data.allocation_info;
+				        	var num=0;
+				        	for (var i = 0; i < data.Data.allocation_info.length; i++) {
+				        		num+=data.Data.allocation_info[i].driver_info.length;
+				        	};
+				        	if(num>=3){
+				        		that.ismore = true;
+				        	};
 			        	}else{
 			        		that.isError=true;
 			        	};
@@ -84,4 +95,6 @@ function orderDetail_success(){
 function orderDetail_error(errorData){
 	showErrorMessage([errorData.message])
 };
+//
 //    showData();
+

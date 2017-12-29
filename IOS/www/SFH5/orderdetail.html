@@ -96,8 +96,8 @@
 									<li v-for="(items,index) in carrierList[index].demand_info">
 										<a :href="'wy_OrderService.html?GoodsId='+items.cars_id+'&UserId='+items.order_user+'&OrderId='+items.order_id">
 											<div class="hisCenterlist_header" >
-												<img :src="appUrl+items.head_src" alt="货满运头像" v-if="item.head_src!==''"/>
-												<img src="image/header.png" alt="货满运头像" v-else/>
+												<img :src="appUrl+items.head_src" alt="货满运头像" v-if="item.head_src!==''" onerror="javascript:this.src='image/header.png';"/>
+												<img src="image/header.png" alt="货满运头像" v-else onerror="javascript:this.src='image/header.png';"/>
 												<span>{{items.user_name}}</span>
 												<!--<span><i class="yellow_color">已接受</i></span>-->
 											</div>
@@ -123,7 +123,7 @@
 							<div>
 			                	<div>
 			                		<div class="icon_frombg"></div>
-				                    <p class="sftitle" >
+				                    <p class="sftitle" style="color:#3D3D3D">
 				                    	{{datas.from_province}}-{{datas.from_city}}-{{datas.from_district}}
 				                    </p>   
 				                </div>
@@ -140,7 +140,7 @@
 				                </div>
 				                <div >
 				                	<div class="icon_tobg"></div>
-				                    <p class="sftitle2 " >{{datas.to_province}}-{{datas.to_city}}-{{datas.to_district}}</p>
+				                    <p class="sftitle2 " style="color:#3D3D3D" >{{datas.to_province}}-{{datas.to_city}}-{{datas.to_district}}</p>
 				                </div>
 				                <div v-show="datas.to_address!==''">
 				                	<div class="icon_detailnormal"></div>
@@ -197,10 +197,11 @@
 							<p class="sf_GDtitle">用车需求</p>
 							<div v-for="cars in allocation_info">
 								<b class="flr carpai">{{cars.car_no}} / </b>
-								<ul class="carnumberstotal flr">
+								<ul class="carnumberstotal flr" :class="{'isshow_od': isShownews}">
 									<li v-for="its in cars.driver_info"><p ><span class="sf_GDlist" v-cloak>{{its.driver_by}}</span><span  v-cloak ><a :href="its.driver_mobile" class="sf_GDphone">{{its.driver_mobile}}</a></span></p></li>
 								</ul>
 							</div>
+							<p @click="isShownews=true,ismore=false" class="sf_font hmyhuang_color" style="text-align: center;" v-show="ismore">查看更多</p>
 						</div>
 						<!--查看司机结束-->
 					</div>

@@ -1,7 +1,7 @@
 var SFAppDatas={
 	 CarId:$.query.get("CarId"),
 	 UserId:$.query.get("UserId"),
-}
+};
 
 var app = new Vue({
     el: '#orderDetail',

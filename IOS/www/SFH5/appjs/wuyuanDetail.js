@@ -1,4 +1,3 @@
-//
 //SFAppData = {
 //	UserId : 'f4fc4103-eb1b-481d-9c95-6834ebbf194d',
 //	GoodsId : '5e3d3c94-66a5-4b42-9950-4d1c3b6b738e',
@@ -27,6 +26,7 @@ function showData (){
 	    	}
 	    },
 	    created:function(){
+	    	//SF_ReqestManage.getCurrentUser(this.userType, null);
 	    	if(SFAppData.isCloseHistory){
 	    		this.isCloseHistory=false;
 	    	};
@@ -44,6 +44,7 @@ function showData (){
 				        success: function (data) {
 				        	console.log(data)
 				        	if(data.Code==0){
+				        		
 				        		that.datas 			= data.Data.goods_details;
 					        	that.carrier_by 	= data.Data.carrier_by;
 							    if(data.Data.carrier_by.length===0){
@@ -89,7 +90,8 @@ function showData (){
 		   },
 		   loadingagain:function(){
 		   		window.location.reload();
-		   }
+		   },
+
     	},
 	    mounted:function(){
 	    	
@@ -109,7 +111,6 @@ function orderDetail_success(){
 function orderDetail_error(errorData){
 	showErrorMessage(errorData.message)
 };
-
 
 //showData ()
 

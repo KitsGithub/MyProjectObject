@@ -3,6 +3,7 @@ var SFAppDatas={
 	 UserId:$.query.get("UserId"),
 	 BatchId:$.query.get("BatchId")
 }
+
 console.log(SFAppDatas);
 var app = new Vue({
     el: '#orderDetail',
@@ -17,9 +18,9 @@ var app = new Vue({
 			issue_by:'',
 			isError:false,
 			isWiFi:false,
-			Cars:true,
 			isHideDelPanel:true,
 			isHideDelPanel2:true,
+			BatchId:SFAppDatas.BatchId,
     	}
     },
     created:function(){	 
@@ -47,7 +48,7 @@ var app = new Vue({
 					// navigation.setTitle("接单人详情")
 		        	console.log(data)
 		        	if(data.Code==0){
-		        		SF_ReqestManage.getCurrentUser(that.userType, null);
+		        		//SF_ReqestManage.getCurrentUser(that.userType, null);
 		        		if(data.Data.demand_info.length!==0){
 				        	that.datas 			= data.Data.user_info;
 				        	that.arrs 	= data.Data.demand_info;
@@ -177,12 +178,7 @@ var app = new Vue({
 	    loadingagain:function(){
 	   		window.location.reload();
 		},
-		userType:function(result){
-			//alert(result.role_type);
-			if(result.role_type==='Car'){
-				this.Cars = false;
-			}
-		},
+		
 	}
 });
 

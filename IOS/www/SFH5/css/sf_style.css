@@ -91,6 +91,7 @@ b{
 }
 .sf_font{
 	font-size: 16px;
+	vertical-align: middle;
 }
 .hmyhui{
 	background: #999999;
@@ -99,6 +100,15 @@ b{
 	background: #ffd74c;
 }
 .hmygreen{
+	background: #4ABA7B;
+}
+.status.hmyhui{
+	background: #999999;
+}
+.status.hmyhuang{
+	background: #ffd74c;
+}
+.status.hmygreen{
 	background: #4ABA7B;
 }
 .hmyhui_color{
@@ -189,9 +199,15 @@ b{
   	background: none;
   	line-height: 1.6rem;
   	color:#666666;
+  	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .sf_D.sf_Dbottm{
 	float: left;
+}
+#input_from_detail,#input_to_detail{
+	width:100%;
 }
 .sf_text{
 	display: block;
@@ -348,6 +364,10 @@ b{
   	color: #666666;
   	border: none;
   	height: 2.3rem;
+  	width:94%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 
 /************************货源详情*********************/
@@ -604,7 +624,13 @@ b{
   margin-right: 1.7rem;
 }
 .carnumberstotal{
-	display: inline-block;	
+	display: inline-block;
+	height: 10.2rem;	
+	overflow: hidden;
+}
+
+.isshow_od{
+	height: auto;
 }
 .carnumberstotal>li{
 	margin-bottom:1.8rem;

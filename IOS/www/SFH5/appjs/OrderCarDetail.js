@@ -1,7 +1,7 @@
-   // SFAppData = {
-   //    	OrderId : '72180d86-da75-11e7-8e38-005056b66c79',
-   //    	UserId 	: 'fe563e28-3b0d-43af-9876-2125e2ad4384'
-   // };
+// SFAppData = {
+//    	OrderId : '72180d86-da75-11e7-8e38-005056b66c79',
+//    	UserId 	: 'fe563e28-3b0d-43af-9876-2125e2ad4384'
+// };
 
 
 function showData(){
@@ -21,6 +21,8 @@ function showData(){
 	    		isNumber:null,
 	    		isError:false,
 				isWiFi:false,
+				isShownews:false,
+				ismore:false,
 	    	}
 	    },
 	    created:function(){	 
@@ -45,6 +47,13 @@ function showData(){
 				        	that.order_dates 	= data.Data.order_dates[0];
 				        	that.allocation_info = data.Data.allocation_info;
 				        	that.order_no=data.Data.order_no;
+				        	var num=0;
+				        	for (var i = 0; i < data.Data.allocation_info.length; i++) {
+				        		num+=data.Data.allocation_info[i].driver_info.length;
+				        	};
+				        	if(num>=3){
+				        		that.ismore = true;
+				        	};
 						}else{
 							that.isError=true;	
 						};
@@ -93,3 +102,4 @@ function orderDetail_error(errorData){
 };
 
 // showData();
+

@@ -199,7 +199,7 @@ function temporaryDetail(data){
 	
 	var toAddress=$("#toAddress").val(data.to_province+"-"+data.from_city+"-"+data.to_district);;
 	var input_to_detail = $("#input_to_detail").val(data.to_address);
-	var input_remark = $("#input_remark").val(data.attention_remark);
+	var input_remark = $("#input_remark").val(data.car_remark);
 	var carType= $("#carType").val(data.car_type);
 	var goodsTypename = $("#goodsTypename").val(data.goods_name);
 	var goodsType = $("#goodsType").val(data.goods_type);

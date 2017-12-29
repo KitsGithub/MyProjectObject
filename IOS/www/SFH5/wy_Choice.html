@@ -38,7 +38,7 @@
 					<div class="sf_divwrap hmyHiscontent"  >
 						<!--人物信息开始-->
 							<div>
-								<div class="sf_w">
+								<div class="sf_w" style="border: none;">
 									<div>
 										<div class="GDmanmews">
 											<span class="sf_imgheaderbig">
@@ -62,17 +62,23 @@
 									<div class="carWrapsleft">
 										<div class="topnews">
 											<i class="iconcar"></i>
-											<span class="gray_color">{{item.car_type}} {{item.car_long}}</span>
-											<span class="gray_color" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重量'">吨</span> </span>
-											<span class="gray_color" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
+											<span class="sf_font">{{item.car_no}}</span>
+											<span class="gray_color sf_font">{{item.car_type}} {{item.car_long}}</span>
+											<span class="gray_color sf_font" >{{item.dead_weight}}<span class="gray_color" v-show="item.dead_weight!=='任意载重'">吨</span> </span>
+											<span class="gray_color sf_font" >{{item.car_size}}<span class="gray_color" v-show="item.car_size!=='任意体积'">方</span></span>
 
 										</div>
 										<div class="bottomnews"><i class="iconcar preciicon"></i>
 											<span class="red_color sf_font" v-if="item.order_fee!=='面议'">{{item.order_fee}}元/车</span>
 											<span class="red_color sf_font" v-else>面议</span>
+											<i class="hmyhuang_color sf_font sf_mrL2" v-if="item.status==='A'">已接受</i>
+											<i class="hmygreen_color sf_font sf_mrL2" v-else-if="item.status==='B'">待确认</i>
+											<i class="hmyhui_color sf_font sf_mrL2" v-else-if="item.status==='C'">已取消</i>
+											<i class="hmyhui_color sf_font sf_mrL2" v-else-if="item.status==='D'">已回绝</i>
+											<i class="hmyhui_color sf_font sf_mrL2" v-else>已撤消</i>
 										</div>
 									</div>
-									<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show="item.status!=='A'" v-if="Cars">	
+									<div class="iconcarright" :checked="item.isCheck" @click="isCheck(item,index)" v-show="item.status!=='A'" v-if="BatchId===''">	
 									</div>		
 								</li>
 							</ul>
@@ -80,7 +86,7 @@
 						<!--车辆信息结束-->
 					</div>
 					<!--已拒绝或者已接收开始-->
-					<div class="wy_choose_footer" v-if="Cars">
+					<div class="wy_choose_footer" v-if="BatchId===''">
 						<div class="totalprice flr">
 							{{totalPrice |  moneyFormat(totalPrice)}}
 						</div>

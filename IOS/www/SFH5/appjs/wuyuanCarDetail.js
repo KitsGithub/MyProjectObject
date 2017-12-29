@@ -1,9 +1,9 @@
-// SFAppData = {
-//       	UserId : 'fe563e28-3b0d-43af-9876-2125e2ad4384',
-//       	CarId : '20710779-7a32-4dcf-9823-a6f5f450f6fe',
-//       	BatchId:"",  //有就传值，没有就传空字符串
-//       	isCloseHistory:false,//true关闭  false 不关闭
-//       };
+//SFAppData = {
+// 	UserId : 'fe563e28-3b0d-43af-9876-2125e2ad4384',
+//	CarId : '20710779-7a32-4dcf-9823-a6f5f450f6fe',
+//	BatchId:"",  //有就传值，没有就传空字符串
+//	isCloseHistory:false,//true关闭  false 不关闭
+// };
 
 
 
@@ -14,20 +14,19 @@ function showData(){
 	    	return{
 	    		datas:{},		//订单数据	json
 	    		booked_by:[],	//承运人列表 	array
-					cars_info:[],
-					isNumber:null,
-					isLook:true,
-					UserId:SFAppData.UserId,
-					CarId:SFAppData.CarId,
-					appUrl:appResourceURL,
-					isCloseHistory:true,
-					isError:false,
-					isWiFi:false,
-					BatchId:SFAppData.BatchId,
+				cars_info:[],
+				isNumber:null,
+				isLook:true,
+				UserId:SFAppData.UserId,
+				CarId:SFAppData.CarId,
+				appUrl:appResourceURL,
+				isCloseHistory:true,
+				isError:false,
+				isWiFi:false,
+				BatchId:SFAppData.BatchId,
 	    	}
 	    },
 	    created:function(){
-	    	//navigation.setTitle("车源详情");
 	    	if(SFAppData.isCloseHistory){
 	    		this.isCloseHistory=false;
 	    	};
