@@ -1,0 +1,170 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML学习笔记</title>
+		<meta charset="utf-8">
+		<meta name="keywoard" content="测试">
+	</head>
+
+	<!-- 块级标签 -->
+	<body>
+		<h1>HTML学习内容</h1>
+		<div id="BlockTag">
+			<h2>常用块级标签</h2>
+			<p>标题标签 h1~h6 </p>
+			<h3>段落标签 p标签 </h3>
+			<p>我是段落</p>
+			<h3>水平线标签 hr标签</h3>
+			<hr>
+		</div>
+		<div id="FruitsList">
+			<h3>有序列表标签li 水果排行榜</h3>
+			<ol>
+				<li>苹果</li>
+				<li>雪梨</li>
+				<li>橙子</li>
+			</ol>
+		</div>
+		<div id="TravelLine">
+			<h3>无序列表 ul标签 旅行线路</h3>
+			<ul>
+				<li>广州-厦门-上海</li>
+				<li>深圳-香港-泰国</li>
+				<li>昆明-丽江-西双版纳</li>
+			</ul>
+		</div>
+		<div id="WaterDesction">
+			<h3>定义描述 dl标签</h3>
+			<dl>
+				<dt>水</dt>
+				<dd>化学表达式：H<sub>2</sub>O</dd>
+				<dd>生命之源</dd>
+			</dl>
+
+			<dl>
+				<dt>氧气</dt>
+				<dd>化学表达式：O<sup>2</sup> </dd>
+			</dl>
+		</div>
+	</body>
+
+	<hr>
+		
+	<!-- 常用行级标签 -->
+	<body>
+		<div id="SectionTag">
+			<h3>常用行级标签</h3>
+			<strong>按行注意显示，前后不会自动换行</strong>
+			<dl>
+				<dd><b>定义粗体文字 b标签</b></dd>
+				<dd><i>定义斜体文字 i标签</i></dd>
+				<dd><em>定义强调文本 em标签</em></dd>
+				<dd><strong>定义粗体文本，与b标签的作用基本相同</strong></dd>
+				<dd><small>定义小号文本</small></dd>
+				<dd>定义下标文本   H<sub>2</sub>O</dd>
+				<dd>定义上标文本   O<sup>2</sup></dd>
+				<dd>定义文本显示方向 如：<bdo dir="ltr">我好帅</bdo> <bdo dir="rtl">我好帅</bdo></dd>
+			</dl>
+		</div>
+
+		<div>
+			<h4>超链接标签 a标签</h4>
+			<!-- target 可以是_self（当前页面打开超链接）,_blank（新建窗口打开超链接）,_top,_parsent 四个值 -->
+			<a href="http:www.baidu.com" target="_top"><img src="http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png" alt="logo"></a>
+			
+			<span>文本等行级内容</span>
+			<br>换行标签<br>
+			常用的特殊符号： 空格&nbsp; 大于号&gt; 小于号&lt; 引号&quot; 版权号&copy;
+
+		</div>
+	</body>
+	<hr>
+	<body>
+		<h3>表格标签的使用</h3>
+		<!-- 
+			cellspacing 单元格与边框之间的距离 
+			cellpadding 单元格内容与单元格的内部间距  默认是0
+		-->
+		<table width="400px" height="200px" border="1" bgcolor="yellow" cellspacing="0" cellpadding="5" >
+			<caption>我喜欢的歌曲</caption>
+			<thead>
+				<tr>
+					<th>歌名</th>
+					<th>作者</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+				<tr>
+					<td>光辉岁月</td>
+					<td>Beyond</td>
+				</tr>
+				<tr>
+					<td>红豆</td>
+					<td>王菲</td>
+				</tr>
+				<tr>
+					<td>我只在乎你</td>
+					<td>邓丽君</td>
+				</tr>
+				<tr>
+					<td>红豆</td>
+					<td>王菲</td>
+				</tr>
+				<tr>
+					<td>倩女幽魂</td>
+					<td rowspan="2">张国荣</td>
+				</tr>
+				<tr>
+					<td>有谁共鸣</td>
+				</tr>
+			<tfoot>
+				<tr>
+					<td colspan="2" align="right">共计5首歌曲</td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+	<br>
+	<hr>
+	<body>
+		<h3>form元素</h3>
+		<!-- 
+			input标签 
+			maxlength 	最大长度
+			checked 	是否选择
+			type : {
+				text 		//普通文本
+				password	//加密文本
+				radio		//单选
+				checkbox	//复选框
+				image		//图片域
+				file 		//文件上传
+				submit 		//提交表单
+				reset		//重置表单
+				button 		//自定义文本
+			}
+		 -->
+		<form name="Form" method="GET" action="https://www.baidu.com">
+			单行文本框: <input type="text" name="userName" placeholder="用户名" maxlength="10" width="30px"><br>
+			密码输入框: <input type="password" name="userPsw" placeholder="密码" maxlength="6" size="30px"><br>
+			隐藏文本框: <input type="hidden" name="hiddenForm"><br>
+			单选按钮: 
+			<input type="radio" name="sex" id="male" checked="checked">男
+			<input type="radio" name="sex" id="female">女<br>
+			复选框:
+			<input type="checkbox" name="sport" value="1" disabled="disable"> 足球
+			<input type="checkbox" name="sport" value="2"> 篮球
+			<input type="checkbox" name="sport" value="3"> 羽毛球
+			<input type="checkbox" name="sport" value="3"> 乒乓球<br>
+			图像域:
+			<input type="image" name="" src="http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png" width="100" height="40"><br>
+
+			文件上传域:
+			<input type="file" name="uploadFile"><br>
+			<input type="submit" name="" value="提交按钮"><br>
+			<input type="reset" name="reset" value="重置按钮"><br>
+			<input type="button" name="button" value="普通按钮"><br>
+		</form>
+	</body>
+
+</html>
