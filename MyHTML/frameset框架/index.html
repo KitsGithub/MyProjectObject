@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<title>framset框架</title>
+		<meta charset="utf-8">
+	</head>
+	<!-- cols 定义框架集中列的数目和尺寸 -->
+	<!-- rols  定义框架集中行的数目和尺寸 -->
+	<frameset rows="30%,*">
+		<frame src="frameset_B.html" name="topFrame"/>
+		<frameset cols="20%,*">
+			<frame src="frameset_A.html" name="leftFrame" noresize="noresize"/>
+			<frame src="frameset_C.html" name="contentFrame" />
+		</frameset>
+
+		<noframes>
+			<body>此浏览器不支持frameset框架</body>
+		</noframes>
+	</frameset>
+</html>
+
+
+
+
