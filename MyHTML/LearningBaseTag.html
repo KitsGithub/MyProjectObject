@@ -49,7 +49,7 @@
 	</body>
 
 	<hr>
-		
+
 	<!-- 常用行级标签 -->
 	<body>
 		<div id="SectionTag">
@@ -71,7 +71,7 @@
 			<h4>超链接标签 a标签</h4>
 			<!-- target 可以是_self（当前页面打开超链接）,_blank（新建窗口打开超链接）,_top,_parsent 四个值 -->
 			<a href="http:www.baidu.com" target="_top"><img src="http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png" alt="logo"></a>
-			
+
 			<span>文本等行级内容</span>
 			<br>换行标签<br>
 			常用的特殊符号： 空格&nbsp; 大于号&gt; 小于号&lt; 引号&quot; 版权号&copy;
@@ -81,8 +81,8 @@
 	<hr>
 	<body>
 		<h3>表格标签的使用</h3>
-		<!-- 
-			cellspacing 单元格与边框之间的距离 
+		<!--
+			cellspacing 单元格与边框之间的距离
 			cellpadding 单元格内容与单元格的内部间距  默认是0
 		-->
 		<table width="400px" height="200px" border="1" bgcolor="yellow" cellspacing="0" cellpadding="5" >
@@ -128,8 +128,8 @@
 	<hr>
 	<body>
 		<h3>form元素</h3>
-		<!-- 
-			input标签 
+		<!--
+			input标签
 			maxlength 	最大长度
 			checked 	是否选择
 			type : {
@@ -148,7 +148,7 @@
 			单行文本框: <input type="text" name="userName" placeholder="用户名" maxlength="10" width="30px"><br>
 			密码输入框: <input type="password" name="userPsw" placeholder="密码" maxlength="6" size="30px"><br>
 			隐藏文本框: <input type="hidden" name="hiddenForm"><br>
-			单选按钮: 
+			单选按钮:
 			<input type="radio" name="sex" id="male" checked="checked">男
 			<input type="radio" name="sex" id="female">女<br>
 			复选框:
@@ -161,10 +161,23 @@
 
 			文件上传域:
 			<input type="file" name="uploadFile"><br>
-			<input type="submit" name="" value="提交按钮"><br>
+			<input type="submit" name="submit" value="提交按钮"><br>
 			<input type="reset" name="reset" value="重置按钮"><br>
 			<input type="button" name="button" value="普通按钮"><br>
+
+			<!-- button标签
+			type:{
+				reset
+				submit
+				button
+			} -->
+			<p>与input相比，button提供了更为强大的功能和更加丰富的内容</p>
+			<button type="submit" name="submit2">提交按钮</button><br>
+			<button type="reset" name="reset2">重置按钮</button>
+			<button type="button" name="button2" disabled="disabled">普通按钮</button>
 		</form>
+
+		<button></button>
 	</body>
 
 </html>
