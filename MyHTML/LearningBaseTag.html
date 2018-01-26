@@ -5,6 +5,9 @@
 		<meta charset="utf-8">
 		<meta name="keywoard" content="测试">
 	</head>
+	<style type="text/css">
+		
+	</style>
 
 	<!-- 块级标签 -->
 	<body>
@@ -145,8 +148,8 @@
 			}
 		 -->
 		<form name="Form" method="GET" action="https://www.baidu.com">
-			单行文本框: <input type="text" name="userName" placeholder="用户名" maxlength="10" width="30px"><br>
-			密码输入框: <input type="password" name="userPsw" placeholder="密码" maxlength="6" size="30px"><br>
+			<label for="userName">单行文本框: </label><input type="text" name="userName" id="userName" placeholder="用户名" maxlength="10" width="30px"><br>
+			<label for="password">密码输入框: </label><input type="password" name="password" id="password" placeholder="密码" maxlength="6" size="30px"><br>
 			隐藏文本框: <input type="hidden" name="hiddenForm"><br>
 			单选按钮:
 			<input type="radio" name="sex" id="male" checked="checked">男
@@ -176,8 +179,39 @@
 			<button type="reset" name="reset2">重置按钮</button>
 			<button type="button" name="button2" disabled="disabled">普通按钮</button>
 		</form>
+		<br>
+		<h3>下拉菜单</h3>
+		<!-- 列表框和下拉菜单 -->
+		<select name="cityList" id="cityList">
+			<option value="beijing">北京</option>
+			<option>上海</option>
+			<option selected="selected" value="tianjin">天津</option>
+			<option>广州</option>
+		</select>
 
-		<button></button>
+		<br>
+		<select name="cityList" id="cityList2" multiple="mltiple" size="3">
+			<optgroup label="一线城市">
+				<option>北京</option>
+				<option>上海</option>
+				<option>天津</option>
+			</optgroup>
+			<optgroup label="二线城市">
+				<option>南京</option>
+				<option>大连</option>
+				<option>杭州</option>
+			</optgroup>
+		</select>
+
+		<br>
+		<h3>多行文本框</h3>
+		<textarea cols="50" rows="4" readonly="readonly">
+			一堆内容
+			一堆内容
+			一堆内容
+		</textarea>
+
+
 	</body>
 
 </html>

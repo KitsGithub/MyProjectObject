@@ -1,0 +1,142 @@
+/*
+* @Author: kit
+* @Date:   2018-01-26 15:06:34
+* @Last Modified by:   kit
+* @Last Modified time: 2018-01-26 17:04:24
+*/
+
+/*
+	============ css控制文本提供了大量属性 ============
+	color 			: 字体颜色;
+	letter-spacing: : 字符间距; h<->e<->l<->l<->o
+	line-height: 	: 行高	
+	text-align:  	: 对齐方式 {
+		left,
+		right,
+		center
+	};
+	text-decoration : 文本装饰效果 {
+		overline, 		上划线
+		underline,		下划线
+		line-through	中划线
+	};
+	text-indent: 	: 设置文本块首行缩进
+	text-transform: : 控制文本大小写 {
+		uppercase,  	全部大写
+		lowercase,		全部小写
+		capitalize		首字母大写
+	};
+	word-spacing: 单词间距 hello<-->word
+ */
+ p.one {
+	color: red;
+	font-size: 10px;
+	letter-spacing: 5px;
+	text-decoration: underline;
+}
+p.one b {
+	color: red;
+	font-size: 2em;
+	letter-spacing: 5px;
+	text-decoration: underline;
+}
+
+p.two {
+	color: green;
+	text-align: right;
+	font-size: 15px;
+	text-decoration: overline;
+}
+
+p.three {
+	color: black;
+	text-decoration: line-through;
+	font-size: 20px;
+	text-transform: capitalize;
+	text-indent: 5px;
+}
+
+/*
+	============ CSS常用边框属性 ============
+	border 		 : 设置边框属性
+	border-width : 边框宽度
+	border-style : 边框样式 {
+		dotted, 	点线
+		solid,		粗边框
+		double,		双划线
+		dashed		虚线
+	};
+	border-color : 边框颜色
+	border-left  : 左边框属性 相对应的还有 border-right、border-top、border-bottom
+	border-left-color : 左边框颜色 相对应的还有 border-right-color、border-top-color、border-bottom-color
+	border-left-style : 左边框样式 相对应的还有 border-right-style、border-top-style、border-bottom-style
+	border-left-width : 左边框宽度 相对应的还有 border-right-width、border-top-width、border-bottom-width	
+	============================================================
+	============================================================
+
+
+	============ CSS常用背景属性 ============
+	background: 设置背景属性
+	background-attachment: 背景图片是否跟随滚动 {
+		fixed,
+		scroll
+	};
+	background-color : 背景颜色
+	background-image : 背景图片 {
+		url,
+		none
+	};
+	background-position : 对齐方式 {
+		top,
+		left,
+		bottom,
+		righ
+	};  
+	background-repeat : 设置是否及如何重复背景图像 {
+		repeat,
+		repeat-x,
+		repeat-y,
+		no-repeat
+	};
+*/
+
+body {
+	background-image: url(http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png);
+	background-repeat: no-repeat;
+	background-position: top;
+	background-attachment: scroll;
+}
+
+p.PBorderStyle {
+	width: 200px;
+	height: 100px;
+	border-color: red;
+	border-style: dotted;
+}
+
+img {
+	width: 90px;
+	height: 30px;
+	/*border: 5px dotted #ff00ff*/
+/*
+	border-left-color: red;
+	border-left-width: 10px;
+	border-left-style: dotted;
+
+	border-right-style: solid;
+	border-top-style: double;
+	border-bottom-style: dashed;
+}*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
