@@ -1,0 +1,32 @@
+/*
+* @Author: kit
+* @Date:   2018-01-29 17:13:37
+* @Last Modified by:   kit
+* @Last Modified time: 2018-01-29 17:44:07
+*/
+/* 
+body {
+	width: 120px;
+	background-color: blue;
+} */
+
+img.weatherImg {
+	width: 40px;
+	height: 50px;
+	left: 10px;
+	top: 0px;
+	float: left;
+}
+
+div.separateLine {
+	width: 120px;
+	border: 1px solid red;
+	z-index: 1;
+}
+
+ul.weather {
+	list-style-position: inside;
+	list-style-type: none;
+	border-top:  1px solid blue;
+	margin: 0px;
+}
