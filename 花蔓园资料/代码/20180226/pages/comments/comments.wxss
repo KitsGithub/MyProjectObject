@@ -1,0 +1,52 @@
+/*全部评论  */
+.comments{
+  display:block;
+  padding: 20rpx 0 20rpx 30rpx;
+  background-color: #ffffff;
+  min-height: 180rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+}
+.com-module{
+  display: block;
+  padding: 20rpx 30rpx 20rpx 0;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+  border-bottom:1rpx solid #e5e5e5;
+}
+.com-user{
+  display: flex;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: left;
+  color: #333333;
+  text-indent: 20rpx;
+  line-height: 48rpx;
+}
+.u-head{
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+}
+.content{
+  display: block;
+  padding-top: 20rpx;
+}
+.spec{
+  display: block;
+  padding-top: 20rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+.com-img{
+  display: flex;
+  width: 100%;
+  height: 220rpx;
+  padding-top:20rpx;
+  justify-content:space-between;
+  overflow: hidden;
+}

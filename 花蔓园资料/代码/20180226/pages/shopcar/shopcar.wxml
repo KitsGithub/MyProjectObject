@@ -1,0 +1,59 @@
+<!--购物车-->
+<view wx:if="{{list.length > 0}}" class="shopcar">
+  <div class="head">
+      <image src="../../images/business.png" class="business-img"/>
+      <span class="business">花蔓园</span>
+      <span wx:if="{{!isHandle}}" class="handle" bindtap="change">编辑</span>
+      <span wx:else class="handle" bindtap="change">完成</span>
+  </div>
+  <scroll-view scroll-y style='height:calc(100vh - 190rpx);'>
+    <div wx:for="{{list}}" wx:key="list-{{index}}" class="car-module">
+      <p class="car-sel" data-index="{{index}}" bindtap="select">
+        <image src="{{item.selected?'../../images/checked.png':'../../images/unchecked.png'}}" class="sel-img"/>
+      </p>
+      <p class="car-good">
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516446349070&di=35e8a390ea3596c0ac502db521a7986f&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc4307e5ddb1373f0e13267dccc66218e%2F83025aafa40f4bfbee9e7872094f78f0f736184d.jpg" data-index="{{index}}" bindload="imageLoad" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+      </p>
+      <!--商品详情  -->
+      <div wx:if="{{!isHandle}}" class="car-detail">
+        <p class="good-name">{{item.commodityName}}</p>
+        <p class="spec">规格:{{item.goodsName}}</p>
+        <p class="item-data">
+          <span class="price">￥{{item.price}}</span>
+          <span class="num">x{{item.count}}</span>
+        </p>
+      </div>
+      <!--编辑购物车商品  -->
+      <div wx:else class="car-detail">
+        <div class="handle-num">
+          <!-- 减号 -->
+          <span class="normal {{item.count==1?'disabled':''}}" data-index="{{index}}" bindtap="bindMinus">-</span>
+          <!-- 数值 -->
+          <span class="number">{{item.count}}</span>
+          <!-- 加号 -->
+          <span class="normal" data-index="{{index}}" bindtap="bindPlus">+</span>
+        </div>
+        <p class="spec">规格:{{item.goodsName}}</p>
+        <p class="item-data">
+          <span class="price">￥{{item.price}}</span>
+        </p>
+      </div>
+      <!--删除  -->
+      <div wx:if="{{isHandle}}" class="car-del" bindtap="delGood" data-index="{{index}}" data-id="{{item.goodsid}}">删除</div>
+    </div>
+  </scroll-view>
+  <!-- 全选 -->
+  <div class="sel-all">
+    <p class="all" bindtap="selAll">
+      <image src="{{allSel?'../../images/checked.png':'../../images/unchecked.png'}}" class="sel-img"/>
+      <span>全选</span>
+    </p>
+    <p class="total">合计: <span>￥{{totalMoney}}</span></p>
+    <p wx:if="{{!isHandle}}" class="dispose" bindtap="account">结算</p>
+    <p wx:else class="dispose" bindtap="delAll">删除</p>
+  </div>
+</view>
+<view wx:else class="nodata">
+  <image src="../../images/carnodata.png" class="no-data-img"/>
+</view>
+

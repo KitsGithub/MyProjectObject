@@ -1,0 +1,12 @@
+<!--支付设置-->
+<view class="payset-view">
+  <div class="order-center handle">
+    <navigator url="../setpassword/setpassword?isUpdate={{isUpdate}}" class="center">
+      <span wx:if="{{isUpdate}}">修改密码</span>
+      <span wx:else>设置密码</span>
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+  </div>
+</view>
+
+

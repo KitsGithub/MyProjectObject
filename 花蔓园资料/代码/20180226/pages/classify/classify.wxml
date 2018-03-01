@@ -1,0 +1,24 @@
+<!--logs.wxml-->
+<view class="classify">
+  <!--左边分类  -->
+  <scroll-view scroll-y  class="class-left">
+    <block wx:for="{{classify}}" wx:for-item="class" wx:key="classify">
+      <p class="{{index===sel?'type-active':''}} type" data-index="{{index}}" bindtap="selClassify">{{class.categoryName}}</p>
+    </block>
+  </scroll-view>
+  <!--右边花 -->
+  <scroll-view scroll-y class="class-right">
+    <div class="class">
+      <navigator url="../goodDetail/goodDetail?id={{item.categoryid}}" wx:for="{{classify[sel].categoryLevelTwos}}" class="good"  wx:key="goods-{{index}}">
+        <p class="good-img">
+          <image src="{{item.categoryPhoto}}" class="img" data-index="{{index}}" bindload="imageLoad" style="width:{{item.width}};height:{{item.height}};"/>
+        </p>
+        <p class="good-name">{{item.categoryName}}</p>
+      </navigator>
+    </div>
+  </scroll-view>
+  <!--客服  -->
+  <button open-type="contact" session-from="weapp" class='service'>
+    <image src="../../images/service.png" class='service-img'></image>
+  </button> 
+</view>

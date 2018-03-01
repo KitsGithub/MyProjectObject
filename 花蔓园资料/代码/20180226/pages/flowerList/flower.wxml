@@ -1,0 +1,44 @@
+<!--商品列表  -->
+<view style="height:100vh;">
+  <!--顶部 筛选项  -->
+  <div class="list-tabs">
+    <p class="tab {{selTab==1?'tab-active':''}}" data-index="1" bindtap="sel">综合</p>
+    <p class="tab {{selTab==3?'tab-active':''}}" data-index="3" bindtap="sel">销量</p>
+    <p class="tab {{selTab==4?'tab-active':''}}" data-index="4" bindtap="sel">价格</p>
+    <p class="tab" data-type="{{cardOrlist}}" bindtap="change">
+      <image wx:if="{{cardOrlist=='card'}}" src="../../images/card.png" class="type-img"/>
+      <image wx:else src="../../images/list.png" class="type-img"/>
+    </p>
+  </div>
+  <!--列表  -->
+  <scroll-view scroll-y class="list" bindscrolltoupper="refesh" bindscrolltolower="loadMore">
+    <view wx:if="{{cardOrlist=='card'}}" class="card">
+      <div wx:for="{{list}}" class="c-module"  data-id="{{item.categoryid}}" bindtap="toGoodDetail" wx:key="card-{{index}}">
+        <p class="c-img">
+          <image src="{{item.photo}}" data-index="{{index}}" bindload="imageLoadCard" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+        </p>
+        <div>
+          <p class="c-title">{{item.commodityName}}</p>
+          <p class="data">
+            <span class="price">￥{{item.goodsValue}}</span>
+            <span class="sales">销量:{{item.salesCount}}</span>
+          </p>
+        </div>
+      </div>
+    </view>
+    <view wx:else class='goodlist'>
+      <div wx:for="{{list}}" class="l-module" wx:key="list-{{index}}" data-id="{{item.categoryid}}" bindtap="toGoodDetail" wx:key="card-{{index}}">
+        <p class="l-img">
+          <image src="{{item.photo}}" data-index="{{index}}" bindload="imageLoadList" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+        </p>
+        <div class="l-detail">
+          <p class="l-title">{{item.commodityName}}</p>
+          <p class="data" style="padding-top:100rpx;">
+            <span class="price">￥{{item.goodsValue}}</span>
+            <span class="sales">销量:{{item.salesCount}}</span>
+          </p>
+        </div>
+      </div>
+    </view>
+  </scroll-view>
+</view>

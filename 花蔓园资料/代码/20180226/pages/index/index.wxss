@@ -1,0 +1,197 @@
+/**index.wxss**/
+/*重写指示点样式start  */
+.swiper-box{
+  height: 422rpx;
+  width: 750rpx;
+  overflow: hidden;
+}
+.swiper-box .wx-swiper-dots.wx-swiper-dots-horizontal{
+     margin-bottom: 2rpx;
+}
+.swiper-box .wx-swiper-dot{
+    width:36rpx;
+    display: inline-flex;
+    height: 8rpx; 
+    margin-left: 10rpx;
+    justify-content:space-between;
+}
+.swiper-box .wx-swiper-dot::before{
+    content: '';
+    flex-grow: 1;  
+    background-color: #ffffff;
+}
+.swiper-box .wx-swiper-dot-active::before{
+    background-color: #055b58;    
+}
+.banner-bg{
+  width: 100%;
+  height: 100%;
+}
+/*重写指示点样式end  */
+.classify{
+  padding-top: 28rpx;
+  display:flex;
+  width: 100%;
+  height:182rpx;
+  background-color: #ffffff;
+}
+.classify .cla{
+  flex:1;
+  width:25%;
+  overflow: hidden;
+  text-align:center;
+}
+.classify-img{
+  width: 76rpx;
+  height: 93rpx;
+}
+.c-name{
+  display: block;
+  padding-top: 14rpx;
+  font-size: 24rpx;
+  font-weight: normal;
+  text-align: center;
+  color: #333333;
+}
+.flower{
+  display: block;
+  width: 361rpx;
+  height: 112rpx;
+  margin: 0 auto;
+  padding: 24rpx 0;
+}
+.footer{
+  display: block;
+  width: 519rpx;
+  height: 115rpx;
+  margin: 0 auto;
+  padding: 60rpx 0;
+}
+.hot{
+  display: block;
+  background-color: #fafafa;
+}
+.f-list{
+  display: flex;
+  width: 100%;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  color: #333333;
+  font-family: PingFang-SC;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.04);
+}
+.h-img{
+  display: block;
+  min-width: 200rpx;
+  max-width: 200rpx;
+  overflow: hidden
+}
+.h-detail{
+  display:block;
+  padding: 20rpx 33rpx 20rpx 20rpx;
+}
+.h-title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+  min-height: 80rpx;
+}
+.rec-detail{
+  display: block;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: justify;
+  color: #333333;
+  line-height:50rpx;
+}
+.rec-title{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.price{
+  width: 58rpx;
+  height: 23rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  font-weight: 500;
+  text-align: justify;
+  color: #ff2929;
+}
+.born{
+  width: 59rpx;
+  height: 19rpx;
+  padding-left: 7rpx;
+  font-family: PingFang-SC;
+  font-size: 24rpx;
+  font-weight: 500;
+  text-align: justify;
+  color: #999999;
+  text-decoration:line-through;
+}
+.more{
+  display: block;
+  padding-right:30rpx;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: right;
+  color: #999999;
+  user-select: none;
+}
+.first{
+  position: relative;
+  display: block;
+  width: 690rpx;
+  height: 690rpx;
+  overflow: hidden;
+  margin: 20rpx 30rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: center;
+  color: #ffffff;
+}
+.look{
+  position: absolute;
+  bottom:80rpx;
+  left:50%;
+  margin-left: -190rpx;
+  width: 380rpx;
+  height: 160rpx;
+  background-color: rgba(5, 91, 88, 0.7);
+}
+.look p{
+  display: block;
+  margin-top: 20rpx;
+}
+.to-look{
+  width: 120rpx;
+  height: 40rpx;
+  margin: 0 auto;
+  padding: 0 13rpx !important;
+  border: 1px solid #ffffff;
+}
+.recommend{
+  display: flex;
+  margin: 0 30rpx 10rpx;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+.rec-div{
+  display: block;
+  width: 340rpx;
+  height: 451rpx;
+  margin-bottom: 10rpx;
+  background-color: #ffffff;
+}
+.rec-img{
+  display: block;
+  width: 340rpx;
+  height: 340rpx;
+  overflow: hidden;
+}

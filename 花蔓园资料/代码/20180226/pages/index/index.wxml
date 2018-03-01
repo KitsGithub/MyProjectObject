@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view>
+  <swiper indicator-dots="true"
+      autoplay="true" indicator-color="#ffffff" indicator-active-color="#055b58" class='swiper-box'>
+      <block wx:for="{{bannerList}}" wx:key="banner-{{index}}">
+        <swiper-item>
+          <image src="{{item.bannerUrl}}" style="width:100%;"/>
+        </swiper-item>
+      </block>
+      <image src="../../images/default.png" class="banner-bg"/>
+  </swiper>
+  <!--分类  -->
+  <div class="classify">
+    <p class="cla" wx:for="{{classify}}" wx:key="classify" bindtap="lookMore">
+      <image src="../../images/f{{index+1}}.png" class="classify-img"/>
+      <span class="c-name">{{item}}</span>
+    </p>
+  </div>
+  <!--热销商品  -->
+  <div class="hot" wx:if="{{hot.length > 0}}">
+    <image src="../../images/index1.png" class="flower"/>
+    <div wx:for="{{hot}}" class="f-list" wx:key="hot+{{index}}" data-id="{{item.categoryid}}" bindtap="toGoodDetail">
+      <!--花图片  -->
+      <div class="h-img">
+        <image src="{{item.photo}}" data-index="{{index}}" bindload="imageLoadHot" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+      </div>
+      <!--花详情  -->
+      <div class="h-detail">
+        <p class="h-title">{{item.commodityName}}</p>
+        <div class="h-price">
+          <span class="price">￥{{item.salesValue}}</span>
+          <span class="born" wx:if="{{item.salesValue!=item.goodsValue}}">￥{{item.goodsValue}}</span>
+        </div>
+      </div>
+    </div>
+    <p class="more" wx:key="more0"><span bindtap="lookMore">查看更多></span></p>
+  </div>
+  <!--每日推荐  -->
+  <div class="hot" wx-if="{{recommend.length > 0}}">
+    <image src="../../images/index2.png" class="flower"/>
+    <!--推荐第一个start  -->
+    <div class="first" wx-if="{{recommend[0]}}">
+      <!--花图  -->
+      <image src="{{recommend[0].photo}}" data-index="0" bindload="imageLoadRecoF" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+      <!--操作  -->
+      <div class="look">
+        <p>{{recommend[0].commodityName}}</p>
+        <p class="to-look" data-id="{{recommend[0].categoryid}}" bindtap="toGoodDetail">点击查看</p>
+      </div>
+      <!--推荐第一个end  -->
+    </div>
+    <!--推荐后4个start  -->
+    <div class="recommend">
+      <div wx:for="{{recommend}}" class="rec-div" wx:if="{{index > 0}}" wx:key="recommend+{{index}}" data-id="{{item.categoryid}}" bindtap="toGoodDetail">
+        <p class="rec-img">
+          <image src="{{item.photo}}" data-index="{{index}}" bindload="imageLoadReco" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+        </p>
+        <div class="rec-detail">
+          <span  class="rec-title">{{item.commodityName}}</span>
+          <span class="price">￥{{item.salesValue}}</span>
+        </div>
+      </div>
+    </div>
+    <!--推荐后4个end  -->
+    <p class="more" wx:key="more1"><span bindtap="lookMore">查看更多></span></p>
+  </div>
+  
+  <!--底部  -->
+  <div class="hot">
+    <image src="../../images/index3.png" class="footer"/>
+  </div>
+  <!--客服  -->
+  <button open-type="contact" session-from="weapp" class='service'>
+    <image src="../../images/service.png" class='service-img'></image>
+  </button> 
+</view>
+
+
+

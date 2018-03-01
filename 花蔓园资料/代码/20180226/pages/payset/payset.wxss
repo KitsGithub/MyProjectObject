@@ -1,0 +1,43 @@
+/*支付设置  */
+.payset-view{
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+.order-center{
+  display: block;
+  width: 100%;
+  background-color:#ffffff;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: center;
+  color: #999999;
+  line-height:45rpx;
+}
+.order-center .center{
+  display: flex;
+  margin-left: 30rpx; 
+  padding:20rpx 30rpx 20rpx 0;
+  height:49rpx;
+  line-height:49rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+  background-color:#ffffff;
+  align-items:center;
+}
+.order-center .center span{
+  display: block;
+  flex: 1;
+  text-indent:18rpx;
+}
+.to{
+  flex:1;
+  max-width: 16rpx;
+  min-width:16rpx;
+  height: 28rpx;
+}
+.handle{
+  margin-top: 10rpx;
+}

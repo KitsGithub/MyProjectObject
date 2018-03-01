@@ -1,0 +1,172 @@
+/*
+* @Author: Mr_kit
+* @Date:   2018-02-08 14:59:59
+* @Last Modified by:   Mr_kit
+* @Last Modified time: 2018-02-08 17:37:03
+*/
+
+.superClass {
+	width: 375px;
+
+}
+
+/* 导航栏头部 */
+.navHeader {
+	width: 375px;
+	height: 44px;
+	/* background-color: #ffffff; */
+	background-color: red;
+}
+
+.navTitle {
+	font-family: PingFangSC;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 44px;
+	text-align: center;
+	color: #3d3d3d;
+	padding: 0px 0px 0px 156px;
+}
+
+.navHeader span img {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	position: absolute;
+	padding: 14px 0px 14px 16px;
+}
+
+.navRight {
+	width: 52px;
+	height: 16px;
+	font-family: PingFangSC;
+	font-size: 16px;
+	line-height: 44px;
+	text-align: left;
+	color: #4c90ff;
+	float: right;
+	/* padding: 20px 20px 14px 323px; */
+}
+
+.navSeparateLine {
+	width: 375px;
+	height: 1px;
+	background-color: #eeeeee;
+	float: left;
+}
+
+
+
+/* TransportTools */
+.Title {
+	width: 355px;
+	height: 21px;
+	font-family: PingFangSC;
+	font-size: 21px;
+	font-weight: 500;
+	line-height: 21px;
+	text-align: left;
+	color: #3d3d3d;
+	/* float: left; */
+	margin: 0px;
+	padding: 30px 0px 0px 20px;
+}
+
+
+/* transportLine  运输线路*/
+.transportLine {
+	width: 375px;
+	height: 309px;
+	background-color: #ffffff;
+	/* background-color: red; */
+	padding: 0px;
+	overflow: hidden;
+}
+
+
+
+.transportAddress {
+	width: 162px;
+	height: 18px;
+	font-family: PingFangSC;
+	font-size: 18px;
+	line-height: 1.0;
+	text-align: left;
+	color: #666666;
+	float: left;
+	/* position: absolute; */
+	padding: 29px 0px 0px 37px;
+}
+
+.transportArrowDown {
+	padding: 23px 20px 0px 0px;
+	float: right;
+}
+
+.transprotInput {
+	width: 302px;
+	height: 48px;
+	float: left;
+	border-radius: 10px;
+	background-color: #f1f1f3;
+	/* padding:0px 0px 0px 0px; */
+	text-indent: 10px;
+	margin-left: 37px;
+	margin-top: 19px;
+	margin-right:36px;
+	border: none;
+}
+
+
+.separateLine {
+	width: 375px;
+	height: 1px;
+	background-color: #eeeeee;
+	float: left;
+	margin-top: 25px;
+}
+
+/* 货物及车辆信息 */
+.transportGoodInfomation {
+	width: 375px;
+	height: 515px;
+	background-color: white;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.infomationInput {
+	width: 335px;
+	height: 48px;
+	float: left;
+	border-radius: 10px;
+	background-color: #f1f1f3;
+	/* padding:0px 0px 0px 0px; */
+	text-indent: 10px;
+	margin-left: 20px;
+	margin-top: 19px;
+	margin-right:20px;
+	border: none;
+}
+
+.infomationTitle {
+	width: 162px;
+	height: 18px;
+	font-family: PingFangSC;
+	font-size: 18px;
+	line-height: 1.0;
+	text-align: left;
+	color: #666666;
+	float: left;
+	/* position: absolute; */
+	padding: 20px 0px 0px 20px;
+}
+
+
+
+
+
+
+
+

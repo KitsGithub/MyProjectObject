@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="pay-result" wx:if="{{result=='true'}}">
+  <image src="../../images/success.png" class="result-img"/>
+  <p>支付成功</p>
+  <p style="color: #999999;">支付金额: ￥{{data}}</p>
+  <navigator url="../ordercenter/ordercenter" open-type="redirect" class="result-btn" hover-class="other-navigator-hover">完成</navigator>
+</view>
+<view class="pay-result" wx:else>
+  <image src="../../images/fail.png" class="result-img"/>
+  <p>支付失败</p>
+  <p style="color: #ff2929;">{{data}}</p>
+  <navigator open-type="navigateBack" class="result-btn" hover-class="other-navigator-hover">返回</navigator>
+</view>
+
+

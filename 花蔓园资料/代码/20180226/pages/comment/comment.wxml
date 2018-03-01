@@ -1,0 +1,14 @@
+<!--发表评价-->
+<view class="comment-view">
+  <form bindsubmit="formSubmit">
+    <textarea bindblur="bindTextAreaBlur" auto-height placeholder="你对宝贝有什么看法？说说看…" name="textarea" class="text"/>
+    
+    <div class="upload" bindtap="uploadImg">
+      <image src="../../images/photo.png" class="photo-img"/> 
+      <p>添加照片</p>
+    </div>
+    <button formType="submit" class="com-btn">发布</button>
+  </form>
+</view>
+
+

@@ -1,0 +1,17 @@
+<!--全部评论  -->
+<view class="comments">
+    <div wx:for="{{comments}}" class="com-module" wx:key="comments+{{index}}">
+      <p class="com-user">
+        <image class="u-head" src="{{item.head}}"/>
+        <span>{{item.userName}}</span>
+      </p>
+      <p class="spec">规格:{{item.goodsName}}</p>
+      <p class="content">{{item.comment}}</p>
+      <div class="com-img">
+        <image wx:for="{{item.commentPhoto}}" wx:key="img-{{index}}" data-index="{{index}}" src="{{item.url}}" bindload="imageLoadImg" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+      </div>
+    </div>
+</view>
+
+
+

@@ -1,0 +1,363 @@
+/*商品详情  */
+.good-detail{
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+.banner{
+  position: relative;
+  width: 100%;
+  height: 750rpx;
+}
+.swiper{
+  height: 750rpx;
+}
+.b-index{
+  position: absolute;
+  bottom: 20rpx;
+  left: 375rpx;
+  margin-left: -38rpx;
+  display: block;
+  width: 76rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  background-color: #000000;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  text-align: center;
+  color: #ffffff;
+}
+.good-info{
+  display:block;
+  padding: 20rpx 30rpx;
+  background-color: #ffffff;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  text-align: justify;
+  color: #333333;
+}
+.g-title{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  padding-bottom:20rpx;
+}
+.money-icon{
+  color: #ff2929;
+}
+.price{
+  color: #ff2929;
+  font-size: 48rpx;
+}
+.born{
+  display: inline-block;
+  font-family:PingFang-SC;
+  font-size:24rpx;
+  font-weight:500;
+  text-align:justify;
+  color:#999999;
+  text-decoration:line-through;
+  text-indent:15rpx;
+}
+.g-other{
+  display: flex;
+  padding-top: 20rpx;
+  font-family: PingFang-SC;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  text-align: justify;
+  color: #999999;
+}
+.franking{
+  text-align: left;
+}
+.sales{
+  text-align: right;
+  display:block;
+  flex:1;
+}
+.piece{
+  display: block;
+  height: 62rpx;
+  line-height: 62rpx;
+  text-align: center;
+  color: #999999;
+}
+.comments{
+  display:block;
+  padding: 20rpx 0 20rpx 30rpx;
+  background-color: #ffffff;
+  min-height: 180rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+}
+.no-comment{
+  display: block;
+  text-align: center;
+  padding-top:27rpx;
+  padding-right:30rpx;
+}
+.com-detail{
+  display: block;
+}
+.com-module{
+  display: block;
+  padding: 20rpx 30rpx 20rpx 0;
+  font-family: PingFang-SC;
+  font-size: 24rpx;
+  text-align: left;
+  color: #333333;
+  border-bottom:1rpx solid #e5e5e5;
+}
+.com-module:nth-child(2){
+  border-bottom:none;
+}
+.com-user{
+  display: flex;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: left;
+  color: #333333;
+  text-indent: 20rpx;
+  line-height: 48rpx;
+}
+.u-head{
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+}
+.content{
+  display: block;
+  padding-top: 20rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.spec{
+  display: block;
+  padding-top: 20rpx;
+  color: #999999;
+}
+.see-more{
+  display: block;
+  width: 200rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  margin: 10rpx auto;
+  font-size: 24rpx;
+  text-align: center;
+  color: #055b58;
+  border: solid 1rpx #055b58;
+  border-radius: 6rpx;
+}
+.detail{
+  display: block;
+  width: 100%;
+  min-height: 200rpx;
+  padding-bottom: 100rpx;
+  background-color: #ffffff;
+}
+.footer{
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-family: PingFang-SC;
+  font-size: 34rpx;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ffffff;
+  box-shadow: 0 -1rpx 1rpx 0 #ebebeb;
+}
+.handle {
+  position: relative;
+  display: block;
+  flex:1;
+  text-align: center;
+  align-items: center;
+  line-height:40rpx;
+  background-color:#ffffff;
+  padding:10rpx;
+}
+.handle::after{
+  border: none;
+}
+.home{
+  display: block;
+  width: 36rpx;
+  height: 36rpx;
+  margin:0 auto;
+}
+.service-img{
+  display: block;
+  width: 37rpx;
+  height: 36rpx;
+  margin:0 auto;
+}
+.shopcar{
+  display: block;
+  width: 37rpx;
+  height: 36rpx;
+  margin:0 auto;
+}
+.hasdata{
+  position: absolute;
+  top:5rpx;
+  right:15rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #ff2929;
+}
+.handle span{
+  font-size: 20rpx;
+  color: #999999;
+}
+.add{
+  display: block;
+  min-width: 220rpx;
+  flex:1;
+  background-color: #fe9702;
+}
+.buy{
+  display: block;
+  min-width: 220rpx;
+  flex:1;
+  background-color: #ff2929;
+}
+/*遮罩层  */
+.shade{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index:2;
+}
+.buy-con{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width:100%;
+  background-color:#ffffff;
+}
+.good-img{
+  display:block;
+  width: 300rpx;
+  height: 300rpx;
+  margin: 100rpx auto 0;
+  overflow: hidden;
+}
+.good-name{
+  display: block;
+  padding: 30rpx 30rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+.good-price{
+  display: block;
+  padding-bottom: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #ff2929;
+}
+.confirm-btn{
+  display:block;
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #ffffff;
+  background-color: #055b58;
+}
+.user-sel{
+  display:flex;
+  font-size:30rpx;
+  color:#333333;
+  padding:30rpx;
+  padding-left: 0;
+  margin-left: 30rpx;
+  border-top:1px solid #e5e5e5;
+  align-items:center;
+  justify-content:space-between;
+}
+.sel-spec{
+  display: flex;
+  padding-top:20rpx;
+  flex-wrap: wrap;
+}
+.sel-spec p{
+  width: 130rpx;
+  height: 60rpx;
+  border-radius: 6rpx;
+  border: solid 1rpx #999999;
+  margin-right:30rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #999999;
+}
+.sel-spec .active{
+  background-color: #055b58;
+  color: #ffffff;
+}
+.handle-num{
+  display: flex;
+  font-size: 30rpx;
+  text-align: center;
+  color: #333333;
+}
+.normal{
+  display: block;
+  min-width: 54rpx;
+  max-width: 54rpx;
+  height: 54rpx;
+  line-height: 45rpx;
+  color: #999999;
+  border-radius: 4rpx;
+  background-color: #f5f5f5;
+  font-size:65rpx;
+}
+/*禁用样式*/
+.disabled{ 
+  color: #ccc; 
+} 
+.number{
+  display: block;
+  width: 80rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  margin: 0 10rpx;
+  background-color: #f5f5f5;
+}
+.close{
+  position: absolute;
+  top: 11rpx;
+  right: 30rpx;
+  display: flex;
+  width: 80rpx;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+}
+.close-img{
+  display: block;
+  width: 42rpx;
+  height: 42rpx;
+}
+.detail-img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}

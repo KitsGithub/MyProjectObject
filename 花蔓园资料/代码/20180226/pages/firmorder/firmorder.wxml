@@ -1,0 +1,108 @@
+<!--确认订单 -->
+<view class="order">
+  <div class="head">
+      <image src="../../images/business.png" class="business-img"/>
+      <span class="business">花蔓园</span>
+  </div>
+  <scroll-view scroll-y class="order-scroll">
+    <div class="order-goods">
+      <div wx:for="{{goods}}" wx:key="goods-{{index}}" class="car-module">
+        <p class="car-good">
+          <image src="{{item.photo}}" data-index="{{index}}" bindload="imageLoadImg" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+        </p>
+        <!--商品详情  -->
+        <div class="car-detail">
+          <p class="good-name">{{item.commodityName}}</p>
+          <p class="spec">规格:{{item.goodsName}}</p>
+          <p class="item-data">
+            <span class="price">￥{{item.salesValue}}</span>
+            <span class="num">x{{item.count}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="user-sel">
+      <div class="option" bindtap="selAddress">
+        <span>收货地址</span> 
+        <span>请选择</span> 
+        <image src="../../images/to.png" class='to'/>
+      </div>
+      <div class="option" bindtap="selType">
+        <span>配送方式</span> 
+        <span>{{delivery[userSelIndex].name}}</span> 
+        <image src="../../images/to.png" class='to'/>
+      </div>
+    </div>
+    <div wx:if="{{isVip}}" class="option vip">
+      <span>会员优惠</span> 
+      <span class="desc">银卡VIP优惠￥30</span> 
+    </div>
+    <!--跳转充值  -->
+    <navigator url="../recharge/recharge" wx:else class="option vip">
+      <image src="../../images/vip.png" class='vip-img'/>
+      <span>成为会员</span> 
+      <span class="desc" style="{{!isVip?'font-size:24rpx;':''}}padding-right:10rpx;">最高优惠30元</span> 
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+  </scroll-view>
+  <!--提交订单 选择配送方式 start  -->
+  <div class="shade" wx:if="{{showShade}}">
+    <!--内容  -->
+    <div class="buy-con">
+      <p class="title">配送方式</p>
+      <div class="content">
+        <div wx:for="{{delivery}}" wx:key="delivery-{{index}}" data-index="{{index}}" bindtap="changeType" class="type">
+          <span class="type-title">{{item.name}}</span>
+          <image src="{{userSelIndex==index?'../../images/checked.png':'../../images/unchecked.png'}}" class="sel-img"/>
+        </div>
+      </div>
+      <p class="confirm-btn" bindtap="selType">确定</p>
+    </div>
+  </div>
+  <!--提交订单 选择配送方式 end  -->
+  <!-- 底部 -->
+  <div class="submit">
+    <p class="total-num">共{{total}}件商品</p>
+    <p class="total">合计: <span>￥{{totalMoney}}</span></p>
+    <p class="dispose" bindtap="submitOrder">提交订单</p>
+  </div>
+  
+  <!--遮罩  -->
+  <div class="shade" wx:if="{{conType}}">
+    <!--支付  -->
+    <div>
+      <!--支付密码框  -->
+      <div class="pay-password">
+        <div class="pay-title">
+          <image src="../../images/close-1.png" bindtap="cancel" class="close1-img"/> 
+          <p>请输入支付密码</p>  
+        </div>
+        <p class="pay-price">
+          <span>需付款</span>
+          <span>￥123</span>
+        </p>
+        <!--6位密码  -->
+        <div class="pwd-frame">
+          <p><span wx:if="{{pwd.length > 0}}"></span></p>
+          <p><span wx:if="{{pwd.length > 1}}"></span></p>
+          <p><span wx:if="{{pwd.length > 2}}"></span></p>
+          <p><span wx:if="{{pwd.length > 3}}"></span></p>
+          <p><span wx:if="{{pwd.length > 4}}"></span></p>
+          <p><span wx:if="{{pwd.length == 6}}"></span></p>
+        </div>
+      </div>
+      <!--支付密码框  -->
+      <!--数字键盘  -->
+      <div class="pwd-key">
+        <p data-num="1" bindtap="inputPwd">1</p><p data-num="2" bindtap="inputPwd">2</p><p data-num="3" bindtap="inputPwd" style="border-right:none;">3</p>
+        <p data-num="4" bindtap="inputPwd">4</p><p data-num="5" bindtap="inputPwd">5</p><p data-num="6" bindtap="inputPwd" style="border-right:none;">6</p>
+        <p data-num="7" bindtap="inputPwd">7</p><p data-num="8" bindtap="inputPwd">8</p><p data-num="9" bindtap="inputPwd" style="border-right:none;">9</p>
+        <p class="bg-e6"></p><p data-num="0" bindtap="inputPwd">0</p><p bindtap="delPwd" class="bg-e6" style="border-right:none;"><image src="../../images/del.png" class="del-img"/></p>
+      </div>
+      <!--数字键盘  -->
+    </div>
+  </div>
+</view>
+
+
+

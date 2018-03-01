@@ -1,0 +1,247 @@
+<!--订单中心-->
+<view class="swiper-tab">  
+  <view class="swiper-tab-list {{tabIndex==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
+  <view class="swiper-tab-list {{tabIndex==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">待付款</view>  
+  <view class="swiper-tab-list {{tabIndex==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">待收货</view>  
+  <view class="swiper-tab-list {{tabIndex==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">待评价</view>  
+</view>  
+<view class="order-center">  
+  <swiper current="{{tabIndex}}" class="swiper-box" duration="300" bindchange="bindChange">  
+      <!-- 全部 -->  
+      <swiper-item>  
+        <view wx:if="{{orderlist0.length > 0&&orderlist0!='nodata'}}">
+        <scroll-view scroll-y style='height:100%;' bindscrolltoupper="refesh" bindscrolltolower="loadMore" upper-threshold="1" lower-threshold="1">
+          <div wx:for="{{orderlist0}}" wx:key="orderlist-{{index}}" class="order-list">
+            <!--店名  -->
+            <navigator url="../orderDetail/orderDetail?orderid={{item.orderid}}" open-type="navigate">
+              <div class="head">
+                <image src="../../images/business.png" class="business-img"/>
+                <span class="business">花蔓园</span>
+                <span wx:if="{{item.orderStatus==1}}" class="status">等待买家付款</span>
+                <span wx:elif="{{item.orderStatus==2}}" class="status">卖家已发货</span>
+                <span wx:else class="status">交易成功</span>
+              </div>
+              <!--商品  -->
+              <div wx:for="{{item.goodsList}}" wx:for-item="goods" wx:for-index="gindex" wx:key="goods-{{good-idx}}" class="car-module">
+                <div class="order-goods">
+                  <p class="car-good">
+                      <image src="{{goods.photo}}" data-index="{{index}}" data-gindex="{{gindex}}" bindload="imageLoadImg" style="width:{{goods.width}};height:{{goods.height}};" class="img"/>   
+                  </p>
+                  <!--商品详情  -->
+                  <div class="car-detail">
+                    <p class="good-name">{{goods.commodityName}}</p>
+                    <p class="spec">规格:{{goods.goodsName}}</p>
+                    <p class="item-data">
+                      <span class="price">￥{{goods.salesAmount}}</span>
+                      <span class="num">x{{goods.salesCount}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </navigator>
+            <!--底部  -->
+            <div class="footer">
+              <p class="total"><span>共{{item.count}}件商品</span><span>合计: ￥{{item.orderAmount}}</span></p>
+              <p class="handle">
+                <span wx:if="{{item.orderStatus==1}}" data-type="cancel" data-index="{{index}}" bindtap="userConfirm" class="order-btn">取消订单</span>
+                <span wx:if="{{item.orderStatus==1}}" data-type="pay" data-index="{{index}}" bindtap="userConfirm" class="order-btn order-suc">付款</span>
+                <span wx:if="{{item.orderStatus==2}}" data-index="{{index}}" class="order-btn order-suc">确认收货</span>
+                <span wx:if="{{item.orderStatus==3}}" data-type="delete" data-index="{{index}}" bindtap="userConfirm" class="order-btn">删除订单</span>
+                <span wx:if="{{item.orderStatus==3}}" data-index="{{index}}" class="order-btn order-suc" bindtap="toComment">评价</span>
+              </p>
+            </div>
+          </div>
+        </scroll-view>
+        </view>  
+        <!--无数据  -->
+        <view class="" wx:elif="{{orderlist0=='nodata'}}">
+          <image src="../../images/noorder.png" class="no-order-img"/>
+        </view>
+      </swiper-item>  
+      <!-- 待付款 -->  
+      <swiper-item>  
+        <view wx:if="{{orderlist1.length > 0&&orderlist1!='nodata'}}">
+        <scroll-view scroll-y style='height:100%;' bindscrolltoupper="refesh" bindscrolltolower="loadMore" upper-threshold="1" lower-threshold="1">
+          <div wx:for="{{orderlist1}}" wx:key="orderlist-{{index}}" class="order-list">
+            <!--店名  -->
+            <navigator url="../orderDetail/orderDetail?orderid={{item.orderid}}" open-type="navigate">
+              <div class="head">
+                <image src="../../images/business.png" class="business-img"/>
+                <span class="business">花蔓园</span>
+                <span wx:if="{{item.orderStatus==1}}" class="status">等待买家付款</span>
+              </div>
+              <!--商品  -->
+              <div wx:for="{{item.goodsList}}" wx:for-item="goods" wx:for-index="gindex" wx:key="goods-{{good-idx}}" class="car-module">
+                <div class="order-goods">
+                  <p class="car-good">
+                      <image src="{{goods.photo}}" data-index="{{index}}" data-gindex="{{gindex}}" bindload="imageLoadImg" style="width:{{goods.width}};height:{{goods.height}};" class="img"/>   
+                  </p>
+                  <!--商品详情  -->
+                  <div class="car-detail">
+                    <p class="good-name">{{goods.commodityName}}</p>
+                    <p class="spec">规格:{{goods.goodsName}}</p>
+                    <p class="item-data">
+                      <span class="price">￥{{goods.salesAmount}}</span>
+                      <span class="num">x{{goods.salesCount}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </navigator>
+            <!--底部  -->
+            <div class="footer">
+              <p class="total"><span>共{{item.count}}件商品</span><span>合计: ￥{{item.orderAmount}}</span></p>
+              <p class="handle">
+                <span wx:if="{{item.orderStatus==1}}" data-type="cancel" data-id="{{item.orderid}}" data-index="{{index}}" bindtap="userConfirm" class="order-btn">取消订单</span>
+                <span wx:if="{{item.orderStatus==1}}" data-type="pay" data-id="{{item.orderid}}" bindtap="userConfirm" class="order-btn order-suc">付款</span>
+              </p>
+            </div>
+          </div>
+        </scroll-view>
+        </view>  
+
+        <!--无数据  -->
+        <view class="" wx:elif="{{orderlist1=='nodata'}}">
+          <image src="../../images/noorder.png" class="no-order-img"/>
+        </view>
+      </swiper-item>  
+      <!-- 待收货 -->  
+      <swiper-item>  
+        <view wx:if="{{orderlist2.length > 0&&orderlist2!='nodata'}}">
+          <scroll-view scroll-y style='height:100%;' bindscrolltoupper="refesh" bindscrolltolower="loadMore" upper-threshold="1" lower-threshold="1">
+          <div wx:for="{{orderlist2}}" wx:key="orderlist-{{index}}" class="order-list">
+            <!--店名  -->
+            <navigator url="../orderDetail/orderDetail?orderid={{item.orderid}}" open-type="navigate">
+              <div class="head">
+                <image src="../../images/business.png" class="business-img"/>
+                <span class="business">花蔓园</span>
+                <span wx:if="{{item.orderStatus==2}}" class="status">卖家已发货</span>
+              </div>
+              <!--商品  -->
+              <div wx:for="{{item.goodsList}}" wx:for-item="goods" wx:for-index="gindex" wx:key="goods-{{good-idx}}" class="car-module">
+                <div class="order-goods">
+                  <p class="car-good">
+                      <image src="{{goods.photo}}" data-index="{{index}}" data-gindex="{{gindex}}" bindload="imageLoadImg" style="width:{{goods.width}};height:{{goods.height}};" class="img"/>   
+                  </p>
+                  <!--商品详情  -->
+                  <div class="car-detail">
+                    <p class="good-name">{{goods.commodityName}}</p>
+                    <p class="spec">规格:{{goods.goodsName}}</p>
+                    <p class="item-data">
+                      <span class="price">￥{{goods.salesAmount}}</span>
+                      <span class="num">x{{goods.salesCount}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </navigator>
+            <!--底部  -->
+            <div class="footer">
+              <p class="total"><span>共{{item.count}}件商品</span><span>合计: ￥{{item.orderAmount}}</span></p>
+              <p class="handle">
+                <span wx:if="{{item.orderStatus==2}}" data-id="{{item.orderid}}" data-index="{{index}}" class="order-btn order-suc">确认收货</span>
+              </p>
+            </div>
+          </div>
+        </scroll-view>
+        </view> 
+        
+        <!--无数据  -->
+        <view class="" wx:elif="{{orderlist2=='nodata'}}">
+          <image src="../../images/noorder.png" class="no-order-img"/>
+        </view> 
+      </swiper-item>  
+      <!-- 待评价 -->  
+      <swiper-item>  
+        <view wx:if="{{orderlist3.length > 0&&orderlist3!='nodata'}}">
+          <scroll-view scroll-y style='height:100%;' bindscrolltoupper="refesh" bindscrolltolower="loadMore" upper-threshold="1" lower-threshold="1">
+          <div wx:for="{{orderlist3}}" wx:key="orderlist-{{index}}" class="order-list">
+            <!--店名  -->
+            <navigator url="../orderDetail/orderDetail?orderid={{item.orderid}}" open-type="navigate">
+              <div class="head">
+                <image src="../../images/business.png" class="business-img"/>
+                <span class="business">花蔓园</span>
+                <span wx:if="{{item.orderStatus==3}}" class="status">交易成功</span>
+              </div>
+              <!--商品  -->
+              <div wx:for="{{item.goodsList}}" wx:for-item="goods" wx:for-index="gindex" wx:key="goods-{{good-idx}}" class="car-module">
+                <div class="order-goods">
+                  <p class="car-good">
+                      <image src="{{goods.photo}}" data-index="{{index}}" data-gindex="{{gindex}}" bindload="imageLoadImg" style="width:{{goods.width}};height:{{goods.height}};" class="img"/>   
+                  </p>
+                  <!--商品详情  -->
+                  <div class="car-detail">
+                    <p class="good-name">{{goods.commodityName}}</p>
+                    <p class="spec">规格:{{goods.goodsName}}</p>
+                    <p class="item-data">
+                      <span class="price">￥{{goods.salesAmount}}</span>
+                      <span class="num">x{{goods.salesCount}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </navigator>
+            <!--底部  -->
+            <div class="footer">
+              <p class="total"><span>共{{item.count}}件商品</span><span>合计: ￥{{item.orderAmount}}</span></p>
+              <p class="handle">
+                <span wx:if="{{item.orderStatus==3}}" data-type="delete" data-id="{{item.orderid}}" data-index="{{index}}" bindtap="userConfirm" class="order-btn">删除订单</span>
+                <span wx:if="{{item.orderStatus==3}}" data-index="{{index}}" class="order-btn order-suc" bindtap="toComment">评价</span>
+              </p>
+            </div>
+          </div>
+        </scroll-view>
+        </view> 
+        
+        <!--无数据  -->
+        <view class="" wx:elif="{{orderlist3=='nodata'}}">
+          <image src="../../images/noorder.png" class="no-order-img"/>
+        </view> 
+      </swiper-item> 
+  </swiper>  
+  <!--遮罩  -->
+  <div class="shade" wx:if="{{conType}}">
+    <!--支付  -->
+    <div wx:if="{{conType=='pay'}}">
+      <!--支付密码框  -->
+      <div class="pay-password">
+        <div class="pay-title">
+          <image src="../../images/close-1.png" bindtap="cancel" class="close1-img"/> 
+          <p>请输入支付密码</p>  
+        </div>
+        <p class="pay-price">
+          <span>需付款</span>
+          <span>￥123</span>
+        </p>
+        <!--6位密码  -->
+        <div class="pwd-frame">
+          <p><span wx:if="{{pwd.length > 0}}"></span></p>
+          <p><span wx:if="{{pwd.length > 1}}"></span></p>
+          <p><span wx:if="{{pwd.length > 2}}"></span></p>
+          <p><span wx:if="{{pwd.length > 3}}"></span></p>
+          <p><span wx:if="{{pwd.length > 4}}"></span></p>
+          <p><span wx:if="{{pwd.length == 6}}"></span></p>
+        </div>
+      </div>
+      <!--支付密码框  -->
+      <!--数字键盘  -->
+      <div class="pwd-key">
+        <p data-num="1" bindtap="inputPwd">1</p><p data-num="2" bindtap="inputPwd">2</p><p data-num="3" bindtap="inputPwd" style="border-right:none;">3</p>
+        <p data-num="4" bindtap="inputPwd">4</p><p data-num="5" bindtap="inputPwd">5</p><p data-num="6" bindtap="inputPwd" style="border-right:none;">6</p>
+        <p data-num="7" bindtap="inputPwd">7</p><p data-num="8" bindtap="inputPwd">8</p><p data-num="9" bindtap="inputPwd" style="border-right:none;">9</p>
+        <p class="bg-e6"></p><p data-num="0" bindtap="inputPwd">0</p><p bindtap="delPwd" class="bg-e6" style="border-right:none;"><image src="../../images/del.png" class="del-img"/></p>
+      </div>
+      <!--数字键盘  -->
+    </div>
+    <!--取消订单或者删除订单  -->
+    <div class="confirm" wx:else>
+      <p class="content">{{text}}</p>
+      <div class="btn">
+        <p bindtap="cancel">否</p>
+        <p bindtap="confirm">是</p>
+      </div>
+    </div>
+  </div>
+</view>
+
+

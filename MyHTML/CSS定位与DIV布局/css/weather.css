@@ -1,32 +1,89 @@
 /*
 * @Author: kit
 * @Date:   2018-01-29 17:13:37
-* @Last Modified by:   kit
-* @Last Modified time: 2018-01-29 17:44:07
+* @Last Modified by:   Mr_kit
+* @Last Modified time: 2018-02-07 16:37:56
 */
-/* 
+/*
 body {
 	width: 120px;
 	background-color: blue;
 } */
 
-img.weatherImg {
-	width: 40px;
-	height: 50px;
-	left: 10px;
-	top: 0px;
+.left {
+	width:250px;
+	background-color: white;
+	margin: 0px;
+	padding: 0px 0px 5px 0px;
+	/* color: #d8ecff; */
 	float: left;
 }
 
-div.separateLine {
-	width: 120px;
-	border: 1px solid red;
-	z-index: 1;
+.weather {
+	background: url('weather.jpeg') no-repeat;
+	margin: 0px 5px 0px 5px;
+	background-color: #ffffff;
 }
 
-ul.weather {
-	list-style-position: inside;
+.weather h3 {
+	font-size: 16px;
+	padding: 0px 0px 0px 100px;
+}
+
+.weather ul {
+	padding: 0px 0px 8px 5px;
 	list-style-type: none;
-	border-top:  1px solid blue;
+}
+
+.weather ul li {
+	font-size: 13px;
+}
+
+
+.today {
+	background-color: #5ea6eb;
+	margin: 0px 5px;
+}
+
+.today h3 {
+	color: #003973;
+	font-size: 15px;
+	padding: 0px 0px 5px 15px;
+	background-color: #bbddff;
+	text-align: center;
+}
+
+.today ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: -10px 0px 0px 10px;
+}
+
+.today ul li {
+	text-align: center;
+}
+
+.today ul li img {
+	border: 1px solid #ffffff;
+	margin: 8px 0px 0px 0px;
+}
+
+.today ul li a:link, .today ul li a:visited {
+	color: #d8ecff;
+	text-decoration: none;
+}
+
+.today ul li a:hover {
+	color: #ffff00;
+	text-decoration: underline;
+}
+
+
+
+.right {
+	width: 176px;
+	background: #ffffff;
 	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	float: right;
 }

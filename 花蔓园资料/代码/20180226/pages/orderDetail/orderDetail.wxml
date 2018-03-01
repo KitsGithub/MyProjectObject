@@ -1,0 +1,110 @@
+<!--订单详情-->
+<view class="order-detail">
+  <!--收货地址信息  -->
+  <scroll-view scroll-y style="height:100%;">
+  <div class="address">
+    <image src="../../images/address.png" class="address-img"/> 
+    <div class="add-detail">
+      <p class="top">
+        <span>收货人:{{orderlist.consignee}}</span>
+        <span class="order-status" wx:if="{{orderlist.orderStatus==1}}">等待买家付款</span>
+        <span class="order-status" wx:if="{{orderlist.orderStatus==2}}">卖家已发货</span>
+        <span class="order-status" wx:if="{{orderlist.orderStatus==3}}">交易成功</span>
+        <span>{{orderlist.consigneePhone}}</span>
+      </p>
+      <p class="detail">收货地址:{{orderlist.consigneeAddress}}</p>
+    </div>
+    <image src="../../images/to.png" class="to"/>
+  </div>
+  <!-- 订单商品 -->
+  <div class="order-list">
+    <!--店名  -->
+    <div class="head">
+      <image src="../../images/business.png" class="business-img"/>
+      <span class="business">花蔓园</span>
+    </div>
+    <!--商品  -->
+    <div wx:for="{{orderlist.goods}}" wx:for-item="goods" wx:for-index="gindex" wx:key="goods-{{good-idx}}" class="car-module">
+      <div class="order-goods">
+        <p class="car-good">
+            <image src="{{goods.photo}}" data-index="{{index}}" data-gindex="{{gindex}}" bindload="imageLoadImg" style="width:{{goods.width}};height:{{goods.height}};" class="img"/>   
+        </p>
+        <!--商品详情  -->
+        <div class="car-detail">
+          <p class="good-name">{{goods.commodityName}}</p>
+          <p class="spec">规格:{{goods.goodsName}}</p>
+          <p class="item-data">
+            <span class="price">￥{{goods.salesAmount}}</span>
+            <span class="num">x{{goods.salesCount}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--底部  -->
+    <div class="total-price">
+      <p class="line"><span>商品总价</span><span>￥{{orderlist.discountAmount}}</span></p>
+      <p class="line" wx:if="{{orderlist.distributionMode}}"><span>配送费</span><span>￥10</span></p>
+      <p class="line"><span>会员优惠</span><span>-￥{{orderlist.discountAmount-orderlist.orderAmount}}</span></p>
+
+      <p class="reality"><span>需付款</span><span>￥{{orderlist.orderAmount}}</span></p>
+    </div>
+  </div>
+  <div class="total-price order-num">
+    <p class="line">订单编号:{{orderlist.orderNum}}</p>
+    <p class="line">创建时间:{{orderlist.orderTime}}</p>
+  </div>
+  </scroll-view>
+  <!-- 订单商品 -->
+  <div class="footer">
+    <span wx:if="{{orderlist.orderStatus==1}}" class="order-btn" data-type="cancel" data-id="{{orderlist.orderid}}" bindtap="userConfirm">取消订单</span>
+    <span wx:if="{{orderlist.orderStatus==1}}" class="order-btn order-suc" data-type="pay" data-id="{{orderlist.orderid}}" bindtap="userConfirm">付款</span>
+    <span wx:if="{{orderlist.orderStatus==2}}" class="order-btn order-suc">确认收货</span>
+    <span wx:if="{{orderlist.orderStatus==3}}" class="order-btn" data-type="delete" data-id="{{orderlist.orderid}}" bindtap="userConfirm">删除订单</span>
+    <navigator wx:if="{{orderlist.orderStatus==3}}" url="../comment/comment?orderid={{orderlist.orderid}}" class="order-btn order-suc">评价</navigator>
+  </div>
+  <!--遮罩  -->
+  <div class="shade" wx:if="{{conType}}">
+    <!--支付  -->
+    <div wx:if="{{conType=='pay'}}">
+      <!--支付密码框  -->
+      <div class="pay-password">
+        <div class="pay-title">
+          <image src="../../images/close-1.png" bindtap="cancel" class="close1-img"/> 
+          <p>请输入支付密码</p>  
+        </div>
+        <p class="pay-price">
+          <span>需付款</span>
+          <span>￥123</span>
+        </p>
+        <!--6位密码  -->
+        <div class="pwd-frame">
+          <p><span wx:if="{{pwd.length > 0}}"></span></p>
+          <p><span wx:if="{{pwd.length > 1}}"></span></p>
+          <p><span wx:if="{{pwd.length > 2}}"></span></p>
+          <p><span wx:if="{{pwd.length > 3}}"></span></p>
+          <p><span wx:if="{{pwd.length > 4}}"></span></p>
+          <p><span wx:if="{{pwd.length == 6}}"></span></p>
+        </div>
+      </div>
+      <!--支付密码框  -->
+      <!--数字键盘  -->
+      <div class="pwd-key">
+        <p data-num="1" bindtap="inputPwd">1</p><p data-num="2" bindtap="inputPwd">2</p><p data-num="3" bindtap="inputPwd" style="border-right:none;">3</p>
+        <p data-num="4" bindtap="inputPwd">4</p><p data-num="5" bindtap="inputPwd">5</p><p data-num="6" bindtap="inputPwd" style="border-right:none;">6</p>
+        <p data-num="7" bindtap="inputPwd">7</p><p data-num="8" bindtap="inputPwd">8</p><p data-num="9" bindtap="inputPwd" style="border-right:none;">9</p>
+        <p class="bg-e6"></p><p data-num="0" bindtap="inputPwd">0</p><p bindtap="delPwd" class="bg-e6" style="border-right:none;"><image src="../../images/del.png" class="del-img"/></p>
+      </div>
+      <!--数字键盘  -->
+    </div>
+    <!--取消订单或者删除订单  -->
+    <div class="confirm" wx:else>
+      <p class="content">{{text}}</p>
+      <div class="btn">
+        <p bindtap="cancel">否</p>
+        <p bindtap="confirm">是</p>
+      </div>
+    </div>
+  </div>
+</view>
+
+

@@ -1,0 +1,71 @@
+<!--个人中心-->
+<view class="user-center">
+  <div class="user">
+    <image src="../../images/user-bg.png" class="user-bg"/>
+    <image src="{{userInfo.head}}" class="user-header"/>
+    <p class="user-name">{{userInfo.wechatname}}</p>
+  </div>
+  <!--用户等级 余额  -->
+  <div class="user-grade">
+    <div class="grade">
+      <p>{{userInfo.userLevel}}</p>
+      <p class="title">会员等级</p>
+    </div>
+    <div class="balance">
+      <p>{{userInfo.amount}}</p>
+      <p class="title">账户余额（元）</p>
+    </div>
+  </div>
+  <!--订单中心  -->
+  <div class="order-center">
+    <navigator url="../ordercenter/ordercenter?tab=0" open-type="navigate" class="center">
+      <image src="../../images/order.png" class='order-img'/>
+      <span>订单中心</span>
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+    <div class="order-type">
+      <navigator url="../ordercenter/ordercenter?tab=1" open-type="navigate" class="type">
+        <image src="../../images/type1.png" class='type1-img'/>
+        <span>待支付</span>
+        <span wx:if="{{orderstatus.status1 > 0}}" class="label">{{orderstatus.status1}}</span>
+      </navigator>
+      <navigator url="../ordercenter/ordercenter?tab=2" open-type="navigate" class="type">
+        <image src="../../images/type2.png" class='type2-img'/>
+        <span>待收货</span>
+        <span wx:if="{{orderstatus.status2 > 0}}" class="label">{{orderstatus.status2}}</span>
+      </navigator>
+      <navigator url="../ordercenter/ordercenter?tab=3" open-type="navigate" class="type">
+        <image src="../../images/type3.png" class='type3-img'/>
+        <span>待评价</span>
+        <span wx:if="{{orderstatus.status3 > 0}}" class="label">{{orderstatus.status3}}</span>
+      </navigator>
+      <navigator url="../ordercenter/ordercenter?tab=3" open-type="navigate" class="type">
+        <image src="../../images/type4.png" class='type4-img'/>
+        <span>售后</span>
+        <span wx:if="{{orderstatus.status4 > 0}}" class="label">{{orderstatus.status4}}</span>
+      </navigator>
+    </div>
+  </div>
+  <!--操作  -->
+  <div class="order-center handle">
+    <navigator url="../recharge/recharge" class="center">
+      <image src="../../images/recharge.png" class='order-img'/>
+      <span>充值中心</span>
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+    <navigator url="../payset/payset" class="center">
+      <image src="../../images/set.png" class='order-img'/>
+      <span>支付设置</span>
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+    <navigator url="../contactus/contactus" class="center last">
+      <image src="../../images/contact.png" class='order-img'/>
+      <span>联系我们</span>
+      <image src="../../images/to.png" class='to'/>
+    </navigator>
+  </div>
+  <!--客服  -->
+  <button open-type="contact" session-from="weapp" class='service'>
+    <image src="../../images/service.png" class='service-img'></image>
+  </button> 
+</view>

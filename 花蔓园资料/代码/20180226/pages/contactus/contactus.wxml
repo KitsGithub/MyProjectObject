@@ -1,0 +1,31 @@
+<!--联系我们-->
+<view class="contactus-view">
+  <!--顶部图  -->
+  <div class="top-suggest">
+    <image src="../../images/us-bgimg.png" class="bg-img"/>
+    <div class="suggest">
+      <image src="../../images/logo.png" class="logo-img"/>
+      <p>专注花艺私人订制</p>
+      <p>服务项目：鲜花批发零售、花束定制、开业花篮、婚庆花艺、花艺市场、花瓶艺品、花艺沙龙课程等；</p>
+    </div>
+  </div>
+  <!-- 详细信息  -->
+  <div class="info">
+    <p><span>实体店地址</span><span>广东省陆丰市东海镇建设路尾独栋玻璃花房</span></p>
+    <p><span>营业时间</span><span>周一至周日10:00-22:00</span></p>
+    <p><span>联系方式</span><span class="tel" bindtap="callTel">18206606234</span></p>
+  </div>
+  <!--二维码  -->
+  <div class="footer-code">
+    <div class="code">
+      <image src="../../images/code.png" class="code-img"/>
+      <span>客服/微信二维码</span>
+    </div>
+    <div class="code">
+      <image src="../../images/code.png" class="code-img"/>
+      <span>花蔓园公众号二维码</span>
+    </div>
+  </div>
+</view>
+
+

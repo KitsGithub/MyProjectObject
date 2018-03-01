@@ -1,0 +1,61 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/classify/classify",
+    "pages/shopcar/shopcar",
+    "pages/userinfo/userinfo",
+    "pages/flowerList/flower",
+    "pages/goodDetail/goodDetail",
+    "pages/shopcar1/shopcar",
+    "pages/comments/comments",
+    "pages/firmorder/firmorder",
+    "pages/paymentResult/paymentResult",
+    "pages/ordercenter/ordercenter",
+    "pages/orderDetail/orderDetail",
+    "pages/comment/comment",
+    "pages/contactus/contactus",
+    "pages/payset/payset",
+    "pages/setpassword/setpassword",
+    "pages/recharge/recharge"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "花蔓园",
+    "navigationBarTextStyle":"black",
+    "backgroundColor":"#fafafa",
+    "innerHeight":"100%"
+  },
+  "tabBar": {
+    "backgroundColor":"#ffffff",
+    "color": "#999999",
+    "selectedColor": "#055b58",
+    "borderStyle":"white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath":"./images/TabBar_test.png",
+        "selectedIconPath":"./images/TabBar_test.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/classify/classify",
+        "iconPath": "./images/classify.png",
+        "selectedIconPath": "./images/classify-active.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/shopcar/shopcar",
+        "iconPath": "./images/Shoping_Test.png",
+        "selectedIconPath": "./images/Shoping_Test_Selected.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/userinfo/userinfo",
+        "iconPath": "./images/userinfo.png",
+        "selectedIconPath": "./images/userinfo-active.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

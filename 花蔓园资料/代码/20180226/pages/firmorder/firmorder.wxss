@@ -1,0 +1,362 @@
+/*确认订单 */
+.order{
+  background-color:#fafafa;
+  overflow:hidden;
+}
+.firmorder{
+  height: calc(100vh - 2rpx);
+  background-color: #fafafa;
+}
+.head{
+  display: flex;
+  height: 80rpx;
+  line-height: 80rpx;
+  align-items: center;
+  padding: 0 30rpx;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin-top: 10rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+}
+.business-img{
+  display: block;
+  min-width: 36rpx;
+  max-width: 36rpx;
+  height: 37rpx;
+}
+.business{
+  flex: 1;
+  text-indent: 10rpx;
+}
+.order-scroll{
+  width: 100%;
+  height:calc(100vh - 190rpx);
+}
+.order-goods{
+  display:block;
+  background-color: #ffffff;
+  overflow:hidden;
+}
+.car-module{
+  display: flex;
+  width:calc(100% - 30rpx);
+  padding-left: 30rpx;
+  height: 200rpx;
+  margin-bottom:10rpx;
+  align-items: center;
+  background-color: #fafafa;
+}
+.car-module:last-child{
+  margin-bottom: 0;
+}
+.car-good{
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  overflow: hidden;
+}
+.car-detail{
+  display: block;
+  flex:1;
+  height: 200rpx;
+  padding-left: 20rpx;
+  padding-right:30rpx;
+  padding-top:10rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+  line-height:40rpx;
+}
+.good-name{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  min-height: 80rpx;
+}
+.spec{
+  font-size: 24rpx;
+  text-align: left;
+  color: #999999;
+}
+.item-data{
+  display: flex;
+  line-height: 60rpx;
+}
+.item-data .price{
+  display: block;
+  flex: 1;
+  color: #ff2929;
+  font-weight: 500;
+}
+.item-data .num{ 
+  display: block;
+  flex: 1;
+  font-weight: 500;
+  color: #999999;
+  text-align: right;
+}
+.submit{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  background-color: #ffffff;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+  border-bottom: 1px solid #ebebeb;
+}
+.total{
+  flex:1;
+  text-align:right;
+  padding-right:30rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.total-num{
+  flex: 1;
+  text-align: left;
+  font-size: 30rpx;
+  text-indent:30rpx;
+}
+.total span{
+  color: #ff2929;
+}
+.dispose{
+  display: block;
+  flex:1;
+  min-width: 230rpx;
+  max-width: 230rpx;
+  font-size: 34rpx;
+  color: #ffffff;
+  text-align: center;
+  background-color: #ff2929;
+}
+.user-sel{
+  display:block;
+  padding-left: 30rpx;
+  background-color: #ffffff;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+}
+.option{
+  display: flex;
+  background-color: #ffffff;
+  padding-right: 30rpx;
+  align-items: center;
+  height: 90rpx;
+}
+.option span{
+  display: block;
+  flex:1;
+}
+.option span:nth-child(2){
+  text-align: right;
+  color: #999999;
+  padding-right:10rpx;
+}
+.to{
+  flex:1;
+  max-width: 16rpx;
+  min-width:16rpx;
+  height: 28rpx;
+}
+.vip{
+  margin-top:20rpx;
+  padding-left: 30rpx;
+  background-color: #ffffff;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: left;
+  color: #333333;
+}
+.vip span:nth-child(2){
+  text-indent: 10rpx;
+  text-align: left;
+  color: #cb9d4d;
+}
+.vip .desc{
+  text-align: right !important;
+  color: #ff2929 !important;
+}
+.vip-img{
+  display: block;
+  flex: 1;
+  min-width: 36rpx;
+  max-width: 36rpx;
+  height: 34rpx;
+}
+/*遮罩层  */
+.shade{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index:2;
+}
+.buy-con{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width:100%;
+  background-color:#ffffff;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: center;
+  color: #333333;
+}
+.title{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.confirm-btn{
+  display:block;
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #ffffff;
+  background-color: #055b58;
+}
+.content{
+  display: block;
+  border-top: 1px solid #e5e5e5;
+  padding-left: 30rpx;
+}
+.type{
+  display:flex;
+  align-items:center;
+  height: 90rpx;
+  border-bottom: 1px solid #e5e5e5;
+  padding-right: 30rpx;
+  justify-content: space-between;
+}
+.type-title{
+  display:block;
+  flex:1;
+  text-align:left;
+}
+.sel-img{
+  display: block;
+  margin: 0 auto;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+}
+
+/*遮罩层  */
+
+/*支付密码  */
+.pay-password{
+  position: absolute;
+  top: 120rpx;
+  left: 50%;
+  margin-left: -280rpx;
+  width: 560rpx;
+  height: 400rpx;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.pay-title{
+  position: relative;
+  display:block;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-family: PingFang-SC;
+  font-size: 30rpx;
+  text-align: center;
+  color: #333333;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.pay-title p{
+  display: block;
+}
+.close1-img{
+  position: absolute;
+  top: 26rpx;
+  left: 30rpx;
+  width: 27rpx;
+  height: 27rpx;
+}
+.pay-price{
+  display: block;
+  padding: 40rpx 30rpx;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: center;
+  color: #333333;
+}
+.pay-price span{
+  display: block;
+}
+.pay-price span:nth-child(2){
+  font-size: 60rpx;
+}
+.pwd-frame{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 20rpx;
+}
+.pwd-frame p{
+  display: flex;
+  flex: 1;
+  max-width: 80rpx;
+  height: 80rpx;
+  border: 1rpx solid #cccccc;
+  align-items: center;
+  justify-content: center;
+}
+.pwd-frame p span{
+  display: block;
+  width: 36rpx;
+  height: 36rpx;
+  background-color: #000000;
+  border-radius: 50%;
+}
+.pwd-key{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+}
+.pwd-key p{
+  display: flex;
+  width: 33%;
+  height: 110rpx;
+  line-height: 110rpx;
+  border-right: 1rpx solid #cccccc;
+  border-bottom: 1rpx solid #cccccc;
+  font-size: 50rpx;
+  color: #333;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.bg-e6{
+  background-color:#E6E6E6;
+}
+.del-img{
+  width: 50rpx;
+  height: 50rpx;
+}

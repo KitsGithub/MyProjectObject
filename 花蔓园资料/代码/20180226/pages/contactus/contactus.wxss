@@ -1,0 +1,97 @@
+/*联系我们  */
+.contactus-view{
+  height: 100vh;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 30rpx;
+  text-align: left;
+  line-height: 40rpx;
+  border-top:1rpx solid #cccccc;
+}
+.top-suggest{
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 600rpx;
+  overflow: hidden;
+}
+.bg-img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width:100%;
+  min-height:100%;
+}
+.logo-img{
+  position: relative;
+  width: 120rpx;
+  height: 120rpx;
+  margin-top:-90rpx;
+}
+.suggest{
+  position: relative;
+  display: block;
+  width: 440rpx;
+  height: 220rpx;
+  margin: 190rpx auto;
+  padding:30rpx 40rpx;
+  background-color: rgba(5, 91, 88, 0.7);
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  text-align: center;
+  color: #ffffff;
+}
+.suggest p{
+  display: block;
+}
+.info{
+  display: block;
+  width: 650rpx;
+  height: 140rpx;
+  margin: 30rpx;
+  padding: 30rpx 20rpx;
+  font-family: PingFang-SC;
+  font-size: 26rpx;
+  line-height: 50rpx;
+  text-align: justify;
+  color: #333333;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  box-shadow: 0px 2rpx 20rpx 0 rgba(5, 91, 88, 0.1);
+}
+.info p{
+  display: flex;
+}
+.info p span{
+  display: block;
+  min-width:150rpx;
+}
+.tel{
+  color: #055b58;
+  text-decoration: underline;
+}
+.footer-code{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60rpx;
+}
+.code{
+  display: block;
+  width: 260rpx;
+}
+.code span{
+  display: block;
+  font-family: PingFang-SC;
+  font-size: 20rpx;
+  text-align: center;
+  color: #333333;
+  line-height:50rpx;
+}
+.code-img{
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  margin: 0 auto;
+}

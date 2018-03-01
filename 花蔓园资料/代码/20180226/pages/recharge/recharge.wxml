@@ -1,0 +1,43 @@
+<!--pages/recharge/recharge.wxml-->
+<view class='recharge-view'>
+  <!--顶部图  -->
+  <div class="reg-top">
+    <image src="../../images/reg-top.png" class='reg-topimg'/>
+  </div>
+  <!--充值选择  -->
+  <div class="reg-sel">
+    <image src="../../images/reg.png" class='reg-img'/>
+    <div class="sel-div">
+      <div class="module">
+        <p class="car-sel" data-index="300" bindtap="select">
+          <image src="{{selected==300?'../../images/checked.png':'../../images/unchecked.png'}}" class="sel-img"/>
+          <span>￥300</span>
+          <span>充值升级银卡VIP1会员</span>
+        </p>
+        <p class="prefer">
+          <span>享鲜花低至8折优惠</span>
+          <span>享花艺商品9.5折优惠</span>
+        </p>
+      </div>
+      <div class="module">
+        <p class="car-sel" data-index="500" bindtap="select">
+          <image src="{{selected==500?'../../images/checked.png':'../../images/unchecked.png'}}" class="sel-img"/>
+          <span>￥500</span>
+          <span>充值升级金卡VIP2会员</span>
+        </p>
+        <p class="prefer">
+          <span>享鲜花低至5折优惠</span>
+          <span>享花艺商品9折优惠</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--提示  -->
+  <p class="hint">
+    <span>提示：</span>
+    <span>充值金额每累计达1000元送一节花艺沙龙课程，低至7折优惠；</span>
+    <span>最终解释权归花蔓园所有。</span>
+  </p>
+  <p class="reg-btn" bindtap="recharge">确认充值</p>
+  <image src="../../images/reg-footer.png" class='reg-footerimg'/>
+</view>

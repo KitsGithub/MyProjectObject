@@ -1,0 +1,106 @@
+<!--index.wxml-->
+<view class="good-detail">
+  <!--banner  -->
+  <div class="banner">
+    <swiper autoplay="true" class="swiper" bindchange="change">
+        <block wx:for="{{imgUrls}}" wx:key="imgUrls">
+          <swiper-item>
+            <image src="{{item.url}}" data-index="{{index}}" bindload="imageLoadTop" style="width:{{item.width}};height:{{item.height}};" class="img"/>
+          </swiper-item>
+        </block>
+    </swiper>
+    <div class="b-index">{{bannerIndex + 1}}/{{imgUrls.length}}</div>
+  </div>
+  <!--商品简要信息  -->
+  <div class="good-info">
+    <p class="g-title">{{goodDetail.commodityName}}</p>
+    <p>
+      <span class="money-icon">￥</span>
+      <span class="price">{{goodDetail.goods[0].salesValue}}</span>
+      <span wx:if="{{goodDetail.goods[0].salesValue!=goodDetail.goods[0].goodsValue}}" class="born">￥{{goodDetail.goods[0].goodsValue}}</span>
+    </p>
+    <p class="g-other">
+      <span class="franking">配送费:￥10</span>
+      <span class="sales">销量:{{sales}}</span>
+    </p>
+  </div>
+  <!--评论区  -->
+  <p class="piece">——商品评论——</p>
+  <div class="comments">
+    <p>全部评论({{comments.length}})</p>
+    <p wx:if="{{comments.length<=0}}" class="no-comment">暂无评论</p>
+    <div wx:else class="com-detail">
+        <div wx:for="{{comments}}" wx:if="{{index<2}}" class="com-module" wx:key="comments+{{index}}">
+          <p class="com-user">
+            <image class="u-head" src="{{item.head}}"/>
+            <span>{{item.wechatName}}</span>
+          </p>
+          <p class="content">{{item.comment}}</p>
+          <p class="spec">规格:{{item.goodsName}}</p>
+        </div>
+        <navigator wx:if="{{comments.length > 2}}" url="../comments/comments?id={{goodDetail.categoryid}}" class="see-more">查看全部评论</navigator>
+    </div>
+  </div>
+  <!-- 商品详情区 -->
+  <p class="piece">——商品详情——</p>
+  <div class="detail">
+    <image wx:for="{{goodDetail.commodityInfo}}" wx:key="detail-{{index}}" data-index="{{index}}" bindload="imageLoadDetail" style="width:{{item.width}};height:{{item.height}};" class="detail-img" src="{{item.url}}"/>
+  </div>
+  <!--购买 加入购物车选择规格 start  -->
+  <div class="shade" wx:if="{{isBuyOrAdd}}">
+    <!--内容  -->
+    <div class="buy-con">
+      <!--关闭  -->
+      <p class="close" bindtap="close">
+        <image src="../../images/close.png" class="close-img"/>
+      </p>
+      <!--关闭  -->
+      <p class="good-img">
+        <image src="{{goodDetail.goods[selSpecIndex].photo}}" data-index="{{selSpecIndex}}" bindload="imageLoadGood" style="width:{{spec[selSpecIndex].width}};height:{{spec[selSpecIndex].height}};" class="img"/>
+      </p>
+      <span class="good-name">{{goodDetail.commodityName}}</span>
+      <span class="good-price">￥{{goodDetail.goods[selSpecIndex].salesValue}}</span>
+      <div class="user-sel" style="display:block;">
+        <p>规格</p>
+        <div class="sel-spec">
+          <p wx:for="{{goodDetail.goods}}" wx:key="spec-{{index}}" class="{{selSpecIndex==index?'active':''}}" data-index="{{index}}" bindtap="changeSpec">{{item.goodsName}}</p>
+        </div>
+      </div>
+      <div class="user-sel">
+        <p>购买数量</p>
+        <div class="handle-num">
+          <!-- 减号 -->
+          <span class="normal {{count==1?'disabled':''}}" bindtap="bindMinus">-</span>
+          <!-- 数值 -->
+          <span class="number">{{count}}</span>
+          <!-- 加号 -->
+          <span class="normal" bindtap="bindPlus">+</span>
+        </div>
+      </div>
+      <p class="confirm-btn" bindtap="confirmData">确定</p>
+    </div>
+  </div>
+  <!--购买 加入购物车选择规格 end  -->
+  <!--底部漂浮操作按钮  -->
+  <div class="footer">
+    <navigator url="../index/index" open-type="switchTab" class="handle">
+      <image src="../../images/home.png" class="home"/>
+      <span>首页</span>
+    </navigator>
+    <button open-type="contact" session-from="weapp" class="handle">
+      <image src="../../images/service-1.png" class="service-img"/>
+      <span>客服</span>
+    </button> 
+    <navigator url="../shopcar1/shopcar" class="handle">
+      <image src="../../images/shopcar.png" class="shopcar"/>
+      <span wx:if="{{shopcar}}" class="hasdata"></span>
+      <span>购物车</span>
+    </navigator>
+    <p class="add" data-type="ADD" bindtap="handle">加入购物车</p>
+    <p class="buy" data-type="BUY" bindtap="handle">立即购买</p>
+    <p></p>
+  </div>
+</view>
+
+
+
